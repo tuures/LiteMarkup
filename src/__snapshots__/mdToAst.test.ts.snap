@@ -1,0 +1,1043 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic 1`] = `
+Array [
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "foo😀",
+      },
+    ],
+    "level": 3,
+    "name": "h",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "gadasdasd,asdasd",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "doc": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "quote here",
+          },
+        ],
+        "name": "p",
+      },
+    ],
+    "name": "bq",
+  },
+  Object {
+    "name": "hr",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "asdas<b>d</b>asda sda1&amp;",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "ffof😀oofoof
+fofoofo2",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "immediate heading",
+      },
+    ],
+    "level": 1,
+    "name": "h",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "This is a list:",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "items": Array [
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "one",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "two",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "three",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "fourth item",
+              },
+            ],
+            "name": "p",
+          },
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "I mean this is a big one",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "fifth",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+    ],
+    "name": "l",
+    "startNumber": undefined,
+  },
+  Object {
+    "items": Array [
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "first",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "second",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "third",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+    ],
+    "name": "l",
+    "startNumber": 1,
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "werwerwerwer",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "infoText": "clara",
+    "name": "cb",
+    "txt": "foo = bar
+ bar = zot
+ 1 < 2
+",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "immediate code:",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "infoText": "",
+    "name": "cb",
+    "txt": "  foo = bar
+",
+  },
+  Object {
+    "infoText": "",
+    "name": "cb",
+    "txt": "",
+  },
+  Object {
+    "infoText": "justnewline\\">eviltext",
+    "name": "cb",
+    "txt": "
+",
+  },
+  Object {
+    "doc": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "asd",
+          },
+        ],
+        "level": 1,
+        "name": "h",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "lol <nottag>
+lazy
+foo",
+          },
+        ],
+        "name": "p",
+      },
+    ],
+    "name": "bq",
+  },
+  Object {
+    "doc": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "level 1",
+          },
+        ],
+        "name": "p",
+      },
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "level 2
+level 2",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "bq",
+      },
+    ],
+    "name": "bq",
+  },
+  Object {
+    "name": "htm",
+    "raw": "<div>
+ foobar
+</div>",
+  },
+  Object {
+    "name": "htm",
+    "raw": "<broken>
+oops </broken> html
+</broken>",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "joo",
+      },
+      Object {
+        "name": "cs",
+        "txt": "asd",
+      },
+      Object {
+        "name": "",
+        "txt": " bar",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "asd ",
+      },
+      Object {
+        "name": "",
+        "txt": "\`\`0doo",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "asd ",
+      },
+      Object {
+        "name": "cs",
+        "txt": " ",
+      },
+      Object {
+        "name": "",
+        "txt": "1doo",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "asd ",
+      },
+      Object {
+        "name": "cs",
+        "txt": "  ",
+      },
+      Object {
+        "name": "",
+        "txt": "2doo",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "asd ",
+      },
+      Object {
+        "name": "cs",
+        "txt": "   ",
+      },
+      Object {
+        "name": "",
+        "txt": "3doo",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "asd ",
+      },
+      Object {
+        "name": "cs",
+        "txt": "foo",
+      },
+      Object {
+        "name": "",
+        "txt": "\` 12dii",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "asd ",
+      },
+      Object {
+        "name": "",
+        "txt": "\`\`foo",
+      },
+      Object {
+        "name": "",
+        "txt": "\` 21dii",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "asd ",
+      },
+      Object {
+        "name": "cs",
+        "txt": "foo",
+      },
+      Object {
+        "name": "",
+        "txt": " 22dii",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "asd",
+      },
+      Object {
+        "name": "",
+        "txt": "\`asd",
+      },
+      Object {
+        "name": "br",
+      },
+      Object {
+        "name": "",
+        "txt": "xfoobar",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "asd",
+      },
+      Object {
+        "name": "",
+        "txt": "\`",
+      },
+      Object {
+        "name": "",
+        "txt": "asd",
+      },
+      Object {
+        "name": "br",
+      },
+      Object {
+        "name": "",
+        "txt": "yfoobar",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "br in the end ",
+      },
+      Object {
+        "name": "br",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "I'm bold",
+          },
+        ],
+        "name": "b",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "I'm italic",
+          },
+        ],
+        "name": "i",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "bold outside and ",
+          },
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "italic inside",
+              },
+            ],
+            "name": "i",
+          },
+        ],
+        "name": "b",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "_bold start",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "bold ending",
+      },
+      Object {
+        "name": "",
+        "txt": "_",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "aftert this comes a few paragraphs with just one character",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "a",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "#",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "_",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "aftert this comes a text content that is just one characters",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "a",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "bold",
+          },
+        ],
+        "name": "b",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "italic",
+          },
+        ],
+        "name": "i",
+      },
+      Object {
+        "name": "",
+        "txt": "s",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "!",
+      },
+      Object {
+        "name": "",
+        "txt": "\\"",
+      },
+      Object {
+        "name": "",
+        "txt": "#",
+      },
+      Object {
+        "name": "",
+        "txt": "$",
+      },
+      Object {
+        "name": "",
+        "txt": "%",
+      },
+      Object {
+        "name": "",
+        "txt": "&",
+      },
+      Object {
+        "name": "",
+        "txt": "'",
+      },
+      Object {
+        "name": "",
+        "txt": "(",
+      },
+      Object {
+        "name": "",
+        "txt": ")",
+      },
+      Object {
+        "name": "",
+        "txt": "*",
+      },
+      Object {
+        "name": "",
+        "txt": "+",
+      },
+      Object {
+        "name": "",
+        "txt": ",",
+      },
+      Object {
+        "name": "",
+        "txt": "-",
+      },
+      Object {
+        "name": "",
+        "txt": ".",
+      },
+      Object {
+        "name": "",
+        "txt": "/",
+      },
+      Object {
+        "name": "",
+        "txt": ":",
+      },
+      Object {
+        "name": "",
+        "txt": ";",
+      },
+      Object {
+        "name": "",
+        "txt": "<",
+      },
+      Object {
+        "name": "",
+        "txt": "=",
+      },
+      Object {
+        "name": "",
+        "txt": ">",
+      },
+      Object {
+        "name": "",
+        "txt": "?",
+      },
+      Object {
+        "name": "",
+        "txt": "@",
+      },
+      Object {
+        "name": "",
+        "txt": "[",
+      },
+      Object {
+        "name": "",
+        "txt": "\\\\",
+      },
+      Object {
+        "name": "",
+        "txt": "]",
+      },
+      Object {
+        "name": "",
+        "txt": "^",
+      },
+      Object {
+        "name": "",
+        "txt": "_",
+      },
+      Object {
+        "name": "",
+        "txt": "\`",
+      },
+      Object {
+        "name": "",
+        "txt": "{",
+      },
+      Object {
+        "name": "",
+        "txt": "|",
+      },
+      Object {
+        "name": "",
+        "txt": "}",
+      },
+      Object {
+        "name": "",
+        "txt": "~",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "\\\\→",
+      },
+      Object {
+        "name": "",
+        "txt": "\\\\A",
+      },
+      Object {
+        "name": "",
+        "txt": "\\\\a",
+      },
+      Object {
+        "name": "",
+        "txt": "\\\\ ",
+      },
+      Object {
+        "name": "",
+        "txt": "\\\\3",
+      },
+      Object {
+        "name": "",
+        "txt": "\\\\φ",
+      },
+      Object {
+        "name": "",
+        "txt": "\\\\«",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "*",
+      },
+      Object {
+        "name": "",
+        "txt": "not emphasized",
+      },
+      Object {
+        "name": "",
+        "txt": "*",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "\\\\",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "emphasis",
+          },
+        ],
+        "name": "b",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "*notbold",
+      },
+      Object {
+        "name": "cs",
+        "txt": "*",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "this paragraph has a ",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "link to",
+          },
+        ],
+        "href": "/thisurl",
+        "name": "a",
+      },
+      Object {
+        "name": "",
+        "txt": " and some parenthesis ",
+      },
+      Object {
+        "name": "",
+        "txt": "[]() that is not a link",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "[foo",
+          },
+          Object {
+            "name": "",
+            "txt": "]",
+          },
+          Object {
+            "name": "",
+            "txt": "a",
+          },
+        ],
+        "href": "ds\\\\)fd\\\\)\\\\\`",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "alt": "image of a cat",
+        "name": "img",
+        "src": "/ordidnthappen.jpg",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`basic 2`] = `
+"<h3>foo😀</h3>
+<p>gadasdasd,asdasd</p>
+<blockquote>
+  <p>quote here</p>
+</blockquote>
+<hr/>
+<p>asdas&lt;b&gt;d</b>asda sda1&amp;amp;</p>
+<p>ffof😀oofoof
+fofoofo2</p>
+<h1>immediate heading</h1>
+<p>This is a list:</p>
+<ul>
+  <li>
+    <p>one</p>
+  </li>
+  <li>
+    <p>two</p>
+  </li>
+  <li>
+    <p>three</p>
+  </li>
+  <li>
+    <p>fourth item</p>
+    <p>I mean this is a big one</p>
+  </li>
+  <li>
+    <p>fifth</p>
+  </li>
+</ul>
+<ol start=\\"1\\">
+  <li>
+    <p>first</p>
+  </li>
+  <li>
+    <p>second</p>
+  </li>
+  <li>
+    <p>third</p>
+  </li>
+</ol>
+<p>werwerwerwer</p>
+<pre><code data-infotext=\\"clara\\">foo = bar
+ bar = zot
+ 1 &lt; 2
+</code></pre>
+<p>immediate code:</p>
+<pre><code>  foo = bar
+</code></pre>
+<pre><code/></pre>
+<pre><code data-infotext=\\"justnewline&quot;&gt;eviltext\\">
+</code></pre>
+<blockquote>
+  <h1>asd</h1>
+  <p>lol &lt;nottag&gt;
+lazy
+foo</p>
+</blockquote>
+<blockquote>
+  <p>level 1</p>
+  <blockquote>
+    <p>level 2
+level 2</p>
+</blockquote>
+</blockquote>
+<div>
+ foobar
+</div>
+<broken>
+oops </broken> html
+</broken>
+<p>joo<code>asd</code> bar</p>
+<p>asd \`\`0doo</p>
+<p>asd <code> </code>1doo</p>
+<p>asd <code>  </code>2doo</p>
+<p>asd <code>   </code>3doo</p>
+<p>asd <code>foo</code>\` 12dii</p>
+<p>asd \`\`foo\` 21dii</p>
+<p>asd <code>foo</code> 22dii</p>
+<p>asd\`asd<br/>xfoobar</p>
+<p>asd\`asd<br/>yfoobar</p>
+<p>br in the end <br/></p>
+<p><span style=\\"font-weight: bold;\\">I&apos;m bold</span></p>
+<p><span style=\\"font-style: italic;\\">I&apos;m italic</span></p>
+<p><span style=\\"font-weight: bold;\\">bold outside and <span style=\\"font-style: italic;\\">italic inside</span></span></p>
+<p>_bold start</p>
+<p>bold ending_</p>
+<p>aftert this comes a few paragraphs with just one character</p>
+<p>a</p>
+<p>#</p>
+<p>_</p>
+<p>aftert this comes a text content that is just one characters</p>
+<p>a<span style=\\"font-weight: bold;\\">bold</span></p>
+<p><span style=\\"font-style: italic;\\">italic</span>s</p>
+<p>!&quot;#$%&amp;&apos;()*+,-./:;&lt;=&gt;?@[\\\\]^_\`{|}~</p>
+<p>\\\\→\\\\A\\\\a\\\\ \\\\3\\\\φ\\\\«</p>
+<p>*not emphasized*</p>
+<p>\\\\<span style=\\"font-weight: bold;\\">emphasis</span></p>
+<p>*notbold<code>*</code></p>
+<p>this paragraph has a <a href=\\"/thisurl\\">link to</a> and some parenthesis []() that is not a link</p>
+<p><a href=\\"ds\\\\)fd\\\\)\\\\\`\\">[foo]a</a></p>
+<p><img alt=\\"image of a cat\\" src=\\"/ordidnthappen.jpg\\"/></p>"
+`;
