@@ -7,10 +7,10 @@ Why yet another Markdown(-like) compiler/language? What makes **LiteMarkup** dif
 
 ## How to use the compiler
 ```
-import { mdToAst, astToHtml } from 'litemarkup'
+import { parseToAst, astToHtml } from 'litemarkup'
 
 // parse LiteMarkup string into an AST:
-const ast = mdToAst(src)
+const ast = parseToAst(src)
 // render an AST into a HTML string
 const html = astToHtml(ast)
 

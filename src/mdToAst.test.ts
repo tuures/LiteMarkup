@@ -1,4 +1,4 @@
-import { mdToAst, astToHtml } from './litemarkup'
+import { parseToAst, astToHtml } from './litemarkup'
 
 test('basic', () => {
   const src = `
@@ -131,7 +131,7 @@ this paragraph has a [link to](/thisurl) and some parenthesis []() that is not a
 ![image of a cat](/ordidnthappen.jpg)
 
 `
-  const ast = mdToAst(src)
+  const ast = parseToAst(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
