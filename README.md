@@ -1,11 +1,11 @@
 # Unbloated Markdown-like markup language
 
 Why yet another Markdown(-like) compiler/language? What makes **LiteMarkup** different:
-- **Implements only a minimum useful subset of Markdown.** Instead of trying to cover all the possible edge cases of "traditional" Markdown, **LiteMarkup** contains only the most widely used parts of Markdown with some small adjustments. There is a list of most notable differences in the end of this document.
-- **Parsing and HTML emitter separated into two different stages.** You can take the AST produced by the parser and implement your custom renderer bypassing the HTML step completely if you don't need it.
-- **Written in TypeScript.** Use the full power of types when writing AST transformations.
+- **Implements only a minimum useful subset of Markdown.** Instead of trying to cover all the possible edge cases of "traditional" Markdown, LiteMarkup contains only the most widely used parts of Markdown with some small adjustments. Due to this the minified compiler is **less than 4kb** and has no implementation dependencies. Despite the increased simplicity, the language remains **intuitive and powerful**.
+- **No emphasis on HTML output** Parsing and HTML emitter are separated into two different compiler stages. You can take the AST produced by the parser and implement your custom renderer bypassing the HTML step completely if you don't need it. For example, generate React elements or custom JSON directly from the AST.
+- **Written in TypeScript.** Use the full power of types when writing AST transformations. Modify the compiler without fear of breaking ton of stuff silently.
 
-Usage example:
+## How to use the compiler
 ```
 import { mdToAst, astToHtml } from 'litemarkup'
 
@@ -20,7 +20,12 @@ import { mdToHtml } from 'litemarkup'
 mdToHtml(src)
 ```
 
---- - - -  -  -
+## Language tour
+
+TODO
+
+
+---
 
 Most notable differences/deviations from the [CommonMark](https://spec.commonmark.org/0.29/) specification at the moment:
 
@@ -36,3 +41,6 @@ Most notable differences/deviations from the [CommonMark](https://spec.commonmar
 - Only type 7 [HTML blocks](https://spec.commonmark.org/0.29/#html-block) are supported (and with some limitations)
 - [Link reference definitions](https://spec.commonmark.org/0.29/#link-reference-definition) are not supported
 
+---
+
+License: MIT, see LICENSE.md
