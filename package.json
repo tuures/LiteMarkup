@@ -3,15 +3,17 @@
   "version": "0.1.1",
   "description": "Unbloated Markdown-like markup language",
   "main": "./dist/litemarkup.js",
-  "bin" : { "litemarkup" : "./dist/cli.js" },
+  "bin": {
+    "litemarkup": "./dist/cli.js"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^24.0.13",
     "jest": "^24.8.0",
-    "prettier": "1.17.1",
-    "terser": "3.17.0",
+    "prettier": "1.18.2",
+    "terser": "4.1.2",
     "ts-jest": "^24.0.2",
-    "typescript": "3.4.5"
+    "typescript": "3.5.3"
   },
   "scripts": {
     "compile": "./node_modules/.bin/tsc && rm -f ./dist/litemarkup.min.js && ./node_modules/.bin/terser --toplevel -c -m -o ./dist/litemarkup.min.js -- ./dist/*.js && echo bytes: && cat ./dist/litemarkup.min.js |wc -c && echo bytes gzipped: && cat ./dist/litemarkup.min.js | gzip -c | wc -c",
