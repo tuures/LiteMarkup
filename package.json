@@ -1,8 +1,9 @@
 {
   "name": "litemarkup",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Unbloated Markdown-like markup language",
-  "main": "litemarkup.js",
+  "main": "./dist/litemarkup.js",
+  "bin" : { "litemarkup" : "./dist/cli.js" },
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^24.0.13",
@@ -13,7 +14,10 @@
     "typescript": "3.4.5"
   },
   "scripts": {
-    "compile": "./node_modules/.bin/tsc && ./node_modules/.bin/terser --toplevel -c -m -o ./dist/litemarkup.min.js -- ./dist/litemarkup.js",
+    "compile": "./node_modules/.bin/tsc && rm -f ./dist/litemarkup.min.js && ./node_modules/.bin/terser --toplevel -c -m -o ./dist/litemarkup.min.js -- ./dist/*.js && echo bytes: && cat ./dist/litemarkup.min.js |wc -c && echo bytes gzipped: && cat ./dist/litemarkup.min.js | gzip -c | wc -c",
     "test": "./node_modules/.bin/jest"
+  },
+  "dependencies": {
+    "@types/node": "^12.6.2"
   }
 }

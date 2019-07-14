@@ -9,5 +9,5 @@ export * from './ast'
 export * from './parseToAst'
 export * from './astToHtml'
 
-export const mdToHtml = (src: string) => astToHtml(parseToAst(src))
+export const convertToHtml = (src: string) => astToHtml(parseToAst(src))
 
