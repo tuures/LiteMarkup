@@ -11,13 +11,13 @@
   "devDependencies": {
     "@types/jest": "^24.0.13",
     "jest": "^24.8.0",
+    "parcel-bundler": "^1.12.3",
     "prettier": "1.18.2",
-    "terser": "4.1.2",
     "ts-jest": "^24.0.2",
     "typescript": "3.5.3"
   },
   "scripts": {
-    "compile": "rm -rf ./dist/* && ./node_modules/.bin/tsc && ./node_modules/.bin/terser --toplevel -c -m -o ./dist/litemarkup.min.js -- ./dist/*.js && echo bytes: && cat ./dist/litemarkup.min.js |wc -c && echo bytes gzipped: && cat ./dist/litemarkup.min.js | gzip -c | wc -c && rm -f ./dist/litemarkup.min.js",
+    "compile": "rm -rf ./dist/* && ./node_modules/.bin/tsc && ./node_modules/.bin/parcel build src/litemarkup.ts -o dist/litemarkup.min.js --global litemarkup",
     "test": "./node_modules/.bin/jest"
   },
   "dependencies": {
