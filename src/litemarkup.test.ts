@@ -163,3 +163,20 @@ test('list with marker character in content', () => {
   const html = astToHtml(ast)
   expect(html).toMatchSnapshot()
 });
+
+test('nested lists', () => {
+  const src = `
+- foo
+  - foo1
+  - foo2
+- bar
+   * bar1
+   * bar2
+* another list
+`
+  const ast = parseToAst(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});

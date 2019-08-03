@@ -1155,3 +1155,162 @@ exports[`multiple images in series 2`] = `
 "<p><img alt=\\"image of a cat\\" src=\\"/ordidnthappen.jpg\\"/> and
 second <img alt=\\"image of a cat\\" src=\\"/ordidnthappen.jpg\\"/></p>"
 `;
+
+exports[`nested lists 1`] = `
+Array [
+  Object {
+    "items": Array [
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "foo",
+              },
+            ],
+            "name": "p",
+          },
+          Object {
+            "items": Array [
+              Object {
+                "doc": Array [
+                  Object {
+                    "body": Array [
+                      Object {
+                        "name": "",
+                        "txt": "foo1",
+                      },
+                    ],
+                    "name": "p",
+                  },
+                ],
+                "name": "li",
+              },
+              Object {
+                "doc": Array [
+                  Object {
+                    "body": Array [
+                      Object {
+                        "name": "",
+                        "txt": "foo2",
+                      },
+                    ],
+                    "name": "p",
+                  },
+                ],
+                "name": "li",
+              },
+            ],
+            "name": "l",
+            "startNumber": undefined,
+          },
+        ],
+        "name": "li",
+      },
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "bar",
+              },
+            ],
+            "name": "p",
+          },
+          Object {
+            "items": Array [
+              Object {
+                "doc": Array [
+                  Object {
+                    "body": Array [
+                      Object {
+                        "name": "",
+                        "txt": "bar1",
+                      },
+                    ],
+                    "name": "p",
+                  },
+                ],
+                "name": "li",
+              },
+              Object {
+                "doc": Array [
+                  Object {
+                    "body": Array [
+                      Object {
+                        "name": "",
+                        "txt": "bar2",
+                      },
+                    ],
+                    "name": "p",
+                  },
+                ],
+                "name": "li",
+              },
+            ],
+            "name": "l",
+            "startNumber": undefined,
+          },
+        ],
+        "name": "li",
+      },
+    ],
+    "name": "l",
+    "startNumber": undefined,
+  },
+  Object {
+    "items": Array [
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "another list",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+    ],
+    "name": "l",
+    "startNumber": undefined,
+  },
+]
+`;
+
+exports[`nested lists 2`] = `
+"<ul>
+  <li>
+    <p>foo</p>
+    <ul>
+      <li>
+        <p>foo1</p>
+      </li>
+      <li>
+        <p>foo2</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>bar</p>
+    <ul>
+      <li>
+        <p>bar1</p>
+      </li>
+      <li>
+        <p>bar2</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>
+    <p>another list</p>
+  </li>
+</ul>"
+`;
