@@ -2,7 +2,7 @@
 
 Why yet another Markdown(-like) compiler/language? What makes **LiteMarkup** different:
 - **Implements only a minimum useful subset of Markdown.** Instead of trying to cover all the possible edge cases of "traditional" Markdown, LiteMarkup contains only the most widely used parts of Markdown with some small adjustments. Due to this the minified compiler (parser + HTML emitter) is **only 4.2kb (1.7kb gzipped!)** and has no implementation dependencies. Despite the increased simplicity, the language remains **intuitive and powerful**.
-- **No emphasis on HTML output** Parsing and HTML emitter are separated into two different compiler stages. You can take the AST produced by the parser and implement your custom renderer bypassing the HTML step completely if you don't need it. For example, generate React elements or custom JSON directly from the AST.
+- **No emphasis on HTML output.** Parsing and HTML emitter are separated into two different compiler stages. You can take the AST produced by the parser and implement your custom renderer bypassing the HTML step completely if you don't need it. For example, generate React elements or custom JSON directly from the AST.
 - **Written in TypeScript.** Use the full power of types when writing AST transformations. Modify the compiler without fear of breaking ton of stuff silently.
 
 ## How to use the compiler

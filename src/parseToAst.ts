@@ -146,7 +146,7 @@ const inlineRules: SimpleRule<Ast.Inline>[] = [
     })
   },
   {
-    re: /^(?=(`*))\1([^](?![`\\_*\[]))*[^]/,
+    re: /^(?=(`*))\1([^](?![`\\_*\[!]))*[^]/,
     mkNode: r => ({
       name: '',
       txt: r[0],

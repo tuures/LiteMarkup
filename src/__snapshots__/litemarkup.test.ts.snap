@@ -1041,3 +1041,33 @@ oops </broken> html
 <p><a href=\\"ds\\\\)fd\\\\)\\\\\`\\">[foo]a</a></p>
 <p><img alt=\\"image of a cat\\" src=\\"/ordidnthappen.jpg\\"/></p>"
 `;
+
+exports[`multiple images in series 1`] = `
+Array [
+  Object {
+    "body": Array [
+      Object {
+        "alt": "image of a cat",
+        "name": "img",
+        "src": "/ordidnthappen.jpg",
+      },
+      Object {
+        "name": "",
+        "txt": " and
+second ",
+      },
+      Object {
+        "alt": "image of a cat",
+        "name": "img",
+        "src": "/ordidnthappen.jpg",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`multiple images in series 2`] = `
+"<p><img alt=\\"image of a cat\\" src=\\"/ordidnthappen.jpg\\"/> and
+second <img alt=\\"image of a cat\\" src=\\"/ordidnthappen.jpg\\"/></p>"
+`;

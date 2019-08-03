@@ -137,3 +137,15 @@ this paragraph has a [link to](/thisurl) and some parenthesis []() that is not a
   const html = astToHtml(ast)
   expect(html).toMatchSnapshot()
 });
+
+test('multiple images in series', () => {
+  const src = `
+![image of a cat](/ordidnthappen.jpg) and
+second ![image of a cat](/ordidnthappen.jpg)
+`
+  const ast = parseToAst(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});
