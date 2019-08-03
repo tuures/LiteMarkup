@@ -66,7 +66,7 @@ const listRule: LookaheadRule<Ast.List> = {
     return R(String.raw`(?:\n+${pr[2]}(?: {${pr[3].length}}|${markerEscaped})${pr[4]}[^\n]*)*`)
   },
   mkNode: (pr, r) => {
-    const markerIndent = R(markerRe(pr[1]))
+    const markerIndent = R('\\n' + markerRe(pr[1]))
     const afterInitialMarkerIndent = pr[5] + r[0]
     const items: Ast.ListItem[] = afterInitialMarkerIndent.split(markerIndent).map(itemSlice => {
       const itemContent = itemSlice.replace(R(`\\n {${pr[1].length}}`, 'g'), '\n')

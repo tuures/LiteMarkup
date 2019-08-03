@@ -1042,6 +1042,90 @@ oops </broken> html
 <p><img alt=\\"image of a cat\\" src=\\"/ordidnthappen.jpg\\"/></p>"
 `;
 
+exports[`list with marker character in content 1`] = `
+Array [
+  Object {
+    "items": Array [
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "foo - the first item",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "bar-second",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "baz- the third",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+      Object {
+        "doc": Array [
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "bam -fourth",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+    ],
+    "name": "l",
+    "startNumber": undefined,
+  },
+]
+`;
+
+exports[`list with marker character in content 2`] = `
+"<ul>
+  <li>
+    <p>foo - the first item</p>
+  </li>
+  <li>
+    <p>bar-second</p>
+  </li>
+  <li>
+    <p>baz- the third</p>
+  </li>
+  <li>
+    <p>bam -fourth</p>
+  </li>
+</ul>"
+`;
+
 exports[`multiple images in series 1`] = `
 Array [
   Object {

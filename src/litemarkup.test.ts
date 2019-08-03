@@ -149,3 +149,17 @@ second ![image of a cat](/ordidnthappen.jpg)
   const html = astToHtml(ast)
   expect(html).toMatchSnapshot()
 });
+
+test('list with marker character in content', () => {
+  const src = `
+- foo - the first item
+- bar-second
+- baz- the third
+- bam -fourth
+`
+  const ast = parseToAst(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});
