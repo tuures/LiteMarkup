@@ -953,17 +953,17 @@ fofoofo2</p>
 <ul>
   <li>
     <p>one</p>
-  </li>
+  </li>
   <li>
     <p>two</p>
-  </li>
+  </li>
   <li>
     <p>three</p>
-  </li>
+  </li>
   <li>
     <p>fourth item</p>
     <p>I mean this is a big one</p>
-  </li>
+  </li>
   <li>
     <p>fifth</p>
   </li>
@@ -971,10 +971,10 @@ fofoofo2</p>
 <ol start=\\"1\\">
   <li>
     <p>first</p>
-  </li>
+  </li>
   <li>
     <p>second</p>
-  </li>
+  </li>
   <li>
     <p>third</p>
   </li>
@@ -1113,13 +1113,13 @@ exports[`list with marker character in content 2`] = `
 "<ul>
   <li>
     <p>foo - the first item</p>
-  </li>
+  </li>
   <li>
     <p>bar-second</p>
-  </li>
+  </li>
   <li>
     <p>baz- the third</p>
-  </li>
+  </li>
   <li>
     <p>bam -fourth</p>
   </li>
@@ -1290,18 +1290,18 @@ exports[`nested lists 2`] = `
     <ul>
       <li>
         <p>foo1</p>
-      </li>
+      </li>
       <li>
         <p>foo2</p>
       </li>
     </ul>
-  </li>
+  </li>
   <li>
     <p>bar</p>
     <ul>
       <li>
         <p>bar1</p>
-      </li>
+      </li>
       <li>
         <p>bar2</p>
       </li>

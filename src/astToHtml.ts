@@ -25,7 +25,7 @@ export function astToHtml(ast: Ast.Block[], indentLevel = 0): string {
 
         const containerTag = b.startNumber ? 'ol' : 'ul'
 
-        return el(containerTag, `\n${ii}${items.join(`\\n${ii}`)}\n${i}`, b.startNumber ? [['start', String(b.startNumber)]] : [])
+        return el(containerTag, `\n${ii}${items.join(`\n${ii}`)}\n${i}`, b.startNumber ? [['start', String(b.startNumber)]] : [])
       }
       case 'hr':
         return '<hr/>'
