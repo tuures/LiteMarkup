@@ -56,7 +56,7 @@ That was a thematic break (horisontal line)
 
 ````
 
-TODO: interactive demo page
+[**See interactive demo here**](./demopage/demopage.html)
 
 ---
 
