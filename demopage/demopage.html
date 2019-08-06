@@ -1,0 +1,261 @@
+<html>
+  <head>
+    <title>LiteMarkup playground</title>
+    <meta name="description" content="See LiteMarkup in action. LiteMarkup is unbloated Markdown-like markup language.">
+  </head>
+  <body>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: sans-serif;
+        background-color: #fafafa;
+        color: #2b2727;
+      }
+
+      .cols {
+        display: flex;
+        height: 100%;
+      }
+
+      .col-50 {
+        flex: 0 0 50%;
+      }
+
+      .flexrows {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .flex-rest {
+        flex: 1 0 0;
+        overflow: scroll;
+      }
+
+      .pad {
+        height: 100%;
+      }
+
+      .pad-border {
+        border-right: 1px solid #0038da;
+      }
+
+      .selectView {
+        display: flex;
+        justify-content: flex-end;
+        text-align: right;
+        padding: 8px;
+        border-bottom: 1px solid #0038da;
+      }
+
+      .selectView select {
+        font-size: 14px;
+      }
+
+      .selectTarget {
+        display: none;
+      }
+
+      .sourceView {
+        margin: 0;
+        border: 0;
+        outline: 0;
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+        font-family: monospace;
+        color: #3e3737;
+        background: #f8f3f3;
+        resize: none;
+        padding: 8px;
+      }
+
+      .astView {
+        min-height: 100%;
+        font-family: monospace;
+        white-space: pre-wrap;
+        padding: 8px;
+        background: #f3f3f8;
+      }
+
+      .htmlSourceView {
+        min-height: 100%;
+        font-family: monospace;
+        white-space: pre-wrap;
+        padding: 8px;
+        background: #f3f3f8;
+      }
+
+      .htmlRenderedView {
+        min-height: 100%;
+        font-size: 14px;
+        line-height: 20px;
+        padding: 0 8px;
+        background: #fff;
+        overflow: auto; /* prevent children margins from collapsing and moving background downwards*/
+      }
+
+      .htmlRenderedView img {
+        max-width: 100%;
+      }
+
+      .htmlRenderedView code {
+        display: inline-block;
+        background: #f9f5f3;
+        border-radius: 4px;
+        padding: 0px 4px;
+        color: #ba13bf;
+      }
+
+      .htmlRenderedView a {
+        color: #0038da;
+      }
+
+      .htmlRenderedView blockquote {
+        border-left: 1px solid #ddd;
+        padding: 0 0 0 15px;
+        margin: 0;
+      }
+    </style>
+
+    <div class="cols">
+
+      <div class="col-50">
+        <div class="pad flexrows pad-border">
+          <div class="selectView">
+            <select>
+              <option value="sourceView" selected="">source</option>
+              <option value="astView">AST</option>
+              <option value="htmlSourceView">HTML source</option>
+              <option value="htmlRenderedView">HTML rendered</option>
+            </select>
+          </div>
+          <div class="flex-rest">
+            <textarea class="selectTarget sourceView"></textarea>
+            <div class="selectTarget astView"></div>
+            <div class="selectTarget htmlSourceView"></div>
+            <div class="selectTarget htmlRenderedView"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-50">
+        <div class="pad flexrows">
+          <div class="selectView">
+            <select>
+              <option value="sourceView">source</option>
+              <option value="astView">AST</option>
+              <option value="htmlSourceView">HTML source</option>
+              <option value="htmlRenderedView" selected="">HTML rendered</option>
+            </select>
+          </div>
+          <div class="flex-rest">
+            <textarea class="selectTarget sourceView"></textarea>
+            <div class="selectTarget astView"></div>
+            <div class="selectTarget htmlSourceView"></div>
+            <div class="selectTarget htmlRenderedView"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="https://unpkg.com/litemarkup@0.1.5/dist/litemarkup.min.js"></script>
+    <!-- for local dev: -->
+    <!-- <script src="../dist/litemarkup.min.js"></script> -->
+    <script>
+      defaultValue = `
+# LiteMarkup demo
+## This is a level 2 heading
+###### This is a level 6 heading
+
+*This text will be bold*
+
+_This text will be italic_
+
+1. Here are
+1. Some items
+1. In a list
+  * As well as
+  * List _inside_ of a list!
+
+A [link example](http://example.com).
+
+> This is a quote
+> - Famous person
+
+\`\`\`foo-lang
+some("code here")
+\`\`\`
+
+There can be \`inline\` code as well.
+
+Escape special characters with single backlash (\\\\) to treat it as verbatim. Add single backlash to the end of line to force a line break like this: \\
+LiteMarkup is pretty easy!
+
+---
+
+That was a thematic break (horisontal line)
+`
+    </script>
+    <script>
+      const sourceViews = Array.from(document.querySelectorAll(".sourceView"))
+      const astViews = Array.from(document.querySelectorAll(".astView"))
+      const htmlSourceViews = Array.from(document.querySelectorAll(".htmlSourceView"))
+      const htmlRenderedViews = Array.from(document.querySelectorAll(".htmlRenderedView"))
+
+      const updateViews = (source, value) => {
+        const ast = litemarkup.parseToAst(value)
+        const html = litemarkup.astToHtml(ast)
+
+        sourceViews.filter(s => s !== source).forEach(sourceView => sourceView.value = value)
+        astViews.forEach(astView => astView.textContent = JSON.stringify(ast, null, 2))
+        htmlSourceViews.forEach(htmlSourceView => htmlSourceView.textContent = html)
+        htmlRenderedViews.forEach(htmlRenderedView => htmlRenderedView.innerHTML = html)
+      }
+
+      let updateTimer = null
+      const onSourceChange = (source, value) => {
+        clearTimeout(updateTimer)
+        updateTimer = setTimeout(() => updateViews(source, value), 200)
+      }
+
+      sourceViews.forEach(source => {
+        source.addEventListener("keyup", e => {
+          onSourceChange(e.target, e.target.value)
+        })
+
+        updateViews(null, defaultValue)
+      })
+
+      document.querySelectorAll(".pad").forEach(pad => {
+        const targets = pad.querySelectorAll(".selectTarget")
+        const changeVisible = selected => {
+          targets.forEach(targetView => {
+            const targetViewClasses = targetView.classList
+            if(targetViewClasses.contains(selected)) {
+              targetViewClasses.remove("selectTarget")
+            } else {
+              targetViewClasses.add("selectTarget")
+            }
+          })
+        }
+        pad.querySelectorAll(".selectView select").forEach(select => {
+          select.addEventListener("change", e => {
+            changeVisible(e.target.value)
+          })
+          changeVisible(select.value)
+        })
+      })
+    </script>
+
+  </body>
+</html>
