@@ -5,7 +5,7 @@ Why yet another Markdown(-like) compiler/language? What makes **LiteMarkup** dif
 - **No emphasis on HTML output.** Parsing and HTML emitter are separated into two different compiler stages. You can take the AST produced by the parser and implement your custom renderer bypassing the HTML step completely if you don't need it. For example, generate React elements or custom JSON directly from the AST.
 - **Written in TypeScript.** Use the full power of types when writing AST transformations. Modify the compiler without fear of breaking ton of stuff silently.
 
-[**See interactive demo here**](./demopage/demopage.html)
+<a href="https://tuures.github.io/LiteMarkup/demopage/demopage.html" target="_blank"><strong>Open interactive playground</strong></a>
 
 ## How to use the compiler
 ```javascript
@@ -58,7 +58,7 @@ That was a thematic break (horisontal line)
 
 ````
 
-[**See interactive demo here**](./demopage/demopage.html)
+<a href="https://tuures.github.io/LiteMarkup/demopage/demopage.html" target="_blank"><strong>Open interactive playground</strong></a>
 
 ---
 
