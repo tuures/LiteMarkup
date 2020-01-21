@@ -9,19 +9,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^24.0.13",
-    "jest": "^24.8.0",
-    "parcel-bundler": "^1.12.3",
-    "prettier": "1.18.2",
-    "ts-jest": "^24.0.2",
-    "typescript": "3.5.3"
+    "@types/jest": "24.9.0",
+    "jest": "24.9.0",
+    "parcel-bundler": "1.12.4",
+    "prettier": "1.19.1",
+    "ts-jest": "24.3.0",
+    "typescript": "3.7.5"
   },
   "scripts": {
     "compile": "rm -rf ./dist/* && ./node_modules/.bin/tsc && ./node_modules/.bin/parcel build src/litemarkup.ts -o dist/litemarkup.min.js --global litemarkup",
     "test": "./node_modules/.bin/jest"
   },
   "dependencies": {
-    "@types/node": "^12.6.2"
+    "@types/node": "13.1.8"
   },
   "files": [
     "dist"
