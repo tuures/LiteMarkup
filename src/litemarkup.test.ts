@@ -120,6 +120,12 @@ _italic_s
 
 \\*not emphasized*
 
+*emphasized star\\**
+
+_\\_italic underlines\\__
+
+_italic underline\\_and star*_
+
 \\\\*emphasis*
 
 *notbold\`*\`

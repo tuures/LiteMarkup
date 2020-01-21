@@ -116,14 +116,14 @@ const inlineRules: SimpleRule<Ast.Inline>[] = [
     })
   },
   {
-    re: /^_([^_`]*[^\\_`])_/,
+    re: /^_((?:[^\\_`]|\\[^])+)_/,
     mkNode: r => ({
       name: 'i',
       body: parse(r[1], inlineRules)
     })
   },
   {
-    re: /^\*([^*`]*[^\\*`])\*/,
+    re: /^\*((?:[^\\*`]|\\[^])+)\*/,
     mkNode: r => ({
       name: 'b',
       body: parse(r[1], inlineRules)

@@ -847,6 +847,72 @@ oops </broken> html
   Object {
     "body": Array [
       Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "emphasized star",
+          },
+          Object {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "b",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "_",
+          },
+          Object {
+            "name": "",
+            "txt": "italic underlines",
+          },
+          Object {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "i",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "italic underline",
+          },
+          Object {
+            "name": "",
+            "txt": "_",
+          },
+          Object {
+            "name": "",
+            "txt": "and star",
+          },
+          Object {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
         "name": "",
         "txt": "\\\\",
       },
@@ -1035,6 +1101,9 @@ oops </broken> html
 <p>!&quot;#$%&amp;&apos;()*+,-./:;&lt;=&gt;?@[\\\\]^_\`{|}~</p>
 <p>\\\\→\\\\A\\\\a\\\\ \\\\3\\\\φ\\\\«</p>
 <p>*not emphasized*</p>
+<p><span style=\\"font-weight: bold;\\">emphasized star*</span></p>
+<p><span style=\\"font-style: italic;\\">_italic underlines_</span></p>
+<p><span style=\\"font-style: italic;\\">italic underline_and star*</span></p>
 <p>\\\\<span style=\\"font-weight: bold;\\">emphasis</span></p>
 <p>*notbold<code>*</code></p>
 <p>this paragraph has a <a href=\\"/thisurl\\">link to</a> and some parenthesis []() that is not a link</p>
