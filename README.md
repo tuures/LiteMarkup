@@ -40,9 +40,6 @@ _This text will be italic_
 
 A [link example](http://example.com).
 
-> This is a quote
-> - Famous person
-
 ```foo-lang
 some("code here")
 ```
@@ -50,7 +47,9 @@ some("code here")
 There can be `inline` code as well.
 
 Escape special characters with single backlash (\\) to treat it as verbatim. Add single backlash to the end of line to force a line break like this: \
-LiteMarkup is pretty easy!
+
+> LiteMarkup is pretty easy!\
+> \- Someone
 
 ---
 
