@@ -10,6 +10,7 @@ avoid backtracking (match as little as possible, but not too little)
 - `yarn release` (updates version in `package.json` and creates a tag & commit)
 - `git push --tags`
 - make release in GitHub
+- update demopage to use the new release
 
 # TODO:
 - VS Code extension (syntax highlighting)
