@@ -7,7 +7,7 @@ avoid backtracking (match as little as possible, but not too little)
 
 # How to do release
 - `yarn compile`
-- `yarn release` (updates version in `package.json` and creates a tag & commit)
+- `yarn publish` (updates version in `package.json` and creates a tag & commit)
 - `git push --tags`
 - make release in GitHub
 - update demopage to use the new release
