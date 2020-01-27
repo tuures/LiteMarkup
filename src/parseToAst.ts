@@ -40,7 +40,7 @@ const priorityLeafBlockRules: SimpleRule<Ast.LeafBlock>[] = [
     mkNode: r => ({ name: 'htm', raw: r[1]}),
   },
   {
-    re: /^( {0,3})(`{3,})([^\n]*)\n(?:(?:\1\2|(?:(\n|(?:(?:[^](?!\n\1\2))*[^]\n))\1\2))[ \t]*(?:$|\n)|([^]*))/,
+    re: /^( {0,3})(`{3,})([^\n`]*)\n(?:(?:\1\2|(?:(\n|(?:(?:[^](?!\n\1\2))*[^]\n))\1\2))[ \t]*(?:$|\n)|([^]*))/,
     mkNode: r => ({
       name: 'cb',
       infoText: r[3].replace(/^[ \t]+/,'').replace(/[ \t]+$/,''),
@@ -146,7 +146,7 @@ const inlineRules: SimpleRule<Ast.Inline>[] = [
     })
   },
   {
-    re: /^(?=(`*))\1([^](?![`\\_*\[!]))*[^]/,
+    re: /^(?=(`*))\1([^](?![`\\_*\[!]))*(?:[^]|$)/,
     mkNode: r => ({
       name: '',
       txt: r[0],

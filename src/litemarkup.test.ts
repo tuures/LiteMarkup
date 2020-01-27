@@ -210,9 +210,42 @@ test('codeblock with broken end', () => {
   expect(html).toMatchSnapshot()
 });
 
-test('codeblock with broken end on the same line', () => {
+test('codeblock with broken end on the same line / codespan with missing backticks in the end', () => {
   const src = `
 \`\`\`foo\`\`
+`
+  const ast = parseToAst(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});
+
+test('codespan with extra backticks on the start', () => {
+  const src = `
+foo \`\`\`foo\`\`
+`
+  const ast = parseToAst(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});
+
+test('codespan with extra backticks on the end', () => {
+  const src = `
+\`\`foo\`\`\`
+`
+  const ast = parseToAst(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});
+
+test('codespan with three backticks in the beginning of a paragraph (not codeblock)', () => {
+  const src = `
+\`\`\`foo\`\`\`
 `
   const ast = parseToAst(src)
   expect(ast).toMatchSnapshot()

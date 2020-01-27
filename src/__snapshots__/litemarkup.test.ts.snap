@@ -1127,17 +1127,25 @@ exports[`codeblock with broken end 2`] = `
 </code></pre>"
 `;
 
-exports[`codeblock with broken end on the same line 1`] = `
+exports[`codeblock with broken end on the same line / codespan with missing backticks in the end 1`] = `
 Array [
   Object {
-    "infoText": "foo\`\`",
-    "name": "cb",
-    "txt": "",
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "\`\`\`foo",
+      },
+      Object {
+        "name": "",
+        "txt": "\`\`",
+      },
+    ],
+    "name": "p",
   },
 ]
 `;
 
-exports[`codeblock with broken end on the same line 2`] = `"<pre><code data-infotext=\\"foo\`\`\\"/></pre>"`;
+exports[`codeblock with broken end on the same line / codespan with missing backticks in the end 2`] = `"<p>\`\`\`foo\`\`</p>"`;
 
 exports[`codeblock without end 1`] = `
 Array [
@@ -1150,6 +1158,66 @@ Array [
 `;
 
 exports[`codeblock without end 2`] = `"<pre><code data-infotext=\\"foo\\"/></pre>"`;
+
+exports[`codespan with extra backticks on the end 1`] = `
+Array [
+  Object {
+    "body": Array [
+      Object {
+        "name": "cs",
+        "txt": "foo",
+      },
+      Object {
+        "name": "",
+        "txt": "\`",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`codespan with extra backticks on the end 2`] = `"<p><code>foo</code>\`</p>"`;
+
+exports[`codespan with extra backticks on the start 1`] = `
+Array [
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "foo ",
+      },
+      Object {
+        "name": "",
+        "txt": "\`\`\`foo",
+      },
+      Object {
+        "name": "",
+        "txt": "\`\`",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`codespan with extra backticks on the start 2`] = `"<p>foo \`\`\`foo\`\`</p>"`;
+
+exports[`codespan with three backticks in the beginning of a paragraph (not codeblock) 1`] = `
+Array [
+  Object {
+    "body": Array [
+      Object {
+        "name": "cs",
+        "txt": "foo",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`codespan with three backticks in the beginning of a paragraph (not codeblock) 2`] = `"<p><code>foo</code></p>"`;
 
 exports[`list with marker character in content 1`] = `
 Array [
