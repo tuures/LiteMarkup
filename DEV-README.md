@@ -8,7 +8,7 @@ avoid backtracking (match as little as possible, but not too little)
 # How to do release
 - `yarn compile`
 - `yarn release` (updates version in `package.json` and creates a tag & commit)
-- `git push`
+- `git push --tags`
 - make release in GitHub
 
 # TODO:
