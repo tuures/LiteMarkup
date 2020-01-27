@@ -1111,6 +1111,46 @@ oops </broken> html
 <p><img alt=\\"image of a cat\\" src=\\"/ordidnthappen.jpg\\"/></p>"
 `;
 
+exports[`codeblock with broken end 1`] = `
+Array [
+  Object {
+    "infoText": "foo",
+    "name": "cb",
+    "txt": "\`\`
+",
+  },
+]
+`;
+
+exports[`codeblock with broken end 2`] = `
+"<pre><code data-infotext=\\"foo\\">\`\`
+</code></pre>"
+`;
+
+exports[`codeblock with broken end on the same line 1`] = `
+Array [
+  Object {
+    "infoText": "foo\`\`",
+    "name": "cb",
+    "txt": "",
+  },
+]
+`;
+
+exports[`codeblock with broken end on the same line 2`] = `"<pre><code data-infotext=\\"foo\`\`\\"/></pre>"`;
+
+exports[`codeblock without end 1`] = `
+Array [
+  Object {
+    "infoText": "foo",
+    "name": "cb",
+    "txt": "",
+  },
+]
+`;
+
+exports[`codeblock without end 2`] = `"<pre><code data-infotext=\\"foo\\"/></pre>"`;
+
 exports[`list with marker character in content 1`] = `
 Array [
   Object {

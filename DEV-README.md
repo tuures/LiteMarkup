@@ -14,6 +14,8 @@ avoid backtracking (match as little as possible, but not too little)
 # TODO:
 - VS Code extension (syntax highlighting)
 - Markdown bold/italics compatiblity mode?
+- Split parser/emitter/CLI into smaller packages?
+- Emitter option to disable rendering raw html nodes (untrusted content)
 
 # Links:
 - https://en.wikipedia.org/wiki/Lightweight_markup_language

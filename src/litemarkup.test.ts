@@ -186,3 +186,37 @@ test('nested lists', () => {
   const html = astToHtml(ast)
   expect(html).toMatchSnapshot()
 });
+
+test('codeblock without end', () => {
+  const src = `
+\`\`\`foo
+`
+  const ast = parseToAst(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});
+
+test('codeblock with broken end', () => {
+  const src = `
+\`\`\`foo
+\`\`
+`
+  const ast = parseToAst(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});
+
+test('codeblock with broken end on the same line', () => {
+  const src = `
+\`\`\`foo\`\`
+`
+  const ast = parseToAst(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});

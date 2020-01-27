@@ -40,7 +40,7 @@ const priorityLeafBlockRules: SimpleRule<Ast.LeafBlock>[] = [
     mkNode: r => ({ name: 'htm', raw: r[1]}),
   },
   {
-    re: /^( {0,3})(`{3,})([^\n`]*)\n(?:(?:\1\2|(?:(\n|(?:(?:[^](?!\n\1\2))*[^]\n))\1\2))[ \t]*(?:$|\n)|([^]*))/,
+    re: /^( {0,3})(`{3,})([^\n]*)\n(?:(?:\1\2|(?:(\n|(?:(?:[^](?!\n\1\2))*[^]\n))\1\2))[ \t]*(?:$|\n)|([^]*))/,
     mkNode: r => ({
       name: 'cb',
       infoText: r[3].replace(/^[ \t]+/,'').replace(/[ \t]+$/,''),
@@ -188,7 +188,7 @@ function parse<N>(src: string, rules: Rule<N>[]): N[] {
     if (matchedLength > 0) {
       remaining = remaining.substr(matchedLength)
     } else {
-      throw new Error('unexpected: "' + remaining.substr(0, 200))
+      throw new Error('Unexpected: ' + remaining.substr(0, 200))
     }
   }
 
