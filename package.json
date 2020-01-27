@@ -1,6 +1,6 @@
 {
   "name": "litemarkup",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Unbloated Markdown-like markup language",
   "main": "./dist/litemarkup.js",
   "types": "./dist/litemarkup.d.ts",
