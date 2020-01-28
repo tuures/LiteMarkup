@@ -2,6 +2,12 @@
   "name": "litemarkup",
   "version": "0.1.8",
   "description": "Unbloated Markdown-like markup language",
+  "keywords": ["markdown", "simple", "markup", "language", "parser", "compiler", "html", "typescript", "small", "lite"],
+  "homepage": "https://tuures.github.io/LiteMarkup/",
+  "repository": "github:tuures/LiteMarkup",
+  "licenses": [{
+    "licence": "MIT"
+  }],
   "main": "./dist/litemarkup.js",
   "types": "./dist/litemarkup.d.ts",
   "bin": {
