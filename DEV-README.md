@@ -11,6 +11,7 @@ avoid backtracking (match as little as possible, but not too little)
 - `git push --tags`
 - make release in GitHub
 - update demopage to use the new release
+- (measure gzipped size at https://terser-playground.surge.sh/)
 
 # TODO:
 - VS Code extension (syntax highlighting)
