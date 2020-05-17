@@ -22,13 +22,13 @@ interface LookaheadRule<N> {
 
 const priorityLeafBlockRules: SimpleRule<Ast.LeafBlock>[] = [
   {
-    re: /^(?:[ \t]*\n)+/,
+    re: /^(?:[ \t]*(?:$|\n))+/,
     mkNode: r => undefined,
   },
   {
     // need to match \n in the end to make sure the line has no other characters
     // than the bar characters and whitespace
-    re: /^ {0,3}(?:[-_\*][ \t]*){3,}($|\n)/,
+    re: /^ {0,3}(?:[-_\*][ \t]*){3,}(?:$|\n)/,
     mkNode: r => ({ name: 'hr' }),
   },
   {
@@ -96,6 +96,8 @@ const inlineRules: SimpleRule<Ast.Inline>[] = [
     mkNode: r => ({
       name: 'cs',
       txt: ((s: string) => {
+        // so that you can start codespan content with a backtick:
+        // `` ` `` will render just the backtick without surrounding space
         const trimSpaces = (s.length >= 3 && s[0] == ' ' && s[1] !== ' ' && s[s.length - 1] == ' ')
 
         return (trimSpaces ? s.slice(1, -1) : s).replace(/\n/g, ' ')
@@ -188,7 +190,8 @@ function parse<N>(src: string, rules: Rule<N>[]): N[] {
     if (matchedLength > 0) {
       remaining = remaining.substr(matchedLength)
     } else {
-      throw new Error('Unexpected: ' + remaining.substr(0, 200))
+      // if we get here we have a bug as we want parser to accept all input
+      throw new Error('Failed to parse: ' + remaining.substr(0, 200))
     }
   }
 

@@ -253,3 +253,12 @@ test('codespan with three backticks in the beginning of a paragraph (not codeblo
   const html = astToHtml(ast)
   expect(html).toMatchSnapshot()
 });
+
+test('empty paragraph in the end of the file', () => {
+  const src = 'foo\n  '
+  const ast = parseToAst(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});

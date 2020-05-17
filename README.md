@@ -59,8 +59,6 @@ That was a thematic break (horisontal line)
 
 <a href="https://tuures.github.io/LiteMarkup/demopage/demopage.html" target="_blank"><strong>Open interactive playground</strong></a>
 
----
-
 Most notable differences/deviations from the [CommonMark](https://spec.commonmark.org/0.29/) specification at the moment:
 
 - [Emphasis and strong emphasis](https://spec.commonmark.org/0.29/#emphasis-and-strong-emphasis) use single `_` and `*` characters, respectively.
@@ -74,6 +72,10 @@ Most notable differences/deviations from the [CommonMark](https://spec.commonmar
 - [Entity and numeric character references](https://spec.commonmark.org/0.29/#entity-and-numeric-character-references) are not supported
 - Only type 7 [HTML blocks](https://spec.commonmark.org/0.29/#html-block) are supported (and with some limitations)
 - [Link reference definitions](https://spec.commonmark.org/0.29/#link-reference-definition) are not supported
+
+## Contributing
+
+Bugfixes and small enhancements are welcome. It's unlikely I'd like to add any new features. If you feel you need one, make a custom fork.
 
 ---
 

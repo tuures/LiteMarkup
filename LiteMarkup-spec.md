@@ -1,6 +1,6 @@
-# LiteMarkup spec (WIP)
+# LiteMarkup spec (NOTE: not actively pursued / not in sync with the implementation ATM)
 
-This is the specification for _LiteMarkup_, the Markdown-like markup language. The goal is to provide a terse and sufficiently exact syntax definition that is easy to write for humans but also easy to parse. To provide contrast, the [*CommonMark*](https://spec.commonmark.org/0.29/) specification is over 100 pages printed, and Markdown compilers that aim to conform that must be quite complex.
+This is the specification for _LiteMarkup_, the Markdown-like markup language. The goal is to define a terse and sufficiently exact syntax that is easy to write for humans but also easy to parse. To provide contrast, the [*CommonMark*](https://spec.commonmark.org/0.29/) specification is over 100 pages printed, and Markdown compilers that aim to conform that must be quite complex.
 
 *LE* ”line ending” = *U+000A* ”\n”\
 *EOL* ”end of line” = *LE* or *END-OF-FILE*\

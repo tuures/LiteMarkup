@@ -1219,6 +1219,22 @@ Array [
 
 exports[`codespan with three backticks in the beginning of a paragraph (not codeblock) 2`] = `"<p><code>foo</code></p>"`;
 
+exports[`empty paragraph in the end of the file 1`] = `
+Array [
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "foo",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`empty paragraph in the end of the file 2`] = `"<p>foo</p>"`;
+
 exports[`list with marker character in content 1`] = `
 Array [
   Object {
