@@ -19,9 +19,31 @@
         font-family: sans-serif;
         background-color: #fafafa;
         color: #2b2727;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overscroll-behavior-y: none;
+      }
+
+      a {
+        color: #1E96FC
+      }
+
+      .header {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: baseline;
+        border-bottom: 1px solid #0038da;
+      }
+      .header h1 {
+        margin: 8px;
+      }
+      .header > *:not(:last-child) {
+        padding-right: 32px;
       }
 
       .cols {
+        flex: 1 1 100%;
         display: flex;
         height: 100%;
       }
@@ -126,6 +148,11 @@
       }
     </style>
 
+    <div class="header">
+      <h1>LiteMarkup playground</h1>
+      <span><a href="https://github.com/tuures/LiteMarkup">see project in GitHub</a></span>
+      <span>Markdown compatibility mode <input type="checkbox" id="mdMode" name="mdMode"></span>
+    </div>
     <div class="cols">
 
       <div class="col-50">
@@ -168,7 +195,7 @@
 
     </div>
 
-    <script src="https://unpkg.com/litemarkup@0.1.9/dist/litemarkup.min.js"></script>
+    <script src="https://unpkg.com/litemarkup@0.1.10/dist/litemarkup.min.js"></script>
     <!-- for local dev: -->
     <!-- <script src="../dist/litemarkup.min.js"></script> -->
     <script>
@@ -206,13 +233,16 @@ That was a thematic break (horisontal line)
 `
     </script>
     <script>
+      const mdModeCheckbox = document.querySelector("#mdMode")
+      let mdMode = undefined
+
       const sourceViews = Array.from(document.querySelectorAll(".sourceView"))
       const astViews = Array.from(document.querySelectorAll(".astView"))
       const htmlSourceViews = Array.from(document.querySelectorAll(".htmlSourceView"))
       const htmlRenderedViews = Array.from(document.querySelectorAll(".htmlRenderedView"))
 
       const updateViews = (source, value) => {
-        const ast = litemarkup.parseToAst(value)
+        const ast = litemarkup.parseToAst(value, mdMode)
         const html = litemarkup.astToHtml(ast)
 
         sourceViews.filter(s => s !== source).forEach(sourceView => sourceView.value = value)
@@ -231,9 +261,14 @@ That was a thematic break (horisontal line)
         source.addEventListener("keyup", e => {
           onSourceChange(e.target, e.target.value)
         })
-
-        updateViews(null, defaultValue)
       })
+
+      mdModeCheckbox.addEventListener("change", e => {
+        mdMode = e.target.checked
+        updateViews(null, sourceViews[0]?.value)
+      })
+
+      updateViews(null, defaultValue)
 
       document.querySelectorAll(".pad").forEach(pad => {
         const targets = pad.querySelectorAll(".selectTarget")
