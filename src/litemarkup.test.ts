@@ -144,6 +144,55 @@ this paragraph has a [link to](/thisurl) and some parenthesis []() that is not a
   expect(html).toMatchSnapshot()
 });
 
+test('markdown compatibility mode', () => {
+  const src = `
+**I'm bold**
+__I'm bold too__
+
+_I'm italic_
+*I'm italic too*
+
+these are supported:
+**bold outside and _italic inside_**
+__bold outside and *italic inside*__
+_italic outside and **bold inside**_
+*italic outside and __bold inside__*
+
+these are not supported:
+**bold outside and *italic inside***
+__bold outside and _italic inside___
+_italic outside and __bold inside___
+*italic outside and **bold inside***
+
+_not italic
+
+not italic_
+
+a**bold**
+
+_italic_s
+
+\\*not emphasized*
+
+*emphasized star\\**
+
+_\\_italic underlines\\__
+
+_italic underline\\_and star*_
+
+\\\\*emphasis after a literal backslash*
+
+*just plain p before code\`*\`
+
+`
+  const ast = parseToAst(src, true)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  console.log(html)
+  expect(html).toMatchSnapshot()
+});
+
 test('multiple images in series', () => {
   const src = `
 ![image of a cat](/ordidnthappen.jpg) and

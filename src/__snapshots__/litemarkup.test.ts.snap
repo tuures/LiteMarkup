@@ -1319,6 +1319,454 @@ exports[`list with marker character in content 2`] = `
 </ul>"
 `;
 
+exports[`markdown compatibility mode 1`] = `
+Array [
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "I'm bold",
+          },
+        ],
+        "name": "b",
+      },
+      Object {
+        "name": "",
+        "txt": "
+",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "I'm bold too",
+          },
+        ],
+        "name": "b",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "I'm italic",
+          },
+        ],
+        "name": "i",
+      },
+      Object {
+        "name": "",
+        "txt": "
+",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "I'm italic too",
+          },
+        ],
+        "name": "i",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "these are supported:
+",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "bold outside and ",
+          },
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "italic inside",
+              },
+            ],
+            "name": "i",
+          },
+        ],
+        "name": "b",
+      },
+      Object {
+        "name": "",
+        "txt": "
+",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "bold outside and ",
+          },
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "italic inside",
+              },
+            ],
+            "name": "i",
+          },
+        ],
+        "name": "b",
+      },
+      Object {
+        "name": "",
+        "txt": "
+",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "italic outside and ",
+          },
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "bold inside",
+              },
+            ],
+            "name": "b",
+          },
+        ],
+        "name": "i",
+      },
+      Object {
+        "name": "",
+        "txt": "
+",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "italic outside and ",
+          },
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "bold inside",
+              },
+            ],
+            "name": "b",
+          },
+        ],
+        "name": "i",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "these are not supported:
+",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "bold outside and ",
+          },
+          Object {
+            "name": "",
+            "txt": "*italic inside",
+          },
+        ],
+        "name": "b",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "
+",
+          },
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "bold outside and ",
+              },
+              Object {
+                "name": "",
+                "txt": "_italic inside",
+              },
+            ],
+            "name": "b",
+          },
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "
+",
+              },
+            ],
+            "name": "i",
+          },
+          Object {
+            "name": "",
+            "txt": "italic outside and ",
+          },
+          Object {
+            "body": Array [
+              Object {
+                "name": "",
+                "txt": "bold inside",
+              },
+            ],
+            "name": "b",
+          },
+          Object {
+            "name": "",
+            "txt": "_
+",
+          },
+        ],
+        "name": "i",
+      },
+      Object {
+        "name": "",
+        "txt": "italic outside and ",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "bold inside",
+          },
+        ],
+        "name": "b",
+      },
+      Object {
+        "name": "",
+        "txt": "*",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "_not italic",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "not italic",
+      },
+      Object {
+        "name": "",
+        "txt": "_",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "a",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "bold",
+          },
+        ],
+        "name": "b",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "italic",
+          },
+        ],
+        "name": "i",
+      },
+      Object {
+        "name": "",
+        "txt": "s",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "*",
+      },
+      Object {
+        "name": "",
+        "txt": "not emphasized",
+      },
+      Object {
+        "name": "",
+        "txt": "*",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "emphasized star",
+          },
+          Object {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "_",
+          },
+          Object {
+            "name": "",
+            "txt": "italic underlines",
+          },
+          Object {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "i",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "italic underline",
+          },
+          Object {
+            "name": "",
+            "txt": "_",
+          },
+          Object {
+            "name": "",
+            "txt": "and star",
+          },
+          Object {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "\\\\",
+      },
+      Object {
+        "body": Array [
+          Object {
+            "name": "",
+            "txt": "emphasis after a literal backslash",
+          },
+        ],
+        "name": "i",
+      },
+    ],
+    "name": "p",
+  },
+  Object {
+    "body": Array [
+      Object {
+        "name": "",
+        "txt": "*just plain p before code",
+      },
+      Object {
+        "name": "cs",
+        "txt": "*",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`markdown compatibility mode 2`] = `
+"<p><span style=\\"font-weight: bold;\\">I&apos;m bold</span>
+<span style=\\"font-weight: bold;\\">I&apos;m bold too</span></p>
+<p><span style=\\"font-style: italic;\\">I&apos;m italic</span>
+<span style=\\"font-style: italic;\\">I&apos;m italic too</span></p>
+<p>these are supported:
+<span style=\\"font-weight: bold;\\">bold outside and <span style=\\"font-style: italic;\\">italic inside</span></span>
+<span style=\\"font-weight: bold;\\">bold outside and <span style=\\"font-style: italic;\\">italic inside</span></span>
+<span style=\\"font-style: italic;\\">italic outside and <span style=\\"font-weight: bold;\\">bold inside</span></span>
+<span style=\\"font-style: italic;\\">italic outside and <span style=\\"font-weight: bold;\\">bold inside</span></span></p>
+<p>these are not supported:
+<span style=\\"font-weight: bold;\\">bold outside and *italic inside</span><span style=\\"font-style: italic;\\">
+<span style=\\"font-weight: bold;\\">bold outside and _italic inside</span><span style=\\"font-style: italic;\\">
+</span>italic outside and <span style=\\"font-weight: bold;\\">bold inside</span>_
+</span>italic outside and <span style=\\"font-weight: bold;\\">bold inside</span>*</p>
+<p>_not italic</p>
+<p>not italic_</p>
+<p>a<span style=\\"font-weight: bold;\\">bold</span></p>
+<p><span style=\\"font-style: italic;\\">italic</span>s</p>
+<p>*not emphasized*</p>
+<p><span style=\\"font-style: italic;\\">emphasized star*</span></p>
+<p><span style=\\"font-style: italic;\\">_italic underlines_</span></p>
+<p><span style=\\"font-style: italic;\\">italic underline_and star*</span></p>
+<p>\\\\<span style=\\"font-style: italic;\\">emphasis after a literal backslash</span></p>
+<p>*just plain p before code<code>*</code></p>"
+`;
+
 exports[`multiple images in series 1`] = `
 Array [
   Object {
