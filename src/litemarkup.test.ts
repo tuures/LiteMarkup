@@ -189,7 +189,6 @@ _italic underline\\_and star*_
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
-  console.log(html)
   expect(html).toMatchSnapshot()
 });
 

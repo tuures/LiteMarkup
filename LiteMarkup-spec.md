@@ -52,6 +52,6 @@ Concatenated ”content line”s of each ”content item” of *ULIST* and *OLIS
   *CODEBLOCKSTART*\
 ))
 
-The ”content” of *HEADING* and *PARAGRAPH* is further parsed as *INLINE*
+The ”content” of *HEADING* and *PARAGRAPH* is further parsed as *INLINE*
 
 *INLINE* = *TEXT* or *CODESPAN* or *EM* or *STRONG* or *LINK* or *IMAGE* or *BR*

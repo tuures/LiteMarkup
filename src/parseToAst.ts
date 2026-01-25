@@ -4,7 +4,7 @@ import * as Ast from './ast'
 // Parser
 //
 
-function impl(markdownMode: boolean) {
+function impl(markdownMode: boolean) {
   const R = (p: string, flags?: string) => new RegExp(p, flags)
 
   type Rule<N> = SimpleRule<N> | LookaheadRule<N>
@@ -45,7 +45,7 @@ function impl(markdownMode: boolean) {
       mkNode: r => ({
         name: 'cb',
         infoText: r[3].replace(/^[ \t]+/,'').replace(/[ \t]+$/,''),
-        txt: (r[4] || r[5] || '').replace(R(`^${r[1]}`), '').replace(R(`\\n${r[1]}`, 'g'), '\n')
+        txt: (r[4] || r[5] || '').replace(R(`^${r[1]}`), '').replace(R(`\\n${r[1]}`, 'g'), '\n')
       }),
     },
   ]
@@ -198,7 +198,7 @@ function impl(markdownMode: boolean) {
             : rule.re.exec(remaining)
           if (match) {
             matchedLength += match[0].length
-            // console.log(`PARSED: ${(rule.pre || rule.re).source}  ->  `, preMatch, match)
+            // console.log(`PARSED: ${(rule.pre || rule.re).source}  ->  `, preMatch, match)
             const astNode = rule.pre ? rule.mkNode(preMatch, match) : rule.mkNode(match)
             if (astNode) {
               // console.log(`MKNODE: ${JSON.stringify(astNode)}`)

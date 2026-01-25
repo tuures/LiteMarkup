@@ -1,10 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`basic 1`] = `
-Array [
-  Object {
-    "body": Array [
-      Object {
+[
+  {
+    "body": [
+      {
         "name": "",
         "txt": "foo😀",
       },
@@ -12,20 +12,20 @@ Array [
     "level": 3,
     "name": "h",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "gadasdasd,asdasd",
       },
     ],
     "name": "p",
   },
-  Object {
-    "doc": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "doc": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "quote here",
           },
@@ -35,21 +35,21 @@ Array [
     ],
     "name": "bq",
   },
-  Object {
+  {
     "name": "hr",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "asdas<b>d</b>asda sda1&amp;",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "ffof😀oofoof
 fofoofo2",
@@ -57,9 +57,9 @@ fofoofo2",
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "immediate heading",
       },
@@ -67,22 +67,22 @@ fofoofo2",
     "level": 1,
     "name": "h",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "This is a list:",
       },
     ],
     "name": "p",
   },
-  Object {
-    "items": Array [
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+  {
+    "items": [
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "one",
               },
@@ -92,11 +92,11 @@ fofoofo2",
         ],
         "name": "li",
       },
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "two",
               },
@@ -106,11 +106,11 @@ fofoofo2",
         ],
         "name": "li",
       },
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "three",
               },
@@ -120,20 +120,20 @@ fofoofo2",
         ],
         "name": "li",
       },
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "fourth item",
               },
             ],
             "name": "p",
           },
-          Object {
-            "body": Array [
-              Object {
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "I mean this is a big one",
               },
@@ -143,11 +143,11 @@ fofoofo2",
         ],
         "name": "li",
       },
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "fifth",
               },
@@ -161,13 +161,13 @@ fofoofo2",
     "name": "l",
     "startNumber": undefined,
   },
-  Object {
-    "items": Array [
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+  {
+    "items": [
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "first",
               },
@@ -177,11 +177,11 @@ fofoofo2",
         ],
         "name": "li",
       },
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "second",
               },
@@ -191,11 +191,11 @@ fofoofo2",
         ],
         "name": "li",
       },
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "third",
               },
@@ -209,16 +209,16 @@ fofoofo2",
     "name": "l",
     "startNumber": 1,
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "werwerwerwer",
       },
     ],
     "name": "p",
   },
-  Object {
+  {
     "infoText": "clara",
     "name": "cb",
     "txt": "foo = bar
@@ -226,37 +226,37 @@ fofoofo2",
  1 < 2
 ",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "immediate code:",
       },
     ],
     "name": "p",
   },
-  Object {
+  {
     "infoText": "",
     "name": "cb",
     "txt": "  foo = bar
 ",
   },
-  Object {
+  {
     "infoText": "",
     "name": "cb",
     "txt": "",
   },
-  Object {
-    "infoText": "justnewline\\">eviltext",
+  {
+    "infoText": "justnewline">eviltext",
     "name": "cb",
     "txt": "
 ",
   },
-  Object {
-    "doc": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "doc": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "asd",
           },
@@ -264,9 +264,9 @@ fofoofo2",
         "level": 1,
         "name": "h",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "lol <nottag>
 lazy
@@ -278,22 +278,22 @@ foo",
     ],
     "name": "bq",
   },
-  Object {
-    "doc": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "doc": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "level 1",
           },
         ],
         "name": "p",
       },
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "level 2
 level 2",
@@ -307,211 +307,211 @@ level 2",
     ],
     "name": "bq",
   },
-  Object {
+  {
     "name": "htm",
     "raw": "<div>
  foobar
 </div>",
   },
-  Object {
+  {
     "name": "htm",
     "raw": "<broken>
 oops </broken> html
 </broken>",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "joo",
       },
-      Object {
+      {
         "name": "cs",
         "txt": "asd",
       },
-      Object {
+      {
         "name": "",
         "txt": " bar",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "asd ",
       },
-      Object {
+      {
         "name": "",
         "txt": "\`\`0doo",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "asd ",
       },
-      Object {
+      {
         "name": "cs",
         "txt": " ",
       },
-      Object {
+      {
         "name": "",
         "txt": "1doo",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "asd ",
       },
-      Object {
+      {
         "name": "cs",
         "txt": "  ",
       },
-      Object {
+      {
         "name": "",
         "txt": "2doo",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "asd ",
       },
-      Object {
+      {
         "name": "cs",
         "txt": "   ",
       },
-      Object {
+      {
         "name": "",
         "txt": "3doo",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "asd ",
       },
-      Object {
+      {
         "name": "cs",
         "txt": "foo",
       },
-      Object {
+      {
         "name": "",
         "txt": "\` 12dii",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "asd ",
       },
-      Object {
+      {
         "name": "",
         "txt": "\`\`foo",
       },
-      Object {
+      {
         "name": "",
         "txt": "\` 21dii",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "asd ",
       },
-      Object {
+      {
         "name": "cs",
         "txt": "foo",
       },
-      Object {
+      {
         "name": "",
         "txt": " 22dii",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "asd",
       },
-      Object {
+      {
         "name": "",
         "txt": "\`asd",
       },
-      Object {
+      {
         "name": "br",
       },
-      Object {
+      {
         "name": "",
         "txt": "xfoobar",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "asd",
       },
-      Object {
+      {
         "name": "",
         "txt": "\`",
       },
-      Object {
+      {
         "name": "",
         "txt": "asd",
       },
-      Object {
+      {
         "name": "br",
       },
-      Object {
+      {
         "name": "",
         "txt": "yfoobar",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "br in the end ",
       },
-      Object {
+      {
         "name": "br",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "I'm bold",
           },
@@ -521,11 +521,11 @@ oops </broken> html
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "I'm italic",
           },
@@ -535,17 +535,17 @@ oops </broken> html
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "bold outside and ",
           },
-          Object {
-            "body": Array [
-              Object {
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "italic inside",
               },
@@ -558,82 +558,82 @@ oops </broken> html
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "_bold start",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "bold ending",
       },
-      Object {
+      {
         "name": "",
         "txt": "_",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "aftert this comes a few paragraphs with just one character",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "a",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "#",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "_",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "aftert this comes a text content that is just one characters",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "a",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "bold",
           },
@@ -643,216 +643,216 @@ oops </broken> html
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "italic",
           },
         ],
         "name": "i",
       },
-      Object {
+      {
         "name": "",
         "txt": "s",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "!",
       },
-      Object {
+      {
         "name": "",
-        "txt": "\\"",
+        "txt": """,
       },
-      Object {
+      {
         "name": "",
         "txt": "#",
       },
-      Object {
+      {
         "name": "",
         "txt": "$",
       },
-      Object {
+      {
         "name": "",
         "txt": "%",
       },
-      Object {
+      {
         "name": "",
         "txt": "&",
       },
-      Object {
+      {
         "name": "",
         "txt": "'",
       },
-      Object {
+      {
         "name": "",
         "txt": "(",
       },
-      Object {
+      {
         "name": "",
         "txt": ")",
       },
-      Object {
+      {
         "name": "",
         "txt": "*",
       },
-      Object {
+      {
         "name": "",
         "txt": "+",
       },
-      Object {
+      {
         "name": "",
         "txt": ",",
       },
-      Object {
+      {
         "name": "",
         "txt": "-",
       },
-      Object {
+      {
         "name": "",
         "txt": ".",
       },
-      Object {
+      {
         "name": "",
         "txt": "/",
       },
-      Object {
+      {
         "name": "",
         "txt": ":",
       },
-      Object {
+      {
         "name": "",
         "txt": ";",
       },
-      Object {
+      {
         "name": "",
         "txt": "<",
       },
-      Object {
+      {
         "name": "",
         "txt": "=",
       },
-      Object {
+      {
         "name": "",
         "txt": ">",
       },
-      Object {
+      {
         "name": "",
         "txt": "?",
       },
-      Object {
+      {
         "name": "",
         "txt": "@",
       },
-      Object {
+      {
         "name": "",
         "txt": "[",
       },
-      Object {
+      {
         "name": "",
-        "txt": "\\\\",
+        "txt": "\\",
       },
-      Object {
+      {
         "name": "",
         "txt": "]",
       },
-      Object {
+      {
         "name": "",
         "txt": "^",
       },
-      Object {
+      {
         "name": "",
         "txt": "_",
       },
-      Object {
+      {
         "name": "",
         "txt": "\`",
       },
-      Object {
+      {
         "name": "",
         "txt": "{",
       },
-      Object {
+      {
         "name": "",
         "txt": "|",
       },
-      Object {
+      {
         "name": "",
         "txt": "}",
       },
-      Object {
+      {
         "name": "",
         "txt": "~",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
-        "txt": "\\\\→",
+        "txt": "\\→",
       },
-      Object {
+      {
         "name": "",
-        "txt": "\\\\A",
+        "txt": "\\A",
       },
-      Object {
+      {
         "name": "",
-        "txt": "\\\\a",
+        "txt": "\\a",
       },
-      Object {
+      {
         "name": "",
-        "txt": "\\\\ ",
+        "txt": "\\ ",
       },
-      Object {
+      {
         "name": "",
-        "txt": "\\\\3",
+        "txt": "\\3",
       },
-      Object {
+      {
         "name": "",
-        "txt": "\\\\φ",
+        "txt": "\\φ",
       },
-      Object {
+      {
         "name": "",
-        "txt": "\\\\«",
+        "txt": "\\«",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "*",
       },
-      Object {
+      {
         "name": "",
         "txt": "not emphasized",
       },
-      Object {
+      {
         "name": "",
         "txt": "*",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "emphasized star",
           },
-          Object {
+          {
             "name": "",
             "txt": "*",
           },
@@ -862,19 +862,19 @@ oops </broken> html
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "_",
           },
-          Object {
+          {
             "name": "",
             "txt": "italic underlines",
           },
-          Object {
+          {
             "name": "",
             "txt": "_",
           },
@@ -884,23 +884,23 @@ oops </broken> html
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "italic underline",
           },
-          Object {
+          {
             "name": "",
             "txt": "_",
           },
-          Object {
+          {
             "name": "",
             "txt": "and star",
           },
-          Object {
+          {
             "name": "",
             "txt": "*",
           },
@@ -910,15 +910,15 @@ oops </broken> html
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
-        "txt": "\\\\",
+        "txt": "\\",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "emphasis",
           },
@@ -928,28 +928,28 @@ oops </broken> html
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "*notbold",
       },
-      Object {
+      {
         "name": "cs",
         "txt": "*",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "this paragraph has a ",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "link to",
           },
@@ -957,43 +957,43 @@ oops </broken> html
         "href": "/thisurl",
         "name": "a",
       },
-      Object {
+      {
         "name": "",
         "txt": " and some parenthesis ",
       },
-      Object {
+      {
         "name": "",
         "txt": "[]() that is not a link",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "[foo",
           },
-          Object {
+          {
             "name": "",
             "txt": "]",
           },
-          Object {
+          {
             "name": "",
             "txt": "a",
           },
         ],
-        "href": "ds\\\\)fd\\\\)\\\\\`",
+        "href": "ds\\)fd\\)\\\`",
         "name": "a",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "alt": "image of a cat",
         "name": "img",
         "src": "/ordidnthappen.jpg",
@@ -1034,7 +1034,7 @@ fofoofo2</p>
     <p>fifth</p>
   </li>
 </ul>
-<ol start=\\"1\\">
+<ol start="1">
   <li>
     <p>first</p>
   </li>
@@ -1046,7 +1046,7 @@ fofoofo2</p>
   </li>
 </ol>
 <p>werwerwerwer</p>
-<pre><code data-infotext=\\"clara\\">foo = bar
+<pre><code data-infotext="clara">foo = bar
  bar = zot
  1 &lt; 2
 </code></pre>
@@ -1054,7 +1054,7 @@ fofoofo2</p>
 <pre><code>  foo = bar
 </code></pre>
 <pre><code/></pre>
-<pre><code data-infotext=\\"justnewline&quot;&gt;eviltext\\">
+<pre><code data-infotext="justnewline&quot;&gt;eviltext">
 </code></pre>
 <blockquote>
   <h1>asd</h1>
@@ -1086,9 +1086,9 @@ oops </broken> html
 <p>asd\`asd<br/>xfoobar</p>
 <p>asd\`asd<br/>yfoobar</p>
 <p>br in the end <br/></p>
-<p><span style=\\"font-weight: bold;\\">I&apos;m bold</span></p>
-<p><span style=\\"font-style: italic;\\">I&apos;m italic</span></p>
-<p><span style=\\"font-weight: bold;\\">bold outside and <span style=\\"font-style: italic;\\">italic inside</span></span></p>
+<p><span style="font-weight: bold;">I&apos;m bold</span></p>
+<p><span style="font-style: italic;">I&apos;m italic</span></p>
+<p><span style="font-weight: bold;">bold outside and <span style="font-style: italic;">italic inside</span></span></p>
 <p>_bold start</p>
 <p>bold ending_</p>
 <p>aftert this comes a few paragraphs with just one character</p>
@@ -1096,24 +1096,24 @@ oops </broken> html
 <p>#</p>
 <p>_</p>
 <p>aftert this comes a text content that is just one characters</p>
-<p>a<span style=\\"font-weight: bold;\\">bold</span></p>
-<p><span style=\\"font-style: italic;\\">italic</span>s</p>
-<p>!&quot;#$%&amp;&apos;()*+,-./:;&lt;=&gt;?@[\\\\]^_\`{|}~</p>
-<p>\\\\→\\\\A\\\\a\\\\ \\\\3\\\\φ\\\\«</p>
+<p>a<span style="font-weight: bold;">bold</span></p>
+<p><span style="font-style: italic;">italic</span>s</p>
+<p>!&quot;#$%&amp;&apos;()*+,-./:;&lt;=&gt;?@[\\]^_\`{|}~</p>
+<p>\\→\\A\\a\\ \\3\\φ\\«</p>
 <p>*not emphasized*</p>
-<p><span style=\\"font-weight: bold;\\">emphasized star*</span></p>
-<p><span style=\\"font-style: italic;\\">_italic underlines_</span></p>
-<p><span style=\\"font-style: italic;\\">italic underline_and star*</span></p>
-<p>\\\\<span style=\\"font-weight: bold;\\">emphasis</span></p>
+<p><span style="font-weight: bold;">emphasized star*</span></p>
+<p><span style="font-style: italic;">_italic underlines_</span></p>
+<p><span style="font-style: italic;">italic underline_and star*</span></p>
+<p>\\<span style="font-weight: bold;">emphasis</span></p>
 <p>*notbold<code>*</code></p>
-<p>this paragraph has a <a href=\\"/thisurl\\">link to</a> and some parenthesis []() that is not a link</p>
-<p><a href=\\"ds\\\\)fd\\\\)\\\\\`\\">[foo]a</a></p>
-<p><img alt=\\"image of a cat\\" src=\\"/ordidnthappen.jpg\\"/></p>"
+<p>this paragraph has a <a href="/thisurl">link to</a> and some parenthesis []() that is not a link</p>
+<p><a href="ds\\)fd\\)\\\`">[foo]a</a></p>
+<p><img alt="image of a cat" src="/ordidnthappen.jpg"/></p>"
 `;
 
 exports[`codeblock with broken end 1`] = `
-Array [
-  Object {
+[
+  {
     "infoText": "foo",
     "name": "cb",
     "txt": "\`\`
@@ -1123,19 +1123,19 @@ Array [
 `;
 
 exports[`codeblock with broken end 2`] = `
-"<pre><code data-infotext=\\"foo\\">\`\`
+"<pre><code data-infotext="foo">\`\`
 </code></pre>"
 `;
 
 exports[`codeblock with broken end on the same line / codespan with missing backticks in the end 1`] = `
-Array [
-  Object {
-    "body": Array [
-      Object {
+[
+  {
+    "body": [
+      {
         "name": "",
         "txt": "\`\`\`foo",
       },
-      Object {
+      {
         "name": "",
         "txt": "\`\`",
       },
@@ -1148,8 +1148,8 @@ Array [
 exports[`codeblock with broken end on the same line / codespan with missing backticks in the end 2`] = `"<p>\`\`\`foo\`\`</p>"`;
 
 exports[`codeblock without end 1`] = `
-Array [
-  Object {
+[
+  {
     "infoText": "foo",
     "name": "cb",
     "txt": "",
@@ -1157,17 +1157,17 @@ Array [
 ]
 `;
 
-exports[`codeblock without end 2`] = `"<pre><code data-infotext=\\"foo\\"/></pre>"`;
+exports[`codeblock without end 2`] = `"<pre><code data-infotext="foo"/></pre>"`;
 
 exports[`codespan with extra backticks on the end 1`] = `
-Array [
-  Object {
-    "body": Array [
-      Object {
+[
+  {
+    "body": [
+      {
         "name": "cs",
         "txt": "foo",
       },
-      Object {
+      {
         "name": "",
         "txt": "\`",
       },
@@ -1180,18 +1180,18 @@ Array [
 exports[`codespan with extra backticks on the end 2`] = `"<p><code>foo</code>\`</p>"`;
 
 exports[`codespan with extra backticks on the start 1`] = `
-Array [
-  Object {
-    "body": Array [
-      Object {
+[
+  {
+    "body": [
+      {
         "name": "",
         "txt": "foo ",
       },
-      Object {
+      {
         "name": "",
         "txt": "\`\`\`foo",
       },
-      Object {
+      {
         "name": "",
         "txt": "\`\`",
       },
@@ -1204,10 +1204,10 @@ Array [
 exports[`codespan with extra backticks on the start 2`] = `"<p>foo \`\`\`foo\`\`</p>"`;
 
 exports[`codespan with three backticks in the beginning of a paragraph (not codeblock) 1`] = `
-Array [
-  Object {
-    "body": Array [
-      Object {
+[
+  {
+    "body": [
+      {
         "name": "cs",
         "txt": "foo",
       },
@@ -1220,10 +1220,10 @@ Array [
 exports[`codespan with three backticks in the beginning of a paragraph (not codeblock) 2`] = `"<p><code>foo</code></p>"`;
 
 exports[`empty paragraph in the end of the file 1`] = `
-Array [
-  Object {
-    "body": Array [
-      Object {
+[
+  {
+    "body": [
+      {
         "name": "",
         "txt": "foo",
       },
@@ -1236,14 +1236,14 @@ Array [
 exports[`empty paragraph in the end of the file 2`] = `"<p>foo</p>"`;
 
 exports[`list with marker character in content 1`] = `
-Array [
-  Object {
-    "items": Array [
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+[
+  {
+    "items": [
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "foo - the first item",
               },
@@ -1253,11 +1253,11 @@ Array [
         ],
         "name": "li",
       },
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "bar-second",
               },
@@ -1267,11 +1267,11 @@ Array [
         ],
         "name": "li",
       },
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "baz- the third",
               },
@@ -1281,11 +1281,11 @@ Array [
         ],
         "name": "li",
       },
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "bam -fourth",
               },
@@ -1320,26 +1320,26 @@ exports[`list with marker character in content 2`] = `
 `;
 
 exports[`markdown compatibility mode 1`] = `
-Array [
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+[
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "I'm bold",
           },
         ],
         "name": "b",
       },
-      Object {
+      {
         "name": "",
         "txt": "
 ",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "I'm bold too",
           },
@@ -1349,25 +1349,25 @@ Array [
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "I'm italic",
           },
         ],
         "name": "i",
       },
-      Object {
+      {
         "name": "",
         "txt": "
 ",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "I'm italic too",
           },
@@ -1377,22 +1377,22 @@ Array [
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "these are supported:
 ",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "bold outside and ",
           },
-          Object {
-            "body": Array [
-              Object {
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "italic inside",
               },
@@ -1402,20 +1402,20 @@ Array [
         ],
         "name": "b",
       },
-      Object {
+      {
         "name": "",
         "txt": "
 ",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "bold outside and ",
           },
-          Object {
-            "body": Array [
-              Object {
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "italic inside",
               },
@@ -1425,20 +1425,20 @@ Array [
         ],
         "name": "b",
       },
-      Object {
+      {
         "name": "",
         "txt": "
 ",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "italic outside and ",
           },
-          Object {
-            "body": Array [
-              Object {
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "bold inside",
               },
@@ -1448,20 +1448,20 @@ Array [
         ],
         "name": "i",
       },
-      Object {
+      {
         "name": "",
         "txt": "
 ",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "italic outside and ",
           },
-          Object {
-            "body": Array [
-              Object {
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "bold inside",
               },
@@ -1474,49 +1474,49 @@ Array [
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "these are not supported:
 ",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "bold outside and ",
           },
-          Object {
+          {
             "name": "",
             "txt": "*italic inside",
           },
         ],
         "name": "b",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "
 ",
           },
-          Object {
-            "body": Array [
-              Object {
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "bold outside and ",
               },
-              Object {
+              {
                 "name": "",
                 "txt": "_italic inside",
               },
             ],
             "name": "b",
           },
-          Object {
-            "body": Array [
-              Object {
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "
 ",
@@ -1524,20 +1524,20 @@ Array [
             ],
             "name": "i",
           },
-          Object {
+          {
             "name": "",
             "txt": "italic outside and ",
           },
-          Object {
-            "body": Array [
-              Object {
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "bold inside",
               },
             ],
             "name": "b",
           },
-          Object {
+          {
             "name": "",
             "txt": "_
 ",
@@ -1545,57 +1545,57 @@ Array [
         ],
         "name": "i",
       },
-      Object {
+      {
         "name": "",
         "txt": "italic outside and ",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "bold inside",
           },
         ],
         "name": "b",
       },
-      Object {
+      {
         "name": "",
         "txt": "*",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "_not italic",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "not italic",
       },
-      Object {
+      {
         "name": "",
         "txt": "_",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "a",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "bold",
           },
@@ -1605,50 +1605,50 @@ Array [
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "italic",
           },
         ],
         "name": "i",
       },
-      Object {
+      {
         "name": "",
         "txt": "s",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "*",
       },
-      Object {
+      {
         "name": "",
         "txt": "not emphasized",
       },
-      Object {
+      {
         "name": "",
         "txt": "*",
       },
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "emphasized star",
           },
-          Object {
+          {
             "name": "",
             "txt": "*",
           },
@@ -1658,19 +1658,19 @@ Array [
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "_",
           },
-          Object {
+          {
             "name": "",
             "txt": "italic underlines",
           },
-          Object {
+          {
             "name": "",
             "txt": "_",
           },
@@ -1680,23 +1680,23 @@ Array [
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
-        "body": Array [
-          Object {
+  {
+    "body": [
+      {
+        "body": [
+          {
             "name": "",
             "txt": "italic underline",
           },
-          Object {
+          {
             "name": "",
             "txt": "_",
           },
-          Object {
+          {
             "name": "",
             "txt": "and star",
           },
-          Object {
+          {
             "name": "",
             "txt": "*",
           },
@@ -1706,15 +1706,15 @@ Array [
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
-        "txt": "\\\\",
+        "txt": "\\",
       },
-      Object {
-        "body": Array [
-          Object {
+      {
+        "body": [
+          {
             "name": "",
             "txt": "emphasis after a literal backslash",
           },
@@ -1724,13 +1724,13 @@ Array [
     ],
     "name": "p",
   },
-  Object {
-    "body": Array [
-      Object {
+  {
+    "body": [
+      {
         "name": "",
         "txt": "*just plain p before code",
       },
-      Object {
+      {
         "name": "cs",
         "txt": "*",
       },
@@ -1741,47 +1741,47 @@ Array [
 `;
 
 exports[`markdown compatibility mode 2`] = `
-"<p><span style=\\"font-weight: bold;\\">I&apos;m bold</span>
-<span style=\\"font-weight: bold;\\">I&apos;m bold too</span></p>
-<p><span style=\\"font-style: italic;\\">I&apos;m italic</span>
-<span style=\\"font-style: italic;\\">I&apos;m italic too</span></p>
+"<p><span style="font-weight: bold;">I&apos;m bold</span>
+<span style="font-weight: bold;">I&apos;m bold too</span></p>
+<p><span style="font-style: italic;">I&apos;m italic</span>
+<span style="font-style: italic;">I&apos;m italic too</span></p>
 <p>these are supported:
-<span style=\\"font-weight: bold;\\">bold outside and <span style=\\"font-style: italic;\\">italic inside</span></span>
-<span style=\\"font-weight: bold;\\">bold outside and <span style=\\"font-style: italic;\\">italic inside</span></span>
-<span style=\\"font-style: italic;\\">italic outside and <span style=\\"font-weight: bold;\\">bold inside</span></span>
-<span style=\\"font-style: italic;\\">italic outside and <span style=\\"font-weight: bold;\\">bold inside</span></span></p>
+<span style="font-weight: bold;">bold outside and <span style="font-style: italic;">italic inside</span></span>
+<span style="font-weight: bold;">bold outside and <span style="font-style: italic;">italic inside</span></span>
+<span style="font-style: italic;">italic outside and <span style="font-weight: bold;">bold inside</span></span>
+<span style="font-style: italic;">italic outside and <span style="font-weight: bold;">bold inside</span></span></p>
 <p>these are not supported:
-<span style=\\"font-weight: bold;\\">bold outside and *italic inside</span><span style=\\"font-style: italic;\\">
-<span style=\\"font-weight: bold;\\">bold outside and _italic inside</span><span style=\\"font-style: italic;\\">
-</span>italic outside and <span style=\\"font-weight: bold;\\">bold inside</span>_
-</span>italic outside and <span style=\\"font-weight: bold;\\">bold inside</span>*</p>
+<span style="font-weight: bold;">bold outside and *italic inside</span><span style="font-style: italic;">
+<span style="font-weight: bold;">bold outside and _italic inside</span><span style="font-style: italic;">
+</span>italic outside and <span style="font-weight: bold;">bold inside</span>_
+</span>italic outside and <span style="font-weight: bold;">bold inside</span>*</p>
 <p>_not italic</p>
 <p>not italic_</p>
-<p>a<span style=\\"font-weight: bold;\\">bold</span></p>
-<p><span style=\\"font-style: italic;\\">italic</span>s</p>
+<p>a<span style="font-weight: bold;">bold</span></p>
+<p><span style="font-style: italic;">italic</span>s</p>
 <p>*not emphasized*</p>
-<p><span style=\\"font-style: italic;\\">emphasized star*</span></p>
-<p><span style=\\"font-style: italic;\\">_italic underlines_</span></p>
-<p><span style=\\"font-style: italic;\\">italic underline_and star*</span></p>
-<p>\\\\<span style=\\"font-style: italic;\\">emphasis after a literal backslash</span></p>
+<p><span style="font-style: italic;">emphasized star*</span></p>
+<p><span style="font-style: italic;">_italic underlines_</span></p>
+<p><span style="font-style: italic;">italic underline_and star*</span></p>
+<p>\\<span style="font-style: italic;">emphasis after a literal backslash</span></p>
 <p>*just plain p before code<code>*</code></p>"
 `;
 
 exports[`multiple images in series 1`] = `
-Array [
-  Object {
-    "body": Array [
-      Object {
+[
+  {
+    "body": [
+      {
         "alt": "image of a cat",
         "name": "img",
         "src": "/ordidnthappen.jpg",
       },
-      Object {
+      {
         "name": "",
         "txt": " and
 second ",
       },
-      Object {
+      {
         "alt": "image of a cat",
         "name": "img",
         "src": "/ordidnthappen.jpg",
@@ -1793,32 +1793,32 @@ second ",
 `;
 
 exports[`multiple images in series 2`] = `
-"<p><img alt=\\"image of a cat\\" src=\\"/ordidnthappen.jpg\\"/> and
-second <img alt=\\"image of a cat\\" src=\\"/ordidnthappen.jpg\\"/></p>"
+"<p><img alt="image of a cat" src="/ordidnthappen.jpg"/> and
+second <img alt="image of a cat" src="/ordidnthappen.jpg"/></p>"
 `;
 
 exports[`nested lists 1`] = `
-Array [
-  Object {
-    "items": Array [
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+[
+  {
+    "items": [
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "foo",
               },
             ],
             "name": "p",
           },
-          Object {
-            "items": Array [
-              Object {
-                "doc": Array [
-                  Object {
-                    "body": Array [
-                      Object {
+          {
+            "items": [
+              {
+                "doc": [
+                  {
+                    "body": [
+                      {
                         "name": "",
                         "txt": "foo1",
                       },
@@ -1828,11 +1828,11 @@ Array [
                 ],
                 "name": "li",
               },
-              Object {
-                "doc": Array [
-                  Object {
-                    "body": Array [
-                      Object {
+              {
+                "doc": [
+                  {
+                    "body": [
+                      {
                         "name": "",
                         "txt": "foo2",
                       },
@@ -1849,24 +1849,24 @@ Array [
         ],
         "name": "li",
       },
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "bar",
               },
             ],
             "name": "p",
           },
-          Object {
-            "items": Array [
-              Object {
-                "doc": Array [
-                  Object {
-                    "body": Array [
-                      Object {
+          {
+            "items": [
+              {
+                "doc": [
+                  {
+                    "body": [
+                      {
                         "name": "",
                         "txt": "bar1",
                       },
@@ -1876,11 +1876,11 @@ Array [
                 ],
                 "name": "li",
               },
-              Object {
-                "doc": Array [
-                  Object {
-                    "body": Array [
-                      Object {
+              {
+                "doc": [
+                  {
+                    "body": [
+                      {
                         "name": "",
                         "txt": "bar2",
                       },
@@ -1901,13 +1901,13 @@ Array [
     "name": "l",
     "startNumber": undefined,
   },
-  Object {
-    "items": Array [
-      Object {
-        "doc": Array [
-          Object {
-            "body": Array [
-              Object {
+  {
+    "items": [
+      {
+        "doc": [
+          {
+            "body": [
+              {
                 "name": "",
                 "txt": "another list",
               },

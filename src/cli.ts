@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
-import fs from 'fs'
-
+import { readFileSync } from 'node:fs'
 import { convertToHtml } from './litemarkup'
 
-const stdin = fs.readFileSync(0, 'utf8')
+const stdin = readFileSync(0, 'utf8')
 
 console.log(convertToHtml(stdin))

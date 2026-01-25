@@ -2,47 +2,33 @@
   "name": "litemarkup",
   "version": "0.1.10",
   "description": "Unbloated Markdown-like markup language",
-  "keywords": [
-    "markdown",
-    "simple",
-    "markup",
-    "language",
-    "parser",
-    "compiler",
-    "html",
-    "typescript",
-    "small",
-    "lite"
-  ],
-  "homepage": "https://tuures.github.io/LiteMarkup/",
-  "repository": "github:tuures/LiteMarkup",
-  "licenses": [
-    {
-      "licence": "MIT"
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/litemarkup.d.ts",
+      "default": "./dist/litemarkup.js"
     }
-  ],
-  "main": "./dist/litemarkup.js",
-  "types": "./dist/litemarkup.d.ts",
+  },
   "bin": {
     "litemarkup": "./dist/cli.js"
   },
-  "license": "MIT",
-  "devDependencies": {
-    "@types/jest": "25.2.2",
-    "jest": "26.0.1",
-    "parcel-bundler": "1.12.4",
-    "prettier": "2.0.5",
-    "ts-jest": "26.0.0",
-    "typescript": "3.9.2"
-  },
-  "scripts": {
-    "compile": "rm -rf ./dist/* && ./node_modules/.bin/tsc && ./node_modules/.bin/parcel build src/litemarkup.ts -o dist/litemarkup.min.js --global litemarkup",
-    "test": "./node_modules/.bin/jest"
-  },
-  "dependencies": {
-    "@types/node": "14.0.1"
-  },
   "files": [
     "dist"
-  ]
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "keywords": ["markdown", "markup", "parser", "html", "typescript", "simple", "lightweight"],
+  "homepage": "https://tuures.github.io/LiteMarkup/",
+  "repository": "github:tuures/LiteMarkup",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^25.0.10",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "tsdown": "^0.20.1",
+    "typescript": "^5.9.3"
+  }
 }

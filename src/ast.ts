@@ -38,7 +38,7 @@ export interface Image {
   src: string
 }
 
-export type Inline = Text | CodeSpan | HardLineBreak | Italic | Bold | Link | Image
+export type Inline = Text | CodeSpan | HardLineBreak | Italic | Bold | Link | Image
 
 export interface BlockQuote {
   name: 'bq'
@@ -47,13 +47,13 @@ export interface BlockQuote {
 
 export interface List {
   name: 'l'
-  startNumber: number | undefined
+  startNumber: number | undefined
   items: ListItem[]
 }
 
 export type ContainerBlock = BlockQuote | List
 
-export interface ListItem {
+export interface ListItem {
   name: 'li'
   doc: Block[]
 }
@@ -84,6 +84,6 @@ export interface Paragraph {
   body: Inline[]
 }
 
-export type LeafBlock = ThematicBreak | Heading | HtmlBlock | CodeBlock | Paragraph
+export type LeafBlock = ThematicBreak | Heading | HtmlBlock | CodeBlock | Paragraph
 
 export type Block = ContainerBlock | LeafBlock

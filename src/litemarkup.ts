@@ -10,4 +10,3 @@ export * from './parseToAst'
 export * from './astToHtml'
 
 export const convertToHtml = (src: string) => astToHtml(parseToAst(src))
-
