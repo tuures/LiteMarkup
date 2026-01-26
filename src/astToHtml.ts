@@ -67,7 +67,7 @@ function emitInline(inline: Ast.Inline[]): string {
   }).join('')
 }
 
-const esc = (txt: string) => txt.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace(`'`, '&apos;')
+const esc = (txt: string) => txt.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
 
 function el(tagName: string, body: string | null, attr: Array<[string, string]> = []) {
   const attributes = attr.map(a =>
