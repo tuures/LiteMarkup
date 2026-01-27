@@ -3,8 +3,13 @@ import * as Ast from './ast'
 //
 // Parser
 //
+interface ParserOptions {
+  markdownMode?: boolean
+  transformBlock?: (node: Ast.Block) => Ast.Block[]
+  transformInline?: (node: Ast.Inline) => Ast.Inline[]
+}
 
-function impl(markdownMode: boolean) {
+export function parseToAst({ markdownMode, transformBlock, transformInline }: ParserOptions = {}) {
   const R = (p: string, flags?: string) => new RegExp(p, flags)
 
   type Rule<N> = SimpleRule<N> | LookaheadRule<N>
@@ -34,7 +39,7 @@ function impl(markdownMode: boolean) {
     },
     {
       re: /^ {0,3}(#{1,6})[ \t]+([^\n]*)/,
-      mkNode: r => ({ name: 'h', level: r[1].length, body: parse(r[2], inlineRules) }),
+      mkNode: r => ({ name: 'h', level: r[1].length, body: parseInline(r[2]) }),
     },
     {
       re: /^(<([^>]+)>[ \t]*\n(?:[^](?!<\/\2>(?:[ \t]*\n){2}))*[^]<\/\2>)[ \t]*(?:$|\n(?:$|[ \t]*\n))/,
@@ -55,7 +60,7 @@ function impl(markdownMode: boolean) {
     mkNode: r => {
       const content = r[1].replace(/\n {0,3}> ?/g, '\n')
 
-      return { name: 'bq', doc: parse(content, blockRules) }
+      return { name: 'bq', doc: parseBlock(content) }
     },
   }
 
@@ -72,7 +77,7 @@ function impl(markdownMode: boolean) {
       const items: Ast.ListItem[] = afterInitialMarkerIndent.split(markerIndent).map(itemSlice => {
         const itemContent = itemSlice.replace(R(`\\n {${pr[1].length}}`, 'g'), '\n')
 
-        return { name: 'li', doc: parse(itemContent, blockRules) }
+        return { name: 'li', doc: parseBlock(itemContent) }
       })
 
       return { name: 'l', startNumber: parseInt(pr[3], 10) || undefined, items }
@@ -86,7 +91,7 @@ function impl(markdownMode: boolean) {
 
   const paragraphRule: SimpleRule<Ast.LeafBlock> = {
     re: /^([^](?!\n( {0,3}(#{1,6}[ \t]|`{3,}[^\n`]*\n|>|([-+*]|\d{1,9}[).]) {1,3}[^\n])|[ \t]*($|\n))))*[^]/,
-    mkNode: r => ({ name: 'p', body: parse(r[0], inlineRules) }),
+    mkNode: r => ({ name: 'p', body: parseInline(r[0]) }),
   }
 
   const blockRules: Rule<Ast.Block>[] = [...priorityLeafBlockRules, ...containerBlockRules, paragraphRule]
@@ -96,14 +101,14 @@ function impl(markdownMode: boolean) {
       re: /^_((?:[^\\_`]|\\[^])+)_/,
       mkNode: r => ({
         name: 'i',
-        body: parse(r[1], inlineRules)
+        body: parseInline(r[1])
       })
     },
     {
       re: /^\*((?:[^\\*`]|\\[^])+)\*/,
       mkNode: r => ({
         name: 'b',
-        body: parse(r[1], inlineRules)
+        body: parseInline(r[1])
       })
     },
   ]
@@ -113,14 +118,14 @@ function impl(markdownMode: boolean) {
       re: /^([_*])((?:(?!\1)[^\\`]|\\[^])+)\1/,
       mkNode: r => ({
         name: 'i',
-        body: parse(r[2], inlineRules)
+        body: parseInline(r[2])
       })
     },
     {
       re: /^([_*]{2})((?:(?!\1)[^\\`]|\\[^])+)\1/,
       mkNode: r => ({
         name: 'b',
-        body: parse(r[2], inlineRules)
+        body: parseInline(r[2])
       })
     },
   ]
@@ -157,7 +162,7 @@ function impl(markdownMode: boolean) {
       re: /^\[((?:[^\\\]`]|\\[^])+)\]\(((?:[^\\\)`]|\\[^])+)\)/,
       mkNode: r => ({
         name: 'a',
-        body: parse(r[1], inlineRules),
+        body: parseInline(r[1]),
         href: r[2],
       })
     },
@@ -180,7 +185,7 @@ function impl(markdownMode: boolean) {
 
   const emptyMatch = /^/.exec('')
 
-  function parse<N>(src: string, rules: Rule<N>[]): N[] {
+  function parse<N>(src: string, rules: Rule<N>[], transform: ((node: N) => N[]) | undefined): N[] {
     // console.log('parsing...')
     let remaining = src
 
@@ -201,8 +206,11 @@ function impl(markdownMode: boolean) {
             // console.log(`PARSED: ${(rule.pre || rule.re).source}  ->  `, preMatch, match)
             const astNode = rule.pre ? rule.mkNode(preMatch, match) : rule.mkNode(match)
             if (astNode) {
-              // console.log(`MKNODE: ${JSON.stringify(astNode)}`)
-              ast.push(astNode)
+              if (transform) {
+                ast.push(...transform(astNode))
+              } else {
+                ast.push(astNode)
+              }
             }
             break
           }
@@ -213,7 +221,7 @@ function impl(markdownMode: boolean) {
         remaining = remaining.slice(matchedLength)
       } else {
         // if we get here we have a bug as we want parser to accept all input
-        throw new Error('Failed to parse: ' + remaining.substr(0, 200))
+        throw new Error('Failed to parse: ' + remaining.slice(0, 200))
       }
     }
 
@@ -221,9 +229,13 @@ function impl(markdownMode: boolean) {
     return ast
   }
 
-  return (src: string) => parse<Ast.Block>(src, blockRules)
-}
+  function parseBlock(src: string) {
+    return parse<Ast.Block>(src, blockRules, transformBlock)
+  }
 
-export function parseToAst(src: string, markdownMode: boolean = false): Ast.Block[] {
-  return impl(markdownMode)(src)
+  function parseInline(src: string) {
+    return parse<Ast.Inline>(src, inlineRules, transformInline)
+  }
+
+  return parseBlock
 }

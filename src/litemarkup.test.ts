@@ -1,4 +1,6 @@
-import { parseToAst, astToHtml } from './litemarkup'
+import { parseToAst, astToHtml, convertToHtml } from './litemarkup'
+
+import * as Ast from './ast'
 
 test('basic', () => {
   const src = `
@@ -141,7 +143,7 @@ this paragraph has a [link to](/thisurl) and some parenthesis []() that is not a
 ![image of a cat](/ordidnthappen.jpg)
 
 `
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -189,7 +191,7 @@ _italic underline\\_and star*_
 *just plain p before code\`*\`
 
 `
-  const ast = parseToAst(src, true)
+  const ast = parseToAst({markdownMode: true})(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -201,7 +203,7 @@ test('multiple images in series', () => {
 ![image of a cat](/ordidnthappen.jpg) and
 second ![image of a cat](/ordidnthappen.jpg)
 `
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -215,7 +217,7 @@ test('list with marker character in content', () => {
 - baz- the third
 - bam -fourth
 `
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -234,7 +236,7 @@ test('nested lists', () => {
    * bar2
 * another list
 `
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -248,7 +250,7 @@ test('codeblock without content', () => {
 
 something after
 `
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -259,7 +261,7 @@ test('codeblock without end', () => {
   const src = `
 \`\`\`foo
 `
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -271,7 +273,7 @@ test('codeblock with broken end', () => {
 \`\`\`foo
 \`\`
 `
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -282,7 +284,7 @@ test('codeblock with broken end on the same line / codespan with missing backtic
   const src = `
 \`\`\`foo\`\`
 `
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -293,7 +295,7 @@ test('codespan with extra backticks on the start', () => {
   const src = `
 foo \`\`\`foo\`\`
 `
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -304,7 +306,7 @@ test('codespan with extra backticks on the end', () => {
   const src = `
 \`\`foo\`\`\`
 `
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -315,7 +317,7 @@ test('codespan with three backticks in the beginning of a paragraph (not codeblo
   const src = `
 \`\`\`foo\`\`\`
 `
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -324,9 +326,57 @@ test('codespan with three backticks in the beginning of a paragraph (not codeblo
 
 test('empty paragraph in the end of the file', () => {
   const src = 'foo\n  '
-  const ast = parseToAst(src)
+  const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
   expect(html).toMatchSnapshot()
+});
+
+test('transform', () => {
+  const src = `
+a
+
+b _c_ d
+`
+
+  const duplicate = (n: Ast.Block): Ast.Block[] => {
+    if (n.name === 'p' && n.body.length === 1 && n.body[0].name === '' && n.body[0].txt === 'a') {
+      return [n, n]
+    } else {
+      return [n]
+    }
+  }
+
+  const convertItalicToBold = (n: Ast.Inline): Ast.Inline[] => {
+    if (n.name === 'i') {
+      return [{...n, name: 'b'}]
+    } else {
+      return [n]
+    }
+  }
+
+  const ast = parseToAst({transformBlock: duplicate, transformInline: convertItalicToBold})(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});
+
+
+test('convertToHtml allowUnsafeHtml', () => {
+  const src = `
+start
+
+<div>
+inside div
+</div>
+
+end
+`
+  const html1 = convertToHtml(src)
+  expect(html1).toMatchSnapshot()
+
+  const html2 = convertToHtml(src, { allowUnsafeHtml: true })
+  expect(html2).toMatchSnapshot()
 });

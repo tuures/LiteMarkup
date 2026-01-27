@@ -1276,6 +1276,19 @@ exports[`codespan with three backticks in the beginning of a paragraph (not code
 
 exports[`codespan with three backticks in the beginning of a paragraph (not codeblock) 2`] = `"<p><code>foo</code></p>"`;
 
+exports[`convertToHtml allowUnsafeHtml 1`] = `
+"<p>start</p>
+<p>end</p>"
+`;
+
+exports[`convertToHtml allowUnsafeHtml 2`] = `
+"<p>start</p>
+<div>
+inside div
+</div>
+<p>end</p>"
+`;
+
 exports[`empty paragraph in the end of the file 1`] = `
 [
   {
@@ -2030,4 +2043,55 @@ foo2</p>
     <p>another list</p>
   </li>
 </ul>"
+`;
+
+exports[`transform 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "b ",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "c",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "name": "",
+        "txt": " d",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`transform 2`] = `
+"<p>a</p>
+<p>a</p>
+<p>b <span style="font-weight: bold;">c</span> d</p>"
 `;
