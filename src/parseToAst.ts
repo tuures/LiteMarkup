@@ -51,9 +51,9 @@ function impl(markdownMode: boolean) {
   ]
 
   const blockQuoteRule: SimpleRule<Ast.BlockQuote> = {
-    re: /^ {0,3}> ?((?:[^](?!\n[ \t]*\n))+[^])/,
+    re: /^ {0,3}> ?((?:[^\n]*(?:\n {0,3}> ?[^\n]*)*))/,
     mkNode: r => {
-      const content = r[1].replace(/\n {0,3}(> ?)?/g, '\n')
+      const content = r[1].replace(/\n {0,3}> ?/g, '\n')
 
       return { name: 'bq', doc: parse(content, blockRules) }
     },
@@ -194,7 +194,7 @@ function impl(markdownMode: boolean) {
         matchedLength += preMatch ? preMatch[0].length : 0
         if (preMatch) {
           const match = rule.pre
-            ? rule.re(preMatch).exec(remaining.substr(matchedLength))
+            ? rule.re(preMatch).exec(remaining.slice(matchedLength))
             : rule.re.exec(remaining)
           if (match) {
             matchedLength += match[0].length
@@ -210,7 +210,7 @@ function impl(markdownMode: boolean) {
       }
 
       if (matchedLength > 0) {
-        remaining = remaining.substr(matchedLength)
+        remaining = remaining.slice(matchedLength)
       } else {
         // if we get here we have a bug as we want parser to accept all input
         throw new Error('Failed to parse: ' + remaining.substr(0, 200))

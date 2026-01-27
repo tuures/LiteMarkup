@@ -268,9 +268,30 @@ fofoofo2",
         "body": [
           {
             "name": "",
-            "txt": "lol <nottag>
-lazy
-foo",
+            "txt": "lol <nottag>",
+          },
+        ],
+        "name": "p",
+      },
+    ],
+    "name": "bq",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "don't be lazy",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "doc": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "foo",
           },
         ],
         "name": "p",
@@ -303,6 +324,15 @@ level 2",
           },
         ],
         "name": "bq",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "level 1 continues",
+          },
+        ],
+        "name": "p",
       },
     ],
     "name": "bq",
@@ -1011,7 +1041,7 @@ exports[`basic 2`] = `
   <p>quote here</p>
 </blockquote>
 <hr/>
-<p>asdas&lt;b&gt;d</b>asda sda1&amp;amp;</p>
+<p>asdas&lt;b&gt;d&lt;/b&gt;asda sda1&amp;amp;</p>
 <p>ffof😀oofoof
 fofoofo2</p>
 <h1>immediate heading</h1>
@@ -1053,21 +1083,24 @@ fofoofo2</p>
 <p>immediate code:</p>
 <pre><code>  foo = bar
 </code></pre>
-<pre><code/></pre>
+<pre><code></code></pre>
 <pre><code data-infotext="justnewline&quot;&gt;eviltext">
 </code></pre>
 <blockquote>
   <h1>asd</h1>
-  <p>lol &lt;nottag&gt;
-lazy
-foo</p>
+  <p>lol &lt;nottag&gt;</p>
+</blockquote>
+<p>don't be lazy</p>
+<blockquote>
+  <p>foo</p>
 </blockquote>
 <blockquote>
   <p>level 1</p>
   <blockquote>
     <p>level 2
 level 2</p>
-</blockquote>
+  </blockquote>
+  <p>level 1 continues</p>
 </blockquote>
 <div>
  foobar
@@ -1086,8 +1119,8 @@ oops </broken> html
 <p>asd\`asd<br/>xfoobar</p>
 <p>asd\`asd<br/>yfoobar</p>
 <p>br in the end <br/></p>
-<p><span style="font-weight: bold;">I&apos;m bold</span></p>
-<p><span style="font-style: italic;">I&apos;m italic</span></p>
+<p><span style="font-weight: bold;">I'm bold</span></p>
+<p><span style="font-style: italic;">I'm italic</span></p>
 <p><span style="font-weight: bold;">bold outside and <span style="font-style: italic;">italic inside</span></span></p>
 <p>_bold start</p>
 <p>bold ending_</p>
@@ -1098,7 +1131,7 @@ oops </broken> html
 <p>aftert this comes a text content that is just one characters</p>
 <p>a<span style="font-weight: bold;">bold</span></p>
 <p><span style="font-style: italic;">italic</span>s</p>
-<p>!&quot;#$%&amp;&apos;()*+,-./:;&lt;=&gt;?@[\\]^_\`{|}~</p>
+<p>!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\\]^_\`{|}~</p>
 <p>\\→\\A\\a\\ \\3\\φ\\«</p>
 <p>*not emphasized*</p>
 <p><span style="font-weight: bold;">emphasized star*</span></p>
@@ -1147,6 +1180,30 @@ exports[`codeblock with broken end on the same line / codespan with missing back
 
 exports[`codeblock with broken end on the same line / codespan with missing backticks in the end 2`] = `"<p>\`\`\`foo\`\`</p>"`;
 
+exports[`codeblock without content 1`] = `
+[
+  {
+    "infoText": "foo",
+    "name": "cb",
+    "txt": "",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "something after",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`codeblock without content 2`] = `
+"<pre><code data-infotext="foo"></code></pre>
+<p>something after</p>"
+`;
+
 exports[`codeblock without end 1`] = `
 [
   {
@@ -1157,7 +1214,7 @@ exports[`codeblock without end 1`] = `
 ]
 `;
 
-exports[`codeblock without end 2`] = `"<pre><code data-infotext="foo"/></pre>"`;
+exports[`codeblock without end 2`] = `"<pre><code data-infotext="foo"></code></pre>"`;
 
 exports[`codespan with extra backticks on the end 1`] = `
 [
@@ -1741,10 +1798,10 @@ exports[`markdown compatibility mode 1`] = `
 `;
 
 exports[`markdown compatibility mode 2`] = `
-"<p><span style="font-weight: bold;">I&apos;m bold</span>
-<span style="font-weight: bold;">I&apos;m bold too</span></p>
-<p><span style="font-style: italic;">I&apos;m italic</span>
-<span style="font-style: italic;">I&apos;m italic too</span></p>
+"<p><span style="font-weight: bold;">I'm bold</span>
+<span style="font-weight: bold;">I'm bold too</span></p>
+<p><span style="font-style: italic;">I'm italic</span>
+<span style="font-style: italic;">I'm italic too</span></p>
 <p>these are supported:
 <span style="font-weight: bold;">bold outside and <span style="font-style: italic;">italic inside</span></span>
 <span style="font-weight: bold;">bold outside and <span style="font-style: italic;">italic inside</span></span>

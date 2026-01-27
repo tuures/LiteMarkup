@@ -4,65 +4,71 @@ import * as Ast from './ast'
 // HTML emitter
 //
 
-const repeat = (s: string) => (times: number) => Array(times + 1).join(s)
+export function astToHtml(ast: Ast.Block[], indentCharacters = '  '): string {
+  const repeat = (s: string) => (times: number) => s.repeat(times)
+  const indent = repeat(indentCharacters)
 
-const indentChars = '  '
-const indent = repeat(indentChars)
+  function emitBlock(blocks: Ast.Block[], indentLevel = 0): string {
 
-export function astToHtml(ast: Ast.Block[], indentLevel = 0): string {
-  const nextLevel = indentLevel + 1
-  const i = indent(indentLevel)
-  const ii = indent(indentLevel + 1)
+    const i = indent(indentLevel)
+    const ii = indent(indentLevel + 1)
 
-  const lines = ast.map(b => {
-    switch (b.name) {
-      case 'bq':
-        return el('blockquote', `\n${astToHtml(b.doc, nextLevel)}\n`)
-      case 'l': {
-        const items = b.items.map(item =>
-          el('li', `\n${astToHtml(item.doc, nextLevel + 1)}\n${ii}`)
-        )
+    const lines = blocks.map(n => {
+      switch (n.name) {
+        case 'bq':
+          return el('blockquote', `\n${emitBlock(n.doc, indentLevel + 1)}\n${i}`)
+        case 'l': {
+          const items = n.items.map(item =>
+            el('li', `\n${emitBlock(item.doc, indentLevel + 2)}\n${ii}`)
+          )
 
-        const containerTag = b.startNumber ? 'ol' : 'ul'
+          const content = `\n${ii}${items.join(`\n${ii}`)}\n${i}`
 
-        return el(containerTag, `\n${ii}${items.join(`\n${ii}`)}\n${i}`, b.startNumber ? [['start', String(b.startNumber)]] : [])
+          const containerTag = n.startNumber ? 'ol' : 'ul'
+
+          return el(containerTag, content, n.startNumber ? [['start', String(n.startNumber)]] : [])
+        }
+        case 'hr':
+          return '<hr/>'
+        case 'h':
+          return el(`h${n.level}`, emitInline(n.body))
+        case 'htm':
+          return n.raw
+        case 'cb':
+          return el('pre', el('code', esc(n.txt), n.infoText ? [['data-infotext', n.infoText]] : []))
+        case 'p':
+          return el('p', emitInline(n.body))
+        default:
+          throw new Error('Unexpected ast node: ' + (n as any).name)
       }
-      case 'hr':
-        return '<hr/>'
-      case 'h':
-        return el(`h${b.level}`, emitInline(b.body))
-      case 'htm':
-        return b.raw
-      case 'cb':
-        return el('pre', el('code', esc(b.txt), b.infoText ? [['data-infotext', b.infoText]] : []))
-      case 'p':
-        return el('p', emitInline(b.body))
-      default:
-        throw new Error('Unexpected ast node: ' + (b as any).name)
-    }
-  })
-  return `${i}${lines.join(`\n${i}`)}`
+    })
+
+    return `${i}${lines.join(`\n${i}`)}`
+  }
+
+  return emitBlock(ast)
 }
 
-function emitInline(inline: Ast.Inline[]): string {
-  return inline.map(i => {
-    switch (i.name) {
+
+function emitInline(inlines: Ast.Inline[]): string {
+  return inlines.map(n => {
+    switch (n.name) {
       case '':
-        return esc(i.txt)
+        return esc(n.txt)
       case 'cs':
-        return el('code', esc(i.txt))
+        return el('code', esc(n.txt))
       case 'br':
         return '<br/>'
       case 'i':
-        return el('span', emitInline(i.body), [['style', 'font-style: italic;']])
+        return el('span', emitInline(n.body), [['style', 'font-style: italic;']])
       case 'b':
-        return el('span', emitInline(i.body), [['style', 'font-weight: bold;']])
+        return el('span', emitInline(n.body), [['style', 'font-weight: bold;']])
       case 'a':
-        return el('a', emitInline(i.body), [['href', i.href]])
+        return el('a', emitInline(n.body), [['href', n.href]])
       case 'img':
-          return el('img', null, [['alt', i.alt], ['src', i.src]])
+          return el('img', null, [['alt', n.alt], ['src', n.src]])
       default:
-        throw new Error('Unexpected ast node: ' + (i as any).name)
+        throw new Error('Unexpected ast node: ' + (n as any).name)
     }
   }).join('')
 }
@@ -75,6 +81,6 @@ function el(tagName: string, body: string | null, attr: Array<[string, string]> 
   ).join(' ')
 
   const start = `<${tagName}${attributes.length ? ' ' : ''}${attributes}`
-  const end = body ? `>${body}</${tagName}>` : '/>'
+  const end = body !== null ? `>${body}</${tagName}>` : '/>'
   return start + end
 }

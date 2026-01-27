@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-import { readFileSync } from 'node:fs'
+import { readFile } from 'node:fs'
 import { convertToHtml } from './litemarkup'
 
-const stdin = readFileSync(0, 'utf8')
-
-console.log(convertToHtml(stdin))
+readFile(0, 'utf8', (err, stdin) => {
+  if (err) throw err
+  process.stdout.write(convertToHtml(stdin))
+})

@@ -87,3 +87,5 @@ export interface Paragraph {
 export type LeafBlock = ThematicBreak | Heading | HtmlBlock | CodeBlock | Paragraph
 
 export type Block = ContainerBlock | LeafBlock
+
+export type Node = Inline | Block

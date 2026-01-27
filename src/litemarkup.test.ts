@@ -51,12 +51,16 @@ immediate code:
 
 > # asd
 > lol <nottag>
-lazy
+don't be lazy
 > foo
 
+>
 > level 1
 > > level 2
 > > level 2
+> level 1 continues
+>
+>
 
 <div>
  foobar
@@ -227,6 +231,20 @@ test('nested lists', () => {
    * bar1
    * bar2
 * another list
+`
+  const ast = parseToAst(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+});
+
+test('codeblock without content', () => {
+  const src = `
+\`\`\`foo
+\`\`\`
+
+something after
 `
   const ast = parseToAst(src)
   expect(ast).toMatchSnapshot()
