@@ -11,22 +11,16 @@ export function astToHtml(ast: Ast.Block[], indentCharacters = '  '): string {
   function emitBlock(blocks: Ast.Block[], indentLevel = 0): string {
 
     const i = indent(indentLevel)
-    const ii = indent(indentLevel + 1)
 
     const lines = blocks.map(n => {
       switch (n.name) {
         case 'bq':
           return el('blockquote', `\n${emitBlock(n.doc, indentLevel + 1)}\n${i}`)
         case 'l': {
-          const items = n.items.map(item =>
-            el('li', `\n${emitBlock(item.doc, indentLevel + 2)}\n${ii}`)
-          )
-
-          const content = `\n${ii}${items.join(`\n${ii}`)}\n${i}`
-
           const containerTag = n.startNumber ? 'ol' : 'ul'
+          const attributes: [string, string][] = n.startNumber ? [['start', String(n.startNumber)]] : []
 
-          return el(containerTag, content, n.startNumber ? [['start', String(n.startNumber)]] : [])
+          return el(containerTag, `\n${emitListItems(n.items, indentLevel + 1)}\n${i}`, attributes)
         }
         case 'hr':
           return '<hr/>'
@@ -46,9 +40,18 @@ export function astToHtml(ast: Ast.Block[], indentCharacters = '  '): string {
     return `${i}${lines.join(`\n${i}`)}`
   }
 
+  function emitListItems(items: Ast.ListItem[], indentLevel: number): string {
+    const i = indent(indentLevel)
+
+    const lines = items.map(item =>
+      el('li', `\n${emitBlock(item.doc, indentLevel + 1)}\n${i}`)
+    )
+
+    return`${i}${lines.join(`\n${i}`)}`
+  }
+
   return emitBlock(ast)
 }
-
 
 function emitInline(inlines: Ast.Inline[]): string {
   return inlines.map(n => {

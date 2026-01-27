@@ -1896,6 +1896,21 @@ exports[`nested lists 1`] = `
                     ],
                     "name": "p",
                   },
+                  {
+                    "doc": [
+                      {
+                        "body": [
+                          {
+                            "name": "",
+                            "txt": "foo2
+foo2",
+                          },
+                        ],
+                        "name": "p",
+                      },
+                    ],
+                    "name": "bq",
+                  },
                 ],
                 "name": "li",
               },
@@ -1991,6 +2006,10 @@ exports[`nested lists 2`] = `
       </li>
       <li>
         <p>foo2</p>
+        <blockquote>
+          <p>foo2
+foo2</p>
+        </blockquote>
       </li>
     </ul>
   </li>

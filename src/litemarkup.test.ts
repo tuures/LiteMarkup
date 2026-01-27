@@ -227,6 +227,8 @@ test('nested lists', () => {
 - foo
   - foo1
   - foo2
+    > foo2
+    > foo2
 - bar
    * bar1
    * bar2
