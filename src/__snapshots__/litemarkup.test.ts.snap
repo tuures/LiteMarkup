@@ -1690,6 +1690,98 @@ oops </broken> html
 <p><img alt="image of a cat" src="/ordidnthappen.jpg"/></p>"
 `;
 
+exports[`blockquotes with leading and trailing carets 1`] = `
+[
+  {
+    "doc": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "a
+b",
+          },
+        ],
+        "name": "p",
+      },
+    ],
+    "name": "bq",
+  },
+  {
+    "doc": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "c
+d",
+          },
+        ],
+        "name": "p",
+      },
+    ],
+    "name": "bq",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "not quoted",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "doc": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "d
+e",
+          },
+        ],
+        "name": "p",
+      },
+    ],
+    "name": "bq",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "not quoted",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "doc": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "f
+g",
+          },
+        ],
+        "name": "p",
+      },
+    ],
+    "name": "bq",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "end",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
 exports[`codeblock with broken end 1`] = `
 [
   {
@@ -1958,8 +2050,13 @@ exports[`empty elements everywhere 1`] = `
     "name": "p",
   },
   {
-    "doc": [],
-    "name": "bq",
+    "body": [
+      {
+        "name": "",
+        "txt": ">",
+      },
+    ],
+    "name": "p",
   },
   {
     "body": [
@@ -2832,6 +2929,39 @@ p1s3",
 ]
 `;
 
+exports[`simple blockquotes 1`] = `
+[
+  {
+    "doc": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "a",
+          },
+        ],
+        "name": "p",
+      },
+    ],
+    "name": "bq",
+  },
+  {
+    "doc": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "b",
+          },
+        ],
+        "name": "p",
+      },
+    ],
+    "name": "bq",
+  },
+]
+`;
+
 exports[`single character inputs 1`] = `
 [
   {
@@ -2844,8 +2974,13 @@ exports[`single character inputs 1`] = `
     "name": "p",
   },
   {
-    "doc": [],
-    "name": "bq",
+    "body": [
+      {
+        "name": "",
+        "txt": ">",
+      },
+    ],
+    "name": "p",
   },
   {
     "body": [

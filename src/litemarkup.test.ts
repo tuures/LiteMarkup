@@ -569,6 +569,48 @@ test('html entities in various contexts', () => {
 //   expect(ast).toMatchSnapshot()
 // })
 
+test('simple blockquotes', () => {
+  const src = `
+> a
+
+>b
+`
+  expect(parseToAst()(src)).toMatchSnapshot()
+})
+
+test('simple blockquote with just a space', () => {
+  const src = '> \n\n'
+  expect(parseToAst()(src)[0].name).toEqual('bq')
+})
+
+test('blockquotes with leading and trailing carets', () => {
+  const src = `
+>
+> a
+> b
+
+>
+>c
+>d
+not quoted
+
+>
+>
+> d
+>e
+not quoted
+
+>
+> f
+>g
+>
+>
+
+end
+`
+  expect(parseToAst()(src)).toMatchSnapshot()
+})
+
 test('100 levels deep blockquote', () => {
   const src = '> '.repeat(100) + 'deep'
   const ast = parseToAst()(src)
@@ -625,7 +667,7 @@ test('single character inputs', () => {
   const chars = ['#', '>', '-', '*', '_', '`', '[', '!', '\\', '\n', ' ']
 
   const ast1 = parseToAst()(chars.join('\n\n'))
-  expect(ast1.map(n => n.name)).toEqual('p,bq,p,p,p,p,p,p,p'.split(','))
+  expect(ast1.map(n => n.name)).toEqual('p,p,p,p,p,p,p,p,p'.split(','))
   expect(ast1).toMatchSnapshot()
 
   // with trailing spaces
