@@ -1,5 +1,551 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
+exports[`100 levels deep blockquote 1`] = `
+[
+  {
+    "doc": [
+      {
+        "doc": [
+          {
+            "doc": [
+              {
+                "doc": [
+                  {
+                    "doc": [
+                      {
+                        "doc": [
+                          {
+                            "doc": [
+                              {
+                                "doc": [
+                                  {
+                                    "doc": [
+                                      {
+                                        "doc": [
+                                          {
+                                            "doc": [
+                                              {
+                                                "doc": [
+                                                  {
+                                                    "doc": [
+                                                      {
+                                                        "doc": [
+                                                          {
+                                                            "doc": [
+                                                              {
+                                                                "doc": [
+                                                                  {
+                                                                    "doc": [
+                                                                      {
+                                                                        "doc": [
+                                                                          {
+                                                                            "doc": [
+                                                                              {
+                                                                                "doc": [
+                                                                                  {
+                                                                                    "doc": [
+                                                                                      {
+                                                                                        "doc": [
+                                                                                          {
+                                                                                            "doc": [
+                                                                                              {
+                                                                                                "doc": [
+                                                                                                  {
+                                                                                                    "doc": [
+                                                                                                      {
+                                                                                                        "doc": [
+                                                                                                          {
+                                                                                                            "doc": [
+                                                                                                              {
+                                                                                                                "doc": [
+                                                                                                                  {
+                                                                                                                    "doc": [
+                                                                                                                      {
+                                                                                                                        "doc": [
+                                                                                                                          {
+                                                                                                                            "doc": [
+                                                                                                                              {
+                                                                                                                                "doc": [
+                                                                                                                                  {
+                                                                                                                                    "doc": [
+                                                                                                                                      {
+                                                                                                                                        "doc": [
+                                                                                                                                          {
+                                                                                                                                            "doc": [
+                                                                                                                                              {
+                                                                                                                                                "doc": [
+                                                                                                                                                  {
+                                                                                                                                                    "doc": [
+                                                                                                                                                      {
+                                                                                                                                                        "doc": [
+                                                                                                                                                          {
+                                                                                                                                                            "doc": [
+                                                                                                                                                              {
+                                                                                                                                                                "doc": [
+                                                                                                                                                                  {
+                                                                                                                                                                    "doc": [
+                                                                                                                                                                      {
+                                                                                                                                                                        "doc": [
+                                                                                                                                                                          {
+                                                                                                                                                                            "doc": [
+                                                                                                                                                                              {
+                                                                                                                                                                                "doc": [
+                                                                                                                                                                                  {
+                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                      {
+                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                          {
+                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                              {
+                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                  {
+                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                      {
+                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                          {
+                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                              {
+                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                                                                                                                                                    "doc": [
+                                                                                                                                                                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                                                                                                                                                                        "doc": [
+                                                                                                                                                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                                                                                                                                                            "doc": [
+                                                                                                                                                                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                                                                                                                                                                "doc": [
+                                                                                                                                                                                                                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                                                                                                                                                                                                                    "body": [
+                                                                                                                                                                                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                                                                                                                                                                                        "name": "",
+                                                                                                                                                                                                                                                                                                                                                                                                                        "txt": "deep",
+                                                                                                                                                                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                                                                                                                                                                    "name": "p",
+                                                                                                                                                                                                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                            ],
+                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                          },
+                                                                                                                                                                                                                        ],
+                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                    ],
+                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                  },
+                                                                                                                                                                                                                ],
+                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                              },
+                                                                                                                                                                                                            ],
+                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                          },
+                                                                                                                                                                                                        ],
+                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                      },
+                                                                                                                                                                                                    ],
+                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                  },
+                                                                                                                                                                                                ],
+                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                              },
+                                                                                                                                                                                            ],
+                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                          },
+                                                                                                                                                                                        ],
+                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                      },
+                                                                                                                                                                                    ],
+                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                  },
+                                                                                                                                                                                ],
+                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                              },
+                                                                                                                                                                            ],
+                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                          },
+                                                                                                                                                                        ],
+                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                      },
+                                                                                                                                                                    ],
+                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                  },
+                                                                                                                                                                ],
+                                                                                                                                                                "name": "bq",
+                                                                                                                                                              },
+                                                                                                                                                            ],
+                                                                                                                                                            "name": "bq",
+                                                                                                                                                          },
+                                                                                                                                                        ],
+                                                                                                                                                        "name": "bq",
+                                                                                                                                                      },
+                                                                                                                                                    ],
+                                                                                                                                                    "name": "bq",
+                                                                                                                                                  },
+                                                                                                                                                ],
+                                                                                                                                                "name": "bq",
+                                                                                                                                              },
+                                                                                                                                            ],
+                                                                                                                                            "name": "bq",
+                                                                                                                                          },
+                                                                                                                                        ],
+                                                                                                                                        "name": "bq",
+                                                                                                                                      },
+                                                                                                                                    ],
+                                                                                                                                    "name": "bq",
+                                                                                                                                  },
+                                                                                                                                ],
+                                                                                                                                "name": "bq",
+                                                                                                                              },
+                                                                                                                            ],
+                                                                                                                            "name": "bq",
+                                                                                                                          },
+                                                                                                                        ],
+                                                                                                                        "name": "bq",
+                                                                                                                      },
+                                                                                                                    ],
+                                                                                                                    "name": "bq",
+                                                                                                                  },
+                                                                                                                ],
+                                                                                                                "name": "bq",
+                                                                                                              },
+                                                                                                            ],
+                                                                                                            "name": "bq",
+                                                                                                          },
+                                                                                                        ],
+                                                                                                        "name": "bq",
+                                                                                                      },
+                                                                                                    ],
+                                                                                                    "name": "bq",
+                                                                                                  },
+                                                                                                ],
+                                                                                                "name": "bq",
+                                                                                              },
+                                                                                            ],
+                                                                                            "name": "bq",
+                                                                                          },
+                                                                                        ],
+                                                                                        "name": "bq",
+                                                                                      },
+                                                                                    ],
+                                                                                    "name": "bq",
+                                                                                  },
+                                                                                ],
+                                                                                "name": "bq",
+                                                                              },
+                                                                            ],
+                                                                            "name": "bq",
+                                                                          },
+                                                                        ],
+                                                                        "name": "bq",
+                                                                      },
+                                                                    ],
+                                                                    "name": "bq",
+                                                                  },
+                                                                ],
+                                                                "name": "bq",
+                                                              },
+                                                            ],
+                                                            "name": "bq",
+                                                          },
+                                                        ],
+                                                        "name": "bq",
+                                                      },
+                                                    ],
+                                                    "name": "bq",
+                                                  },
+                                                ],
+                                                "name": "bq",
+                                              },
+                                            ],
+                                            "name": "bq",
+                                          },
+                                        ],
+                                        "name": "bq",
+                                      },
+                                    ],
+                                    "name": "bq",
+                                  },
+                                ],
+                                "name": "bq",
+                              },
+                            ],
+                            "name": "bq",
+                          },
+                        ],
+                        "name": "bq",
+                      },
+                    ],
+                    "name": "bq",
+                  },
+                ],
+                "name": "bq",
+              },
+            ],
+            "name": "bq",
+          },
+        ],
+        "name": "bq",
+      },
+    ],
+    "name": "bq",
+  },
+]
+`;
+
+exports[`RTL and mixed directional text 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "مرحبا Hello עברית",
+      },
+    ],
+    "level": 1,
+    "name": "h",
+  },
+]
+`;
+
+exports[`backslash at end of input 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "text",
+      },
+      {
+        "name": "br",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
 exports[`basic 1`] = `
 [
   {
@@ -1180,6 +1726,30 @@ exports[`codeblock with broken end on the same line / codespan with missing back
 
 exports[`codeblock with broken end on the same line / codespan with missing backticks in the end 2`] = `"<p>\`\`\`foo\`\`</p>"`;
 
+exports[`codeblock with info text having quotes 1`] = `
+[
+  {
+    "infoText": "foo""",
+    "name": "cb",
+    "txt": "",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "something after",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`codeblock with info text having quotes 2`] = `
+"<pre><code data-infotext="foo&quot;&quot;"></code></pre>
+<p>something after</p>"
+`;
+
 exports[`codeblock without content 1`] = `
 [
   {
@@ -1289,6 +1859,173 @@ inside div
 <p>end</p>"
 `;
 
+exports[`emojis 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "🎉 Emoji heading 🎊",
+      },
+    ],
+    "level": 1,
+    "name": "h",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "bold 💪 text",
+          },
+        ],
+        "name": "b",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "items": [
+      {
+        "doc": [
+          {
+            "body": [
+              {
+                "name": "",
+                "txt": "📌 list item",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+      {
+        "doc": [
+          {
+            "body": [
+              {
+                "name": "",
+                "txt": "second 🔥",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+    ],
+    "name": "l",
+    "startNumber": undefined,
+  },
+  {
+    "body": [
+      {
+        "name": "cs",
+        "txt": "code 💻 span",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "link 🔗",
+          },
+        ],
+        "href": "https://example.com/🔥",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`empty elements everywhere 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "#",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "doc": [],
+    "name": "bq",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "-",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "*",
+      },
+      {
+        "name": "",
+        "txt": "*",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "_",
+      },
+      {
+        "name": "",
+        "txt": "_",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "infoText": "",
+    "name": "cb",
+    "txt": "",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "[]()",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "!",
+      },
+      {
+        "name": "",
+        "txt": "[]()",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
 exports[`empty paragraph in the end of the file 1`] = `
 [
   {
@@ -1304,6 +2041,12 @@ exports[`empty paragraph in the end of the file 1`] = `
 `;
 
 exports[`empty paragraph in the end of the file 2`] = `"<p>foo</p>"`;
+
+exports[`html entities in various contexts 1`] = `
+"<p>&amp;script&amp;</p>
+<p><code>&amp;amp;</code></p>
+<p><a href="/path?a=1&amp;b=2&amp;c=&quot;&quot;">&amp;quot;link&amp;quot;</a></p>"
+`;
 
 exports[`list with marker character in content 1`] = `
 [
@@ -1837,6 +2580,32 @@ exports[`markdown compatibility mode 2`] = `
 <p>*just plain p before code<code>*</code></p>"
 `;
 
+exports[`mixed line endings 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "p1line1",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "p2line1
+
+p2s2
+p2s3",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
 exports[`multiple images in series 1`] = `
 [
   {
@@ -2043,6 +2812,279 @@ foo2</p>
     <p>another list</p>
   </li>
 </ul>"
+`;
+
+exports[`only carriage returns 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "p1s1
+p1s2
+
+
+p1s3",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`single character inputs 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "#",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "doc": [],
+    "name": "bq",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "-",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "*",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "_",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "\`",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "[",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "!",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "br",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`single character inputs 2`] = `
+[
+  {
+    "body": [],
+    "level": 1,
+    "name": "h",
+  },
+  {
+    "doc": [],
+    "name": "bq",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "- ",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "* ",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "_ ",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "\` ",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "[ ",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "! ",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "\\ ",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`tabs vs spaces in indentation 1`] = `
+[
+  {
+    "items": [
+      {
+        "doc": [
+          {
+            "body": [
+              {
+                "name": "",
+                "txt": "item",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+    ],
+    "name": "l",
+    "startNumber": undefined,
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "	- tab indented",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "items": [
+      {
+        "doc": [
+          {
+            "body": [
+              {
+                "name": "",
+                "txt": "space indented",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+    ],
+    "name": "l",
+    "startNumber": undefined,
+  },
+]
+`;
+
+exports[`trailing spaces everywhere 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "heading   ",
+      },
+    ],
+    "level": 1,
+    "name": "h",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "paragraph   ",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "items": [
+      {
+        "doc": [
+          {
+            "body": [
+              {
+                "name": "",
+                "txt": "list   ",
+              },
+            ],
+            "name": "p",
+          },
+        ],
+        "name": "li",
+      },
+    ],
+    "name": "l",
+    "startNumber": undefined,
+  },
+]
 `;
 
 exports[`transform 1`] = `
