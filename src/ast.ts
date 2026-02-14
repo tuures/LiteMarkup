@@ -28,13 +28,13 @@ export interface Bold {
 
 export interface Link {
   name: 'a'
-  body: Inline[],
+  body: Inline[]
   href: string
 }
 
 export interface Image {
-  name: 'img',
-  alt: string,
+  name: 'img'
+  alt: string
   src: string
 }
 
@@ -74,8 +74,8 @@ export interface HtmlBlock {
 }
 
 export interface CodeBlock {
-  name: 'cb',
-  infoText: string,
+  name: 'cb'
+  infoText: string
   txt: string
 }
 

@@ -15,13 +15,13 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
   type Rule<N> = SimpleRule<N> | LookaheadRule<N>
 
   interface SimpleRule<N> {
-    pre?: undefined,
+    pre?: undefined
     re: RegExp
     mkNode: (r: RegExpExecArray) => N | undefined
   }
 
   interface LookaheadRule<N> {
-    pre: RegExp,
+    pre: RegExp
     re: (pr: RegExpExecArray) => RegExp
     mkNode: (pr: RegExpExecArray, r: RegExpExecArray) => N | undefined
   }
@@ -43,14 +43,14 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
     },
     {
       re: /^(<([^>]+)>[ \t]*\n(?:[^](?!<\/\2>(?:[ \t]*\n){2}))*[^]<\/\2>)[ \t]*(?:$|\n(?:$|[ \t]*\n))/,
-      mkNode: r => ({ name: 'htm', raw: r[1]}),
+      mkNode: r => ({ name: 'htm', raw: r[1] }),
     },
     {
       re: /^( {0,3})(`{3,})([^\n`]*)\n(?:(?:\1\2|(?:(\n|(?:(?:[^](?!\n\1\2))*[^]\n))\1\2))[ \t]*(?:$|\n)|([^]*))/,
       mkNode: r => ({
         name: 'cb',
-        infoText: r[3].replace(/^[ \t]+/,'').replace(/[ \t]+$/,''),
-        txt: (r[4] || r[5] || '').replace(R(`^${r[1]}`), '').replace(R(`\\n${r[1]}`, 'g'), '\n')
+        infoText: r[3].replace(/^[ \t]+/, '').replace(/[ \t]+$/, ''),
+        txt: (r[4] || r[5] || '').replace(R(`^${r[1]}`), '').replace(R(`\\n${r[1]}`, 'g'), '\n'),
       }),
     },
   ]
@@ -84,32 +84,33 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
     },
   }
 
-  const containerBlockRules: Rule<Ast.ContainerBlock>[] = [
-    blockQuoteRule,
-    listRule,
-  ]
+  const containerBlockRules: Rule<Ast.ContainerBlock>[] = [blockQuoteRule, listRule]
 
   const paragraphRule: SimpleRule<Ast.LeafBlock> = {
     re: /^([^](?!\n( {0,3}(#{1,6}[ \t]|`{3,}[^\n`]*\n|>|([-+*]|\d{1,9}[).]) {1,3}[^\n])|[ \t]*($|\n))))*[^]/,
     mkNode: r => ({ name: 'p', body: parseInline(r[0]) }),
   }
 
-  const blockRules: Rule<Ast.Block>[] = [...priorityLeafBlockRules, ...containerBlockRules, paragraphRule]
+  const blockRules: Rule<Ast.Block>[] = [
+    ...priorityLeafBlockRules,
+    ...containerBlockRules,
+    paragraphRule,
+  ]
 
   const litemarkupIb: SimpleRule<Ast.Inline>[] = [
     {
       re: /^_((?:[^\\_`]|\\[^])+)_/,
       mkNode: r => ({
         name: 'i',
-        body: parseInline(r[1])
-      })
+        body: parseInline(r[1]),
+      }),
     },
     {
       re: /^\*((?:[^\\*`]|\\[^])+)\*/,
       mkNode: r => ({
         name: 'b',
-        body: parseInline(r[1])
-      })
+        body: parseInline(r[1]),
+      }),
     },
   ]
 
@@ -118,15 +119,15 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
       re: /^([_*])((?:(?!\1)[^\\`]|\\[^])+)\1/,
       mkNode: r => ({
         name: 'i',
-        body: parseInline(r[2])
-      })
+        body: parseInline(r[2]),
+      }),
     },
     {
       re: /^([_*]{2})((?:(?!\1)[^\\`]|\\[^])+)\1/,
       mkNode: r => ({
         name: 'b',
-        body: parseInline(r[2])
-      })
+        body: parseInline(r[2]),
+      }),
     },
   ]
 
@@ -138,24 +139,24 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
         txt: ((s: string) => {
           // so that you can start codespan content with a backtick:
           // `` ` `` will render just the backtick without surrounding space
-          const trimSpaces = (s.length >= 3 && s[0] == ' ' && s[1] !== ' ' && s[s.length - 1] == ' ')
+          const trimSpaces = s.length >= 3 && s[0] == ' ' && s[1] !== ' ' && s[s.length - 1] == ' '
 
           return (trimSpaces ? s.slice(1, -1) : s).replace(/\n/g, ' ')
         })(r[2] || ''),
-      })
+      }),
     },
     {
       re: /^\\(\n|$)/,
       mkNode: r => ({
-        name: 'br'
-      })
+        name: 'br',
+      }),
     },
     {
       re: /^\\([-!"#$%&'()*+,.:;<=>?@^_`{|}~\/\\\[\]])/,
       mkNode: r => ({
         name: '',
-        txt: r[1]
-      })
+        txt: r[1],
+      }),
     },
     ...(markdownMode ? markdownIb : litemarkupIb),
     {
@@ -164,7 +165,7 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
         name: 'a',
         body: parseInline(r[1]),
         href: r[2],
-      })
+      }),
     },
     {
       re: /^!\[((?:[^\\\]`]|\\[^])+)\]\(((?:[^\\\)`]|\\[^])+)\)/,
@@ -172,14 +173,14 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
         name: 'img',
         alt: r[1],
         src: r[2],
-      })
+      }),
     },
     {
       re: /^(?=(`*))\1([^](?![`\\_*\[!]))*(?:[^]|$)/,
       mkNode: r => ({
         name: '',
         txt: r[0],
-      })
+      }),
     },
   ]
 

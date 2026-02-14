@@ -191,7 +191,7 @@ _italic underline\\_and star*_
 *just plain p before code\`*\`
 
 `
-  const ast = parseToAst({markdownMode: true})(src)
+  const ast = parseToAst({ markdownMode: true })(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
@@ -370,19 +370,18 @@ b _c_ d
 
   const convertItalicToBold = (n: Ast.Inline): Ast.Inline[] => {
     if (n.name === 'i') {
-      return [{...n, name: 'b'}]
+      return [{ ...n, name: 'b' }]
     } else {
       return [n]
     }
   }
 
-  const ast = parseToAst({transformBlock: duplicate, transformInline: convertItalicToBold})(src)
+  const ast = parseToAst({ transformBlock: duplicate, transformInline: convertItalicToBold })(src)
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
   expect(html).toMatchSnapshot()
 })
-
 
 test('convertToHtml allowUnsafeHtml', () => {
   const src = `
@@ -541,18 +540,20 @@ test('html entities in various contexts', () => {
         body: [
           {
             name: '',
-            txt: '&quot;link&quot;'
-          }
+            txt: '&quot;link&quot;',
+          },
         ],
-        href: '/path?a=1&b=2&c=""'
-      }
-    ]
+        href: '/path?a=1&b=2&c=""',
+      },
+    ],
   })
 
   const html = astToHtml(ast)
   expect(html).toContain('<p>&amp;script&amp;</p>')
   expect(html).toContain('<p><code>&amp;amp;</code></p>')
-  expect(html).toContain('<p><a href="/path?a=1&amp;b=2&amp;c=&quot;&quot;">&amp;quot;link&amp;quot;</a></p>')
+  expect(html).toContain(
+    '<p><a href="/path?a=1&amp;b=2&amp;c=&quot;&quot;">&amp;quot;link&amp;quot;</a></p>',
+  )
   expect(html).toMatchSnapshot()
 })
 
@@ -587,31 +588,11 @@ test('interleaved quotes and lists deeply', () => {
   const lst = (items: Ast.ListItem[]) => ({ name: 'l' as const, startNumber: undefined, items })
   const p = (txt: string) => ({ name: 'p' as const, body: [{ name: '' as const, txt }] })
 
-  let expected: Ast.Block =
-    bq(
-      lst([
-        li([
-          p('item'),
-          bq(
-            lst([
-              li([
-                p('nested'),
-                bq(
-                  lst([
-                    li([
-                      p('deeper'),
-                      bq(
-                        p('text')
-                      )
-                    ])
-                  ])
-                )
-              ])
-            ])
-          )
-        ])
-      ])
-    )
+  let expected: Ast.Block = bq(
+    lst([
+      li([p('item'), bq(lst([li([p('nested'), bq(lst([li([p('deeper'), bq(p('text'))])]))])]))]),
+    ]),
+  )
 
   const ast = parseToAst()(src)
   expect(ast).toEqual([expected])
@@ -648,7 +629,7 @@ test('single character inputs', () => {
   expect(ast1).toMatchSnapshot()
 
   // with trailing spaces
-  const ast2 = parseToAst()(chars.map(c => c + " ").join('\n\n'))
+  const ast2 = parseToAst()(chars.map(c => c + ' ').join('\n\n'))
   expect(ast2.map(n => n.name)).toEqual('h,bq,p,p,p,p,p,p,p'.split(','))
   expect(ast2).toMatchSnapshot()
 })
