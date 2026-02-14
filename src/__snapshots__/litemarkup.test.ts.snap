@@ -798,6 +798,24 @@ exports[`basic 1`] = `
     "name": "bq",
   },
   {
+    "body": [
+      {
+        "name": "",
+        "txt": "text and empty quote",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": ">",
+      },
+    ],
+    "name": "p",
+  },
+  {
     "doc": [
       {
         "body": [
@@ -887,23 +905,21 @@ level 2",
     "raw": "<div>
 embedded raw html, not escaped
 and can contain multiple lines
+both opening and closing tags must be on their own lines
+<div>
+closing tag must be followed by empty line or end of file
+</div>
 </div>",
-  },
-  {
-    "name": "htm",
-    "raw": "<broken>
-oops </broken> html
-</broken>",
   },
   {
     "body": [
       {
         "name": "",
-        "txt": "abc",
+        "txt": "abc ",
       },
       {
         "name": "cs",
-        "txt": "def",
+        "txt": "codespan content",
       },
       {
         "name": "",
@@ -915,102 +931,17 @@ oops </broken> html
   {
     "body": [
       {
-        "name": "",
-        "txt": "a \`\`0doo",
+        "name": "cs",
+        "txt": "codespan made with 2 backticks",
       },
     ],
     "name": "p",
   },
   {
     "body": [
-      {
-        "name": "",
-        "txt": "b ",
-      },
       {
         "name": "cs",
-        "txt": " ",
-      },
-      {
-        "name": "",
-        "txt": "1doo",
-      },
-    ],
-    "name": "p",
-  },
-  {
-    "body": [
-      {
-        "name": "",
-        "txt": "c ",
-      },
-      {
-        "name": "cs",
-        "txt": "  ",
-      },
-      {
-        "name": "",
-        "txt": "2doo",
-      },
-    ],
-    "name": "p",
-  },
-  {
-    "body": [
-      {
-        "name": "",
-        "txt": "d ",
-      },
-      {
-        "name": "cs",
-        "txt": "   ",
-      },
-      {
-        "name": "",
-        "txt": "3doo",
-      },
-    ],
-    "name": "p",
-  },
-  {
-    "body": [
-      {
-        "name": "",
-        "txt": "e ",
-      },
-      {
-        "name": "cs",
-        "txt": "foo",
-      },
-      {
-        "name": "",
-        "txt": "\` 12dii",
-      },
-    ],
-    "name": "p",
-  },
-  {
-    "body": [
-      {
-        "name": "",
-        "txt": "f \`\`foo\` 21dii",
-      },
-    ],
-    "name": "p",
-  },
-  {
-    "body": [
-      {
-        "name": "",
-        "txt": "g ",
-      },
-      {
-        "name": "cs",
-        "txt": "foo",
-      },
-      {
-        "name": "",
-        "txt": " 22dii",
+        "txt": "codespan that has \` backtick inside",
       },
     ],
     "name": "p",
@@ -1300,7 +1231,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "*notbold",
+        "txt": "*not bold as codespan has priority",
       },
       {
         "name": "cs",
@@ -1327,7 +1258,26 @@ oops </broken> html
       },
       {
         "name": "",
-        "txt": " and some parenthesis []() that is not a link",
+        "txt": " and ",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "another link to",
+          },
+        ],
+        "href": "/thisurl",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "not a link []<> []()",
       },
     ],
     "name": "p",
@@ -1351,6 +1301,16 @@ oops </broken> html
     "body": [
       {
         "alt": "image of a cat",
+        "name": "img",
+        "src": "/ordidnthappen.jpg",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "alt": "another image of a cat",
         "name": "img",
         "src": "/ordidnthappen.jpg",
       },
@@ -1411,6 +1371,8 @@ exports[`basic 2`] = `
 <blockquote>
   <p>quote here</p>
 </blockquote>
+<p>text and empty quote</p>
+<p>&gt;</p>
 <blockquote>
   <h1>heading in quote</h1>
   <p>something &lt;nottag&gt;</p>
@@ -1430,18 +1392,14 @@ level 2</p>
 <div>
 embedded raw html, not escaped
 and can contain multiple lines
+both opening and closing tags must be on their own lines
+<div>
+closing tag must be followed by empty line or end of file
 </div>
-<broken>
-oops </broken> html
-</broken>
-<p>abc<code>def</code> bar</p>
-<p>a \`\`0doo</p>
-<p>b <code> </code>1doo</p>
-<p>c <code>  </code>2doo</p>
-<p>d <code>   </code>3doo</p>
-<p>e <code>foo</code>\` 12dii</p>
-<p>f \`\`foo\` 21dii</p>
-<p>g <code>foo</code> 22dii</p>
+</div>
+<p>abc <code>codespan content</code> bar</p>
+<p><code>codespan made with 2 backticks</code></p>
+<p><code>codespan that has \` backtick inside</code></p>
 <p>h\`i<br/>xfoobar</p>
 <p>xyz\`xyz<br/>yfoobar</p>
 <p>br in the end <br/></p>
@@ -1464,10 +1422,12 @@ oops </broken> html
 <p><span style="font-style: italic;">_italic underlines_</span></p>
 <p><span style="font-style: italic;">italic underline_and star*</span></p>
 <p>\\<span style="font-weight: bold;">emphasis</span></p>
-<p>*notbold<code>*</code></p>
-<p>this paragraph has a <a href="/thisurl">link to</a> and some parenthesis []() that is not a link</p>
+<p>*not bold as codespan has priority<code>*</code></p>
+<p>this paragraph has a <a href="/thisurl">link to</a> and <a href="/thisurl">another link to</a></p>
+<p>not a link []&lt;&gt; []()</p>
 <p><a href="ds\\)fd\\)\\\`">[foo]a</a></p>
-<p><img alt="image of a cat" src="/ordidnthappen.jpg"/></p>"
+<p><img alt="image of a cat" src="/ordidnthappen.jpg"/></p>
+<p><img alt="another image of a cat" src="/ordidnthappen.jpg"/></p>"
 `;
 
 exports[`blockquotes with leading and trailing carets 1`] = `
@@ -1562,37 +1522,25 @@ g",
 ]
 `;
 
-exports[`codeblock with broken end 1`] = `
+exports[`codeblock with broken end, should parse until end of file 1`] = `
 [
   {
     "infoText": "foo",
     "name": "cb",
     "txt": "\`\`
+
+the double backticks will be considered part of the code block content, and the block will end at the end of file
 ",
   },
 ]
 `;
 
-exports[`codeblock with broken end 2`] = `
+exports[`codeblock with broken end, should parse until end of file 2`] = `
 "<pre><code data-infotext="foo">\`\`
+
+the double backticks will be considered part of the code block content, and the block will end at the end of file
 </code></pre>"
 `;
-
-exports[`codeblock with broken end on the same line / codespan with missing backticks in the end 1`] = `
-[
-  {
-    "body": [
-      {
-        "name": "",
-        "txt": "\`\`\`foo\`\`",
-      },
-    ],
-    "name": "p",
-  },
-]
-`;
-
-exports[`codeblock with broken end on the same line / codespan with missing backticks in the end 2`] = `"<p>\`\`\`foo\`\`</p>"`;
 
 exports[`codeblock with info text having quotes 1`] = `
 [
@@ -1642,7 +1590,7 @@ exports[`codeblock without content 2`] = `
 <p>something after</p>"
 `;
 
-exports[`codeblock without end 1`] = `
+exports[`codeblock without end, should parse until end of file 1`] = `
 [
   {
     "infoText": "foo",
@@ -1652,9 +1600,25 @@ exports[`codeblock without end 1`] = `
 ]
 `;
 
-exports[`codeblock without end 2`] = `"<pre><code data-infotext="foo"></code></pre>"`;
+exports[`codeblock without end, should parse until end of file 2`] = `"<pre><code data-infotext="foo"></code></pre>"`;
 
-exports[`codespan with extra backticks on the end 1`] = `
+exports[`codespan cannot span multiple lines 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "cs",
+        "txt": " ",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`codespan cannot span multiple lines 2`] = `"<p><code> </code></p>"`;
+
+exports[`codespan with extra backticks on the end should parse as codespan plus extra backtick as text 1`] = `
 [
   {
     "body": [
@@ -1672,15 +1636,15 @@ exports[`codespan with extra backticks on the end 1`] = `
 ]
 `;
 
-exports[`codespan with extra backticks on the end 2`] = `"<p><code>foo</code>\`</p>"`;
+exports[`codespan with extra backticks on the end should parse as codespan plus extra backtick as text 2`] = `"<p><code>foo</code>\`</p>"`;
 
-exports[`codespan with extra backticks on the start 1`] = `
+exports[`codespan with missing backticks in the end should not parse as codespan 1`] = `
 [
   {
     "body": [
       {
         "name": "",
-        "txt": "foo \`\`\`foo\`\`",
+        "txt": "\`\`\`foo\`\`",
       },
     ],
     "name": "p",
@@ -1688,7 +1652,7 @@ exports[`codespan with extra backticks on the start 1`] = `
 ]
 `;
 
-exports[`codespan with extra backticks on the start 2`] = `"<p>foo \`\`\`foo\`\`</p>"`;
+exports[`codespan with missing backticks in the end should not parse as codespan 2`] = `"<p>\`\`\`foo\`\`</p>"`;
 
 exports[`codespan with three backticks in the beginning of a paragraph (not codeblock) 1`] = `
 [
@@ -1708,6 +1672,11 @@ exports[`codespan with three backticks in the beginning of a paragraph (not code
 
 exports[`convertToHtml allowUnsafeHtml 1`] = `
 "<p>start</p>
+<p>&lt;div&gt;
+inside div
+&lt;/div&gt;</p>
+<p>please click here (url)</p>
+<p>[image alt text](url)</p>
 <p>end</p>"
 `;
 
@@ -1716,6 +1685,8 @@ exports[`convertToHtml allowUnsafeHtml 2`] = `
 <div>
 inside div
 </div>
+<p>please <a href="url">click here</a></p>
+<p><img alt="image alt text" src="url"/></p>
 <p>end</p>"
 `;
 
@@ -1922,10 +1893,137 @@ exports[`extra asterisks doesn’t produce nested emphasis 1`] = `
 ]
 `;
 
+exports[`html blocks 1`] = `
+[
+  {
+    "name": "htm",
+    "raw": "<broken>
+this gets split due to the paragraph break after the inner closing tag
+<broken>
+</broken>",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "</broken>",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "name": "htm",
+    "raw": "<div>
+  but this doesn't get split because the inner closing tag is indented
+  <div>
+  </div>
+
+</div>",
+  },
+  {
+    "name": "htm",
+    "raw": "<broken>
+garbage in </broken> garbage out
+</broken>",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "this is not html but a paragraph with a link because the opening tag is not preceded by an empty line
+<url>
+",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "link text",
+          },
+        ],
+        "href": "/url",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "<url>
+",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "this is also not html but link because closing tag is not on its own line",
+          },
+        ],
+        "href": "/url",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`html blocks 2`] = `
+"<broken>
+this gets split due to the paragraph break after the inner closing tag
+<broken>
+</broken>
+<p>&lt;/broken&gt;</p>
+<div>
+  but this doesn't get split because the inner closing tag is indented
+  <div>
+  </div>
+
+</div>
+<broken>
+garbage in </broken> garbage out
+</broken>
+<p>this is not html but a paragraph with a link because the opening tag is not preceded by an empty line
+&lt;url&gt;
+<a href="/url">link text</a></p>
+<p>&lt;url&gt;
+<a href="/url">this is also not html but link because closing tag is not on its own line</a></p>"
+`;
+
 exports[`html entities in various contexts 1`] = `
 "<p>&amp;script&amp;</p>
 <p><code>&amp;amp;</code></p>
 <p><a href="/path?a=1&amp;b=2&amp;c=&quot;&quot;">&amp;quot;link&amp;quot;</a></p>"
+`;
+
+exports[`invalid codespans 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "a \`\`0doo",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "f \`\`foo\` 21",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`invalid codespans 2`] = `
+"<p>a \`\`0doo</p>
+<p>f \`\`foo\` 21</p>"
 `;
 
 exports[`list with marker character in content 1`] = `
@@ -2687,9 +2785,14 @@ exports[`markdown compatibility mode 1`] = `
     "body": [
       {
         "name": "",
-        "txt": "these are supported:
-",
+        "txt": "these are supported:",
       },
+    ],
+    "level": 1,
+    "name": "h",
+  },
+  {
+    "body": [
       {
         "body": [
           {
@@ -2708,11 +2811,11 @@ exports[`markdown compatibility mode 1`] = `
         ],
         "name": "b",
       },
-      {
-        "name": "",
-        "txt": "
-",
-      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
       {
         "body": [
           {
@@ -2731,11 +2834,11 @@ exports[`markdown compatibility mode 1`] = `
         ],
         "name": "b",
       },
-      {
-        "name": "",
-        "txt": "
-",
-      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
       {
         "body": [
           {
@@ -2754,11 +2857,11 @@ exports[`markdown compatibility mode 1`] = `
         ],
         "name": "i",
       },
-      {
-        "name": "",
-        "txt": "
-",
-      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
       {
         "body": [
           {
@@ -2784,9 +2887,14 @@ exports[`markdown compatibility mode 1`] = `
     "body": [
       {
         "name": "",
-        "txt": "these nestings are not supported (only outer will be applied):
-",
+        "txt": "these nestings are not supported (only outer will be applied):",
       },
+    ],
+    "level": 1,
+    "name": "h",
+  },
+  {
+    "body": [
       {
         "body": [
           {
@@ -2797,55 +2905,40 @@ exports[`markdown compatibility mode 1`] = `
         "name": "b",
       },
       {
+        "name": "",
+        "txt": "*",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
         "body": [
           {
             "name": "",
-            "txt": "
-",
+            "txt": "F bold outside _but not italic inside",
           },
-          {
-            "body": [
-              {
-                "name": "",
-                "txt": "F bold outside _but not italic inside",
-              },
-            ],
-            "name": "b",
-          },
-          {
-            "body": [
-              {
-                "name": "",
-                "txt": "
-",
-              },
-            ],
-            "name": "i",
-          },
+        ],
+        "name": "b",
+      },
+      {
+        "name": "",
+        "txt": "_",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
           {
             "name": "",
             "txt": "G italic outside ",
           },
-          {
-            "body": [
-              {
-                "name": "",
-                "txt": "but not bold inside",
-              },
-            ],
-            "name": "b",
-          },
-          {
-            "name": "",
-            "txt": "_
-",
-          },
         ],
         "name": "i",
-      },
-      {
-        "name": "",
-        "txt": "H italic outside ",
       },
       {
         "body": [
@@ -2854,11 +2947,38 @@ exports[`markdown compatibility mode 1`] = `
             "txt": "but not bold inside",
           },
         ],
-        "name": "b",
+        "name": "i",
       },
       {
         "name": "",
-        "txt": "*",
+        "txt": "__",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "H italic outside ",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "but not bold inside",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "name": "",
+        "txt": "**",
       },
     ],
     "name": "p",
@@ -3007,16 +3127,16 @@ exports[`markdown compatibility mode 2`] = `
 <span style="font-weight: bold;">I'm bold too</span></p>
 <p><span style="font-style: italic;">I'm italic</span>
 <span style="font-style: italic;">I'm italic too</span></p>
-<p>these are supported:
-<span style="font-weight: bold;">A bold outside and <span style="font-style: italic;">italic inside</span></span>
-<span style="font-weight: bold;">B bold outside and <span style="font-style: italic;">italic inside</span></span>
-<span style="font-style: italic;">C italic outside and <span style="font-weight: bold;">bold inside</span></span>
-<span style="font-style: italic;">D italic outside and <span style="font-weight: bold;">bold inside</span></span></p>
-<p>these nestings are not supported (only outer will be applied):
-<span style="font-weight: bold;">E bold outside *but not italic inside</span><span style="font-style: italic;">
-<span style="font-weight: bold;">F bold outside _but not italic inside</span><span style="font-style: italic;">
-</span>G italic outside <span style="font-weight: bold;">but not bold inside</span>_
-</span>H italic outside <span style="font-weight: bold;">but not bold inside</span>*</p>
+<h1>these are supported:</h1>
+<p><span style="font-weight: bold;">A bold outside and <span style="font-style: italic;">italic inside</span></span></p>
+<p><span style="font-weight: bold;">B bold outside and <span style="font-style: italic;">italic inside</span></span></p>
+<p><span style="font-style: italic;">C italic outside and <span style="font-weight: bold;">bold inside</span></span></p>
+<p><span style="font-style: italic;">D italic outside and <span style="font-weight: bold;">bold inside</span></span></p>
+<h1>these nestings are not supported (only outer will be applied):</h1>
+<p><span style="font-weight: bold;">E bold outside *but not italic inside</span>*</p>
+<p><span style="font-weight: bold;">F bold outside _but not italic inside</span>_</p>
+<p><span style="font-style: italic;">G italic outside </span><span style="font-style: italic;">but not bold inside</span>__</p>
+<p><span style="font-style: italic;">H italic outside </span><span style="font-style: italic;">but not bold inside</span>**</p>
 <p>_not italic</p>
 <p>not italic_</p>
 <p>a<span style="font-weight: bold;">bold</span></p>
@@ -3314,7 +3434,7 @@ exports[`simple blockquotes 1`] = `
 ]
 `;
 
-exports[`single character inputs 1`] = `
+exports[`single character paragraphs 1`] = `
 [
   {
     "body": [
@@ -3399,7 +3519,7 @@ exports[`single character inputs 1`] = `
 ]
 `;
 
-exports[`single character inputs 2`] = `
+exports[`single character paragraphs 2`] = `
 [
   {
     "body": [],
@@ -3474,6 +3594,140 @@ exports[`single character inputs 2`] = `
     "name": "p",
   },
 ]
+`;
+
+exports[`spaces inside codespans 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "a ",
+      },
+      {
+        "name": "cs",
+        "txt": " ",
+      },
+      {
+        "name": "",
+        "txt": "1 space is preserved alone",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "b ",
+      },
+      {
+        "name": "cs",
+        "txt": "  ",
+      },
+      {
+        "name": "",
+        "txt": "2 spaces is preserved alone",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "c ",
+      },
+      {
+        "name": "cs",
+        "txt": "   ",
+      },
+      {
+        "name": "",
+        "txt": "3 spaces is preserved alone",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "e ",
+      },
+      {
+        "name": "cs",
+        "txt": "y",
+      },
+      {
+        "name": "",
+        "txt": " first and last spaces are trimmed away when there's more than just spaces",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "f ",
+      },
+      {
+        "name": "cs",
+        "txt": "z ",
+      },
+      {
+        "name": "",
+        "txt": " first and last spaces are trimmed away, but the one after z is preserved",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "g ",
+      },
+      {
+        "name": "cs",
+        "txt": "\`",
+      },
+      {
+        "name": "",
+        "txt": " codespan that results in a single backtick (first and last space trmmed away)",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "h ",
+      },
+      {
+        "name": "cs",
+        "txt": "\` x \`",
+      },
+      {
+        "name": "",
+        "txt": "3 codespan that results in backtick, space, x, space, and backtick",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`spaces inside codespans 2`] = `
+"<p>a <code> </code>1 space is preserved alone</p>
+<p>b <code>  </code>2 spaces is preserved alone</p>
+<p>c <code>   </code>3 spaces is preserved alone</p>
+<p>e <code>y</code> first and last spaces are trimmed away when there's more than just spaces</p>
+<p>f <code>z </code> first and last spaces are trimmed away, but the one after z is preserved</p>
+<p>g <code>\`</code> codespan that results in a single backtick (first and last space trmmed away)</p>
+<p>h <code>\` x \`</code>3 codespan that results in backtick, space, x, space, and backtick</p>"
 `;
 
 exports[`tabs vs spaces in indentation 1`] = `

@@ -1,4 +1,4 @@
-import { parseToAst } from './parseToAst'
+import { parseToAst, type ParserOptions } from './parseToAst'
 import { astToHtml } from './astToHtml'
 import * as Ast from './ast'
 
@@ -10,13 +10,25 @@ export * from './ast'
 export * from './parseToAst'
 export * from './astToHtml'
 
-const skipUnsafeHtml = (n: Ast.Block) => (n.name === 'htm' ? [] : [n])
+const textifyHtmlBlocks = (n: Ast.Block): Ast.Block[] =>
+  n.name === 'htm' ? [{ name: 'p', body: [{ name: '', txt: n.raw }] }] : [n]
+
+const textifyImages = (n: Ast.Inline): Ast.Inline[] =>
+  n.name === 'img' ? [{ name: '', txt: '[' + n.alt + '](' + n.src + ')' }] : [n]
+
+const textifyLinks = (n: Ast.Inline): Ast.Inline[] =>
+  n.name === 'a' ? [...n.body, { name: '', txt: ' (' + n.href + ')' }] : [n]
 
 export function convertToHtml(
   src: string,
   { allowUnsafeHtml }: { allowUnsafeHtml?: boolean } = {},
 ) {
-  const options = allowUnsafeHtml ? {} : { transformBlock: skipUnsafeHtml }
+  const options: ParserOptions = allowUnsafeHtml
+    ? {}
+    : {
+        transformBlock: textifyHtmlBlocks,
+        transformInline: n => textifyImages(n).flatMap(textifyLinks),
+      }
 
   return astToHtml(parseToAst(options)(src))
 }

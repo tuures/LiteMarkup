@@ -50,6 +50,9 @@ immediate code:
 text not part of quote
 > quote here
 
+text and empty quote
+>
+
 > # heading in quote
 > something <nottag>
 Every line in a blockquote must be prefixed with a >, even the empty ones. This lines breaks the quote into two.
@@ -66,27 +69,17 @@ Every line in a blockquote must be prefixed with a >, even the empty ones. This 
 <div>
 embedded raw html, not escaped
 and can contain multiple lines
+both opening and closing tags must be on their own lines
+<div>
+closing tag must be followed by empty line or end of file
+</div>
 </div>
 
-<broken>
-oops </broken> html
-</broken>
+abc \`codespan content\` bar
 
-abc\` def \` bar
+\`\`codespan made with 2 backticks\`\`
 
-a \`\`0doo
-
-b \` \`1doo
-
-c \`  \`2doo
-
-d \`   \`3doo
-
-e \`foo\`\` 12dii
-
-f \`\`foo\` 21dii
-
-g \`\`foo\`\` 22dii
+\`\`codespan that has \` backtick inside\`\`
 
 h\`i\\
 xfoobar
@@ -134,13 +127,17 @@ _italic underline\\_and star*_
 
 \\\\*emphasis*
 
-*notbold\`*\`
+*not bold as codespan has priority\`*\`
 
-this paragraph has a [link to](/thisurl) and some parenthesis []() that is not a link
+this paragraph has a [link to]</thisurl> and [another link to](/thisurl)
+
+not a link []<> []()
 
 [[foo\\]a](ds\\)fd\\)\\\`)
 
-![image of a cat](/ordidnthappen.jpg)
+![image of a cat]</ordidnthappen.jpg>
+
+![another image of a cat](/ordidnthappen.jpg)
 
 `
   const ast = parseToAst()(src)
@@ -158,17 +155,26 @@ __I'm bold too__
 _I'm italic_
 *I'm italic too*
 
-these are supported:
+# these are supported:
+
 **A bold outside and _italic inside_**
+
 __B bold outside and *italic inside*__
+
 _C italic outside and **bold inside**_
+
 *D italic outside and __bold inside__*
 
-these nestings are not supported (only outer will be applied):
+# these nestings are not supported (only outer will be applied):
+
 **E bold outside *but not italic inside***
+
 __F bold outside _but not italic inside___
+
 _G italic outside __but not bold inside___
+
 *H italic outside **but not bold inside***
+
 
 _not italic
 
@@ -198,208 +204,10 @@ _italic underline\\_and star*_
   expect(html).toMatchSnapshot()
 })
 
-test('multiple images in series', () => {
-  const src = `
-![image of a cat](/ordidnthappen.jpg) and
-second ![image of a cat](/ordidnthappen.jpg)
-`
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('list with marker character in content', () => {
-  const src = `
-- foo - the first item
-- bar-second
-- baz- the third
-- bam -fourth
-`
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('nested lists', () => {
-  const src = `
-- foo
-  - foo1
-  - foo2
-    > foo2
-    > foo2
-- bar
-   * bar1
-   * bar2
-* another list
-`
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('codeblock without content', () => {
-  const src = `
-\`\`\`foo
-\`\`\`
-
-something after
-`
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('codeblock with info text having quotes', () => {
-  const src = `
-\`\`\`foo""
-\`\`\`
-
-something after
-`
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('codeblock without end', () => {
-  const src = `
-\`\`\`foo
-`
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('codeblock with broken end', () => {
-  const src = `
-\`\`\`foo
-\`\`
-`
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('codeblock with broken end on the same line / codespan with missing backticks in the end', () => {
-  const src = `
-\`\`\`foo\`\`
-`
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('codespan with extra backticks on the start', () => {
-  const src = `
-foo \`\`\`foo\`\`
-`
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('codespan with extra backticks on the end', () => {
-  const src = `
-\`\`foo\`\`\`
-`
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('codespan with three backticks in the beginning of a paragraph (not codeblock)', () => {
-  const src = `
-\`\`\`foo\`\`\`
-`
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('escaped characters in code spans', () => {
-  const src = '`\\*not special\\*`'
+test('null bytes', () => {
+  const src = 'foo\x00bar'
   const html = convertToHtml(src)
-  expect(html).toContain('<code>\\*not special\\*</code>')
-})
-
-test('empty paragraph in the end of the file', () => {
-  const src = 'foo\n  '
-  const ast = parseToAst()(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('transform', () => {
-  const src = `
-a
-
-b _c_ d
-`
-
-  const duplicate = (n: Ast.Block): Ast.Block[] => {
-    if (n.name === 'p' && n.body.length === 1 && n.body[0].name === '' && n.body[0].txt === 'a') {
-      return [n, n]
-    } else {
-      return [n]
-    }
-  }
-
-  const convertItalicToBold = (n: Ast.Inline): Ast.Inline[] => {
-    if (n.name === 'i') {
-      return [{ ...n, name: 'b' }]
-    } else {
-      return [n]
-    }
-  }
-
-  const ast = parseToAst({ transformBlock: duplicate, transformInline: convertItalicToBold })(src)
-  expect(ast).toMatchSnapshot()
-
-  const html = astToHtml(ast)
-  expect(html).toMatchSnapshot()
-})
-
-test('convertToHtml allowUnsafeHtml', () => {
-  const src = `
-start
-
-<div>
-inside div
-</div>
-
-end
-`
-  const html1 = convertToHtml(src)
-  expect(html1).not.toContain('<div>')
-  expect(html1).toMatchSnapshot()
-
-  const html2 = convertToHtml(src, { allowUnsafeHtml: true })
-  expect(html2).toContain('<div>')
-  expect(html2).toMatchSnapshot()
+  expect(html).toContain(src)
 })
 
 test('zero-width characters', () => {
@@ -438,33 +246,59 @@ test('complex unicode', () => {
   expect(html).toContain(src)
 })
 
-test('heading with max level', () => {
-  const src = '###### h6\n####### not h7'
-  const ast = parseToAst()(src)
-  expect(ast[0]).toMatchObject({ name: 'h', level: 6 })
-  expect(ast[1]).toMatchObject({ name: 'p' })
-})
+test('empty elements everywhere', () => {
+  const src = `
+#
 
-test('list starting at max number', () => {
-  const src = '999999999. max ordered list number'
-  const ast = parseToAst()(src)
-  expect(ast[0].name).toEqual('l')
-})
+>
 
-test('list number overflow', () => {
-  const src = '9999999999. exceeds 9 digits'
-  const ast = parseToAst()(src)
-  expect(ast[0].name).toEqual('p')
-})
+-
 
-test('tabs vs spaces in indentation', () => {
-  const src = '- item\n\t- tab indented\n  - space indented'
+**
+
+__
+
+\`\`\`
+\`\`\`
+
+[]()
+
+![]()
+`
   const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 })
 
 test('trailing spaces everywhere', () => {
   const src = '# heading   \n\nparagraph   \n\n- list   '
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+})
+
+test('single character paragraphs', () => {
+  const chars = ['#', '>', '-', '*', '_', '`', '[', '!', '\\', '\n', ' ']
+
+  const ast1 = parseToAst()(chars.join('\n\n'))
+  expect(ast1.map(n => n.name)).toEqual('p,p,p,p,p,p,p,p,p'.split(','))
+  expect(ast1).toMatchSnapshot()
+
+  // with trailing spaces
+  const ast2 = parseToAst()(chars.map(c => c + ' ').join('\n\n'))
+  expect(ast2.map(n => n.name)).toEqual('h,bq,p,p,p,p,p,p,p'.split(','))
+  expect(ast2).toMatchSnapshot()
+})
+
+test('empty paragraph in the end of the file', () => {
+  const src = 'foo\n  '
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('backslash at end of input', () => {
+  const src = 'text\\'
   const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
 })
@@ -491,70 +325,62 @@ test('form feed and vertical tab', () => {
   expect(html).toContain(src)
 })
 
-// test('parenthesis in url', () => {
-//   const src = '[click me](/go?param=\\(value\\))'
-//   const html = convertToHtml(src)
-//   expect(html).toContain('/go?param=(value)')
-// })
-
-// test('javascript URL in link', () => {
-//   const src = '[click me](javascript:alert(1))'
-//   const html = convertToHtml(src)
-//   expect(html).toMatchSnapshot()
-// })
-
-// test('data URL in image', () => {
-//   const src = '![img](data:text/html,<script>alert(1)</script>)'
-//   const html = convertToHtml(src)
-//   expect(html).toMatchSnapshot()
-// })
-
-test('null bytes', () => {
-  const src = 'foo\x00bar'
-  const html = convertToHtml(src)
-  expect(html).toContain(src)
+test('heading with max level', () => {
+  const src = '###### h6\n####### not h7'
+  const ast = parseToAst()(src)
+  expect(ast[0]).toMatchObject({ name: 'h', level: 6 })
+  expect(ast[1]).toMatchObject({ name: 'p' })
 })
 
-test('html encoding in links', () => {
-  const src = `[link](https://example.com/path?a=1&b=2)`
-  const html = convertToHtml(src)
-  expect(html).toContain('&amp;')
-})
-
-test('html entities in various contexts', () => {
+test('list with marker character in content', () => {
   const src = `
-&script&
-
-\`&amp;\`
-
-[&quot;link&quot;](/path?a=1&b=2&c="")
+- foo - the first item
+- bar-second
+- baz- the third
+- bam -fourth
 `
   const ast = parseToAst()(src)
-  expect(ast[0]).toMatchObject({ name: 'p', body: [{ name: '', txt: '&script&' }] })
-  expect(ast[1]).toMatchObject({ name: 'p', body: [{ name: 'cs', txt: '&amp;' }] })
-  expect(ast[2]).toMatchObject({
-    name: 'p',
-    body: [
-      {
-        name: 'a',
-        body: [
-          {
-            name: '',
-            txt: '&quot;link&quot;',
-          },
-        ],
-        href: '/path?a=1&b=2&c=""',
-      },
-    ],
-  })
+  expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
-  expect(html).toContain('<p>&amp;script&amp;</p>')
-  expect(html).toContain('<p><code>&amp;amp;</code></p>')
-  expect(html).toContain(
-    '<p><a href="/path?a=1&amp;b=2&amp;c=&quot;&quot;">&amp;quot;link&amp;quot;</a></p>',
-  )
   expect(html).toMatchSnapshot()
+})
+
+test('nested lists', () => {
+  const src = `
+- foo
+  - foo1
+  - foo2
+    > foo2
+    > foo2
+- bar
+   * bar1
+   * bar2
+* another list
+`
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('list starting at max number', () => {
+  const src = '999999999. max ordered list number'
+  const ast = parseToAst()(src)
+  expect(ast[0].name).toEqual('l')
+})
+
+test('list number overflow', () => {
+  const src = '9999999999. exceeds 9 digits'
+  const ast = parseToAst()(src)
+  expect(ast[0].name).toEqual('p')
+})
+
+test('tabs vs spaces in indentation', () => {
+  const src = '- item\n\t- tab indented\n  - space indented'
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
 })
 
 test('extra asterisks doesn’t produce nested emphasis', () => {
@@ -640,46 +466,311 @@ test('interleaved quotes and lists deeply', () => {
   expect(ast).toEqual([expected])
 })
 
-test('empty elements everywhere', () => {
+test('codeblock without content', () => {
   const src = `
-#
-
->
-
--
-
-**
-
-__
-
-\`\`\`
+\`\`\`foo
 \`\`\`
 
-[]()
-
-![]()
+something after
 `
   const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
 })
 
-test('single character inputs', () => {
-  const chars = ['#', '>', '-', '*', '_', '`', '[', '!', '\\', '\n', ' ']
+test('codeblock with info text having quotes', () => {
+  const src = `
+\`\`\`foo""
+\`\`\`
 
-  const ast1 = parseToAst()(chars.join('\n\n'))
-  expect(ast1.map(n => n.name)).toEqual('p,p,p,p,p,p,p,p,p'.split(','))
-  expect(ast1).toMatchSnapshot()
-
-  // with trailing spaces
-  const ast2 = parseToAst()(chars.map(c => c + ' ').join('\n\n'))
-  expect(ast2.map(n => n.name)).toEqual('h,bq,p,p,p,p,p,p,p'.split(','))
-  expect(ast2).toMatchSnapshot()
-})
-
-test('backslash at end of input', () => {
-  const src = 'text\\'
+something after
+`
   const ast = parseToAst()(src)
   expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('codeblock without end, should parse until end of file', () => {
+  const src = `
+\`\`\`foo
+`
+  const ast = parseToAst()(src)
+  expect(ast.length).toEqual(1)
+  expect(ast[0].name).toEqual('cb')
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('codeblock with broken end, should parse until end of file', () => {
+  const src = `
+\`\`\`foo
+\`\`
+
+the double backticks will be considered part of the code block content, and the block will end at the end of file
+`
+  const ast = parseToAst()(src)
+  expect(ast.length).toEqual(1)
+  expect(ast[0].name).toEqual('cb')
+  expect((ast[0] as Ast.CodeBlock).txt.startsWith('``\n')).toBeTruthy()
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('codespan with missing backticks in the end should not parse as codespan', () => {
+  const src = `
+\`\`\`foo\`\`
+`
+  const ast = parseToAst()(src)
+  expect(ast.length).toEqual(1)
+  expect(ast[0].name).toEqual('p')
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('codespan with extra backticks on the end should parse as codespan plus extra backtick as text', () => {
+  const src = `
+\`\`foo\`\`\`
+`
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('codespan with three backticks in the beginning of a paragraph (not codeblock)', () => {
+  const src = `
+\`\`\`foo\`\`\`
+`
+  const ast = parseToAst()(src)
+  expect(ast.length).toEqual(1)
+  expect(ast[0].name).toEqual('p')
+  expect((ast[0] as Ast.Paragraph).body[0].name).toEqual('cs')
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('spaces inside codespans', () => {
+  const src = `
+a \` \`1 space is preserved alone
+
+b \`  \`2 spaces is preserved alone
+
+c \`   \`3 spaces is preserved alone
+
+e \` y \` first and last spaces are trimmed away when there's more than just spaces
+
+f \` z  \` first and last spaces are trimmed away, but the one after z is preserved
+
+g \`\` \` \`\` codespan that results in a single backtick (first and last space trmmed away)
+
+h \`\` \` x \` \`\`3 codespan that results in backtick, space, x, space, and backtick
+`
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('invalid codespans', () => {
+  const src = `
+a \`\`0doo
+
+f \`\`foo\` 21
+`
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('codespan cannot span multiple lines', () => {
+  const src = `
+\`\`
+\`\`
+`
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('escaped characters in code spans', () => {
+  const src = '`\\*not special\\*`'
+  const html = convertToHtml(src)
+  expect(html).toContain('<code>\\*not special\\*</code>')
+})
+
+test('html blocks', () => {
+  const src = `
+<broken>
+this gets split due to the paragraph break after the inner closing tag
+<broken>
+</broken>
+
+</broken>
+
+<div>
+  but this doesn't get split because the inner closing tag is indented
+  <div>
+  </div>
+
+</div>
+
+<broken>
+garbage in </broken> garbage out
+</broken>
+
+this is not html but a paragraph with a link because the opening tag is not preceded by an empty line
+<url>
+[link text]</url>
+
+<url>
+[this is also not html but link because closing tag is not on its own line]</url>
+
+
+`
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('character escapes are not processed in urls', () => {
+  const src = '[click me](/go?param=\\(value\\))'
+  const ast = parseToAst()(src)
+  const html = astToHtml(ast)
+  expect(html).toContain('href="/go?param=\\(value\\)"')
+})
+
+test('angle brackets can be used to avoid issues with parentheses in urls', () => {
+  const src = '[click me]<http://en.wikipedia.org/wiki/Recursion_(computer_science)>'
+  const ast = parseToAst()(src)
+  expect(ast[0]).toMatchSnapshot
+  const html = astToHtml(ast)
+  expect(html).toContain('href="http://en.wikipedia.org/wiki/Recursion_(computer_science)"')
+})
+
+test('multiple images in series', () => {
+  const src = `
+![image of a cat](/ordidnthappen.jpg) and
+second ![image of a cat](/ordidnthappen.jpg)
+`
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('html encoding in links', () => {
+  const src = `[link](https://example.com/path?a=1&b=2)`
+  const html = convertToHtml(src)
+  expect(html).toContain('1&amp;b')
+})
+
+test('html entities in various contexts', () => {
+  const src = `
+&script&
+
+\`&amp;\`
+
+[&quot;link&quot;](/path?a=1&b=2&c="")
+`
+  const ast = parseToAst()(src)
+  expect(ast[0]).toMatchObject({ name: 'p', body: [{ name: '', txt: '&script&' }] })
+  expect(ast[1]).toMatchObject({ name: 'p', body: [{ name: 'cs', txt: '&amp;' }] })
+  expect(ast[2]).toMatchObject({
+    name: 'p',
+    body: [
+      {
+        name: 'a',
+        body: [
+          {
+            name: '',
+            txt: '&quot;link&quot;',
+          },
+        ],
+        href: '/path?a=1&b=2&c=""',
+      },
+    ],
+  })
+
+  const html = astToHtml(ast)
+  expect(html).toContain('<p>&amp;script&amp;</p>')
+  expect(html).toContain('<p><code>&amp;amp;</code></p>')
+  expect(html).toContain(
+    '<p><a href="/path?a=1&amp;b=2&amp;c=&quot;&quot;">&amp;quot;link&amp;quot;</a></p>',
+  )
+  expect(html).toMatchSnapshot()
+})
+
+test('transform', () => {
+  const src = `
+a
+
+b _c_ d
+`
+
+  const duplicate = (n: Ast.Block): Ast.Block[] => {
+    if (n.name === 'p' && n.body.length === 1 && n.body[0].name === '' && n.body[0].txt === 'a') {
+      return [n, n]
+    } else {
+      return [n]
+    }
+  }
+
+  const convertItalicToBold = (n: Ast.Inline): Ast.Inline[] => {
+    if (n.name === 'i') {
+      return [{ ...n, name: 'b' }]
+    } else {
+      return [n]
+    }
+  }
+
+  const ast = parseToAst({ transformBlock: duplicate, transformInline: convertItalicToBold })(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('convertToHtml allowUnsafeHtml', () => {
+  const src = `
+start
+
+<div>
+inside div
+</div>
+
+please [click here](url)
+
+![image alt text](url)
+
+end
+`
+  const html1 = convertToHtml(src)
+  expect(html1).not.toContain('<div>')
+  expect(html1).toMatchSnapshot()
+
+  const html2 = convertToHtml(src, { allowUnsafeHtml: true })
+  expect(html2).toContain('<div>')
+  expect(html2).toMatchSnapshot()
 })
 
 test('large document performance', () => {

@@ -3,7 +3,7 @@ import * as Ast from './ast'
 //
 // Parser
 //
-interface ParserOptions {
+export interface ParserOptions {
   markdownMode?: boolean
   transformBlock?: (node: Ast.Block) => Ast.Block[]
   transformInline?: (node: Ast.Inline) => Ast.Inline[]
@@ -42,7 +42,7 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
       mkNode: r => ({ name: 'h', level: r[1].length, body: parseInline(r[2]) }),
     },
     {
-      re: /^(<([^>]+)>[ \t]*\n(?:[^](?!<\/\2>(?:[ \t]*\n){2}))*[^]<\/\2>)[ \t]*(?:$|\n(?:$|[ \t]*\n))/,
+      re: /^(<([^>]+)>[ \t]*\n(?:[^](?!\n<\/\2>(?:[ \t]*\n){2}))*[^]\n<\/\2>)[ \t]*(?:$|\n(?:$|[ \t]*\n))/,
       mkNode: r => ({ name: 'htm', raw: r[1] }),
     },
     {
@@ -160,19 +160,19 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
     },
     ...(markdownMode ? markdownIb : litemarkupIb),
     {
-      re: /^\[((?:[^\\\]`]|\\[^])+)\]\(((?:[^\\\)`]|\\[^])+)\)/,
+      re: /^\[((?:[^\\\]`]|\\[^])+)\](?:<((?:[^\\>`]|\\[^])+)>|\(((?:[^\\\)`]|\\[^])+)\))/,
       mkNode: r => ({
         name: 'a',
         body: parseInline(r[1]),
-        href: r[2],
+        href: r[2] || r[3],
       }),
     },
     {
-      re: /^!\[((?:[^\\\]`]|\\[^])+)\]\(((?:[^\\\)`]|\\[^])+)\)/,
+      re: /^!\[((?:[^\\\]`]|\\[^])+)\](?:<((?:[^\\>`]|\\[^])+)>|\(((?:[^\\\)`]|\\[^])+)\))/,
       mkNode: r => ({
         name: 'img',
         alt: r[1],
-        src: r[2],
+        src: r[2] || r[3],
       }),
     },
     {
