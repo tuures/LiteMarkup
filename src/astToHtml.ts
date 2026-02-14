@@ -5,6 +5,10 @@ import * as Ast from './ast'
 //
 
 export function astToHtml(ast: Ast.Block[], indentCharacters = '  '): string {
+  if (!Array.isArray(ast)) {
+    throw new Error('Expected array of AST nodes')
+  }
+
   const repeat = (s: string) => (times: number) => s.repeat(times)
   const indent = repeat(indentCharacters)
 
@@ -37,7 +41,7 @@ export function astToHtml(ast: Ast.Block[], indentCharacters = '  '): string {
         case 'p':
           return el('p', emitInline(n.body))
         default:
-          throw new Error('Unexpected ast node: ' + (n as any).name)
+          throw new Error('Unexpected AST node: ' + (n as any).name)
       }
     })
 
@@ -77,7 +81,7 @@ function emitInline(inlines: Ast.Inline[]): string {
             ['src', n.src],
           ])
         default:
-          throw new Error('Unexpected ast node: ' + (n as any).name)
+          throw new Error('Unexpected AST node: ' + (n as any).name)
       }
     })
     .join('')
