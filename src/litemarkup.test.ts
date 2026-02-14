@@ -6,16 +6,12 @@ test('basic', () => {
   const src = `
 ### foo😀
 
-gadasdasd,asdasd
-> quote here
-
 ***
 
-asdas<b>d</b>asda sda1&amp;
+this will be <b>just text not html</b> and&amp will be escaped in output;
 
-ffof😀oofoof
-fofoofo2
-# immediate heading
+text followed immediately by a
+# heading
 
 This is a list:
 - one
@@ -23,7 +19,7 @@ This is a list:
 - three
 - fourth item
 
-  I mean this is a big one
+  Another paragraph inside the fourth item
 
 - fifth
 
@@ -31,7 +27,7 @@ This is a list:
 2. second
 3. third
 
-werwerwerwer
+just a paragraph
 
   \`\`\`\`clara
   foo = bar
@@ -51,10 +47,13 @@ immediate code:
 
 \`\`\`
 
-> # asd
-> lol <nottag>
-don't be lazy
-> foo
+text not part of quote
+> quote here
+
+> # heading in quote
+> something <nottag>
+Every line in a blockquote must be prefixed with a >, even the empty ones. This lines breaks the quote into two.
+> another quote
 
 >
 > level 1
@@ -65,33 +64,34 @@ don't be lazy
 >
 
 <div>
- foobar
+embedded raw html, not escaped
+and can contain multiple lines
 </div>
 
 <broken>
 oops </broken> html
 </broken>
 
-joo\` asd \` bar
+abc\` def \` bar
 
-asd \`\`0doo
+a \`\`0doo
 
-asd \` \`1doo
+b \` \`1doo
 
-asd \`  \`2doo
+c \`  \`2doo
 
-asd \`   \`3doo
+d \`   \`3doo
 
-asd \`foo\`\` 12dii
+e \`foo\`\` 12dii
 
-asd \`\`foo\` 21dii
+f \`\`foo\` 21dii
 
-asd \`\`foo\`\` 22dii
+g \`\`foo\`\` 22dii
 
-asd\`asd\\
+h\`i\\
 xfoobar
 
-asd\\\`asd\\
+xyz\\\`xyz\\
 yfoobar
 
 br in the end \\
@@ -102,9 +102,9 @@ _I'm italic_
 
 *bold outside and _italic inside_*
 
-_bold start
+_not bold start
 
-bold ending_
+not bold ending_
 
 aftert this comes a few paragraphs with just one character
 
@@ -159,16 +159,16 @@ _I'm italic_
 *I'm italic too*
 
 these are supported:
-**bold outside and _italic inside_**
-__bold outside and *italic inside*__
-_italic outside and **bold inside**_
-*italic outside and __bold inside__*
+**A bold outside and _italic inside_**
+__B bold outside and *italic inside*__
+_C italic outside and **bold inside**_
+*D italic outside and __bold inside__*
 
-these are not supported:
-**bold outside and *italic inside***
-__bold outside and _italic inside___
-_italic outside and __bold inside___
-*italic outside and **bold inside***
+these nestings are not supported (only outer will be applied):
+**E bold outside *but not italic inside***
+__F bold outside _but not italic inside___
+_G italic outside __but not bold inside___
+*H italic outside **but not bold inside***
 
 _not italic
 
@@ -557,17 +557,17 @@ test('html entities in various contexts', () => {
   expect(html).toMatchSnapshot()
 })
 
-// test('deeply nested emphasis', () => {
-//   const src = '*'.repeat(5) + 'a' + '*'.repeat(5)
-//   const ast = parseToAst()(src)
-//   expect(ast).toMatchSnapshot()
-// })
+test('extra asterisks doesn’t produce nested emphasis', () => {
+  const src = '*'.repeat(5) + 'a' + '*'.repeat(5)
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+})
 
-// test('many alternating formatting chars', () => {
-//   const src = '_*'.repeat(50) + 'a' + '*_'.repeat(50)
-//   const ast = parseToAst()(src)
-//   expect(ast).toMatchSnapshot()
-// })
+test('many alternating formatting chars', () => {
+  const src = '_*'.repeat(50) + 'a' + '*_'.repeat(50)
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+})
 
 test('simple blockquotes', () => {
   const src = `

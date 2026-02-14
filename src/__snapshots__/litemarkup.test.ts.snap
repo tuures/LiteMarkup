@@ -559,36 +559,13 @@ exports[`basic 1`] = `
     "name": "h",
   },
   {
-    "body": [
-      {
-        "name": "",
-        "txt": "gadasdasd,asdasd",
-      },
-    ],
-    "name": "p",
-  },
-  {
-    "doc": [
-      {
-        "body": [
-          {
-            "name": "",
-            "txt": "quote here",
-          },
-        ],
-        "name": "p",
-      },
-    ],
-    "name": "bq",
-  },
-  {
     "name": "hr",
   },
   {
     "body": [
       {
         "name": "",
-        "txt": "asdas<b>d</b>asda sda1&amp;",
+        "txt": "this will be <b>just text not html</b> and&amp will be escaped in output;",
       },
     ],
     "name": "p",
@@ -597,8 +574,7 @@ exports[`basic 1`] = `
     "body": [
       {
         "name": "",
-        "txt": "ffof😀oofoof
-fofoofo2",
+        "txt": "text followed immediately by a",
       },
     ],
     "name": "p",
@@ -607,7 +583,7 @@ fofoofo2",
     "body": [
       {
         "name": "",
-        "txt": "immediate heading",
+        "txt": "heading",
       },
     ],
     "level": 1,
@@ -681,7 +657,7 @@ fofoofo2",
             "body": [
               {
                 "name": "",
-                "txt": "I mean this is a big one",
+                "txt": "Another paragraph inside the fourth item",
               },
             ],
             "name": "p",
@@ -759,7 +735,7 @@ fofoofo2",
     "body": [
       {
         "name": "",
-        "txt": "werwerwerwer",
+        "txt": "just a paragraph",
       },
     ],
     "name": "p",
@@ -799,12 +775,35 @@ fofoofo2",
 ",
   },
   {
+    "body": [
+      {
+        "name": "",
+        "txt": "text not part of quote",
+      },
+    ],
+    "name": "p",
+  },
+  {
     "doc": [
       {
         "body": [
           {
             "name": "",
-            "txt": "asd",
+            "txt": "quote here",
+          },
+        ],
+        "name": "p",
+      },
+    ],
+    "name": "bq",
+  },
+  {
+    "doc": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "heading in quote",
           },
         ],
         "level": 1,
@@ -814,7 +813,7 @@ fofoofo2",
         "body": [
           {
             "name": "",
-            "txt": "lol <nottag>",
+            "txt": "something <nottag>",
           },
         ],
         "name": "p",
@@ -826,7 +825,7 @@ fofoofo2",
     "body": [
       {
         "name": "",
-        "txt": "don't be lazy",
+        "txt": "Every line in a blockquote must be prefixed with a >, even the empty ones. This lines breaks the quote into two.",
       },
     ],
     "name": "p",
@@ -837,7 +836,7 @@ fofoofo2",
         "body": [
           {
             "name": "",
-            "txt": "foo",
+            "txt": "another quote",
           },
         ],
         "name": "p",
@@ -886,7 +885,8 @@ level 2",
   {
     "name": "htm",
     "raw": "<div>
- foobar
+embedded raw html, not escaped
+and can contain multiple lines
 </div>",
   },
   {
@@ -899,11 +899,11 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "joo",
+        "txt": "abc",
       },
       {
         "name": "cs",
-        "txt": "asd",
+        "txt": "def",
       },
       {
         "name": "",
@@ -916,11 +916,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "asd ",
-      },
-      {
-        "name": "",
-        "txt": "\`\`0doo",
+        "txt": "a \`\`0doo",
       },
     ],
     "name": "p",
@@ -929,7 +925,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "asd ",
+        "txt": "b ",
       },
       {
         "name": "cs",
@@ -946,7 +942,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "asd ",
+        "txt": "c ",
       },
       {
         "name": "cs",
@@ -963,7 +959,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "asd ",
+        "txt": "d ",
       },
       {
         "name": "cs",
@@ -980,7 +976,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "asd ",
+        "txt": "e ",
       },
       {
         "name": "cs",
@@ -997,15 +993,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "asd ",
-      },
-      {
-        "name": "",
-        "txt": "\`\`foo",
-      },
-      {
-        "name": "",
-        "txt": "\` 21dii",
+        "txt": "f \`\`foo\` 21dii",
       },
     ],
     "name": "p",
@@ -1014,7 +1002,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "asd ",
+        "txt": "g ",
       },
       {
         "name": "cs",
@@ -1031,11 +1019,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "asd",
-      },
-      {
-        "name": "",
-        "txt": "\`asd",
+        "txt": "h\`i",
       },
       {
         "name": "br",
@@ -1051,15 +1035,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "asd",
-      },
-      {
-        "name": "",
-        "txt": "\`",
-      },
-      {
-        "name": "",
-        "txt": "asd",
+        "txt": "xyz\`xyz",
       },
       {
         "name": "br",
@@ -1138,7 +1114,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "_bold start",
+        "txt": "_not bold start",
       },
     ],
     "name": "p",
@@ -1147,11 +1123,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "bold ending",
-      },
-      {
-        "name": "",
-        "txt": "_",
+        "txt": "not bold ending_",
       },
     ],
     "name": "p",
@@ -1241,131 +1213,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "!",
-      },
-      {
-        "name": "",
-        "txt": """,
-      },
-      {
-        "name": "",
-        "txt": "#",
-      },
-      {
-        "name": "",
-        "txt": "$",
-      },
-      {
-        "name": "",
-        "txt": "%",
-      },
-      {
-        "name": "",
-        "txt": "&",
-      },
-      {
-        "name": "",
-        "txt": "'",
-      },
-      {
-        "name": "",
-        "txt": "(",
-      },
-      {
-        "name": "",
-        "txt": ")",
-      },
-      {
-        "name": "",
-        "txt": "*",
-      },
-      {
-        "name": "",
-        "txt": "+",
-      },
-      {
-        "name": "",
-        "txt": ",",
-      },
-      {
-        "name": "",
-        "txt": "-",
-      },
-      {
-        "name": "",
-        "txt": ".",
-      },
-      {
-        "name": "",
-        "txt": "/",
-      },
-      {
-        "name": "",
-        "txt": ":",
-      },
-      {
-        "name": "",
-        "txt": ";",
-      },
-      {
-        "name": "",
-        "txt": "<",
-      },
-      {
-        "name": "",
-        "txt": "=",
-      },
-      {
-        "name": "",
-        "txt": ">",
-      },
-      {
-        "name": "",
-        "txt": "?",
-      },
-      {
-        "name": "",
-        "txt": "@",
-      },
-      {
-        "name": "",
-        "txt": "[",
-      },
-      {
-        "name": "",
-        "txt": "\\",
-      },
-      {
-        "name": "",
-        "txt": "]",
-      },
-      {
-        "name": "",
-        "txt": "^",
-      },
-      {
-        "name": "",
-        "txt": "_",
-      },
-      {
-        "name": "",
-        "txt": "\`",
-      },
-      {
-        "name": "",
-        "txt": "{",
-      },
-      {
-        "name": "",
-        "txt": "|",
-      },
-      {
-        "name": "",
-        "txt": "}",
-      },
-      {
-        "name": "",
-        "txt": "~",
+        "txt": "!"#$%&'()*+,-./:;<=>?@[\\]^_\`{|}~",
       },
     ],
     "name": "p",
@@ -1374,31 +1222,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "\\→",
-      },
-      {
-        "name": "",
-        "txt": "\\A",
-      },
-      {
-        "name": "",
-        "txt": "\\a",
-      },
-      {
-        "name": "",
-        "txt": "\\ ",
-      },
-      {
-        "name": "",
-        "txt": "\\3",
-      },
-      {
-        "name": "",
-        "txt": "\\φ",
-      },
-      {
-        "name": "",
-        "txt": "\\«",
+        "txt": "\\→\\A\\a\\ \\3\\φ\\«",
       },
     ],
     "name": "p",
@@ -1407,15 +1231,7 @@ oops </broken> html
     "body": [
       {
         "name": "",
-        "txt": "*",
-      },
-      {
-        "name": "",
-        "txt": "not emphasized",
-      },
-      {
-        "name": "",
-        "txt": "*",
+        "txt": "*not emphasized*",
       },
     ],
     "name": "p",
@@ -1426,11 +1242,7 @@ oops </broken> html
         "body": [
           {
             "name": "",
-            "txt": "emphasized star",
-          },
-          {
-            "name": "",
-            "txt": "*",
+            "txt": "emphasized star*",
           },
         ],
         "name": "b",
@@ -1444,15 +1256,7 @@ oops </broken> html
         "body": [
           {
             "name": "",
-            "txt": "_",
-          },
-          {
-            "name": "",
-            "txt": "italic underlines",
-          },
-          {
-            "name": "",
-            "txt": "_",
+            "txt": "_italic underlines_",
           },
         ],
         "name": "i",
@@ -1466,19 +1270,7 @@ oops </broken> html
         "body": [
           {
             "name": "",
-            "txt": "italic underline",
-          },
-          {
-            "name": "",
-            "txt": "_",
-          },
-          {
-            "name": "",
-            "txt": "and star",
-          },
-          {
-            "name": "",
-            "txt": "*",
+            "txt": "italic underline_and star*",
           },
         ],
         "name": "i",
@@ -1535,11 +1327,7 @@ oops </broken> html
       },
       {
         "name": "",
-        "txt": " and some parenthesis ",
-      },
-      {
-        "name": "",
-        "txt": "[]() that is not a link",
+        "txt": " and some parenthesis []() that is not a link",
       },
     ],
     "name": "p",
@@ -1550,15 +1338,7 @@ oops </broken> html
         "body": [
           {
             "name": "",
-            "txt": "[foo",
-          },
-          {
-            "name": "",
-            "txt": "]",
-          },
-          {
-            "name": "",
-            "txt": "a",
+            "txt": "[foo]a",
           },
         ],
         "href": "ds\\)fd\\)\\\`",
@@ -1582,15 +1362,10 @@ oops </broken> html
 
 exports[`basic 2`] = `
 "<h3>foo😀</h3>
-<p>gadasdasd,asdasd</p>
-<blockquote>
-  <p>quote here</p>
-</blockquote>
 <hr/>
-<p>asdas&lt;b&gt;d&lt;/b&gt;asda sda1&amp;amp;</p>
-<p>ffof😀oofoof
-fofoofo2</p>
-<h1>immediate heading</h1>
+<p>this will be &lt;b&gt;just text not html&lt;/b&gt; and&amp;amp will be escaped in output;</p>
+<p>text followed immediately by a</p>
+<h1>heading</h1>
 <p>This is a list:</p>
 <ul>
   <li>
@@ -1604,7 +1379,7 @@ fofoofo2</p>
   </li>
   <li>
     <p>fourth item</p>
-    <p>I mean this is a big one</p>
+    <p>Another paragraph inside the fourth item</p>
   </li>
   <li>
     <p>fifth</p>
@@ -1621,7 +1396,7 @@ fofoofo2</p>
     <p>third</p>
   </li>
 </ol>
-<p>werwerwerwer</p>
+<p>just a paragraph</p>
 <pre><code data-infotext="clara">foo = bar
  bar = zot
  1 &lt; 2
@@ -1632,13 +1407,17 @@ fofoofo2</p>
 <pre><code></code></pre>
 <pre><code data-infotext="justnewline&quot;&gt;eviltext">
 </code></pre>
+<p>text not part of quote</p>
 <blockquote>
-  <h1>asd</h1>
-  <p>lol &lt;nottag&gt;</p>
+  <p>quote here</p>
 </blockquote>
-<p>don't be lazy</p>
 <blockquote>
-  <p>foo</p>
+  <h1>heading in quote</h1>
+  <p>something &lt;nottag&gt;</p>
+</blockquote>
+<p>Every line in a blockquote must be prefixed with a &gt;, even the empty ones. This lines breaks the quote into two.</p>
+<blockquote>
+  <p>another quote</p>
 </blockquote>
 <blockquote>
   <p>level 1</p>
@@ -1649,27 +1428,28 @@ level 2</p>
   <p>level 1 continues</p>
 </blockquote>
 <div>
- foobar
+embedded raw html, not escaped
+and can contain multiple lines
 </div>
 <broken>
 oops </broken> html
 </broken>
-<p>joo<code>asd</code> bar</p>
-<p>asd \`\`0doo</p>
-<p>asd <code> </code>1doo</p>
-<p>asd <code>  </code>2doo</p>
-<p>asd <code>   </code>3doo</p>
-<p>asd <code>foo</code>\` 12dii</p>
-<p>asd \`\`foo\` 21dii</p>
-<p>asd <code>foo</code> 22dii</p>
-<p>asd\`asd<br/>xfoobar</p>
-<p>asd\`asd<br/>yfoobar</p>
+<p>abc<code>def</code> bar</p>
+<p>a \`\`0doo</p>
+<p>b <code> </code>1doo</p>
+<p>c <code>  </code>2doo</p>
+<p>d <code>   </code>3doo</p>
+<p>e <code>foo</code>\` 12dii</p>
+<p>f \`\`foo\` 21dii</p>
+<p>g <code>foo</code> 22dii</p>
+<p>h\`i<br/>xfoobar</p>
+<p>xyz\`xyz<br/>yfoobar</p>
 <p>br in the end <br/></p>
 <p><span style="font-weight: bold;">I'm bold</span></p>
 <p><span style="font-style: italic;">I'm italic</span></p>
 <p><span style="font-weight: bold;">bold outside and <span style="font-style: italic;">italic inside</span></span></p>
-<p>_bold start</p>
-<p>bold ending_</p>
+<p>_not bold start</p>
+<p>not bold ending_</p>
 <p>aftert this comes a few paragraphs with just one character</p>
 <p>a</p>
 <p>#</p>
@@ -1804,11 +1584,7 @@ exports[`codeblock with broken end on the same line / codespan with missing back
     "body": [
       {
         "name": "",
-        "txt": "\`\`\`foo",
-      },
-      {
-        "name": "",
-        "txt": "\`\`",
+        "txt": "\`\`\`foo\`\`",
       },
     ],
     "name": "p",
@@ -1904,15 +1680,7 @@ exports[`codespan with extra backticks on the start 1`] = `
     "body": [
       {
         "name": "",
-        "txt": "foo ",
-      },
-      {
-        "name": "",
-        "txt": "\`\`\`foo",
-      },
-      {
-        "name": "",
-        "txt": "\`\`",
+        "txt": "foo \`\`\`foo\`\`",
       },
     ],
     "name": "p",
@@ -2071,11 +1839,7 @@ exports[`empty elements everywhere 1`] = `
     "body": [
       {
         "name": "",
-        "txt": "*",
-      },
-      {
-        "name": "",
-        "txt": "*",
+        "txt": "**",
       },
     ],
     "name": "p",
@@ -2084,11 +1848,7 @@ exports[`empty elements everywhere 1`] = `
     "body": [
       {
         "name": "",
-        "txt": "_",
-      },
-      {
-        "name": "",
-        "txt": "_",
+        "txt": "__",
       },
     ],
     "name": "p",
@@ -2111,11 +1871,7 @@ exports[`empty elements everywhere 1`] = `
     "body": [
       {
         "name": "",
-        "txt": "!",
-      },
-      {
-        "name": "",
-        "txt": "[]()",
+        "txt": "![]()",
       },
     ],
     "name": "p",
@@ -2138,6 +1894,33 @@ exports[`empty paragraph in the end of the file 1`] = `
 `;
 
 exports[`empty paragraph in the end of the file 2`] = `"<p>foo</p>"`;
+
+exports[`extra asterisks doesn’t produce nested emphasis 1`] = `
+[
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "****",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "a",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "name": "",
+        "txt": "****",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
 
 exports[`html entities in various contexts 1`] = `
 "<p>&amp;script&amp;</p>
@@ -2229,6 +2012,619 @@ exports[`list with marker character in content 2`] = `
 </ul>"
 `;
 
+exports[`many alternating formatting chars 1`] = `
+[
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "a",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "_",
+          },
+        ],
+        "name": "b",
+      },
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "name": "i",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
 exports[`markdown compatibility mode 1`] = `
 [
   {
@@ -2298,7 +2694,7 @@ exports[`markdown compatibility mode 1`] = `
         "body": [
           {
             "name": "",
-            "txt": "bold outside and ",
+            "txt": "A bold outside and ",
           },
           {
             "body": [
@@ -2321,7 +2717,7 @@ exports[`markdown compatibility mode 1`] = `
         "body": [
           {
             "name": "",
-            "txt": "bold outside and ",
+            "txt": "B bold outside and ",
           },
           {
             "body": [
@@ -2344,7 +2740,7 @@ exports[`markdown compatibility mode 1`] = `
         "body": [
           {
             "name": "",
-            "txt": "italic outside and ",
+            "txt": "C italic outside and ",
           },
           {
             "body": [
@@ -2367,7 +2763,7 @@ exports[`markdown compatibility mode 1`] = `
         "body": [
           {
             "name": "",
-            "txt": "italic outside and ",
+            "txt": "D italic outside and ",
           },
           {
             "body": [
@@ -2388,18 +2784,14 @@ exports[`markdown compatibility mode 1`] = `
     "body": [
       {
         "name": "",
-        "txt": "these are not supported:
+        "txt": "these nestings are not supported (only outer will be applied):
 ",
       },
       {
         "body": [
           {
             "name": "",
-            "txt": "bold outside and ",
-          },
-          {
-            "name": "",
-            "txt": "*italic inside",
+            "txt": "E bold outside *but not italic inside",
           },
         ],
         "name": "b",
@@ -2415,11 +2807,7 @@ exports[`markdown compatibility mode 1`] = `
             "body": [
               {
                 "name": "",
-                "txt": "bold outside and ",
-              },
-              {
-                "name": "",
-                "txt": "_italic inside",
+                "txt": "F bold outside _but not italic inside",
               },
             ],
             "name": "b",
@@ -2436,13 +2824,13 @@ exports[`markdown compatibility mode 1`] = `
           },
           {
             "name": "",
-            "txt": "italic outside and ",
+            "txt": "G italic outside ",
           },
           {
             "body": [
               {
                 "name": "",
-                "txt": "bold inside",
+                "txt": "but not bold inside",
               },
             ],
             "name": "b",
@@ -2457,13 +2845,13 @@ exports[`markdown compatibility mode 1`] = `
       },
       {
         "name": "",
-        "txt": "italic outside and ",
+        "txt": "H italic outside ",
       },
       {
         "body": [
           {
             "name": "",
-            "txt": "bold inside",
+            "txt": "but not bold inside",
           },
         ],
         "name": "b",
@@ -2488,11 +2876,7 @@ exports[`markdown compatibility mode 1`] = `
     "body": [
       {
         "name": "",
-        "txt": "not italic",
-      },
-      {
-        "name": "",
-        "txt": "_",
+        "txt": "not italic_",
       },
     ],
     "name": "p",
@@ -2537,15 +2921,7 @@ exports[`markdown compatibility mode 1`] = `
     "body": [
       {
         "name": "",
-        "txt": "*",
-      },
-      {
-        "name": "",
-        "txt": "not emphasized",
-      },
-      {
-        "name": "",
-        "txt": "*",
+        "txt": "*not emphasized*",
       },
     ],
     "name": "p",
@@ -2556,11 +2932,7 @@ exports[`markdown compatibility mode 1`] = `
         "body": [
           {
             "name": "",
-            "txt": "emphasized star",
-          },
-          {
-            "name": "",
-            "txt": "*",
+            "txt": "emphasized star*",
           },
         ],
         "name": "i",
@@ -2574,15 +2946,7 @@ exports[`markdown compatibility mode 1`] = `
         "body": [
           {
             "name": "",
-            "txt": "_",
-          },
-          {
-            "name": "",
-            "txt": "italic underlines",
-          },
-          {
-            "name": "",
-            "txt": "_",
+            "txt": "_italic underlines_",
           },
         ],
         "name": "i",
@@ -2596,19 +2960,7 @@ exports[`markdown compatibility mode 1`] = `
         "body": [
           {
             "name": "",
-            "txt": "italic underline",
-          },
-          {
-            "name": "",
-            "txt": "_",
-          },
-          {
-            "name": "",
-            "txt": "and star",
-          },
-          {
-            "name": "",
-            "txt": "*",
+            "txt": "italic underline_and star*",
           },
         ],
         "name": "i",
@@ -2656,15 +3008,15 @@ exports[`markdown compatibility mode 2`] = `
 <p><span style="font-style: italic;">I'm italic</span>
 <span style="font-style: italic;">I'm italic too</span></p>
 <p>these are supported:
-<span style="font-weight: bold;">bold outside and <span style="font-style: italic;">italic inside</span></span>
-<span style="font-weight: bold;">bold outside and <span style="font-style: italic;">italic inside</span></span>
-<span style="font-style: italic;">italic outside and <span style="font-weight: bold;">bold inside</span></span>
-<span style="font-style: italic;">italic outside and <span style="font-weight: bold;">bold inside</span></span></p>
-<p>these are not supported:
-<span style="font-weight: bold;">bold outside and *italic inside</span><span style="font-style: italic;">
-<span style="font-weight: bold;">bold outside and _italic inside</span><span style="font-style: italic;">
-</span>italic outside and <span style="font-weight: bold;">bold inside</span>_
-</span>italic outside and <span style="font-weight: bold;">bold inside</span>*</p>
+<span style="font-weight: bold;">A bold outside and <span style="font-style: italic;">italic inside</span></span>
+<span style="font-weight: bold;">B bold outside and <span style="font-style: italic;">italic inside</span></span>
+<span style="font-style: italic;">C italic outside and <span style="font-weight: bold;">bold inside</span></span>
+<span style="font-style: italic;">D italic outside and <span style="font-weight: bold;">bold inside</span></span></p>
+<p>these nestings are not supported (only outer will be applied):
+<span style="font-weight: bold;">E bold outside *but not italic inside</span><span style="font-style: italic;">
+<span style="font-weight: bold;">F bold outside _but not italic inside</span><span style="font-style: italic;">
+</span>G italic outside <span style="font-weight: bold;">but not bold inside</span>_
+</span>H italic outside <span style="font-weight: bold;">but not bold inside</span>*</p>
 <p>_not italic</p>
 <p>not italic_</p>
 <p>a<span style="font-weight: bold;">bold</span></p>

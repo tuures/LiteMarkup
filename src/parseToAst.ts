@@ -186,7 +186,7 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
 
   const emptyMatch = /^/.exec('')
 
-  function parse<N>(src: string, rules: Rule<N>[], transform: ((node: N) => N[]) | undefined): N[] {
+  function parse<N>(src: string, rules: Rule<N>[]): N[] {
     // console.log('parsing...')
     let remaining = src
 
@@ -207,11 +207,7 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
             // console.log(`PARSED: ${(rule.pre || rule.re).source}  ->  `, preMatch, match)
             const astNode = rule.pre ? rule.mkNode(preMatch, match) : rule.mkNode(match)
             if (astNode) {
-              if (transform) {
-                ast.push(...transform(astNode))
-              } else {
-                ast.push(astNode)
-              }
+              ast.push(astNode)
             }
             break
           }
@@ -230,12 +226,31 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
     return ast
   }
 
+  function mergeConsecutiveTextNodes(inlines: Ast.Inline[]): Ast.Inline[]{
+    const merged: Ast.Inline[] = []
+
+    for(let n of inlines){
+      const lastNode = merged[merged.length - 1]
+      if(n.name === '' && lastNode?.name === ''){
+        lastNode.txt += n.txt
+      } else {
+        merged.push(n)
+      }
+    }
+
+    return merged
+  }
+
+  function flatMapOpt<N>(a: N[], f: undefined | ((node: N) => N[])): N[] {
+    return f ? a.flatMap(f) : a
+  }
+
   function parseBlock(src: string) {
-    return parse<Ast.Block>(src, blockRules, transformBlock)
+    return flatMapOpt(parse<Ast.Block>(src, blockRules), transformBlock)
   }
 
   function parseInline(src: string) {
-    return parse<Ast.Inline>(src, inlineRules, transformInline)
+    return flatMapOpt(mergeConsecutiveTextNodes(parse<Ast.Inline>(src, inlineRules)), transformInline)
   }
 
   return parseBlock
