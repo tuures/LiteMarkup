@@ -149,7 +149,7 @@ The backslash is removed and the character is rendered literally.
 *ITALIC* = `_` + content + `_`\
 *BOLD* = `*` + content + `*`
 
-Content cannot contain unescaped delimiter or backticks. Delimiters must directly surround content.
+Content cannot contain unescaped backticks.
 
 Examples:
 - `_italic_` → italic
@@ -167,7 +167,8 @@ When `markdownMode: true`:
 
 *LINK* = `[` + text + `]` + (`<` + url + `>` | `(` + url + `)`)
 
-Text is parsed as inline. URL is used verbatim.
+Text is parsed as inline, but square brackets must be escaped, except for embedded images.
+URL is parsed verbatim.
 
 Examples:
 - `[click here]<https://example.com/path?a=1>`
@@ -182,6 +183,8 @@ The angle bracket syntax is useful for URLs containing parentheses.
 Examples:
 - `![alt text]<https://example.com/image.jpg>`
 - `![alt text](https://example.com/image.jpg)`
+
+Alt text must escape any square brackets.
 
 ### Text
 

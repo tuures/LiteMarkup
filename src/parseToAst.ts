@@ -9,11 +9,23 @@ export interface ParserOptions {
   transformInline?: (node: Ast.Inline) => Ast.Inline[]
 }
 
+const R = (p: string, flags?: string) => new RegExp(p, flags)
+
+const escapedCharacterPattern = /\\([-!"#$%&'()*+,.:;<=>?@^_`{|}~\/\\\[\]])/
+
+const unescapeAllPattern = R(escapedCharacterPattern.source, 'g')
+
+function unescape(s: string): string {
+  return s.replace(unescapeAllPattern, '$1')
+}
+
+function trim(s: string): string {
+  return s.replace(/^[ \t]+/, '').replace(/[ \t]+$/, '')
+}
+
 export function parseToAst({ markdownMode, transformBlock, transformInline }: ParserOptions = {}): (
   src: string,
 ) => Ast.Block[] {
-  const R = (p: string, flags?: string) => new RegExp(p, flags)
-
   type Rule<N> = SimpleRule<N> | LookaheadRule<N>
 
   interface SimpleRule<N> {
@@ -48,10 +60,10 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
       mkNode: r => ({ name: 'htm', raw: r[1] }),
     },
     {
-      re: /^( {0,3})(`{3,})([^\n`]*)\n(?:(?:\1\2|(?:(\n|(?:(?:[^](?!\n\1\2))*[^]\n))\1\2))[ \t]*(?:$|\n)|([^]*))/,
+      re: /^( {0,3})(`{3,})((?:[^\\\n`]|\\[^])*)\n(?:(?:\1\2|(?:(\n|(?:(?:[^](?!\n\1\2))*[^]\n))\1\2))[ \t]*(?:$|\n)|([^]*))/,
       mkNode: r => ({
         name: 'cb',
-        infoText: r[3].replace(/^[ \t]+/, '').replace(/[ \t]+$/, ''),
+        infoText: unescape(trim(r[3])),
         txt: (r[4] || r[5] || '').replace(R(`^${r[1]}`), '').replace(R(`\\n${r[1]}`, 'g'), '\n'),
       }),
     },
@@ -154,7 +166,7 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
       }),
     },
     {
-      re: /^\\([-!"#$%&'()*+,.:;<=>?@^_`{|}~\/\\\[\]])/,
+      re: R(`^${escapedCharacterPattern.source}`),
       mkNode: r => ({
         name: '',
         txt: r[1],
@@ -162,7 +174,29 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
     },
     ...(markdownMode ? markdownIb : litemarkupIb),
     {
-      re: /^\[((?:[^\\\]`]|\\[^])+)\](?:<((?:[^\\>`]|\\[^])+)>|\(((?:[^\\\)`]|\\[^])+)\))/,
+      // The first part of the regex is a lookahead to check that we have a non-empty link body instead of immediate
+      // closing bracket.
+      // After that we have the first actual part of the regex to parse the link body until the closing bracket.
+      // This part consists of three sub-parts that all use the same core pattern which is the alternation between
+      // [^\\\[\]`] and \\[^] The second part of the alteration parses anything escaped with a backslash verbatim.
+      // This core pattern alone does not accept opening brackets (nested brackets). The core pattern is first
+      // used to parse any basic content of the link body. This is the first sub-part of the body link body parsing.
+      // However, if we find a exclamation mark followed by an opening bracket, we know that we have an image tag, and
+      // the the second sub-part which starts with the exclamation sign matches. This second sub-part tries to parse
+      // the body further until matching inner closing bracket is found.
+      // After that we have a third sub-part to parse any remainder of the body until the actual closing bracket.
+      // This way we can support images within links.
+      // In this part we don't care if the image tag is otherwise properly formed, we are simply trying to match the
+      // brackets so that the entire link body can per parsed.
+      // After the body has been parsed the second part of the regex matches the link url which can be either
+      // in angle brackets or parentheses. Hence the two alternatives at the end of the regex.
+      // This second part should be identical to the one used in the image regex below, as the syntax for the link url
+      // is the same for both links and images.
+      // It's notable that while the url part allows for anything except closing angle bracket or parentheses, (even
+      // an opening angle bracket or parenthesis), the link body parsing is more strict and does not allow opening
+      // brackets unless balanced with a closing bracket after exclamation mark.
+      // In other words any brackets in link body not part of image tag must be escaped.
+      re: /^\[(?=[^\]])((?:[^\\\[\]]|\\[^])*(?:!\[(?:[^\\\[\]]|\\[^])*\](?:[^\\\[\]]|\\[^])*)*)\](?:<((?:[^\\>]|\\[^])+)>|\(((?:[^\\\)]|\\[^])+)\))/,
       mkNode: r => ({
         name: 'a',
         body: parseInline(r[1]),
@@ -170,14 +204,19 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
       }),
     },
     {
-      re: /^!\[((?:[^\\\]`]|\\[^])+)\](?:<((?:[^\\>`]|\\[^])+)>|\(((?:[^\\\)`]|\\[^])+)\))/,
+      // Note that while link body parsing allows for nested brackets (for image tags), the alt text parsing does not.
+      // Instead brackets in alt text must always be escaped. This is in line with the general rule that applies for
+      // link body as well that brackets must be escaped within brackets. (Only exception being an image tag within
+      // a link.)
+      re: /^!\[((?:[^\\\[\]]|\\[^])+)\](?:<((?:[^\\>]|\\[^])+)>|\(((?:[^\\\)]|\\[^])+)\))/,
       mkNode: r => ({
         name: 'img',
-        alt: r[1],
+        alt: unescape(r[1]),
         src: r[2] || r[3],
       }),
     },
     {
+      // TODO explain
       re: /^(?=(`*))\1([^](?![`\\_*\[!]))*(?:[^]|$)/,
       mkNode: r => ({
         name: '',

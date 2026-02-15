@@ -1280,13 +1280,32 @@ closing tag must be followed by empty line or end of file
   {
     "body": [
       {
+        "name": "",
+        "txt": "[",
+      },
+      {
         "body": [
           {
             "name": "",
-            "txt": "[foo]a",
+            "txt": "foo]a",
           },
         ],
         "href": "ds\\)fd\\)\\\`",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "brackets [] and quotes "" inside link body",
+          },
+        ],
+        "href": "url",
         "name": "a",
       },
     ],
@@ -1305,9 +1324,33 @@ closing tag must be followed by empty line or end of file
   {
     "body": [
       {
-        "alt": "another image of a cat",
+        "alt": "another image of a "cat"[]",
         "name": "img",
         "src": "/ordidnthappen.jpg",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "link with ",
+          },
+          {
+            "alt": "image of a cat",
+            "name": "img",
+            "src": "/",
+          },
+          {
+            "name": "",
+            "txt": " inside link body",
+          },
+        ],
+        "href": "url",
+        "name": "a",
       },
     ],
     "name": "p",
@@ -1422,9 +1465,11 @@ closing tag must be followed by empty line or end of file
 <p>*not bold as codespan has priority<code>*</code></p>
 <p>this paragraph has a <a href="/thisurl">link to</a> and <a href="/thisurl">another link to</a></p>
 <p>not a link []&lt;&gt; []()</p>
-<p><a href="ds\\)fd\\)\\\`">[foo]a</a></p>
+<p>[<a href="ds\\)fd\\)\\\`">foo]a</a></p>
+<p><a href="url">brackets [] and quotes &quot;&quot; inside link body</a></p>
 <p><img alt="image of a cat" src="/ordidnthappen.jpg"/></p>
-<p><img alt="another image of a cat" src="/ordidnthappen.jpg"/></p>"
+<p><img alt="another image of a &quot;cat&quot;[]" src="/ordidnthappen.jpg"/></p>
+<p><a href="url">link with <img alt="image of a cat" src="/"/> inside link body</a></p>"
 `;
 
 exports[`blockquotes with leading and trailing carets 1`] = `
@@ -1666,6 +1711,243 @@ exports[`codespan with three backticks in the beginning of a paragraph (not code
 `;
 
 exports[`codespan with three backticks in the beginning of a paragraph (not codeblock) 2`] = `"<p><code>foo</code></p>"`;
+
+exports[`complex link body 1`] = `
+[
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "[]",
+          },
+          {
+            "name": "cs",
+            "txt": "\\",
+          },
+          {
+            "name": "",
+            "txt": "*",
+          },
+        ],
+        "href": "1\`2",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "[]",
+          },
+          {
+            "name": "cs",
+            "txt": "![\\[\\]",
+          },
+          {
+            "name": "",
+            "txt": "\`*](3)\`*",
+          },
+        ],
+        "href": "4",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "![]",
+          },
+        ],
+        "href": "/",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "![]x",
+          },
+        ],
+        "href": "/",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "x![]",
+          },
+        ],
+        "href": "/",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "![x]",
+          },
+        ],
+        "href": "/",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "![]<x",
+          },
+        ],
+        "href": "/",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "x![]>",
+          },
+        ],
+        "href": "/",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "![x]<>",
+          },
+        ],
+        "href": "/",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "![x]</>",
+          },
+        ],
+        "href": "/",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "",
+            "txt": "![x]</>",
+          },
+        ],
+        "href": "/",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "body": [
+              {
+                "name": "",
+                "txt": "bold",
+              },
+            ],
+            "name": "b",
+          },
+        ],
+        "href": "/",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "name": "cs",
+            "txt": "codespan",
+          },
+        ],
+        "href": "/",
+        "name": "a",
+      },
+    ],
+    "name": "p",
+  },
+]
+`;
+
+exports[`complex link body 2`] = `
+"<p><a href="1\`2">[]<code>\\</code>*</a></p>
+<p><a href="4">[]<code>![\\[\\]</code>\`*](3)\`*</a></p>
+<p><a href="/">![]</a></p>
+<p><a href="/">![]x</a></p>
+<p><a href="/">x![]</a></p>
+<p><a href="/">![x]</a></p>
+<p><a href="/">![]&lt;x</a></p>
+<p><a href="/">x![]&gt;</a></p>
+<p><a href="/">![x]&lt;&gt;</a></p>
+<p><a href="/">![x]&lt;/&gt;</a></p>
+<p><a href="/">![x]&lt;/&gt;</a></p>
+<p><a href="/"><b>bold</b></a></p>
+<p><a href="/"><code>codespan</code></a></p>"
+`;
 
 exports[`convertToHtml allowUnsafeHtml 1`] = `
 "<p>start</p>

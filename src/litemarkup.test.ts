@@ -2,6 +2,14 @@ import { parseToAst, astToHtml, convertToHtml } from './litemarkup'
 
 import * as Ast from './ast'
 
+const bq = (doc: Ast.Block) => ({ name: 'bq' as const, doc: [doc] })
+const li = (doc: Ast.Block[]) => ({ name: 'li' as const, doc })
+const list = (items: Ast.ListItem[]) => ({ name: 'l' as const, startNumber: undefined, items })
+const p1 = (i: Ast.Inline): Ast.Paragraph => ({ name: 'p' as const, body: [i] })
+const txt = (t: string) => ({ name: '' as const, txt: t })
+const ptxt = (t: string) => ({ name: 'p' as const, body: [txt(t)] })
+const atxt = (t: string, href: string) => ({ name: 'a' as const, body: [txt(t)], href })
+
 test('basic', () => {
   const src = `
 ### foo😀
@@ -135,9 +143,13 @@ not a link []<> []()
 
 [[foo\\]a](ds\\)fd\\)\\\`)
 
+[brackets \\[\\] and quotes "" inside link body](url)
+
 ![image of a cat]</ordidnthappen.jpg>
 
-![another image of a cat](/ordidnthappen.jpg)
+![another image of a "cat"\\[\\]](/ordidnthappen.jpg)
+
+[link with ![image of a cat]</> inside link body]<url>
 
 `
   const ast = parseToAst()(src)
@@ -450,15 +462,12 @@ test('interleaved quotes and lists deeply', () => {
 >   >   > - deeper
 >   >   >   > text
 `
-
-  const bq = (doc: Ast.Block) => ({ name: 'bq' as const, doc: [doc] })
-  const li = (doc: Ast.Block[]) => ({ name: 'li' as const, doc })
-  const lst = (items: Ast.ListItem[]) => ({ name: 'l' as const, startNumber: undefined, items })
-  const p = (txt: string) => ({ name: 'p' as const, body: [{ name: '' as const, txt }] })
-
   let expected: Ast.Block = bq(
-    lst([
-      li([p('item'), bq(lst([li([p('nested'), bq(lst([li([p('deeper'), bq(p('text'))])]))])]))]),
+    list([
+      li([
+        ptxt('item'),
+        bq(list([li([ptxt('nested'), bq(list([li([ptxt('deeper'), bq(ptxt('text'))])]))])])),
+      ]),
     ]),
   )
 
@@ -488,10 +497,22 @@ test('codeblock with info text having quotes', () => {
 something after
 `
   const ast = parseToAst()(src)
+  expect(ast[0]).toMatchObject({ name: 'cb', infoText: 'foo""' })
   expect(ast).toMatchSnapshot()
 
   const html = astToHtml(ast)
   expect(html).toMatchSnapshot()
+})
+
+test('codeblock with info text having escaped characters', () => {
+  const src = `
+\`\`\`*foo*\\*\\\`\\\\
+\`\`\`
+
+something after
+`
+  const ast = parseToAst()(src)
+  expect(ast[0]).toMatchObject({ name: 'cb', infoText: '*foo**`\\' })
 })
 
 test('codeblock without end, should parse until end of file', () => {
@@ -678,11 +699,19 @@ after
   })
 })
 
-test('character escapes are not processed in urls', () => {
-  const src = '[click me](/go?param=\\(value\\))'
+test('link urls are parsed verbatim', () => {
+  const src = '[click me](/go?param=\\(*value*`\\))'
+  const ast = parseToAst()(src)
+  expect(ast[0]).toEqual(p1(atxt('click me', '/go?param=\\(*value*`\\)')))
+  const html = astToHtml(ast)
+  expect(html).toContain('href="/go?param=\\(*value*`\\)"')
+})
+
+test('image urls are parsed verbatim', () => {
+  const src = '![click me](/img?param=\\(*value*`\\))'
   const ast = parseToAst()(src)
   const html = astToHtml(ast)
-  expect(html).toContain('href="/go?param=\\(value\\)"')
+  expect(html).toContain('src="/img?param=\\(*value*`\\)"')
 })
 
 test('angle brackets can be used to avoid issues with parentheses in urls', () => {
@@ -695,7 +724,7 @@ test('angle brackets can be used to avoid issues with parentheses in urls', () =
 
 test('multiple images in series', () => {
   const src = `
-![image of a cat](/ordidnthappen.jpg) and
+![image of a cat]</ordidnthappen.jpg> and
 second ![image of a cat](/ordidnthappen.jpg)
 `
   const ast = parseToAst()(src)
@@ -703,6 +732,55 @@ second ![image of a cat](/ordidnthappen.jpg)
 
   const html = astToHtml(ast)
   expect(html).toMatchSnapshot()
+})
+
+test('complex link body', () => {
+  const src = `
+[\\[\\]\`\\\`\\*](1\`2)
+
+[\\[\\]\`![\\[\\]\`\\\`\\*](3)\\\`\\*](4)
+
+[![]](/)
+
+[![]x](/)
+
+[x![]](/)
+
+[![x]](/)
+
+[![]<x](/)
+
+[x![]>](/)
+
+[![x]<>](/)
+
+[\\!\\[x\\]</>](/)
+
+[!\\[x\\]</>](/)
+
+[*bold*](/)
+
+[\`codespan\`](/)
+`
+  const ast = parseToAst()(src)
+  expect(ast).toMatchSnapshot()
+
+  const html = astToHtml(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('image alt text escaping', () => {
+  const src = `
+![\\[\\]\`\\\`\\*](1\`2)
+`
+  const ast = parseToAst()(src)
+  expect(ast[0]).toEqual(
+    p1({
+      name: 'img',
+      alt: '[]``*',
+      src: '1`2',
+    }),
+  )
 })
 
 test('html encoding in links', () => {
@@ -720,23 +798,9 @@ test('html entities in various contexts', () => {
 [&quot;link&quot;](/path?a=1&b=2&c="")
 `
   const ast = parseToAst()(src)
-  expect(ast[0]).toMatchObject({ name: 'p', body: [{ name: '', txt: '&script&' }] })
-  expect(ast[1]).toMatchObject({ name: 'p', body: [{ name: 'cs', txt: '&amp;' }] })
-  expect(ast[2]).toMatchObject({
-    name: 'p',
-    body: [
-      {
-        name: 'a',
-        body: [
-          {
-            name: '',
-            txt: '&quot;link&quot;',
-          },
-        ],
-        href: '/path?a=1&b=2&c=""',
-      },
-    ],
-  })
+  expect(ast[0]).toEqual(ptxt('&script&'))
+  expect(ast[1]).toEqual(p1({ name: 'cs' as const, txt: '&amp;' }))
+  expect(ast[2]).toEqual(p1(atxt('&quot;link&quot;', '/path?a=1&b=2&c=""')))
 
   const html = astToHtml(ast)
   expect(html).toContain('<p>&amp;script&amp;</p>')
