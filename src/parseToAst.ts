@@ -9,7 +9,9 @@ export interface ParserOptions {
   transformInline?: (node: Ast.Inline) => Ast.Inline[]
 }
 
-export function parseToAst({ markdownMode, transformBlock, transformInline }: ParserOptions = {}) {
+export function parseToAst({ markdownMode, transformBlock, transformInline }: ParserOptions = {}): (
+  src: string,
+) => Ast.Block[] {
   const R = (p: string, flags?: string) => new RegExp(p, flags)
 
   type Rule<N> = SimpleRule<N> | LookaheadRule<N>
@@ -42,7 +44,7 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
       mkNode: r => ({ name: 'h', level: r[1].length, body: parseInline(r[2]) }),
     },
     {
-      re: /^(<([^>]+)>[ \t]*\n(?:[^](?!\n<\/\2>(?:[ \t]*\n){2}))*[^]\n<\/\2>)[ \t]*(?:$|\n(?:$|[ \t]*\n))/,
+      re: /^(<([a-z][a-z0-9-]*)(?: [^>]+)?>[ \t]*\n(?:[^](?!\n<\/\2>(?:[ \t]*\n){2}))*[^]\n<\/\2>)[ \t]*(?:$|\n(?:$|[ \t]*\n))/,
       mkNode: r => ({ name: 'htm', raw: r[1] }),
     },
     {
@@ -226,12 +228,12 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
     return ast
   }
 
-  function mergeConsecutiveTextNodes(inlines: Ast.Inline[]): Ast.Inline[]{
+  function mergeConsecutiveTextNodes(inlines: Ast.Inline[]): Ast.Inline[] {
     const merged: Ast.Inline[] = []
 
-    for(let n of inlines){
+    for (let n of inlines) {
       const lastNode = merged[merged.length - 1]
-      if(n.name === '' && lastNode?.name === ''){
+      if (n.name === '' && lastNode?.name === '') {
         lastNode.txt += n.txt
       } else {
         merged.push(n)
@@ -250,7 +252,10 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
   }
 
   function parseInline(src: string) {
-    return flatMapOpt(mergeConsecutiveTextNodes(parse<Ast.Inline>(src, inlineRules)), transformInline)
+    return flatMapOpt(
+      mergeConsecutiveTextNodes(parse<Ast.Inline>(src, inlineRules)),
+      transformInline,
+    )
   }
 
   return parseBlock

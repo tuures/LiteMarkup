@@ -651,6 +651,33 @@ this is not html but a paragraph with a link because the opening tag is not prec
   expect(html).toMatchSnapshot()
 })
 
+test('html block with single char element', () => {
+  const src = `
+<p>
+single char tag
+</p>
+
+after
+`
+  const ast = parseToAst()(src)
+  expect(ast[0]).toMatchObject({ name: 'htm', raw: '<p>\nsingle char tag\n</p>' })
+})
+
+test('html block with custom element and attributes', () => {
+  const src = `
+<my-custom attr="something" data-id="123">
+custom element content
+</my-custom>
+
+after
+`
+  const ast = parseToAst()(src)
+  expect(ast[0]).toMatchObject({
+    name: 'htm',
+    raw: '<my-custom attr="something" data-id="123">\ncustom element content\n</my-custom>',
+  })
+})
+
 test('character escapes are not processed in urls', () => {
   const src = '[click me](/go?param=\\(value\\))'
   const ast = parseToAst()(src)
