@@ -1,16 +1,12 @@
-<div align="center">
-
 # 🪶 LiteMarkup
 
 **A tiny, fast Markdown(-like) parser for when you need just the essentials. Not tied to HTML output.**
 
 [![npm version](https://img.shields.io/npm/v/litemarkup.svg)](https://www.npmjs.com/package/litemarkup)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/litemarkup)](https://bundlephobia.com/package/litemarkup)
+[![Bundle Size](https://img.shields.io/badge/gzip-<3kb-blue)](https://pkg-size.dev/litemarkup)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-[Live Playground](https://tuures.github.io/LiteMarkup/demopage/demopage.html) · [API Docs](#api) · [Why LiteMarkup?](#why-litemarkup)
-
-</div>
+[Live Playground](https://tuures.github.io/LiteMarkup/demopage/demopage.html)
 
 ---
 

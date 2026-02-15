@@ -1,295 +1,881 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>LiteMarkup playground</title>
-    <meta name="description" content="See LiteMarkup in action. LiteMarkup is unbloated Markdown-like markup language.">
-  </head>
-  <body>
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LiteMarkup Playground</title>
+    <meta
+      name="description"
+      content="Try LiteMarkup live — a lightweight, AST-first markup language."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <style>
-      * {
-        box-sizing: border-box;
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8fafc;
+        --bg-tertiary: #f1f5f9;
+        --bg-editor: #f8fafc;
+        --text-primary: #0f172a;
+        --text-secondary: #475569;
+        --text-muted: #94a3b8;
+        --text-editor: #334155;
+        --accent: #6366f1;
+        --accent-hover: #4f46e5;
+        --accent-light: #e0e7ff;
+        --border: #e2e8f0;
+        --border-focus: #6366f1;
+        --success: #10b981;
+        --code-bg: #f8fafc;
+        --code-text: #6366f1;
+        --code-block-bg: #f1f5f9;
+        --code-block-text: #334155;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        --radius: 8px;
+        --radius-lg: 12px;
       }
 
-      html, body {
+      [data-theme="dark"] {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --bg-tertiary: #334155;
+        --bg-editor: #0f172a;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-muted: #64748b;
+        --text-editor: #e2e8f0;
+        --accent: #818cf8;
+        --accent-hover: #6366f1;
+        --accent-light: #312e81;
+        --border: #334155;
+        --border-focus: #818cf8;
+        --code-bg: #1e293b;
+        --code-text: #a5b4fc;
+        --code-block-bg: #0f172a;
+        --code-block-text: #e2e8f0;
+        --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+        --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
+        --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+      }
+
+      * {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
       }
 
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
+
       body {
-        font-family: sans-serif;
-        background-color: #fafafa;
-        color: #2b2727;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+
+      .app {
         display: flex;
         flex-direction: column;
-        height: 100%;
-        overscroll-behavior-y: none;
+        height: 100vh;
       }
 
-      a {
-        color: #1E96FC
-      }
-
+      /* Header */
       .header {
-        flex: 1 1 auto;
         display: flex;
-        align-items: baseline;
-        border-bottom: 1px solid #0038da;
-      }
-      .header h1 {
-        margin: 8px;
-      }
-      .header > *:not(:last-child) {
-        padding-right: 32px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 24px;
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
       }
 
-      .cols {
-        flex: 1 1 100%;
+      .header-left {
         display: flex;
-        height: 100%;
+        align-items: center;
+        gap: 16px;
       }
 
-      .col-50 {
-        flex: 0 0 50%;
-      }
-
-      .flexrows {
+      .logo {
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--text-primary);
       }
 
-      .flex-rest {
-        flex: 1 0 0;
-        overflow: scroll;
-      }
-
-      .pad {
-        height: 100%;
-      }
-
-      .pad-border {
-        border-right: 1px solid #0038da;
-      }
-
-      .selectView {
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+        border-radius: var(--radius);
         display: flex;
-        justify-content: flex-end;
-        text-align: right;
-        padding: 8px;
-        border-bottom: 1px solid #0038da;
-      }
-
-      .selectView select {
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
         font-size: 14px;
       }
 
-      .selectTarget {
-        display: none;
+      .logo-text {
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
       }
 
-      .sourceView {
-        margin: 0;
-        border: 0;
-        outline: 0;
+      .logo-text span {
+        color: var(--text-muted);
+        font-weight: 400;
+      }
+
+      .header-controls {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .example-select {
+        padding: 8px 12px;
+        font-size: 13px;
+        font-family: inherit;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text-primary);
+        cursor: pointer;
+        min-width: 160px;
+      }
+
+      .example-select:focus {
+        outline: none;
+        border-color: var(--border-focus);
+      }
+
+      .toggle-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        background: var(--bg-secondary);
+        border-radius: var(--radius);
+        font-size: 13px;
+        color: var(--text-secondary);
+      }
+
+      .toggle-switch {
+        position: relative;
+        width: 36px;
+        height: 20px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        inset: 0;
+        background: var(--border);
+        border-radius: 10px;
+        transition: 0.2s;
+      }
+
+      .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 3px;
+        bottom: 3px;
+        background: white;
+        border-radius: 50%;
+        transition: 0.2s;
+      }
+
+      .toggle-switch input:checked + .toggle-slider {
+        background: var(--accent);
+      }
+
+      .toggle-switch input:checked + .toggle-slider:before {
+        transform: translateX(16px);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 500;
+        font-family: inherit;
+        border: none;
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: all 0.15s;
+        text-decoration: none;
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--text-secondary);
+      }
+
+      .btn-ghost:hover {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+      }
+
+      .btn-icon {
+        padding: 8px;
+      }
+
+      .btn svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      /* Main Content */
+      .main {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+        padding: 16px;
+        gap: 16px;
+      }
+
+      .panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-primary);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+        min-width: 0;
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px;
+        background: var(--bg-secondary);
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+      }
+
+      .panel-title {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-muted);
+      }
+
+      .panel-tabs {
+        display: flex;
+        gap: 4px;
+      }
+
+      .tab-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        font-weight: 500;
+        font-family: inherit;
+        background: transparent;
+        border: none;
+        border-radius: 6px;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+
+      .tab-btn:hover {
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+      }
+
+      .tab-btn.active {
+        background: var(--accent-light);
+        color: var(--accent);
+      }
+
+      .panel-body {
+        flex: 1;
+        overflow: auto;
+        position: relative;
+      }
+
+      /* Editor */
+      .editor {
         width: 100%;
         height: 100%;
+        padding: 16px;
+        font-family: 'JetBrains Mono', monospace;
         font-size: 14px;
-        font-family: monospace;
-        color: #3e3737;
-        background: #f8f3f3;
+        line-height: 1.7;
+        background: var(--bg-editor);
+        color: var(--text-editor);
+        border: none;
+        outline: none;
         resize: none;
-        padding: 8px;
       }
 
-      .astView {
-        min-height: 100%;
-        font-family: monospace;
-        white-space: pre-wrap;
-        padding: 8px;
-        background: #f3f3f8;
+      .editor::placeholder {
+        color: var(--text-muted);
       }
 
-      .htmlSourceView {
-        min-height: 100%;
-        font-family: monospace;
-        white-space: pre-wrap;
-        padding: 8px;
-        background: #f3f3f8;
+      /* Output Views */
+      .output-view {
+        display: none;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
       }
 
-      .htmlRenderedView {
-        min-height: 100%;
-        font-size: 14px;
-        line-height: 20px;
-        padding: 0 8px;
-        background: #fff;
-        overflow: auto; /* prevent children margins from collapsing and moving background downwards*/
+      .output-view.active {
+        display: block;
       }
 
-      .htmlRenderedView img {
-        max-width: 100%;
+      .html-preview {
+        padding: 24px;
+        font-size: 15px;
+        line-height: 1.7;
       }
 
-      .htmlRenderedView code {
-        display: inline-block;
-        background: #f9f5f3;
+      .html-preview h1,
+      .html-preview h2,
+      .html-preview h3,
+      .html-preview h4,
+      .html-preview h5,
+      .html-preview h6 {
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+        font-weight: 600;
+        line-height: 1.3;
+        letter-spacing: -0.02em;
+      }
+
+      .html-preview h1:first-child,
+      .html-preview h2:first-child,
+      .html-preview h3:first-child {
+        margin-top: 0;
+      }
+
+      .html-preview h1 { font-size: 2em; }
+      .html-preview h2 { font-size: 1.5em; }
+      .html-preview h3 { font-size: 1.25em; }
+      .html-preview h4 { font-size: 1.1em; }
+      .html-preview h5 { font-size: 1em; }
+      .html-preview h6 { font-size: 0.9em; color: var(--text-secondary); }
+
+      .html-preview p {
+        margin: 1em 0;
+      }
+
+      .html-preview a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .html-preview a:hover {
+        text-decoration: underline;
+      }
+
+      .html-preview code {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.9em;
+        background: var(--code-bg);
+        color: var(--code-text);
+        padding: 2px 6px;
         border-radius: 4px;
-        padding: 0px 4px;
-        color: #ba13bf;
       }
 
-      .htmlRenderedView a {
-        color: #0038da;
+      .html-preview pre {
+        background: var(--code-block-bg);
+        color: var(--code-block-text);
+        padding: 16px;
+        border-radius: var(--radius);
+        overflow-x: auto;
+        margin: 1em 0;
       }
 
-      .htmlRenderedView blockquote {
-        border-left: 1px solid #ddd;
-        padding: 0 0 0 15px;
-        margin: 0;
+      .html-preview pre code {
+        background: transparent;
+        color: inherit;
+        padding: 0;
+      }
+
+      .html-preview blockquote {
+        border-left: 3px solid var(--accent);
+        margin: 1em 0;
+        padding: 0.5em 0 0.5em 1em;
+        color: var(--text-secondary);
+        background: var(--bg-secondary);
+        border-radius: 0 var(--radius) var(--radius) 0;
+      }
+
+      .html-preview blockquote p {
+        margin: 0.5em 0;
+      }
+
+      .html-preview ul,
+      .html-preview ol {
+        margin: 1em 0;
+        padding-left: 1.5em;
+      }
+
+      .html-preview li {
+        margin: 0.25em 0;
+      }
+
+      .html-preview hr {
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, var(--border), var(--accent), var(--border));
+        margin: 2em 0;
+        border-radius: 1px;
+      }
+
+      .html-preview img {
+        max-width: 100%;
+        border-radius: var(--radius);
+      }
+
+      .html-preview i {
+        font-style: italic;
+      }
+
+      .html-preview b {
+        font-weight: 600;
+      }
+
+      .code-view {
+        padding: 16px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+        word-break: break-all;
+        background: var(--bg-editor);
+        color: var(--text-editor);
+        min-height: 100%;
+      }
+
+      .ast-view {
+        padding: 16px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        background: var(--bg-secondary);
+        min-height: 100%;
+      }
+
+      .ast-key { color: #6366f1; }
+      .ast-string { color: #10b981; }
+      .ast-number { color: #f59e0b; }
+      .ast-null { color: #94a3b8; }
+
+      /* Footer */
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        font-size: 12px;
+        color: var(--text-muted);
+        border-top: 1px solid var(--border);
+        background: var(--bg-primary);
+        flex-shrink: 0;
+        gap: 16px;
+      }
+
+      .footer a {
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+
+      .footer a:hover {
+        color: var(--accent);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .header {
+          flex-wrap: wrap;
+          gap: 12px;
+          padding: 12px 16px;
+        }
+
+        .header-controls {
+          width: 100%;
+          flex-wrap: wrap;
+        }
+
+        .main {
+          flex-direction: column;
+          padding: 12px;
+          gap: 12px;
+        }
+
+        .panel {
+          min-height: 40vh;
+        }
       }
     </style>
-
-    <div class="header">
-      <h1>LiteMarkup playground</h1>
-      <span><a href="https://github.com/tuures/LiteMarkup">see project in GitHub</a></span>
-      <span>Markdown compatibility mode <input type="checkbox" id="mdMode" name="mdMode"></span>
-    </div>
-    <div class="cols">
-
-      <div class="col-50">
-        <div class="pad flexrows pad-border">
-          <div class="selectView">
-            <select>
-              <option value="sourceView" selected="">source</option>
-              <option value="astView">AST</option>
-              <option value="htmlSourceView">HTML source</option>
-              <option value="htmlRenderedView">HTML rendered</option>
-            </select>
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div class="header-left">
+          <a href="https://github.com/tuures/LiteMarkup" class="logo">
+            <div class="logo-icon">LM</div>
+            <div class="logo-text">LiteMarkup <span>Playground</span></div>
+          </a>
+        </div>
+        <div class="header-controls">
+          <select class="example-select" id="examples">
+            <option value="">Load example...</option>
+            <option value="basics">Basic Syntax</option>
+            <option value="formatting">Text Formatting</option>
+            <option value="lists">Lists</option>
+            <option value="code">Code Blocks</option>
+            <option value="links">Links &amp; Images</option>
+            <option value="blockquotes">Blockquotes</option>
+            <option value="full">Full Demo</option>
+            <option value="readme">GitHub repo README.md</option>
+            <option value="syntax">Syntax Reference</option>
+          </select>
+          <div class="toggle-group">
+            <span>Markdown mode</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="mdMode" />
+              <span class="toggle-slider"></span>
+            </label>
           </div>
-          <div class="flex-rest">
-            <textarea class="selectTarget sourceView"></textarea>
-            <div class="selectTarget astView"></div>
-            <div class="selectTarget htmlSourceView"></div>
-            <div class="selectTarget htmlRenderedView"></div>
+          <button class="btn btn-ghost btn-icon" id="themeToggle" title="Toggle theme">
+            <!-- Sun and moon icons from Heroicons (MIT License) -->
+            <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+            </svg>
+            <svg id="moonIcon" style="display: none;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+            </svg>
+          </button>
+          <a href="https://github.com/tuures/LiteMarkup" class="btn btn-ghost" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            GitHub
+          </a>
+        </div>
+      </header>
+
+      <main class="main">
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Input</span>
+          </div>
+          <div class="panel-body">
+            <textarea class="editor" id="editor" placeholder="Type your LiteMarkup here..." spellcheck="false"></textarea>
           </div>
         </div>
-      </div>
 
-      <div class="col-50">
-        <div class="pad flexrows">
-          <div class="selectView">
-            <select>
-              <option value="sourceView">source</option>
-              <option value="astView">AST</option>
-              <option value="htmlSourceView">HTML source</option>
-              <option value="htmlRenderedView" selected="">HTML rendered</option>
-            </select>
+        <div class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Output</span>
+            <div class="panel-tabs">
+              <button class="tab-btn active" data-view="preview">Preview</button>
+              <button class="tab-btn" data-view="html">HTML</button>
+              <button class="tab-btn" data-view="ast">AST</button>
+            </div>
           </div>
-          <div class="flex-rest">
-            <textarea class="selectTarget sourceView"></textarea>
-            <div class="selectTarget astView"></div>
-            <div class="selectTarget htmlSourceView"></div>
-            <div class="selectTarget htmlRenderedView"></div>
+          <div class="panel-body">
+            <div class="output-view html-preview active" id="previewView"></div>
+            <div class="output-view code-view" id="htmlView"></div>
+            <div class="output-view ast-view" id="astView"></div>
           </div>
         </div>
-      </div>
+      </main>
 
+      <footer class="footer">
+        <span>LiteMarkup — AST-first, lightweight markup</span>
+        <a href="https://github.com/tuures/LiteMarkup/" target="_blank">GitHub</a>
+        <a href="https://www.npmjs.com/package/litemarkup" target="_blank">NPM</a>
+      </footer>
     </div>
 
     <script src="https://unpkg.com/litemarkup@0.1.10/dist/litemarkup.min.js"></script>
     <!-- for local dev: -->
     <!-- <script src="../dist/litemarkup.min.iife.js"></script> -->
     <script>
-      defaultValue = `
-# LiteMarkup demo
-## This is a level 2 heading
-###### This is a level 6 heading
+      // Examples
+      let examples = {
+        basics: `# Welcome to LiteMarkup
 
-*This text will be bold*
+This is a paragraph with some text.
 
-_This text will be italic_
+## Subheading
 
-1. Here are
-1. Some items
-1. In a list
-   * As well as
-   * List _inside_ of a list!
+Another paragraph here. LiteMarkup is simple and lightweight.`,
 
-A [link example](http://example.com).
+        formatting: `# Text Formatting
 
-\`\`\`foo-lang
-some("code here")
+*This text is bold*
+
+_This text is italic_
+
+You can combine *bold and _italic_ together*.
+
+Use \`inline code\` for code snippets.
+
+Add a line break with backslash at the end:\\
+Like this!`,
+
+        lists: `# Lists
+
+## Ordered List
+1. First item
+1. Second item
+1. Third item
+   * Nested unordered
+   * Another nested item
+1. Fourth item
+
+## Unordered List
+* Apple
+* Banana
+  1. Yellow
+  1. Curved
+* Cherry`,
+
+        code: `# Code Blocks
+
+Inline \`code\` looks like this.
+
+\`\`\`javascript
+function greet(name) {
+  return \`Hello, \${name}!\`
+}
+
+console.log(greet('World'))
 \`\`\`
 
-There can be \`inline\` code as well.
+\`\`\`python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+\`\`\``,
 
-Escape special characters with single backlash (\\\\) to treat it as verbatim. Add single backlash to the end of line to force a line break like this: \\
+        links: `# Links & Images
 
-> LiteMarkup is pretty easy!\\
-> \\- Someone
+Here's a [link to GitHub](https://github.com).
+
+Images work too:
+
+![Placeholder](https://via.placeholder.com/400x200/6366f1/ffffff?text=LiteMarkup)
+
+Links can be *styled* like [_this italic link_](https://example.com).`,
+
+        blockquotes: `# Blockquotes
+
+> This is a blockquote.
+> It can span multiple lines.
+
+Regular paragraph here.
+
+> Another quote with *bold* and _italic_.
+> Very nice!`,
+
+        full: `# LiteMarkup Demo
+
+## Features
+
+LiteMarkup is an *AST-first* markup language that's simple yet powerful.
+
+### Text Formatting
+- *Bold text* for emphasis
+- _Italic text_ for style
+- \`Inline code\` for technical terms
+
+### Code Blocks
+
+\`\`\`typescript
+import { parseToAst, astToHtml } from 'litemarkup'
+
+const ast = parseToAst()('# Hello *world*!')
+const html = astToHtml(ast)
+\`\`\`
+
+### Lists
+
+1. Parse to AST
+1. Transform as needed
+1. Render to any format
+   * HTML
+   * React components
+   * DOCX documents
+   * Anything!
+
+### Links & Quotes
+
+Check out the [GitHub repo](https://github.com/tuures/LiteMarkup) for more.
+
+> LiteMarkup gives you full control over the parsing and rendering pipeline.
 
 ---
 
-That was a thematic break (horisontal line)
-`
-    </script>
-    <script>
-      const mdModeCheckbox = document.querySelector("#mdMode")
-      let mdMode = undefined
-
-      const sourceViews = Array.from(document.querySelectorAll(".sourceView"))
-      const astViews = Array.from(document.querySelectorAll(".astView"))
-      const htmlSourceViews = Array.from(document.querySelectorAll(".htmlSourceView"))
-      const htmlRenderedViews = Array.from(document.querySelectorAll(".htmlRenderedView"))
-
-      const updateViews = (source, value) => {
-        const ast = litemarkup.parseToAst(value, mdMode)
-        const html = litemarkup.astToHtml(ast)
-
-        sourceViews.filter(s => s !== source).forEach(sourceView => sourceView.value = value)
-        astViews.forEach(astView => astView.textContent = JSON.stringify(ast, null, 2))
-        htmlSourceViews.forEach(htmlSourceView => htmlSourceView.textContent = html)
-        htmlRenderedViews.forEach(htmlRenderedView => htmlRenderedView.innerHTML = html)
+That's it! Simple, clean, and powerful.`
       }
 
-      let updateTimer = null
-      const onSourceChange = (source, value) => {
-        clearTimeout(updateTimer)
-        updateTimer = setTimeout(() => updateViews(source, value), 200)
+      // DOM elements
+      const editor = document.getElementById('editor')
+      const previewView = document.getElementById('previewView')
+      const htmlView = document.getElementById('htmlView')
+      const astView = document.getElementById('astView')
+      const mdModeToggle = document.getElementById('mdMode')
+      const themeToggle = document.getElementById('themeToggle')
+      const sunIcon = document.getElementById('sunIcon')
+      const moonIcon = document.getElementById('moonIcon')
+      const exampleSelect = document.getElementById('examples')
+      const tabBtns = document.querySelectorAll('.tab-btn')
+      const outputViews = document.querySelectorAll('.output-view')
+
+      // State
+      let mdMode = false
+
+      // Prefetch example files on page load
+      const filesToFetch = {
+        syntax: '../LiteMarkup-syntax.lm',
+        readme: '../README.md'
       }
 
-      sourceViews.forEach(source => {
-        source.addEventListener("keyup", e => {
-          onSourceChange(e.target, e.target.value)
-        })
+      Object.entries(filesToFetch).forEach(([key, path]) => {
+        fetch(path)
+          .then(res => res.ok ? res.text() : null)
+          .then(text => { examples[key] = text })
+          .catch(() => {})
       })
 
-      mdModeCheckbox.addEventListener("change", e => {
-        mdMode = e.target.checked
-        updateViews(null, sourceViews[0]?.value)
-      })
-
-      updateViews(null, defaultValue)
-
-      document.querySelectorAll(".pad").forEach(pad => {
-        const targets = pad.querySelectorAll(".selectTarget")
-        const changeVisible = selected => {
-          targets.forEach(targetView => {
-            const targetViewClasses = targetView.classList
-            if(targetViewClasses.contains(selected)) {
-              targetViewClasses.remove("selectTarget")
-            } else {
-              targetViewClasses.add("selectTarget")
-            }
-          })
+      // Load example content
+      function loadExample(name) {
+        const content = examples[name]
+        if (content) {
+          editor.value = content
+          updateViews()
         }
-        pad.querySelectorAll(".selectView select").forEach(select => {
-          select.addEventListener("change", e => {
-            changeVisible(e.target.value)
-          })
-          changeVisible(select.value)
+      }
+
+      // Theme
+      function setTheme(dark) {
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : '')
+        sunIcon.style.display = dark ? 'none' : 'block'
+        moonIcon.style.display = dark ? 'block' : 'none'
+        localStorage.setItem('theme', dark ? 'dark' : 'light')
+      }
+
+      // Initialize theme
+      const savedTheme = localStorage.getItem('theme')
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      setTheme(savedTheme === 'dark' || (savedTheme === null && prefersDark))
+
+      themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
+        setTheme(!isDark)
+      })
+
+      // Syntax highlight AST
+      function highlightAST(obj, indent = 0) {
+        const spaces = '  '.repeat(indent)
+
+        if (obj === null) return '<span class="ast-null">null</span>'
+        if (typeof obj === 'string') return `<span class="ast-string">"${escapeHtml(obj)}"</span>`
+        if (typeof obj === 'number') return `<span class="ast-number">${obj}</span>`
+        if (typeof obj === 'boolean') return `<span class="ast-number">${obj}</span>`
+
+        if (Array.isArray(obj)) {
+          if (obj.length === 0) return '[]'
+          const items = obj.map(item => spaces + '  ' + highlightAST(item, indent + 1))
+          return '[\n' + items.join(',\n') + '\n' + spaces + ']'
+        }
+
+        if (typeof obj === 'object') {
+          const keys = Object.keys(obj)
+          if (keys.length === 0) return '{}'
+          const pairs = keys.map(key =>
+            spaces + '  ' + `<span class="ast-key">"${key}"</span>: ` + highlightAST(obj[key], indent + 1)
+          )
+          return '{\n' + pairs.join(',\n') + '\n' + spaces + '}'
+        }
+
+        return String(obj)
+      }
+
+      function escapeHtml(str) {
+        return str
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+      }
+
+      // Update views
+      let updateTimer = null
+      function updateViews() {
+        clearTimeout(updateTimer)
+        updateTimer = setTimeout(() => {
+          const value = editor.value
+          const ast = litemarkup.parseToAst({ markdownMode: mdMode })(value)
+          const html = litemarkup.astToHtml(ast)
+
+          previewView.innerHTML = html
+          htmlView.textContent = html
+          astView.innerHTML = highlightAST(ast)
+        }, 100)
+      }
+
+      // Event listeners
+      editor.addEventListener('input', updateViews)
+
+      mdModeToggle.addEventListener('change', (e) => {
+        mdMode = e.target.checked
+        updateViews()
+      })
+
+      exampleSelect.addEventListener('change', (e) => {
+        const value = e.target.value
+        if (value) {
+          loadExample(value)
+          e.target.value = ''
+        }
+      })
+
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          tabBtns.forEach(b => b.classList.remove('active'))
+          btn.classList.add('active')
+
+          const view = btn.dataset.view
+          outputViews.forEach(v => v.classList.remove('active'))
+          document.getElementById(view + 'View').classList.add('active')
         })
       })
-    </script>
 
+      // Initialize with default example
+      loadExample('basics')
+    </script>
   </body>
 </html>
