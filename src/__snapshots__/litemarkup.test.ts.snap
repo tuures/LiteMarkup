@@ -1272,7 +1272,26 @@ closing tag must be followed by empty line or end of file
     "body": [
       {
         "name": "",
-        "txt": "not a link []<> []()",
+        "txt": "not a link as url is missing []<> []()",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "name": "",
+        "txt": "not an image as url is missing ![]() ![]<>",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [],
+        "href": "/link-without-body",
+        "name": "a",
       },
     ],
     "name": "p",
@@ -1317,6 +1336,16 @@ closing tag must be followed by empty line or end of file
         "alt": "image of a cat",
         "name": "img",
         "src": "/ordidnthappen.jpg",
+      },
+    ],
+    "name": "p",
+  },
+  {
+    "body": [
+      {
+        "alt": "",
+        "name": "img",
+        "src": "/without-alt.jpg",
       },
     ],
     "name": "p",
@@ -1464,10 +1493,13 @@ closing tag must be followed by empty line or end of file
 <p>\\<b>emphasis</b></p>
 <p>*not bold as codespan has priority<code>*</code></p>
 <p>this paragraph has a <a href="/thisurl">link to</a> and <a href="/thisurl">another link to</a></p>
-<p>not a link []&lt;&gt; []()</p>
+<p>not a link as url is missing []&lt;&gt; []()</p>
+<p>not an image as url is missing ![]() ![]&lt;&gt;</p>
+<p><a href="/link-without-body"></a></p>
 <p>[<a href="ds\\)fd\\)\\\`">foo]a</a></p>
 <p><a href="url">brackets [] and quotes &quot;&quot; inside link body</a></p>
 <p><img alt="image of a cat" src="/ordidnthappen.jpg"/></p>
+<p><img alt="" src="/without-alt.jpg"/></p>
 <p><img alt="another image of a &quot;cat&quot;[]" src="/ordidnthappen.jpg"/></p>
 <p><a href="url">link with <img alt="image of a cat" src="/"/> inside link body</a></p>"
 `;

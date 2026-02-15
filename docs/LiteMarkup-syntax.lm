@@ -168,7 +168,8 @@ When `markdownMode: true`:
 *LINK* = `[` + text + `]` + (`<` + url + `>` | `(` + url + `)`)
 
 Text is parsed as inline, but square brackets must be escaped, except for embedded images.
-URL is parsed verbatim.
+
+URL is parsed verbatim. URL cannot be empty.
 
 Examples:
 - `[click here]<https://example.com/path?a=1>`
@@ -185,6 +186,8 @@ Examples:
 - `![alt text](https://example.com/image.jpg)`
 
 Alt text must escape any square brackets.
+
+URL is parsed verbatim. URL cannot be empty.
 
 ### Text
 

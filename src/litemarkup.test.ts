@@ -139,13 +139,19 @@ _italic underline\\_and star*_
 
 this paragraph has a [link to]</thisurl> and [another link to](/thisurl)
 
-not a link []<> []()
+not a link as url is missing []<> []()
+
+not an image as url is missing ![]() ![]<>
+
+[]</link-without-body>
 
 [[foo\\]a](ds\\)fd\\)\\\`)
 
 [brackets \\[\\] and quotes "" inside link body](url)
 
 ![image of a cat]</ordidnthappen.jpg>
+
+![]</without-alt.jpg>
 
 ![another image of a "cat"\\[\\]](/ordidnthappen.jpg)
 

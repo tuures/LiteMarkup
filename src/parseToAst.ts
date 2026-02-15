@@ -174,9 +174,7 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
     },
     ...(markdownMode ? markdownIb : litemarkupIb),
     {
-      // The first part of the regex is a lookahead to check that we have a non-empty link body instead of immediate
-      // closing bracket.
-      // After that we have the first actual part of the regex to parse the link body until the closing bracket.
+      // The first actual part of the regex tries to parse the link body until the closing bracket.
       // This part consists of three sub-parts that all use the same core pattern which is the alternation between
       // [^\\\[\]`] and \\[^] The second part of the alteration parses anything escaped with a backslash verbatim.
       // This core pattern alone does not accept opening brackets (nested brackets). The core pattern is first
@@ -196,7 +194,7 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
       // an opening angle bracket or parenthesis), the link body parsing is more strict and does not allow opening
       // brackets unless balanced with a closing bracket after exclamation mark.
       // In other words any brackets in link body not part of image tag must be escaped.
-      re: /^\[(?=[^\]])((?:[^\\\[\]]|\\[^])*(?:!\[(?:[^\\\[\]]|\\[^])*\](?:[^\\\[\]]|\\[^])*)*)\](?:<((?:[^\\>]|\\[^])+)>|\(((?:[^\\\)]|\\[^])+)\))/,
+      re: /^\[((?:[^\\\[\]]|\\[^])*(?:!\[(?:[^\\\[\]]|\\[^])*\](?:[^\\\[\]]|\\[^])*)*)\](?:<((?:[^\\>]|\\[^])+)>|\(((?:[^\\\)]|\\[^])+)\))/,
       mkNode: r => ({
         name: 'a',
         body: parseInline(r[1]),
@@ -208,7 +206,7 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
       // Instead brackets in alt text must always be escaped. This is in line with the general rule that applies for
       // link body as well that brackets must be escaped within brackets. (Only exception being an image tag within
       // a link.)
-      re: /^!\[((?:[^\\\[\]]|\\[^])+)\](?:<((?:[^\\>]|\\[^])+)>|\(((?:[^\\\)]|\\[^])+)\))/,
+      re: /^!\[((?:[^\\\[\]]|\\[^])*)\](?:<((?:[^\\>]|\\[^])+)>|\(((?:[^\\\)]|\\[^])+)\))/,
       mkNode: r => ({
         name: 'img',
         alt: unescape(r[1]),

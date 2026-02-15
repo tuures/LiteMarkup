@@ -6,7 +6,7 @@
 [![Bundle Size](https://img.shields.io/badge/gzip-<3kb-blue)](https://pkg-size.dev/litemarkup)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-[Live Playground](https://tuures.github.io/LiteMarkup/demopage/demopage.html)
+[Live Playground](https://tuures.github.io/LiteMarkup/docs/demopage.html)
 
 ---
 
@@ -306,7 +306,7 @@ Thematic break above. Force line break with backslash:\
 New line here.
 ````
 
-**[Try it live →](https://tuures.github.io/LiteMarkup/demopage/demopage.html)**
+**[Try it live →](https://tuures.github.io/LiteMarkup/docs/demopage.html)**
 
 Notable differences from CommonMark:
 
@@ -322,7 +322,7 @@ Notable differences from CommonMark:
 - Only type 7 [HTML blocks](https://spec.commonmark.org/0.29/#html-block) are supported (and with some limitations)
 - [Link reference definitions](https://spec.commonmark.org/0.29/#link-reference-definition) are not supported
 
-[Full syntax description →](./LiteMarkup-syntax.lm)
+[Full syntax description →](./docs/LiteMarkup-syntax.lm)
 
 ---
 
