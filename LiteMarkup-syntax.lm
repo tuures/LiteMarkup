@@ -1,0 +1,188 @@
+# LiteMarkup Syntax
+
+## Primitives
+
+- *LF* = U+000A `\n` (line feed)
+- *EOL* = *LF* or end of input
+- *SPACE* = U+0020 ` `
+- *TAB* = U+0009 `\t`
+- *WS* = one or more *SPACE* or *TAB*
+- *INDENT* = 0-3 spaces
+
+A `?` suffix indicates the element is optional (e.g., *WS*? means zero or more whitespace).
+
+## Document Structure
+
+*DOCUMENT* = zero or more *BLOCK*
+
+*BLOCK* = *BLANKLINES* | *THEMATICBREAK* | *HEADING* | *HTMLBLOCK* | *CODEBLOCK* | *BLOCKQUOTE* | *LIST* | *PARAGRAPH*
+
+Blocks are matched in the order listed above. The first matching rule wins.
+
+## Leaf Blocks
+
+### Blank Lines
+
+*BLANKLINES* = one or more lines containing only whitespace
+
+Blank lines are consumed and produce no AST node. They serve as separators between blocks.
+
+### Thematic Break
+
+*THEMATICBREAK* = *INDENT* + three or more of (`-`, `_`, or `*`) each optionally followed by spaces + *EOL*
+
+Examples:
+- `---`
+- `- - -`
+- `***`
+- `___`
+
+### Heading
+
+*HEADING* = *INDENT* + 1-6 `#` characters + *WS* + content + *EOL*
+
+The number of `#` characters determines the heading level (1-6). The content is parsed as inline.
+
+Examples:
+- `# Heading 1`
+- `## Heading 2`
+- `###### Heading 6`
+
+### Code Block (Fenced)
+
+*CODEBLOCK* = opening fence + content + closing fence
+
+- Opening fence: *INDENT* + 3+ backticks + optional info text (no backticks allowed) + *LF*
+- Content: any characters until closing fence (or end of input)
+- Closing fence: same indent + same number of backticks + *WS*? + *EOL*
+
+The indent of the opening fence is stripped from each content line.
+
+### HTML Block
+
+*HTMLBLOCK* = `<` + tagname + optional attributes + `>` + *WS*? + *LF* + content + *LF* + `</` + tagname + `>` + *WS*? + (end of input or blank line)
+
+- Tag name: lowercase letter followed by lowercase letters, digits, or hyphens (`[a-z][a-z0-9-]*`)
+- Opening and closing tags must match exactly
+- Must be followed by a blank line or end of input
+
+## Container Blocks
+
+### Blockquote
+
+*BLOCKQUOTE* = one or more consecutive lines starting with *INDENT* + `>` + optional content
+
+Each line must be prefixed with `>`. The `> ` prefix (with optional space) is stripped, and the remaining content is parsed recursively as a document. Blockquotes are not lazy — every line must have the `>` prefix.
+
+Example:
+```
+> This is a quote.
+> It continues here.
+>
+> > Nested quote.
+```
+
+### List
+
+*LIST* = one or more *LISTITEM*s with consistent marker style
+
+*LISTMARKER* = *INDENT* + (`-`, `+`, or `*` for unordered) or (1-9 digits + `.` or `)` for ordered) + 1-3 spaces
+
+*LISTITEM* = *LISTMARKER* + content + continuation lines
+
+Continuation lines must be indented to align with the first content character after the marker.
+
+Examples:
+```
+- Item one
+- Item two
+  with continuation
+
+1. First
+2. Second
+
+1) Also valid
+2) Ordered list
+```
+
+Nested lists and other blocks can appear inside list items with proper indentation.
+
+## Paragraph
+
+*PARAGRAPH* = one or more lines of text not matching any other block rule
+
+A paragraph continues until:
+- A blank line
+- A heading start (`# `)
+- A code block start (three backticks)
+- A blockquote start (`>`)
+- A list marker (`- `, `* `, `1. `, etc.)
+
+Paragraph content is parsed as inline.
+
+## Inline Elements
+
+Inline parsing applies to heading content and paragraph content. Inline rules are matched in the order listed below; the first matching rule wins.
+
+### Code Span
+
+*CODESPAN* = *n* backticks + content + *n* backticks (same count)
+
+Content is rendered verbatim. Newlines in content become spaces. If content starts and ends with a space (and has other non-space content), those spaces are trimmed.
+
+### Hard Line Break
+
+*LINEBREAK* = `\` + *EOL*
+
+A backslash at end of line creates a `<br/>`.
+
+### Escape
+
+*ESCAPE* = `\` + ASCII punctuation character
+
+Escapable characters: ``- ! " # $ % & ' ( ) * + , . : ; < = > ? @ ^ _ ` { | } ~ / \ [ ]``
+
+The backslash is removed and the character is rendered literally.
+
+### Emphasis (LiteMarkup Mode)
+
+*ITALIC* = `_` + content + `_`\
+*BOLD* = `*` + content + `*`
+
+Content cannot contain unescaped delimiter or backticks. Delimiters must directly surround content.
+
+Examples:
+- `_italic_` → italic
+- `*bold*` → bold
+- `*bold with _italic_ inside*`
+
+### Emphasis (Markdown Mode)
+
+When `markdownMode: true`:
+
+*ITALIC* = `_` or `*` + content + same delimiter\
+*BOLD* = `__` or `**` + content + same delimiter
+
+### Link
+
+*LINK* = `[` + text + `]` + (`<` + url + `>` | `(` + url + `)`)
+
+Text is parsed as inline. URL is used verbatim.
+
+Examples:
+- `[click here]<https://example.com/path?a=1>`
+- `[click here](https://example.com/path?a=1)`
+
+The angle bracket syntax is useful for URLs containing parentheses.
+
+### Image
+
+*IMAGE* = `!` + `[` + alt text + `]` + (`<` + url + `>` | `(` + url + `)`)
+
+Examples:
+- `![alt text]<https://example.com/image.jpg>`
+- `![alt text](https://example.com/image.jpg)`
+
+### Text
+
+Any characters not matching the above rules are rendered as plain text.
