@@ -6,11 +6,11 @@
   "exports": {
     ".": {
       "types": "./dist/litemarkup.d.ts",
-      "default": "./dist/litemarkup.js"
+      "default": "./dist/litemarkup.mjs"
     }
   },
   "bin": {
-    "litemarkup": "./dist/cli.js"
+    "litemarkup": "./dist/cli.mjs"
   },
   "files": [
     "dist"
