@@ -70,9 +70,9 @@ function emitInline(inlines: Ast.Inline[]): string {
         case 'br':
           return '<br/>'
         case 'i':
-          return el('span', emitInline(n.body), [['style', 'font-style: italic;']])
+          return el('i', emitInline(n.body))
         case 'b':
-          return el('span', emitInline(n.body), [['style', 'font-weight: bold;']])
+          return el('b', emitInline(n.body))
         case 'a':
           return el('a', emitInline(n.body), [['href', n.href]])
         case 'img':

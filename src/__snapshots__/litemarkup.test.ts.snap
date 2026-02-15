@@ -1400,9 +1400,9 @@ closing tag must be followed by empty line or end of file
 <p>h\`i<br/>xfoobar</p>
 <p>xyz\`xyz<br/>yfoobar</p>
 <p>br in the end <br/></p>
-<p><span style="font-weight: bold;">I'm bold</span></p>
-<p><span style="font-style: italic;">I'm italic</span></p>
-<p><span style="font-weight: bold;">bold outside and <span style="font-style: italic;">italic inside</span></span></p>
+<p><b>I'm bold</b></p>
+<p><i>I'm italic</i></p>
+<p><b>bold outside and <i>italic inside</i></b></p>
 <p>_not bold start</p>
 <p>not bold ending_</p>
 <p>aftert this comes a few paragraphs with just one character</p>
@@ -1410,15 +1410,15 @@ closing tag must be followed by empty line or end of file
 <p>#</p>
 <p>_</p>
 <p>aftert this comes a text content that is just one characters</p>
-<p>a<span style="font-weight: bold;">bold</span></p>
-<p><span style="font-style: italic;">italic</span>s</p>
+<p>a<b>bold</b></p>
+<p><i>italic</i>s</p>
 <p>!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\\]^_\`{|}~</p>
 <p>\\→\\A\\a\\ \\3\\φ\\«</p>
 <p>*not emphasized*</p>
-<p><span style="font-weight: bold;">emphasized star*</span></p>
-<p><span style="font-style: italic;">_italic underlines_</span></p>
-<p><span style="font-style: italic;">italic underline_and star*</span></p>
-<p>\\<span style="font-weight: bold;">emphasis</span></p>
+<p><b>emphasized star*</b></p>
+<p><i>_italic underlines_</i></p>
+<p><i>italic underline_and star*</i></p>
+<p>\\<b>emphasis</b></p>
 <p>*not bold as codespan has priority<code>*</code></p>
 <p>this paragraph has a <a href="/thisurl">link to</a> and <a href="/thisurl">another link to</a></p>
 <p>not a link []&lt;&gt; []()</p>
@@ -3115,29 +3115,29 @@ exports[`markdown compatibility mode 1`] = `
 `;
 
 exports[`markdown compatibility mode 2`] = `
-"<p><span style="font-weight: bold;">I'm bold</span>
-<span style="font-weight: bold;">I'm bold too</span></p>
-<p><span style="font-style: italic;">I'm italic</span>
-<span style="font-style: italic;">I'm italic too</span></p>
+"<p><b>I'm bold</b>
+<b>I'm bold too</b></p>
+<p><i>I'm italic</i>
+<i>I'm italic too</i></p>
 <h1>these are supported:</h1>
-<p><span style="font-weight: bold;">A bold outside and <span style="font-style: italic;">italic inside</span></span></p>
-<p><span style="font-weight: bold;">B bold outside and <span style="font-style: italic;">italic inside</span></span></p>
-<p><span style="font-style: italic;">C italic outside and <span style="font-weight: bold;">bold inside</span></span></p>
-<p><span style="font-style: italic;">D italic outside and <span style="font-weight: bold;">bold inside</span></span></p>
+<p><b>A bold outside and <i>italic inside</i></b></p>
+<p><b>B bold outside and <i>italic inside</i></b></p>
+<p><i>C italic outside and <b>bold inside</b></i></p>
+<p><i>D italic outside and <b>bold inside</b></i></p>
 <h1>these nestings are not supported (only outer will be applied):</h1>
-<p><span style="font-weight: bold;">E bold outside *but not italic inside</span>*</p>
-<p><span style="font-weight: bold;">F bold outside _but not italic inside</span>_</p>
-<p><span style="font-style: italic;">G italic outside </span><span style="font-style: italic;">but not bold inside</span>__</p>
-<p><span style="font-style: italic;">H italic outside </span><span style="font-style: italic;">but not bold inside</span>**</p>
+<p><b>E bold outside *but not italic inside</b>*</p>
+<p><b>F bold outside _but not italic inside</b>_</p>
+<p><i>G italic outside </i><i>but not bold inside</i>__</p>
+<p><i>H italic outside </i><i>but not bold inside</i>**</p>
 <p>_not italic</p>
 <p>not italic_</p>
-<p>a<span style="font-weight: bold;">bold</span></p>
-<p><span style="font-style: italic;">italic</span>s</p>
+<p>a<b>bold</b></p>
+<p><i>italic</i>s</p>
 <p>*not emphasized*</p>
-<p><span style="font-style: italic;">emphasized star*</span></p>
-<p><span style="font-style: italic;">_italic underlines_</span></p>
-<p><span style="font-style: italic;">italic underline_and star*</span></p>
-<p>\\<span style="font-style: italic;">emphasis after a literal backslash</span></p>
+<p><i>emphasized star*</i></p>
+<p><i>_italic underlines_</i></p>
+<p><i>italic underline_and star*</i></p>
+<p>\\<i>emphasis after a literal backslash</i></p>
 <p>*just plain p before code<code>*</code></p>"
 `;
 
@@ -3863,5 +3863,5 @@ exports[`transform 1`] = `
 exports[`transform 2`] = `
 "<p>a</p>
 <p>a</p>
-<p>b <span style="font-weight: bold;">c</span> d</p>"
+<p>b <b>c</b> d</p>"
 `;
