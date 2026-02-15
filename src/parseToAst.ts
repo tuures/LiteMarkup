@@ -56,7 +56,7 @@ export function parseToAst({ markdownMode, transformBlock, transformInline }: Pa
   ]
 
   const blockQuoteRule: SimpleRule<Ast.BlockQuote> = {
-    re: /^(?: {0,3}>\n)*(?: {0,3}>[^\n]+(?:$|\n))+(?: {0,3}>(?:$|\n))*/,
+    re: /^(?: {0,3}>[^\n]*(?:$|\n))+/,
     mkNode: r => {
       const content = r[0].replace(/(^|\n) {0,3}> ?/g, '\n')
 

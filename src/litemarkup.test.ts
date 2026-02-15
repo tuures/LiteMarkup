@@ -279,7 +279,7 @@ test('single character paragraphs', () => {
   const chars = ['#', '>', '-', '*', '_', '`', '[', '!', '\\', '\n', ' ']
 
   const ast1 = parseToAst()(chars.join('\n\n'))
-  expect(ast1.map(n => n.name)).toEqual('p,p,p,p,p,p,p,p,p'.split(','))
+  expect(ast1.map(n => n.name)).toEqual('p,bq,p,p,p,p,p,p,p'.split(','))
   expect(ast1).toMatchSnapshot()
 
   // with trailing spaces

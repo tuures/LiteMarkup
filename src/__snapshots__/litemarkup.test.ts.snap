@@ -807,13 +807,8 @@ exports[`basic 1`] = `
     "name": "p",
   },
   {
-    "body": [
-      {
-        "name": "",
-        "txt": ">",
-      },
-    ],
-    "name": "p",
+    "doc": [],
+    "name": "bq",
   },
   {
     "doc": [
@@ -1372,7 +1367,9 @@ exports[`basic 2`] = `
   <p>quote here</p>
 </blockquote>
 <p>text and empty quote</p>
-<p>&gt;</p>
+<blockquote>
+  
+</blockquote>
 <blockquote>
   <h1>heading in quote</h1>
   <p>something &lt;nottag&gt;</p>
@@ -1789,13 +1786,8 @@ exports[`empty elements everywhere 1`] = `
     "name": "p",
   },
   {
-    "body": [
-      {
-        "name": "",
-        "txt": ">",
-      },
-    ],
-    "name": "p",
+    "doc": [],
+    "name": "bq",
   },
   {
     "body": [
@@ -3446,13 +3438,8 @@ exports[`single character paragraphs 1`] = `
     "name": "p",
   },
   {
-    "body": [
-      {
-        "name": "",
-        "txt": ">",
-      },
-    ],
-    "name": "p",
+    "doc": [],
+    "name": "bq",
   },
   {
     "body": [
