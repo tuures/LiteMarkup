@@ -391,10 +391,6 @@
 
       .html-preview a {
         color: var(--accent);
-        text-decoration: none;
-      }
-
-      .html-preview a:hover {
         text-decoration: underline;
       }
 
@@ -848,7 +844,16 @@ That's it! Simple, clean, and powerful.`
           const ast = litemarkup.parseToAst({ markdownMode: mdMode })(value)
           const html = litemarkup.astToHtml(ast)
 
-          previewView.innerHTML = html
+            previewView.innerHTML = html
+            previewView.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
+            const slug = el.textContent
+              .normalize()
+              .toLowerCase()
+              .replace(/[^a-z0-9 \p{L}-]/gu, '')
+              .replace(/\s+|-+/g, '-')
+              .replace(/^-|-$/g, '')
+            el.id = slug
+            })
           htmlView.textContent = html
           astView.innerHTML = highlightAST(ast)
         }, 100)
