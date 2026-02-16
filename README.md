@@ -304,6 +304,11 @@ const x = 42
 
 Thematic break above. Force line break with backslash:\
 New line here.
+Use backslash to escape special characters to keep them verbatim:
+\*this is not bolded — verbatim asterisks\*
+
+    * Indent anything four spaces to keep entire paragraph verbatim without using backslash escapes. *
+
 ````
 
 **[Try it live →](https://tuures.github.io/LiteMarkup/docs/demopage.html)**
