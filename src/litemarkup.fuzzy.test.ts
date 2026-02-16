@@ -1,4 +1,4 @@
-import { parseToAst, astToHtml } from './litemarkup'
+import { parser, renderHtml } from './litemarkup'
 
 let lastChar = ''
 const randomString = (length: number): string =>
@@ -22,8 +22,8 @@ describe('fuzzy testing', () => {
     for (let i = 0; i < 5000; i++) {
       const input = randomString(Math.floor(Math.random() * 5000))
       expect(() => {
-        const ast = parseToAst()(input)
-        astToHtml(ast)
+        const ast = parser()(input)
+        renderHtml(ast)
       }).not.toThrow()
     }
   })

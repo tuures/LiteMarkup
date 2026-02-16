@@ -32,10 +32,10 @@ npm install litemarkup
 ```
 
 ```typescript
-import { parseToAst, astToHtml } from 'litemarkup'
+import { parser, renderHtml } from 'litemarkup'
 
 // Create a parser (optionally with transforms)
-const parse = parseToAst()
+const parse = parser()
 
 const ast = parse('# Hello *world*!')
 // → [{ name: 'h', level: 1, body: [
@@ -45,7 +45,7 @@ const ast = parse('# Hello *world*!')
 //    ]}]
 
 // Built-in HTML renderer
-const html = astToHtml(ast)
+const html = renderHtml(ast)
 // → <h1>Hello <b>world</b>!</h1>
 
 // Or build your own renderer: React, DOCX, PDF, ...
@@ -54,7 +54,7 @@ const html = astToHtml(ast)
 
 **That's it.** No complex config, no plugins, no 50KB bundle.
 
-> ⚠️ **Security note:** `astToHtml` assumes input can be trusted — it renders the AST as-is.
+> ⚠️ **Security note:** `renderHtml` assumes input can be trusted — it renders the AST as-is.
 > If your input is untrusted you need to [sanitize the input](#sanitizing-untrusted-input) first.
 > For convenience, a built-in shorthand `convertToHtml` is provided that includes AST transforms to textify HTML blocks, links, and images.
 
@@ -68,6 +68,15 @@ convertToHtml('Click [here](/url)!')
 // HTML blocks are converted to paragraphs (which escape content automatically)
 convertToHtml('<script>\nalert(1)\n</script>\n\n')
 // → '<p>&lt;script&gt;\nalert(1)\n&lt;/script&gt;</p>'
+```
+
+Prefer minimal imports?
+
+```typescript
+import { parser } from 'litemarkup/parser'
+import { renderHtml } from 'litemarkup/html'
+// shared AST types
+import type { Block, Inline } from 'litemarkup/ast'
 ```
 
 ---
@@ -93,10 +102,10 @@ convertToHtml('<script>\nalert(1)\n</script>\n\n')
 ### Basic usage
 
 ```typescript
-import { parseToAst, astToHtml } from 'litemarkup'
+import { parser, renderHtml } from 'litemarkup'
 
 // Create a parser (optionally with transforms)
-const parse = parseToAst()
+const parse = parser()
 
 // Get the AST for custom processing
 const ast = parse('Hello *world*!')
@@ -107,7 +116,7 @@ const ast = parse('Hello *world*!')
 //    ]}]
 
 // Then render to HTML
-const html = astToHtml(ast)
+const html = renderHtml(ast)
 ```
 
 ### Markdown compatibility mode
@@ -115,12 +124,12 @@ const html = astToHtml(ast)
 By default, LiteMarkup uses `*bold*` and `_italic_`. Enable markdown mode for CommonMark-style emphasis:
 
 ```typescript
-import { parseToAst, astToHtml } from 'litemarkup'
+import { parser, renderHtml } from 'litemarkup'
 
-const parse = parseToAst({ markdownMode: true })
+const parse = parser({ markdownMode: true })
 
 const ast = parse('Hello **world** and *italic*!')
-const html = astToHtml(ast)
+const html = renderHtml(ast)
 // → '<p>Hello <b>world</b> and <i>italic</i>!</p>'
 ```
 
@@ -129,11 +138,11 @@ const html = astToHtml(ast)
 Use `transformBlock` and `transformInline` hooks to modify the AST during parsing:
 
 ```typescript
-import { parseToAst, astToHtml } from 'litemarkup'
+import { parser, renderHtml } from 'litemarkup'
 import type { Block, Inline } from 'litemarkup'
 
 // Example 1: Convert all headings to level 2
-const parse = parseToAst({
+const parse = parser({
   transformBlock: (node: Block): Block[] => {
     if (node.name === 'h') {
       return [{ ...node, level: 2 }]
@@ -143,7 +152,7 @@ const parse = parseToAst({
 })
 
 // Example 2: Auto-link URLs in text
-const parseWithAutoLinks = parseToAst({
+const parseWithAutoLinks = parser({
   transformInline: (node: Inline): Inline[] => {
     if (node.name === '' && node.txt.includes('http')) {
       const match = node.txt.match(/(https?:\/\/[^\s]+)/)
@@ -162,7 +171,7 @@ const parseWithAutoLinks = parseToAst({
 })
 
 // Example 3: Remove a node by returning empty array
-const parseNoImages = parseToAst({
+const parseNoImages = parser({
   transformInline: (node: Inline): Inline[] =>
     node.name === 'img' ? [] : [node]
 })
@@ -173,12 +182,12 @@ const parseNoImages = parseToAst({
 Strip or modify dangerous content using transforms. For example:
 
 ```typescript
-import { parseToAst, astToHtml } from 'litemarkup'
+import { parser, renderHtml } from 'litemarkup'
 import type { Block, Inline } from 'litemarkup'
 
 const isSafeUrl = (url: string) => /^https?:\/\//.test(url)
 
-const parse = parseToAst({
+const parse = parser({
   transformBlock: (node: Block): Block[] => {
     // Drop HTML blocks
     if (node.name === 'htm') {
@@ -199,7 +208,7 @@ const parse = parseToAst({
   }
 })
 
-astToHtml(parse('[safe](https://example.com) and [danger](javascript:void)'))
+renderHtml(parse('[safe](https://example.com) and [danger](javascript:void)'))
 // → '<p><a href="https://example.com">safe</a> and danger</p>'
 ```
 
@@ -209,10 +218,10 @@ The AST makes it easy to render to anything — not just HTML.
 For example, render directly into React components:
 
 ```tsx
-import { parseToAst } from 'litemarkup'
+import { parser } from 'litemarkup'
 import type { Block, Inline } from 'litemarkup'
 
-const parse = parseToAst()
+const parse = parser()
 const ast = parse('Hello *world*!')
 
 // e.g. create a custom render that outputs React elements
@@ -241,10 +250,10 @@ Or generate Word documents with [docx](https://github.com/dolanmiu/docx):
 ```typescript
 import { Document, Paragraph, TextRun, HeadingLevel, ExternalHyperlink, Packer } from 'docx'
 import { writeFileSync } from 'fs'
-import { parseToAst } from 'litemarkup'
+import { parser } from 'litemarkup'
 import type { Block, Inline } from 'litemarkup'
 
-const parse = parseToAst()
+const parse = parser()
 const ast = parse('# Hello *world*!')
 
 function renderInline(node: Inline): (TextRun | ExternalHyperlink)[] {

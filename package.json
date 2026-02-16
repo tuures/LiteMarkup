@@ -7,6 +7,18 @@
     ".": {
       "types": "./dist/litemarkup.d.ts",
       "default": "./dist/litemarkup.mjs"
+    },
+    "./parser": {
+      "types": "./dist/parser.d.ts",
+      "default": "./dist/parser.mjs"
+    },
+    "./html": {
+      "types": "./dist/html.d.ts",
+      "default": "./dist/html.mjs"
+    },
+    "./ast": {
+      "types": "./dist/ast.d.ts",
+      "default": "./dist/ast.mjs"
     }
   },
   "bin": {

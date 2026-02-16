@@ -10,8 +10,8 @@
 
 The compiler has two stages:
 
-1. **parseToAst** — regex-based recursive descent parser, produces AST
-2. **astToHtml** — renders AST to HTML string
+1. **parser** — regex-based recursive descent parser, produces AST
+2. **renderHtml** — renders AST to HTML string
 
 Parser uses two rule types:
 

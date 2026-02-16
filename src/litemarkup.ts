@@ -1,14 +1,14 @@
-import { parseToAst, type ParserOptions } from './parseToAst'
-import { astToHtml } from './astToHtml'
 import * as Ast from './ast'
+import { parser, type ParserOptions } from './parser'
+import { renderHtml } from './html'
 
 //
 // Facade
 //
 
 export * from './ast'
-export * from './parseToAst'
-export * from './astToHtml'
+export * from './parser'
+export * from './html'
 
 const textifyHtmlBlocks = (n: Ast.Block): Ast.Block[] =>
   n.name === 'htm' ? [{ name: 'p', body: [{ name: '', txt: n.raw }] }] : [n]
@@ -30,5 +30,5 @@ export function convertToHtml(
         transformInline: n => textifyImages(n).flatMap(textifyLinks),
       }
 
-  return astToHtml(parseToAst(options)(src))
+  return renderHtml(parser(options)(src))
 }

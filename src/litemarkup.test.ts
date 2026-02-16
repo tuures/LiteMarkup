@@ -1,4 +1,4 @@
-import { parseToAst, astToHtml, convertToHtml } from './litemarkup'
+import { parser, renderHtml, convertToHtml } from './litemarkup'
 
 import * as Ast from './ast'
 
@@ -158,10 +158,10 @@ not an image as url is missing ![]() ![]<>
 [link with ![image of a cat]</> inside link body]<url>
 
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -215,10 +215,10 @@ _italic underline\\_and star*_
 *just plain p before code\`*\`
 
 `
-  const ast = parseToAst({ markdownMode: true })(src)
+  const ast = parser({ markdownMode: true })(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -230,13 +230,13 @@ test('null bytes', () => {
 
 test('zero-width characters', () => {
   const src = 'foo\u200B\u200Cbar'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(JSON.stringify(ast)).toContain('"' + src + '"')
 })
 
 test('RTL and mixed directional text', () => {
   const src = `# مرحبا Hello עברית`
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 })
 
@@ -253,14 +253,14 @@ test('emojis', () => {
 
 [link 🔗](https://example.com/🔥)
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 })
 
 test('complex unicode', () => {
   const src = '𝕳𝖊𝖑𝖑𝖔 𝕎𝕠𝕣𝕝𝕕 café e\u0301'
-  const ast = parseToAst()(src)
-  const html = astToHtml(ast)
+  const ast = parser()(src)
+  const html = renderHtml(ast)
   expect(html).toContain(src)
 })
 
@@ -283,69 +283,69 @@ __
 
 ![]()
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 })
 
 test('trailing spaces everywhere', () => {
   const src = '# heading   \n\nparagraph   \n\n- list   '
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 })
 
 test('single character paragraphs', () => {
   const chars = ['#', '>', '-', '*', '_', '`', '[', '!', '\\', '\n', ' ']
 
-  const ast1 = parseToAst()(chars.join('\n\n'))
+  const ast1 = parser()(chars.join('\n\n'))
   expect(ast1.map(n => n.name)).toEqual('p,bq,p,p,p,p,p,p,p'.split(','))
   expect(ast1).toMatchSnapshot()
 
   // with trailing spaces
-  const ast2 = parseToAst()(chars.map(c => c + ' ').join('\n\n'))
+  const ast2 = parser()(chars.map(c => c + ' ').join('\n\n'))
   expect(ast2.map(n => n.name)).toEqual('h,bq,p,p,p,p,p,p,p'.split(','))
   expect(ast2).toMatchSnapshot()
 })
 
 test('empty paragraph in the end of the file', () => {
   const src = 'foo\n  '
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
 test('backslash at end of input', () => {
   const src = 'text\\'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 })
 
 test('only carriage returns', () => {
   const src = 'p1s1\rp1s2\r\r\rp1s3'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast.length).toEqual(1)
   expect(ast).toMatchSnapshot()
 })
 
 test('mixed line endings', () => {
   const src = 'p1line1\n\np2line1\r\n\r\np2s2\rp2s3'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast.length).toEqual(2)
   expect(ast).toMatchSnapshot()
 })
 
 test('form feed and vertical tab', () => {
   const src = 'foo\f\vbar'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast.length).toEqual(1)
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toContain(src)
 })
 
 test('heading with max level', () => {
   const src = '###### h6\n####### not h7'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast[0]).toMatchObject({ name: 'h', level: 6 })
   expect(ast[1]).toMatchObject({ name: 'p' })
 })
@@ -357,10 +357,10 @@ test('list with marker character in content', () => {
 - baz- the third
 - bam -fourth
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -376,40 +376,40 @@ test('nested lists', () => {
    * bar2
 * another list
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
 test('list starting at max number', () => {
   const src = '999999999. max ordered list number'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast[0].name).toEqual('l')
 })
 
 test('list number overflow', () => {
   const src = '9999999999. exceeds 9 digits'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast[0].name).toEqual('p')
 })
 
 test('tabs vs spaces in indentation', () => {
   const src = '- item\n\t- tab indented\n  - space indented'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 })
 
 test('extra asterisks doesn’t produce nested emphasis', () => {
   const src = '*'.repeat(5) + 'a' + '*'.repeat(5)
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 })
 
 test('many alternating formatting chars', () => {
   const src = '_*'.repeat(50) + 'a' + '*_'.repeat(50)
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 })
 
@@ -419,12 +419,12 @@ test('simple blockquotes', () => {
 
 >b
 `
-  expect(parseToAst()(src)).toMatchSnapshot()
+  expect(parser()(src)).toMatchSnapshot()
 })
 
 test('simple blockquote with just a space', () => {
   const src = '> \n\n'
-  expect(parseToAst()(src)[0].name).toEqual('bq')
+  expect(parser()(src)[0].name).toEqual('bq')
 })
 
 test('blockquotes with leading and trailing carets', () => {
@@ -452,12 +452,12 @@ not quoted
 
 end
 `
-  expect(parseToAst()(src)).toMatchSnapshot()
+  expect(parser()(src)).toMatchSnapshot()
 })
 
 test('100 levels deep blockquote', () => {
   const src = '> '.repeat(100) + 'deep'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 })
 
@@ -477,7 +477,7 @@ test('interleaved quotes and lists deeply', () => {
     ]),
   )
 
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toEqual([expected])
 })
 
@@ -488,10 +488,10 @@ test('codeblock without content', () => {
 
 something after
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -502,11 +502,11 @@ test('codeblock with info text having quotes', () => {
 
 something after
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast[0]).toMatchObject({ name: 'cb', infoText: 'foo""' })
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -517,7 +517,7 @@ test('codeblock with info text having escaped characters', () => {
 
 something after
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast[0]).toMatchObject({ name: 'cb', infoText: '*foo**`\\' })
 })
 
@@ -525,12 +525,12 @@ test('codeblock without end, should parse until end of file', () => {
   const src = `
 \`\`\`foo
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast.length).toEqual(1)
   expect(ast[0].name).toEqual('cb')
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -541,13 +541,13 @@ test('codeblock with broken end, should parse until end of file', () => {
 
 the double backticks will be considered part of the code block content, and the block will end at the end of file
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast.length).toEqual(1)
   expect(ast[0].name).toEqual('cb')
   expect((ast[0] as Ast.CodeBlock).txt.startsWith('``\n')).toBeTruthy()
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -555,12 +555,12 @@ test('codespan with missing backticks in the end should not parse as codespan', 
   const src = `
 \`\`\`foo\`\`
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast.length).toEqual(1)
   expect(ast[0].name).toEqual('p')
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -568,10 +568,10 @@ test('codespan with extra backticks on the end should parse as codespan plus ext
   const src = `
 \`\`foo\`\`\`
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -579,13 +579,13 @@ test('codespan with three backticks in the beginning of a paragraph (not codeblo
   const src = `
 \`\`\`foo\`\`\`
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast.length).toEqual(1)
   expect(ast[0].name).toEqual('p')
   expect((ast[0] as Ast.Paragraph).body[0].name).toEqual('cs')
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -605,10 +605,10 @@ g \`\` \` \`\` codespan that results in a single backtick (first and last space 
 
 h \`\` \` x \` \`\`3 codespan that results in backtick, space, x, space, and backtick
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -618,10 +618,10 @@ a \`\`0doo
 
 f \`\`foo\` 21
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -630,10 +630,10 @@ test('codespan cannot span multiple lines', () => {
 \`\`
 \`\`
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -672,9 +672,9 @@ this is not html but a paragraph with a link because the opening tag is not prec
 
 
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -686,7 +686,7 @@ single char tag
 
 after
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast[0]).toMatchObject({ name: 'htm', raw: '<p>\nsingle char tag\n</p>' })
 })
 
@@ -698,7 +698,7 @@ custom element content
 
 after
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast[0]).toMatchObject({
     name: 'htm',
     raw: '<my-custom attr="something" data-id="123">\ncustom element content\n</my-custom>',
@@ -707,24 +707,24 @@ after
 
 test('link urls are parsed verbatim', () => {
   const src = '[click me](/go?param=\\(*value*`\\))'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast[0]).toEqual(p1(atxt('click me', '/go?param=\\(*value*`\\)')))
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toContain('href="/go?param=\\(*value*`\\)"')
 })
 
 test('image urls are parsed verbatim', () => {
   const src = '![click me](/img?param=\\(*value*`\\))'
-  const ast = parseToAst()(src)
-  const html = astToHtml(ast)
+  const ast = parser()(src)
+  const html = renderHtml(ast)
   expect(html).toContain('src="/img?param=\\(*value*`\\)"')
 })
 
 test('angle brackets can be used to avoid issues with parentheses in urls', () => {
   const src = '[click me]<http://en.wikipedia.org/wiki/Recursion_(computer_science)>'
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast[0]).toMatchSnapshot
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toContain('href="http://en.wikipedia.org/wiki/Recursion_(computer_science)"')
 })
 
@@ -733,10 +733,10 @@ test('multiple images in series', () => {
 ![image of a cat]</ordidnthappen.jpg> and
 second ![image of a cat](/ordidnthappen.jpg)
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -768,10 +768,10 @@ test('complex link body', () => {
 
 [\`codespan\`](/)
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -779,7 +779,7 @@ test('image alt text escaping', () => {
   const src = `
 ![\\[\\]\`\\\`\\*](1\`2)
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast[0]).toEqual(
     p1({
       name: 'img',
@@ -803,12 +803,12 @@ test('html entities in various contexts', () => {
 
 [&quot;link&quot;](/path?a=1&b=2&c="")
 `
-  const ast = parseToAst()(src)
+  const ast = parser()(src)
   expect(ast[0]).toEqual(ptxt('&script&'))
   expect(ast[1]).toEqual(p1({ name: 'cs' as const, txt: '&amp;' }))
   expect(ast[2]).toEqual(p1(atxt('&quot;link&quot;', '/path?a=1&b=2&c=""')))
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toContain('<p>&amp;script&amp;</p>')
   expect(html).toContain('<p><code>&amp;amp;</code></p>')
   expect(html).toContain(
@@ -840,10 +840,10 @@ b _c_ d
     }
   }
 
-  const ast = parseToAst({ transformBlock: duplicate, transformInline: convertItalicToBold })(src)
+  const ast = parser({ transformBlock: duplicate, transformInline: convertItalicToBold })(src)
   expect(ast).toMatchSnapshot()
 
-  const html = astToHtml(ast)
+  const html = renderHtml(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -875,8 +875,8 @@ test('large document performance', () => {
   const src = (paragraph + '\n\n').repeat(100)
 
   const start = performance.now()
-  const ast = parseToAst()(src)
-  astToHtml(ast)
+  const ast = parser()(src)
+  renderHtml(ast)
   const duration = performance.now() - start
 
   expect(duration).toBeLessThan(10 * 1000)
@@ -886,7 +886,7 @@ test('many small elements', () => {
   const src = Array.from({ length: 100000 }, (_, i) => `- item ${i}`).join('\n')
 
   const start = performance.now()
-  parseToAst()(src)
+  parser()(src)
   const duration = performance.now() - start
 
   expect(duration).toBeLessThan(10 * 1000)

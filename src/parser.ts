@@ -23,7 +23,7 @@ function trim(s: string): string {
   return s.replace(/^[ \t]+/, '').replace(/[ \t]+$/, '')
 }
 
-export function parseToAst({ markdownMode, transformBlock, transformInline }: ParserOptions = {}): (
+export function parser({ markdownMode, transformBlock, transformInline }: ParserOptions = {}): (
   src: string,
 ) => Ast.Block[] {
   type Rule<N> = SimpleRule<N> | LookaheadRule<N>

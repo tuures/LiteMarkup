@@ -4,7 +4,7 @@ import * as Ast from './ast'
 // HTML emitter
 //
 
-export function astToHtml(ast: Ast.Block[], indentCharacters = '  '): string {
+export function renderHtml(ast: Ast.Block[], indentCharacters = '  '): string {
   if (!Array.isArray(ast)) {
     throw new Error('Expected array of AST nodes')
   }
