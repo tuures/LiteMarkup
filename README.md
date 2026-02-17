@@ -21,7 +21,7 @@ Most Markdown parsers are **bloated** — full CommonMark implementations have e
 
 **Perfect for:** Comment systems, chat apps, note-taking tools, or anywhere you want lightweight markup without the bloat.
 
-> 💡 **AST-first design:** Unlike libraries that only output HTML, LiteMarkup gives you a clean typed AST. Build custom renderers easily.
+> 💡 **AST-first design:** Unlike libraries that only output HTML, LiteMarkup gives you a clean typed AST. Integrate to custom output formats easily.
 
 ---
 
@@ -32,11 +32,12 @@ npm install litemarkup
 ```
 
 ```typescript
-import { parser, renderHtml } from 'litemarkup'
+import { parser, htmlRenderer } from 'litemarkup'
 
 // Create a parser (optionally with transforms)
-const parse = parser()
+const parse = parser(/* options */)
 
+// Parse markup to produce an AST
 const ast = parse('# Hello *world*!')
 // → [{ name: 'h', level: 1, body: [
 //      { name: '', txt: 'Hello ' },
@@ -44,48 +45,44 @@ const ast = parse('# Hello *world*!')
 //      { name: '', txt: '!' }
 //    ]}]
 
-// Built-in HTML renderer
-const html = renderHtml(ast)
+// Produce output, for example with the built-in HTML rendering
+const render = htmlRenderer(/* options */)
+
+const html = render(ast)
 // → <h1>Hello <b>world</b>!</h1>
 
-// Or build your own renderer: React, DOCX, PDF, ...
-// See examples below
+// Or bring/build your own rendering: React, DOCX, PDF, ...
+// See examples further below
 ```
 
-**That's it.** No complex config, no plugins, no 50KB bundle.
-
-> ⚠️ **Security note:** `renderHtml` assumes input can be trusted — it renders the AST as-is.
-> If your input is untrusted you need to [sanitize the input](#sanitizing-untrusted-input) first.
-> For convenience, a built-in shorthand `convertToHtml` is provided that includes AST transforms to textify HTML blocks, links, and images.
+There's a convenience shorthand if you want to convert directly to HTML:
 
 ```typescript
 import { convertToHtml } from 'litemarkup'
 
-// Links and images are converted to text
+// Note that raw html, links and images are converted to text...
 convertToHtml('Click [here](/url)!')
-// → '<p>Click here (/url)!</p>'
+// → '<p>Click [here]&lt;/url&gt;!</p>'
 
-// HTML blocks are converted to paragraphs (which escape content automatically)
-convertToHtml('<script>\nalert(1)\n</script>\n\n')
-// → '<p>&lt;script&gt;\nalert(1)\n&lt;/script&gt;</p>'
+// ... unless you allow unsafe HTML. Don’t do this on untrusted input!
+convertToHtml('Click [here]<javascript:alert(`You’ve been warned!`);>!', { allowUnsafeHtml: true })
+// → '<p>Click <a href="javascript:alert(`You’ve been warned!`);">here</a>!</p>'
 ```
 
-Prefer minimal imports?
+**That's it.** No complex config, no plugins, no 50KB bundle.
 
-```typescript
-import { parser } from 'litemarkup/parser'
-import { renderHtml } from 'litemarkup/html'
-// shared AST types
-import type { Block, Inline } from 'litemarkup/ast'
-```
+> ⚠️ **Security note:** By default, any HTML blocks, links, and images are textified.\
+> This security measure can be disabled with `htmlRenderer({ allowUnsafeHtml: true })` or `convertToHtml(src, { allowUnsafeHtml: true })`.\
+> Learn how to selectively [sanitize untrusted input](#sanitizing-untrusted-input) before doing so.
 
 ---
 
 ## Syntax overview
 
 - ✅ **Headings** — `# H1` through `###### H6`
-- ✅ **Bold & Italic** — `*bold*` and `_italic_` (or use [markdown mode](#markdown-compatibility-mode) for `**bold**` / `*italic*`)
-- ✅ **Lists** — Ordered (`1.`) and unordered (`*`)
+- ✅ **Bold & Italic** — `*bold*` and `_italic_`
+  (or use [markdown mode](#markdown-compatibility-mode) for `**bold**` / `*italic*`)
+- ✅ **Lists** — Ordered (`1.`) and unordered (`-` or `*`)
 - ✅ **Links** — `[text]<url>` or `[text](url)`
 - ✅ **Code** — Inline `` `code` `` and fenced blocks
 - ✅ **Blockquotes** — `> quoted text`
@@ -99,24 +96,31 @@ import type { Block, Inline } from 'litemarkup/ast'
 
 ## API
 
-### Basic usage
+```typescript
+interface ParserOptions {
+  markdownMode?: boolean
+  transformBlock?: (node: Ast.Block) => Ast.Block[]
+  transformInline?: (node: Ast.Inline) => Ast.Inline[]
+}
+
+function parser(o: ParserOptions = {}): (src: string) => Ast.Block[]
+
+export interface HtmlRendererOptions {
+  allowUnsafeHtml?: boolean
+  indentCharacters?: string
+}
+
+function htmlRenderer(o: HtmlRendererOptions = {}): (ast: Ast.Block[]) => string
+```
+
+Prefer minimal imports for only what you need?
 
 ```typescript
-import { parser, renderHtml } from 'litemarkup'
+import { parser } from 'litemarkup/parser'
 
-// Create a parser (optionally with transforms)
-const parse = parser()
+import { htmlRenderer } from 'litemarkup/html'
 
-// Get the AST for custom processing
-const ast = parse('Hello *world*!')
-// → [{ name: 'p', body: [
-//      { name: '', txt: 'Hello ' },
-//      { name: 'b', body: [{ name: '', txt: 'world' }] },
-//      { name: '', txt: '!' }
-//    ]}]
-
-// Then render to HTML
-const html = renderHtml(ast)
+import type { Block, Inline } from 'litemarkup/ast'
 ```
 
 ### Markdown compatibility mode
@@ -124,12 +128,12 @@ const html = renderHtml(ast)
 By default, LiteMarkup uses `*bold*` and `_italic_`. Enable markdown mode for CommonMark-style emphasis:
 
 ```typescript
-import { parser, renderHtml } from 'litemarkup'
+import { parser, htmlRenderer } from 'litemarkup'
 
 const parse = parser({ markdownMode: true })
 
 const ast = parse('Hello **world** and *italic*!')
-const html = renderHtml(ast)
+const html = htmlRenderer()(ast)
 // → '<p>Hello <b>world</b> and <i>italic</i>!</p>'
 ```
 
@@ -138,7 +142,7 @@ const html = renderHtml(ast)
 Use `transformBlock` and `transformInline` hooks to modify the AST during parsing:
 
 ```typescript
-import { parser, renderHtml } from 'litemarkup'
+import { parser, htmlRenderer } from 'litemarkup'
 import type { Block, Inline } from 'litemarkup'
 
 // Example 1: Convert all headings to level 2
@@ -148,7 +152,7 @@ const parse = parser({
       return [{ ...node, level: 2 }]
     }
     return [node]
-  }
+  },
 })
 
 // Example 2: Auto-link URLs in text
@@ -162,27 +166,26 @@ const parseWithAutoLinks = parser({
         return [
           { name: '', txt: node.txt.slice(0, idx) },
           { name: 'a', href: url, body: [{ name: '', txt: url }] },
-          { name: '', txt: node.txt.slice(idx + url.length) }
+          { name: '', txt: node.txt.slice(idx + url.length) },
         ]
       }
     }
     return [node]
-  }
+  },
 })
 
 // Example 3: Remove a node by returning empty array
 const parseNoImages = parser({
-  transformInline: (node: Inline): Inline[] =>
-    node.name === 'img' ? [] : [node]
+  transformInline: (node: Inline): Inline[] => (node.name === 'img' ? [] : [node]),
 })
 ```
 
 ### Sanitizing untrusted input
 
-Strip or modify dangerous content using transforms. For example:
+Strip or modify dangerous content using transforms depending on your needs. For example:
 
 ```typescript
-import { parser, renderHtml } from 'litemarkup'
+import { parser, htmlRenderer } from 'litemarkup'
 import type { Block, Inline } from 'litemarkup'
 
 const isSafeUrl = (url: string) => /^https?:\/\//.test(url)
@@ -205,14 +208,18 @@ const parse = parser({
       return []
     }
     return [node]
-  }
+  },
 })
 
-renderHtml(parse('[safe](https://example.com) and [danger](javascript:void)'))
+// Now that input is sanitized to our liking, we can pass { allowUnsafeHtml: true }
+// to let the renderer process the AST in full
+htmlRenderer({ allowUnsafeHtml: true })(
+  parse('[safe](https://example.com) and [danger](javascript:void)'),
+)
 // → '<p><a href="https://example.com">safe</a> and danger</p>'
 ```
 
-### Custom renderers
+### Custom output formats
 
 The AST makes it easy to render to anything — not just HTML.
 For example, render directly into React components:
@@ -227,16 +234,20 @@ const ast = parse('Hello *world*!')
 // e.g. create a custom render that outputs React elements
 function renderInline(node: Inline) {
   switch (node.name) {
-    case '': return node.txt
-    case 'a': return <a href={node.href}>{node.body.map(renderInline)}</a>
+    case '':
+      return node.txt
+    case 'a':
+      return <a href={node.href}>{node.body.map(renderInline)}</a>
     // ... handle other inline types
   }
 }
 
 function renderBlock(node: Block) {
   switch (node.name) {
-    case 'p': return <p>{node.body.map(renderInline)}</p>
-    case 'h': return <h1>{node.body.map(renderInline)}</h1>
+    case 'p':
+      return <p>{node.body.map(renderInline)}</p>
+    case 'h':
+      return <h1>{node.body.map(renderInline)}</h1>
     // ... handle other block types
   }
 }
@@ -258,19 +269,40 @@ const ast = parse('# Hello *world*!')
 
 function renderInline(node: Inline): (TextRun | ExternalHyperlink)[] {
   switch (node.name) {
-    case '': return [new TextRun(node.txt)]
-    case 'b': return [new TextRun({ text: node.body.map(n => n.name === '' ? n.txt : '').join(''), bold: true })]
-    case 'i': return [new TextRun({ text: node.body.map(n => n.name === '' ? n.txt : '').join(''), italics: true })]
-    case 'a': return [new ExternalHyperlink({ link: node.href, children: node.body.flatMap(renderInline) })]
-    default: return []
+    case '':
+      return [new TextRun(node.txt)]
+    case 'b':
+      return [
+        new TextRun({
+          text: node.body.map(n => (n.name === '' ? n.txt : '')).join(''),
+          bold: true,
+        }),
+      ]
+    case 'i':
+      return [
+        new TextRun({
+          text: node.body.map(n => (n.name === '' ? n.txt : '')).join(''),
+          italics: true,
+        }),
+      ]
+    case 'a':
+      return [new ExternalHyperlink({ link: node.href, children: node.body.flatMap(renderInline) })]
+    default:
+      return []
   }
 }
 
 function renderBlock(node: Block): Paragraph {
   switch (node.name) {
-    case 'p': return new Paragraph({ children: node.body.flatMap(renderInline) })
-    case 'h': return new Paragraph({ heading: HeadingLevel[`HEADING_${node.level}`], children: node.body.flatMap(renderInline) })
-    default: return new Paragraph({})
+    case 'p':
+      return new Paragraph({ children: node.body.flatMap(renderInline) })
+    case 'h':
+      return new Paragraph({
+        heading: HeadingLevel[`HEADING_${node.level}`],
+        children: node.body.flatMap(renderInline),
+      })
+    default:
+      return new Paragraph({})
   }
 }
 
@@ -278,7 +310,6 @@ const doc = new Document({ sections: [{ children: ast.map(renderBlock) }] })
 Packer.toBuffer(doc).then(buffer => {
   writeFileSync('output.docx', buffer)
 })
-
 ```
 
 ---
@@ -287,16 +318,17 @@ Packer.toBuffer(doc).then(buffer => {
 
 ````markdown
 # Heading 1
+
 ## Heading 2
 
 *This is bold*
 _This is italic_
 
-In markdown mode: **bold** and *italic*
+In markdown mode: **bold** and _italic_
 
 1. Ordered list
 2. Second item
-   * Nested unordered
+   - Nested unordered
 
 A [link](https://example.com) in text.
 
@@ -317,7 +349,6 @@ Use backslash to escape special characters to keep them verbatim:
 \*this is not bolded — verbatim asterisks\*
 
     * Indent anything four spaces to keep entire paragraph verbatim without using backslash escapes. *
-
 ````
 
 **[Try it live →](https://tuures.github.io/LiteMarkup/docs/demopage.html)**
@@ -327,8 +358,8 @@ Notable differences from CommonMark:
 - [Emphasis and strong emphasis](https://spec.commonmark.org/0.29/#emphasis-and-strong-emphasis) use single `_` and `*` characters, respectively.
 - [Settext headings](https://spec.commonmark.org/0.29/#setext-heading) are not supported (use ATX headings (`# foo`) instead)
 - [Indented code blocks](https://spec.commonmark.org/0.29/#indented-code-block) are not supported (use fenced code blocks (```) instead)
-- Only U+000A (aka `\n` / LF) is considered [*line ending*](https://spec.commonmark.org/0.29/#line-ending).
-- Only space and tab are considered [*whitespace characters*](https://spec.commonmark.org/0.29/#whitespace-character).
+- Only U+000A (aka `\n` / LF) is considered [_line ending_](https://spec.commonmark.org/0.29/#line-ending).
+- Only space and tab are considered [_whitespace characters_](https://spec.commonmark.org/0.29/#whitespace-character).
 - [Tabs have no behaviour](https://spec.commonmark.org/0.29/#example-6).
 - [Thematic breaks](https://spec.commonmark.org/0.29/#thematic-break) do not interrupt paragraph (blank line needed).
 - ATX headings cannot have [closing sequence](https://spec.commonmark.org/0.29/#example-41).
@@ -362,7 +393,6 @@ echo "[click](http://example.com)" | npx litemarkup --allow-unsafe-html
   document.body.innerHTML = html
 </script>
 ```
-
 
 ---
 

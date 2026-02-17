@@ -529,6 +529,46 @@ exports[`RTL and mixed directional text 1`] = `
 ]
 `;
 
+exports[`allowUnsafeHtml works consistently between convertToHtml and htmlRenderer 1`] = `
+"<p>start</p>
+<p>&lt;div&gt;
+inside div
+&lt;/div&gt;</p>
+<p>please [click here]&lt;url&gt;</p>
+<p>[image alt text]&lt;url&gt;</p>
+<p>end</p>"
+`;
+
+exports[`allowUnsafeHtml works consistently between convertToHtml and htmlRenderer 2`] = `
+"<p>start</p>
+<div>
+inside div
+</div>
+<p>please <a href="url">click here</a></p>
+<p><img alt="image alt text" src="url"/></p>
+<p>end</p>"
+`;
+
+exports[`allowUnsafeHtml works consistently between convertToHtml and htmlRenderer 3`] = `
+"<p>start</p>
+<p>&lt;div&gt;
+inside div
+&lt;/div&gt;</p>
+<p>please [click here]&lt;url&gt;</p>
+<p>[image alt text]&lt;url&gt;</p>
+<p>end</p>"
+`;
+
+exports[`allowUnsafeHtml works consistently between convertToHtml and htmlRenderer 4`] = `
+"<p>start</p>
+<div>
+inside div
+</div>
+<p>please <a href="url">click here</a></p>
+<p><img alt="image alt text" src="url"/></p>
+<p>end</p>"
+`;
+
 exports[`backslash at end of input 1`] = `
 [
   {
@@ -1979,26 +2019,6 @@ exports[`complex link body 2`] = `
 <p><a href="/">![x]&lt;/&gt;</a></p>
 <p><a href="/"><b>bold</b></a></p>
 <p><a href="/"><code>codespan</code></a></p>"
-`;
-
-exports[`convertToHtml allowUnsafeHtml 1`] = `
-"<p>start</p>
-<p>&lt;div&gt;
-inside div
-&lt;/div&gt;</p>
-<p>please click here (url)</p>
-<p>[image alt text](url)</p>
-<p>end</p>"
-`;
-
-exports[`convertToHtml allowUnsafeHtml 2`] = `
-"<p>start</p>
-<div>
-inside div
-</div>
-<p>please <a href="url">click here</a></p>
-<p><img alt="image alt text" src="url"/></p>
-<p>end</p>"
 `;
 
 exports[`emojis 1`] = `

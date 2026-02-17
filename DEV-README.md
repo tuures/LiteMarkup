@@ -11,7 +11,7 @@
 The compiler has two stages:
 
 1. **parser** — regex-based recursive descent parser, produces AST
-2. **renderHtml** — renders AST to HTML string
+2. **htmlRenderer** — produces HTML string from the AST
 
 Parser uses two rule types:
 

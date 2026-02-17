@@ -1,4 +1,4 @@
-import { parser, renderHtml } from './litemarkup'
+import { parser, htmlRenderer } from './litemarkup'
 
 let lastChar = ''
 const randomString = (length: number): string =>
@@ -23,7 +23,7 @@ describe('fuzzy testing', () => {
       const input = randomString(Math.floor(Math.random() * 5000))
       expect(() => {
         const ast = parser()(input)
-        renderHtml(ast)
+        htmlRenderer()(ast)
       }).not.toThrow()
     }
   })

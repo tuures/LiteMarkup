@@ -776,17 +776,17 @@ LiteMarkup is an *AST-first* markup language that's simple yet powerful.
 ### Code Blocks
 
 \`\`\`typescript
-import { parser, renderHtml } from 'litemarkup'
+import { parser, htmlRenderer } from 'litemarkup'
 
 const ast = parser()('# Hello *world*!')
-const html = renderHtml(ast)
+const html = htmlRenderer()(ast)
 \`\`\`
 
 ### Lists
 
 1. Parse to AST
 1. Transform as needed
-1. Render to any format
+1. Integrate to any output format
    * HTML
    * React components
    * DOCX documents
@@ -907,7 +907,7 @@ That's it! Simple, clean, and powerful.`,
         updateTimer = setTimeout(() => {
           const value = editor.value
           const ast = litemarkup.parser({ markdownMode: mdMode })(value)
-          const html = litemarkup.renderHtml(ast)
+          const html = litemarkup.htmlRenderer()(ast)
 
           previewView.innerHTML = html
           previewView.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {

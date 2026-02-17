@@ -1,4 +1,4 @@
-import { parser, renderHtml, convertToHtml } from './litemarkup'
+import { parser, htmlRenderer, convertToHtml } from './litemarkup'
 
 import * as Ast from './ast'
 
@@ -161,7 +161,7 @@ not an image as url is missing ![]() ![]<>
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -218,7 +218,7 @@ _italic underline\\_and star*_
   const ast = parser({ markdownMode: true })(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -260,7 +260,7 @@ test('emojis', () => {
 test('complex unicode', () => {
   const src = '𝕳𝖊𝖑𝖑𝖔 𝕎𝕠𝕣𝕝𝕕 café e\u0301'
   const ast = parser()(src)
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toContain(src)
 })
 
@@ -311,7 +311,7 @@ test('empty paragraph in the end of the file', () => {
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -339,7 +339,7 @@ test('form feed and vertical tab', () => {
   const src = 'foo\f\vbar'
   const ast = parser()(src)
   expect(ast.length).toEqual(1)
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toContain(src)
 })
 
@@ -360,7 +360,7 @@ test('list with marker character in content', () => {
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -379,7 +379,7 @@ test('nested lists', () => {
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -491,7 +491,7 @@ something after
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -506,7 +506,7 @@ something after
   expect(ast[0]).toMatchObject({ name: 'cb', infoText: 'foo""' })
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -530,7 +530,7 @@ test('codeblock without end, should parse until end of file', () => {
   expect(ast[0].name).toEqual('cb')
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -547,7 +547,7 @@ the double backticks will be considered part of the code block content, and the 
   expect((ast[0] as Ast.CodeBlock).txt.startsWith('``\n')).toBeTruthy()
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -560,7 +560,7 @@ test('codespan with missing backticks in the end should not parse as codespan', 
   expect(ast[0].name).toEqual('p')
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -571,7 +571,7 @@ test('codespan with extra backticks on the end should parse as codespan plus ext
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -585,7 +585,7 @@ test('codespan with three backticks in the beginning of a paragraph (not codeblo
   expect((ast[0] as Ast.Paragraph).body[0].name).toEqual('cs')
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -608,7 +608,7 @@ h \`\` \` x \` \`\`3 codespan that results in backtick, space, x, space, and bac
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -621,7 +621,7 @@ f \`\`foo\` 21
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -633,7 +633,7 @@ test('codespan cannot span multiple lines', () => {
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -674,7 +674,7 @@ this is not html but a paragraph with a link because the opening tag is not prec
 `
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
-  const html = renderHtml(ast)
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -709,14 +709,14 @@ test('link urls are parsed verbatim', () => {
   const src = '[click me](/go?param=\\(*value*`\\))'
   const ast = parser()(src)
   expect(ast[0]).toEqual(p1(atxt('click me', '/go?param=\\(*value*`\\)')))
-  const html = renderHtml(ast)
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
   expect(html).toContain('href="/go?param=\\(*value*`\\)"')
 })
 
 test('image urls are parsed verbatim', () => {
   const src = '![click me](/img?param=\\(*value*`\\))'
   const ast = parser()(src)
-  const html = renderHtml(ast)
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
   expect(html).toContain('src="/img?param=\\(*value*`\\)"')
 })
 
@@ -724,7 +724,7 @@ test('angle brackets can be used to avoid issues with parentheses in urls', () =
   const src = '[click me]<http://en.wikipedia.org/wiki/Recursion_(computer_science)>'
   const ast = parser()(src)
   expect(ast[0]).toMatchSnapshot
-  const html = renderHtml(ast)
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
   expect(html).toContain('href="http://en.wikipedia.org/wiki/Recursion_(computer_science)"')
 })
 
@@ -736,7 +736,7 @@ second ![image of a cat](/ordidnthappen.jpg)
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -771,7 +771,7 @@ test('complex link body', () => {
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
   expect(html).toMatchSnapshot()
 })
 
@@ -808,7 +808,7 @@ test('html entities in various contexts', () => {
   expect(ast[1]).toEqual(p1({ name: 'cs' as const, txt: '&amp;' }))
   expect(ast[2]).toEqual(p1(atxt('&quot;link&quot;', '/path?a=1&b=2&c=""')))
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
   expect(html).toContain('<p>&amp;script&amp;</p>')
   expect(html).toContain('<p><code>&amp;amp;</code></p>')
   expect(html).toContain(
@@ -843,11 +843,11 @@ b _c_ d
   const ast = parser({ transformBlock: duplicate, transformInline: convertItalicToBold })(src)
   expect(ast).toMatchSnapshot()
 
-  const html = renderHtml(ast)
+  const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
 })
 
-test('convertToHtml allowUnsafeHtml', () => {
+test('allowUnsafeHtml works consistently between convertToHtml and htmlRenderer', () => {
   const src = `
 start
 
@@ -868,6 +868,17 @@ end
   const html2 = convertToHtml(src, { allowUnsafeHtml: true })
   expect(html2).toContain('<div>')
   expect(html2).toMatchSnapshot()
+
+  const html3 = htmlRenderer()(parser()(src))
+  expect(html3).not.toContain('<div>')
+  expect(html3).toMatchSnapshot()
+
+  const html4 = htmlRenderer({ allowUnsafeHtml: true })(parser()(src))
+  expect(html4).toContain('<div>')
+  expect(html4).toMatchSnapshot()
+
+  expect(html1).toEqual(html3)
+  expect(html2).toEqual(html4)
 })
 
 test('large document performance', () => {
@@ -876,7 +887,7 @@ test('large document performance', () => {
 
   const start = performance.now()
   const ast = parser()(src)
-  renderHtml(ast)
+  htmlRenderer()(ast)
   const duration = performance.now() - start
 
   expect(duration).toBeLessThan(10 * 1000)
