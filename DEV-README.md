@@ -1,4 +1,4 @@
-# Development
+# Development guide
 
 ## Commands
 
@@ -10,8 +10,14 @@
 
 The compiler has two stages:
 
-1. **parser** — regex-based recursive descent parser, produces AST
-2. **htmlRenderer** — produces HTML string from the AST
+1. **parser** (`src/parser.ts`) — regex-based recursive descent parser, produces AST
+2. **htmlRenderer** (`src/html.ts`) — produces HTML string from the AST
+
+AST node shapes live in `src/ast.ts`. Every node has a `type` field. Block nodes use `body` (for inline content) or `doc` (for nested blocks). Text content uses `txt`. AST is plain JSON-serializable data — no classes, functions, or circular references.
+
+Parser and renderer are both stateless and side-effect free.
+
+### Parser internals
 
 Parser uses two rule types:
 
@@ -20,11 +26,13 @@ Parser uses two rule types:
 
 Rules are matched in priority order; first match wins.
 
-Extension points: `transformBlock` and `transformInline` hooks allow AST modification.
+### Extension hooks
+
+`transformBlock` and `transformInline` hooks allow AST modification without forking the parser. See `EXTENDING.md` for usage and conventions.
 
 ## Syntax description
 
-See [LiteMarkup-syntax.lm](LiteMarkup-syntax.lm) for the syntax description.
+See [LiteMarkup-syntax.lm](docs/LiteMarkup-syntax.lm) for the syntax description.
 It should be kept in sync with this reference implementation.
 
 ## Regex development
@@ -38,11 +46,13 @@ Avoid backtracking — match as little as possible, but not too little.
 - **Snapshot tests** — verify output for various inputs
 - **Fuzzy tests** — random input to catch parser failures
 
-## How to do release
+Add a failing test first for parser/renderer changes. Re-run the suite after changes.
+
+## How to do a release
 
 - `npm run build`
 - `npm version patch|minor|major`
-- `npm publish` (updates version in `package.json` and creates a tag & commit)
+- `npm publish`
 - `git push --tags`
 - Make release in GitHub
 - Update demopage to use the new release

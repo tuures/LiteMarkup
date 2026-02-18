@@ -2,51 +2,55 @@
 // AST
 //
 
+export interface Extension {
+  type: 'x'
+}
+
 export interface Text {
-  name: ''
+  type: ''
   txt: string
 }
 
 export interface CodeSpan {
-  name: 'cs'
+  type: 'cs'
   txt: string
 }
 
 export interface HardLineBreak {
-  name: 'br'
+  type: 'br'
 }
 
 export interface Italic {
-  name: 'i'
+  type: 'i'
   body: Inline[]
 }
 
 export interface Bold {
-  name: 'b'
+  type: 'b'
   body: Inline[]
 }
 
 export interface Link {
-  name: 'a'
+  type: 'a'
   body: Inline[]
   href: string
 }
 
 export interface Image {
-  name: 'img'
+  type: 'img'
   alt: string
   src: string
 }
 
-export type Inline = Text | CodeSpan | HardLineBreak | Italic | Bold | Link | Image
+export type Inline = Text | CodeSpan | HardLineBreak | Italic | Bold | Link | Image | Extension
 
 export interface BlockQuote {
-  name: 'bq'
+  type: 'bq'
   doc: Block[]
 }
 
 export interface List {
-  name: 'l'
+  type: 'l'
   startNumber: number | undefined
   items: ListItem[]
 }
@@ -54,37 +58,37 @@ export interface List {
 export type ContainerBlock = BlockQuote | List
 
 export interface ListItem {
-  name: 'li'
+  type: 'li'
   doc: Block[]
 }
 
 export interface ThematicBreak {
-  name: 'hr'
+  type: 'hr'
 }
 
 export interface Heading {
-  name: 'h'
+  type: 'h'
   level: number
   body: Inline[]
 }
 
 export interface HtmlBlock {
-  name: 'htm'
+  type: 'htm'
   raw: string
 }
 
 export interface CodeBlock {
-  name: 'cb'
+  type: 'cb'
   infoText: string
   txt: string
 }
 
 export interface Paragraph {
-  name: 'p'
+  type: 'p'
   body: Inline[]
 }
 
-export type LeafBlock = ThematicBreak | Heading | HtmlBlock | CodeBlock | Paragraph
+export type LeafBlock = ThematicBreak | Heading | HtmlBlock | CodeBlock | Paragraph | Extension
 
 export type Block = ContainerBlock | LeafBlock
 

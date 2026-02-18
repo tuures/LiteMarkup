@@ -2,13 +2,13 @@ import { parser, htmlRenderer, convertToHtml } from './litemarkup'
 
 import * as Ast from './ast'
 
-const bq = (doc: Ast.Block) => ({ name: 'bq' as const, doc: [doc] })
-const li = (doc: Ast.Block[]) => ({ name: 'li' as const, doc })
-const list = (items: Ast.ListItem[]) => ({ name: 'l' as const, startNumber: undefined, items })
-const p1 = (i: Ast.Inline): Ast.Paragraph => ({ name: 'p' as const, body: [i] })
-const txt = (t: string) => ({ name: '' as const, txt: t })
-const ptxt = (t: string) => ({ name: 'p' as const, body: [txt(t)] })
-const atxt = (t: string, href: string) => ({ name: 'a' as const, body: [txt(t)], href })
+const bq = (doc: Ast.Block) => ({ type: 'bq' as const, doc: [doc] })
+const li = (doc: Ast.Block[]) => ({ type: 'li' as const, doc })
+const list = (items: Ast.ListItem[]) => ({ type: 'l' as const, startNumber: undefined, items })
+const p1 = (i: Ast.Inline): Ast.Paragraph => ({ type: 'p' as const, body: [i] })
+const txt = (t: string) => ({ type: '' as const, txt: t })
+const ptxt = (t: string) => ({ type: 'p' as const, body: [txt(t)] })
+const atxt = (t: string, href: string) => ({ type: 'a' as const, body: [txt(t)], href })
 
 test('basic', () => {
   const src = `
@@ -297,12 +297,12 @@ test('single character paragraphs', () => {
   const chars = ['#', '>', '-', '*', '_', '`', '[', '!', '\\', '\n', ' ']
 
   const ast1 = parser()(chars.join('\n\n'))
-  expect(ast1.map(n => n.name)).toEqual('p,bq,p,p,p,p,p,p,p'.split(','))
+  expect(ast1.map(n => n.type)).toEqual('p,bq,p,p,p,p,p,p,p'.split(','))
   expect(ast1).toMatchSnapshot()
 
   // with trailing spaces
   const ast2 = parser()(chars.map(c => c + ' ').join('\n\n'))
-  expect(ast2.map(n => n.name)).toEqual('h,bq,p,p,p,p,p,p,p'.split(','))
+  expect(ast2.map(n => n.type)).toEqual('h,bq,p,p,p,p,p,p,p'.split(','))
   expect(ast2).toMatchSnapshot()
 })
 
@@ -346,8 +346,8 @@ test('form feed and vertical tab', () => {
 test('heading with max level', () => {
   const src = '###### h6\n####### not h7'
   const ast = parser()(src)
-  expect(ast[0]).toMatchObject({ name: 'h', level: 6 })
-  expect(ast[1]).toMatchObject({ name: 'p' })
+  expect(ast[0]).toMatchObject({ type: 'h', level: 6 })
+  expect(ast[1]).toMatchObject({ type: 'p' })
 })
 
 test('list with marker character in content', () => {
@@ -386,13 +386,13 @@ test('nested lists', () => {
 test('list starting at max number', () => {
   const src = '999999999. max ordered list number'
   const ast = parser()(src)
-  expect(ast[0].name).toEqual('l')
+  expect(ast[0].type).toEqual('l')
 })
 
 test('list number overflow', () => {
   const src = '9999999999. exceeds 9 digits'
   const ast = parser()(src)
-  expect(ast[0].name).toEqual('p')
+  expect(ast[0].type).toEqual('p')
 })
 
 test('tabs vs spaces in indentation', () => {
@@ -424,7 +424,7 @@ test('simple blockquotes', () => {
 
 test('simple blockquote with just a space', () => {
   const src = '> \n\n'
-  expect(parser()(src)[0].name).toEqual('bq')
+  expect(parser()(src)[0].type).toEqual('bq')
 })
 
 test('blockquotes with leading and trailing carets', () => {
@@ -503,7 +503,7 @@ test('codeblock with info text having quotes', () => {
 something after
 `
   const ast = parser()(src)
-  expect(ast[0]).toMatchObject({ name: 'cb', infoText: 'foo""' })
+  expect(ast[0]).toMatchObject({ type: 'cb', infoText: 'foo""' })
   expect(ast).toMatchSnapshot()
 
   const html = htmlRenderer()(ast)
@@ -518,7 +518,7 @@ test('codeblock with info text having escaped characters', () => {
 something after
 `
   const ast = parser()(src)
-  expect(ast[0]).toMatchObject({ name: 'cb', infoText: '*foo**`\\' })
+  expect(ast[0]).toMatchObject({ type: 'cb', infoText: '*foo**`\\' })
 })
 
 test('codeblock without end, should parse until end of file', () => {
@@ -527,7 +527,7 @@ test('codeblock without end, should parse until end of file', () => {
 `
   const ast = parser()(src)
   expect(ast.length).toEqual(1)
-  expect(ast[0].name).toEqual('cb')
+  expect(ast[0].type).toEqual('cb')
   expect(ast).toMatchSnapshot()
 
   const html = htmlRenderer()(ast)
@@ -543,7 +543,7 @@ the double backticks will be considered part of the code block content, and the 
 `
   const ast = parser()(src)
   expect(ast.length).toEqual(1)
-  expect(ast[0].name).toEqual('cb')
+  expect(ast[0].type).toEqual('cb')
   expect((ast[0] as Ast.CodeBlock).txt.startsWith('``\n')).toBeTruthy()
   expect(ast).toMatchSnapshot()
 
@@ -557,7 +557,7 @@ test('codespan with missing backticks in the end should not parse as codespan', 
 `
   const ast = parser()(src)
   expect(ast.length).toEqual(1)
-  expect(ast[0].name).toEqual('p')
+  expect(ast[0].type).toEqual('p')
   expect(ast).toMatchSnapshot()
 
   const html = htmlRenderer()(ast)
@@ -581,8 +581,8 @@ test('codespan with three backticks in the beginning of a paragraph (not codeblo
 `
   const ast = parser()(src)
   expect(ast.length).toEqual(1)
-  expect(ast[0].name).toEqual('p')
-  expect((ast[0] as Ast.Paragraph).body[0].name).toEqual('cs')
+  expect(ast[0].type).toEqual('p')
+  expect((ast[0] as Ast.Paragraph).body[0].type).toEqual('cs')
   expect(ast).toMatchSnapshot()
 
   const html = htmlRenderer()(ast)
@@ -687,7 +687,7 @@ single char tag
 after
 `
   const ast = parser()(src)
-  expect(ast[0]).toMatchObject({ name: 'htm', raw: '<p>\nsingle char tag\n</p>' })
+  expect(ast[0]).toMatchObject({ type: 'htm', raw: '<p>\nsingle char tag\n</p>' })
 })
 
 test('html block with custom element and attributes', () => {
@@ -700,7 +700,7 @@ after
 `
   const ast = parser()(src)
   expect(ast[0]).toMatchObject({
-    name: 'htm',
+    type: 'htm',
     raw: '<my-custom attr="something" data-id="123">\ncustom element content\n</my-custom>',
   })
 })
@@ -782,7 +782,7 @@ test('image alt text escaping', () => {
   const ast = parser()(src)
   expect(ast[0]).toEqual(
     p1({
-      name: 'img',
+      type: 'img',
       alt: '[]``*',
       src: '1`2',
     }),
@@ -805,7 +805,7 @@ test('html entities in various contexts', () => {
 `
   const ast = parser()(src)
   expect(ast[0]).toEqual(ptxt('&script&'))
-  expect(ast[1]).toEqual(p1({ name: 'cs' as const, txt: '&amp;' }))
+  expect(ast[1]).toEqual(p1({ type: 'cs' as const, txt: '&amp;' }))
   expect(ast[2]).toEqual(p1(atxt('&quot;link&quot;', '/path?a=1&b=2&c=""')))
 
   const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
@@ -825,7 +825,7 @@ b _c_ d
 `
 
   const duplicate = (n: Ast.Block): Ast.Block[] => {
-    if (n.name === 'p' && n.body.length === 1 && n.body[0].name === '' && n.body[0].txt === 'a') {
+    if (n.type === 'p' && n.body.length === 1 && n.body[0].type === '' && n.body[0].txt === 'a') {
       return [n, n]
     } else {
       return [n]
@@ -833,8 +833,8 @@ b _c_ d
   }
 
   const convertItalicToBold = (n: Ast.Inline): Ast.Inline[] => {
-    if (n.name === 'i') {
-      return [{ ...n, name: 'b' }]
+    if (n.type === 'i') {
+      return [{ ...n, type: 'b' }]
     } else {
       return [n]
     }

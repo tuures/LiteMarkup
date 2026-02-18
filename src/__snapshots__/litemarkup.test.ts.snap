@@ -205,311 +205,311 @@ exports[`100 levels deep blockquote 1`] = `
                                                                                                                                                                                                                                                                                                                                                                                                                   {
                                                                                                                                                                                                                                                                                                                                                                                                                     "body": [
                                                                                                                                                                                                                                                                                                                                                                                                                       {
-                                                                                                                                                                                                                                                                                                                                                                                                                        "name": "",
                                                                                                                                                                                                                                                                                                                                                                                                                         "txt": "deep",
+                                                                                                                                                                                                                                                                                                                                                                                                                        "type": "",
                                                                                                                                                                                                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                                                                                                                                                                                                    "name": "p",
+                                                                                                                                                                                                                                                                                                                                                                                                                    "type": "p",
                                                                                                                                                                                                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                                                               },
                                                                                                                                                                                                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                                                           },
                                                                                                                                                                                                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                                               },
                                                                                                                                                                                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                                           },
                                                                                                                                                                                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                               },
                                                                                                                                                                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                           },
                                                                                                                                                                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                                                                                                                                                               },
                                                                                                                                                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                                                                                                                                                           },
                                                                                                                                                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                                                                                                                                               },
                                                                                                                                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                                                                                                                                           },
                                                                                                                                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                                                                                                                               },
                                                                                                                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                                                                                                                           },
                                                                                                                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                                                                                                               },
                                                                                                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                                                                                                           },
                                                                                                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                                                                                               },
                                                                                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                                                                                           },
                                                                                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                                                                               },
                                                                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                                                                           },
                                                                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                                                               },
                                                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                                                           },
                                                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                                               },
                                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                                           },
                                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                                       },
                                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                                   },
                                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                                               },
                                                                                                                                                                                                                             ],
-                                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                                           },
                                                                                                                                                                                                                         ],
-                                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                                       },
                                                                                                                                                                                                                     ],
-                                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                                   },
                                                                                                                                                                                                                 ],
-                                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                                               },
                                                                                                                                                                                                             ],
-                                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                                           },
                                                                                                                                                                                                         ],
-                                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                                       },
                                                                                                                                                                                                     ],
-                                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                                   },
                                                                                                                                                                                                 ],
-                                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                                "type": "bq",
                                                                                                                                                                                               },
                                                                                                                                                                                             ],
-                                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                                            "type": "bq",
                                                                                                                                                                                           },
                                                                                                                                                                                         ],
-                                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                                        "type": "bq",
                                                                                                                                                                                       },
                                                                                                                                                                                     ],
-                                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                                    "type": "bq",
                                                                                                                                                                                   },
                                                                                                                                                                                 ],
-                                                                                                                                                                                "name": "bq",
+                                                                                                                                                                                "type": "bq",
                                                                                                                                                                               },
                                                                                                                                                                             ],
-                                                                                                                                                                            "name": "bq",
+                                                                                                                                                                            "type": "bq",
                                                                                                                                                                           },
                                                                                                                                                                         ],
-                                                                                                                                                                        "name": "bq",
+                                                                                                                                                                        "type": "bq",
                                                                                                                                                                       },
                                                                                                                                                                     ],
-                                                                                                                                                                    "name": "bq",
+                                                                                                                                                                    "type": "bq",
                                                                                                                                                                   },
                                                                                                                                                                 ],
-                                                                                                                                                                "name": "bq",
+                                                                                                                                                                "type": "bq",
                                                                                                                                                               },
                                                                                                                                                             ],
-                                                                                                                                                            "name": "bq",
+                                                                                                                                                            "type": "bq",
                                                                                                                                                           },
                                                                                                                                                         ],
-                                                                                                                                                        "name": "bq",
+                                                                                                                                                        "type": "bq",
                                                                                                                                                       },
                                                                                                                                                     ],
-                                                                                                                                                    "name": "bq",
+                                                                                                                                                    "type": "bq",
                                                                                                                                                   },
                                                                                                                                                 ],
-                                                                                                                                                "name": "bq",
+                                                                                                                                                "type": "bq",
                                                                                                                                               },
                                                                                                                                             ],
-                                                                                                                                            "name": "bq",
+                                                                                                                                            "type": "bq",
                                                                                                                                           },
                                                                                                                                         ],
-                                                                                                                                        "name": "bq",
+                                                                                                                                        "type": "bq",
                                                                                                                                       },
                                                                                                                                     ],
-                                                                                                                                    "name": "bq",
+                                                                                                                                    "type": "bq",
                                                                                                                                   },
                                                                                                                                 ],
-                                                                                                                                "name": "bq",
+                                                                                                                                "type": "bq",
                                                                                                                               },
                                                                                                                             ],
-                                                                                                                            "name": "bq",
+                                                                                                                            "type": "bq",
                                                                                                                           },
                                                                                                                         ],
-                                                                                                                        "name": "bq",
+                                                                                                                        "type": "bq",
                                                                                                                       },
                                                                                                                     ],
-                                                                                                                    "name": "bq",
+                                                                                                                    "type": "bq",
                                                                                                                   },
                                                                                                                 ],
-                                                                                                                "name": "bq",
+                                                                                                                "type": "bq",
                                                                                                               },
                                                                                                             ],
-                                                                                                            "name": "bq",
+                                                                                                            "type": "bq",
                                                                                                           },
                                                                                                         ],
-                                                                                                        "name": "bq",
+                                                                                                        "type": "bq",
                                                                                                       },
                                                                                                     ],
-                                                                                                    "name": "bq",
+                                                                                                    "type": "bq",
                                                                                                   },
                                                                                                 ],
-                                                                                                "name": "bq",
+                                                                                                "type": "bq",
                                                                                               },
                                                                                             ],
-                                                                                            "name": "bq",
+                                                                                            "type": "bq",
                                                                                           },
                                                                                         ],
-                                                                                        "name": "bq",
+                                                                                        "type": "bq",
                                                                                       },
                                                                                     ],
-                                                                                    "name": "bq",
+                                                                                    "type": "bq",
                                                                                   },
                                                                                 ],
-                                                                                "name": "bq",
+                                                                                "type": "bq",
                                                                               },
                                                                             ],
-                                                                            "name": "bq",
+                                                                            "type": "bq",
                                                                           },
                                                                         ],
-                                                                        "name": "bq",
+                                                                        "type": "bq",
                                                                       },
                                                                     ],
-                                                                    "name": "bq",
+                                                                    "type": "bq",
                                                                   },
                                                                 ],
-                                                                "name": "bq",
+                                                                "type": "bq",
                                                               },
                                                             ],
-                                                            "name": "bq",
+                                                            "type": "bq",
                                                           },
                                                         ],
-                                                        "name": "bq",
+                                                        "type": "bq",
                                                       },
                                                     ],
-                                                    "name": "bq",
+                                                    "type": "bq",
                                                   },
                                                 ],
-                                                "name": "bq",
+                                                "type": "bq",
                                               },
                                             ],
-                                            "name": "bq",
+                                            "type": "bq",
                                           },
                                         ],
-                                        "name": "bq",
+                                        "type": "bq",
                                       },
                                     ],
-                                    "name": "bq",
+                                    "type": "bq",
                                   },
                                 ],
-                                "name": "bq",
+                                "type": "bq",
                               },
                             ],
-                            "name": "bq",
+                            "type": "bq",
                           },
                         ],
-                        "name": "bq",
+                        "type": "bq",
                       },
                     ],
-                    "name": "bq",
+                    "type": "bq",
                   },
                 ],
-                "name": "bq",
+                "type": "bq",
               },
             ],
-            "name": "bq",
+            "type": "bq",
           },
         ],
-        "name": "bq",
+        "type": "bq",
       },
     ],
-    "name": "bq",
+    "type": "bq",
   },
 ]
 `;
@@ -519,12 +519,12 @@ exports[`RTL and mixed directional text 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "مرحبا Hello עברית",
+        "type": "",
       },
     ],
     "level": 1,
-    "name": "h",
+    "type": "h",
   },
 ]
 `;
@@ -574,14 +574,14 @@ exports[`backslash at end of input 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "text",
+        "type": "",
       },
       {
-        "name": "br",
+        "type": "br",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -591,52 +591,52 @@ exports[`basic 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "foo😀",
+        "type": "",
       },
     ],
     "level": 3,
-    "name": "h",
+    "type": "h",
   },
   {
-    "name": "hr",
+    "type": "hr",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "this will be <b>just text not html</b> and&amp will be escaped in output;",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "text followed immediately by a",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "heading",
+        "type": "",
       },
     ],
     "level": 1,
-    "name": "h",
+    "type": "h",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "This is a list:",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "items": [
@@ -645,83 +645,83 @@ exports[`basic 1`] = `
           {
             "body": [
               {
-                "name": "",
                 "txt": "one",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "two",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "three",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "fourth item",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
           {
             "body": [
               {
-                "name": "",
                 "txt": "Another paragraph inside the fourth item",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "fifth",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
     ],
-    "name": "l",
     "startNumber": undefined,
+    "type": "l",
   },
   {
     "items": [
@@ -730,213 +730,212 @@ exports[`basic 1`] = `
           {
             "body": [
               {
-                "name": "",
                 "txt": "first",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "second",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "third",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
     ],
-    "name": "l",
     "startNumber": 1,
+    "type": "l",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "just a paragraph",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "infoText": "clara",
-    "name": "cb",
     "txt": "foo = bar
  bar = zot
  1 < 2
 ",
+    "type": "cb",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "immediate code:",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "infoText": "",
-    "name": "cb",
     "txt": "  foo = bar
 ",
+    "type": "cb",
   },
   {
     "infoText": "",
-    "name": "cb",
     "txt": "",
+    "type": "cb",
   },
   {
     "infoText": "justnewline">eviltext",
-    "name": "cb",
     "txt": "
 ",
+    "type": "cb",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "text not part of quote",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "doc": [
       {
         "body": [
           {
-            "name": "",
             "txt": "quote here",
+            "type": "",
           },
         ],
-        "name": "p",
+        "type": "p",
       },
     ],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "text and empty quote",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "doc": [],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "doc": [
       {
         "body": [
           {
-            "name": "",
             "txt": "heading in quote",
+            "type": "",
           },
         ],
         "level": 1,
-        "name": "h",
+        "type": "h",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "something <nottag>",
+            "type": "",
           },
         ],
-        "name": "p",
+        "type": "p",
       },
     ],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "Every line in a blockquote must be prefixed with a >, even the empty ones. This lines breaks the quote into two.",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "doc": [
       {
         "body": [
           {
-            "name": "",
             "txt": "another quote",
+            "type": "",
           },
         ],
-        "name": "p",
+        "type": "p",
       },
     ],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "doc": [
       {
         "body": [
           {
-            "name": "",
             "txt": "level 1",
+            "type": "",
           },
         ],
-        "name": "p",
+        "type": "p",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "level 2
 level 2",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "bq",
+        "type": "bq",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "level 1 continues",
+            "type": "",
           },
         ],
-        "name": "p",
+        "type": "p",
       },
     ],
-    "name": "bq",
+    "type": "bq",
   },
   {
-    "name": "htm",
     "raw": "<div>
 embedded raw html, not escaped
 and can contain multiple lines
@@ -945,484 +944,485 @@ both opening and closing tags must be on their own lines
 closing tag must be followed by empty line or end of file
 </div>
 </div>",
+    "type": "htm",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "abc ",
+        "type": "",
       },
       {
-        "name": "cs",
         "txt": "codespan content",
+        "type": "cs",
       },
       {
-        "name": "",
         "txt": " bar",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "cs",
         "txt": "codespan made with 2 backticks",
+        "type": "cs",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "cs",
         "txt": "codespan that has \` backtick inside",
+        "type": "cs",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "h\`i",
+        "type": "",
       },
       {
-        "name": "br",
+        "type": "br",
       },
       {
-        "name": "",
         "txt": "xfoobar",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "xyz\`xyz",
+        "type": "",
       },
       {
-        "name": "br",
+        "type": "br",
       },
       {
-        "name": "",
         "txt": "yfoobar",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "br in the end ",
+        "type": "",
       },
       {
-        "name": "br",
+        "type": "br",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "I'm bold",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "I'm italic",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "bold outside and ",
+            "type": "",
           },
           {
             "body": [
               {
-                "name": "",
                 "txt": "italic inside",
+                "type": "",
               },
             ],
-            "name": "i",
+            "type": "i",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "_not bold start",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "not bold ending_",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "aftert this comes a few paragraphs with just one character",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "a",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "#",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "_",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "aftert this comes a text content that is just one characters",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "a",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "bold",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "italic",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
-        "name": "",
         "txt": "s",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "!"#$%&'()*+,-./:;<=>?@[\\]^_\`{|}~",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "\\→\\A\\a\\ \\3\\φ\\«",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "*not emphasized*",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "emphasized star*",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "_italic underlines_",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "italic underline_and star*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "\\",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "emphasis",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "*not bold as codespan has priority",
+        "type": "",
       },
       {
-        "name": "cs",
         "txt": "*",
+        "type": "cs",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "this paragraph has a ",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "link to",
+            "type": "",
           },
         ],
         "href": "/thisurl",
-        "name": "a",
+        "type": "a",
       },
       {
-        "name": "",
         "txt": " and ",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "another link to",
+            "type": "",
           },
         ],
         "href": "/thisurl",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "not a link as url is missing []<> []()",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "not an image as url is missing ![]() ![]<>",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [],
         "href": "/link-without-body",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "[",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "foo]a",
+            "type": "",
           },
         ],
         "href": "ds\\)fd\\)\\\`",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "brackets [] and quotes "" inside link body",
+            "type": "",
           },
         ],
         "href": "url",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "alt": "image of a cat",
-        "name": "img",
         "src": "/ordidnthappen.jpg",
+        "type": "img",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "alt": "",
-        "name": "img",
         "src": "/without-alt.jpg",
+        "type": "img",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "alt": "another image of a "cat"[]",
-        "name": "img",
         "src": "/ordidnthappen.jpg",
+        "type": "img",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "link with ",
+            "type": "",
           },
           {
             "alt": "image of a cat",
-            "name": "img",
             "src": "/",
+            "type": "img",
           },
           {
-            "name": "",
             "txt": " inside link body",
+            "type": "",
           },
         ],
         "href": "url",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -1551,87 +1551,87 @@ exports[`blockquotes with leading and trailing carets 1`] = `
       {
         "body": [
           {
-            "name": "",
             "txt": "a
 b",
+            "type": "",
           },
         ],
-        "name": "p",
+        "type": "p",
       },
     ],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "doc": [
       {
         "body": [
           {
-            "name": "",
             "txt": "c
 d",
+            "type": "",
           },
         ],
-        "name": "p",
+        "type": "p",
       },
     ],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "not quoted",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "doc": [
       {
         "body": [
           {
-            "name": "",
             "txt": "d
 e",
+            "type": "",
           },
         ],
-        "name": "p",
+        "type": "p",
       },
     ],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "not quoted",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "doc": [
       {
         "body": [
           {
-            "name": "",
             "txt": "f
 g",
+            "type": "",
           },
         ],
-        "name": "p",
+        "type": "p",
       },
     ],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "end",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -1640,11 +1640,11 @@ exports[`codeblock with broken end, should parse until end of file 1`] = `
 [
   {
     "infoText": "foo",
-    "name": "cb",
     "txt": "\`\`
 
 the double backticks will be considered part of the code block content, and the block will end at the end of file
 ",
+    "type": "cb",
   },
 ]
 `;
@@ -1660,17 +1660,17 @@ exports[`codeblock with info text having quotes 1`] = `
 [
   {
     "infoText": "foo""",
-    "name": "cb",
     "txt": "",
+    "type": "cb",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "something after",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -1684,17 +1684,17 @@ exports[`codeblock without content 1`] = `
 [
   {
     "infoText": "foo",
-    "name": "cb",
     "txt": "",
+    "type": "cb",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "something after",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -1708,8 +1708,8 @@ exports[`codeblock without end, should parse until end of file 1`] = `
 [
   {
     "infoText": "foo",
-    "name": "cb",
     "txt": "",
+    "type": "cb",
   },
 ]
 `;
@@ -1721,11 +1721,11 @@ exports[`codespan cannot span multiple lines 1`] = `
   {
     "body": [
       {
-        "name": "cs",
         "txt": " ",
+        "type": "cs",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -1737,15 +1737,15 @@ exports[`codespan with extra backticks on the end should parse as codespan plus 
   {
     "body": [
       {
-        "name": "cs",
         "txt": "foo",
+        "type": "cs",
       },
       {
-        "name": "",
         "txt": "\`",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -1757,11 +1757,11 @@ exports[`codespan with missing backticks in the end should not parse as codespan
   {
     "body": [
       {
-        "name": "",
         "txt": "\`\`\`foo\`\`",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -1773,11 +1773,11 @@ exports[`codespan with three backticks in the beginning of a paragraph (not code
   {
     "body": [
       {
-        "name": "cs",
         "txt": "foo",
+        "type": "cs",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -1791,181 +1791,181 @@ exports[`complex link body 1`] = `
       {
         "body": [
           {
-            "name": "",
             "txt": "[]",
+            "type": "",
           },
           {
-            "name": "cs",
             "txt": "\\",
+            "type": "cs",
           },
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
         "href": "1\`2",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "[]",
+            "type": "",
           },
           {
-            "name": "cs",
             "txt": "![\\[\\]",
+            "type": "cs",
           },
           {
-            "name": "",
             "txt": "\`*](3)\`*",
+            "type": "",
           },
         ],
         "href": "4",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "![]",
+            "type": "",
           },
         ],
         "href": "/",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "![]x",
+            "type": "",
           },
         ],
         "href": "/",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "x![]",
+            "type": "",
           },
         ],
         "href": "/",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "![x]",
+            "type": "",
           },
         ],
         "href": "/",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "![]<x",
+            "type": "",
           },
         ],
         "href": "/",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "x![]>",
+            "type": "",
           },
         ],
         "href": "/",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "![x]<>",
+            "type": "",
           },
         ],
         "href": "/",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "![x]</>",
+            "type": "",
           },
         ],
         "href": "/",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "![x]</>",
+            "type": "",
           },
         ],
         "href": "/",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
@@ -1974,33 +1974,33 @@ exports[`complex link body 1`] = `
           {
             "body": [
               {
-                "name": "",
                 "txt": "bold",
+                "type": "",
               },
             ],
-            "name": "b",
+            "type": "b",
           },
         ],
         "href": "/",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "cs",
             "txt": "codespan",
+            "type": "cs",
           },
         ],
         "href": "/",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -2026,26 +2026,26 @@ exports[`emojis 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "🎉 Emoji heading 🎊",
+        "type": "",
       },
     ],
     "level": 1,
-    "name": "h",
+    "type": "h",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "bold 💪 text",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "items": [
@@ -2054,56 +2054,56 @@ exports[`emojis 1`] = `
           {
             "body": [
               {
-                "name": "",
                 "txt": "📌 list item",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "second 🔥",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
     ],
-    "name": "l",
     "startNumber": undefined,
+    "type": "l",
   },
   {
     "body": [
       {
-        "name": "cs",
         "txt": "code 💻 span",
+        "type": "cs",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "link 🔗",
+            "type": "",
           },
         ],
         "href": "https://example.com/🔥",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -2113,65 +2113,65 @@ exports[`empty elements everywhere 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "#",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "doc": [],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "-",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "**",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "__",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "infoText": "",
-    "name": "cb",
     "txt": "",
+    "type": "cb",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "[]()",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "![]()",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -2181,11 +2181,11 @@ exports[`empty paragraph in the end of the file 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "foo",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -2197,24 +2197,24 @@ exports[`extra asterisks doesn’t produce nested emphasis 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "****",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "a",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
-        "name": "",
         "txt": "****",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -2222,76 +2222,76 @@ exports[`extra asterisks doesn’t produce nested emphasis 1`] = `
 exports[`html blocks 1`] = `
 [
   {
-    "name": "htm",
     "raw": "<broken>
 this gets split due to the paragraph break after the inner closing tag
 <broken>
 </broken>",
+    "type": "htm",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "</broken>",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
-    "name": "htm",
     "raw": "<div>
   but this doesn't get split because the inner closing tag is indented
   <div>
   </div>
 
 </div>",
+    "type": "htm",
   },
   {
-    "name": "htm",
     "raw": "<broken>
 garbage in </broken> garbage out
 </broken>",
+    "type": "htm",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "this is not html but a paragraph with a link because the opening tag is not preceded by an empty line
 <url>
 ",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "link text",
+            "type": "",
           },
         ],
         "href": "/url",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "<url>
 ",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "this is also not html but link because closing tag is not on its own line",
+            "type": "",
           },
         ],
         "href": "/url",
-        "name": "a",
+        "type": "a",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -2329,20 +2329,20 @@ exports[`invalid codespans 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "a \`\`0doo",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "f \`\`foo\` 21",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -2361,60 +2361,60 @@ exports[`list with marker character in content 1`] = `
           {
             "body": [
               {
-                "name": "",
                 "txt": "foo - the first item",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "bar-second",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "baz- the third",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "bam -fourth",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
     ],
-    "name": "l",
     "startNumber": undefined,
+    "type": "l",
   },
 ]
 `;
@@ -2443,608 +2443,608 @@ exports[`many alternating formatting chars 1`] = `
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "a",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "_",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -3056,394 +3056,394 @@ exports[`markdown compatibility mode 1`] = `
       {
         "body": [
           {
-            "name": "",
             "txt": "I'm bold",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
-        "name": "",
         "txt": "
 ",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "I'm bold too",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "I'm italic",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
-        "name": "",
         "txt": "
 ",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "I'm italic too",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "these are supported:",
+        "type": "",
       },
     ],
     "level": 1,
-    "name": "h",
+    "type": "h",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "A bold outside and ",
+            "type": "",
           },
           {
             "body": [
               {
-                "name": "",
                 "txt": "italic inside",
+                "type": "",
               },
             ],
-            "name": "i",
+            "type": "i",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "B bold outside and ",
+            "type": "",
           },
           {
             "body": [
               {
-                "name": "",
                 "txt": "italic inside",
+                "type": "",
               },
             ],
-            "name": "i",
+            "type": "i",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "C italic outside and ",
+            "type": "",
           },
           {
             "body": [
               {
-                "name": "",
                 "txt": "bold inside",
+                "type": "",
               },
             ],
-            "name": "b",
+            "type": "b",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "D italic outside and ",
+            "type": "",
           },
           {
             "body": [
               {
-                "name": "",
                 "txt": "bold inside",
+                "type": "",
               },
             ],
-            "name": "b",
+            "type": "b",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "these nestings are not supported (only outer will be applied):",
+        "type": "",
       },
     ],
     "level": 1,
-    "name": "h",
+    "type": "h",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "E bold outside *but not italic inside",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
-        "name": "",
         "txt": "*",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "F bold outside _but not italic inside",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
-        "name": "",
         "txt": "_",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "G italic outside ",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "but not bold inside",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
-        "name": "",
         "txt": "__",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "H italic outside ",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "but not bold inside",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
-        "name": "",
         "txt": "**",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "_not italic",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "not italic_",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "a",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "bold",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "italic",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
       {
-        "name": "",
         "txt": "s",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "*not emphasized*",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "emphasized star*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "_italic underlines_",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
         "body": [
           {
-            "name": "",
             "txt": "italic underline_and star*",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "\\",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "emphasis after a literal backslash",
+            "type": "",
           },
         ],
-        "name": "i",
+        "type": "i",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "*just plain p before code",
+        "type": "",
       },
       {
-        "name": "cs",
         "txt": "*",
+        "type": "cs",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -3480,23 +3480,23 @@ exports[`mixed line endings 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "p1line1",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "p2line1
 
 p2s2
 p2s3",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -3507,21 +3507,21 @@ exports[`multiple images in series 1`] = `
     "body": [
       {
         "alt": "image of a cat",
-        "name": "img",
         "src": "/ordidnthappen.jpg",
+        "type": "img",
       },
       {
-        "name": "",
         "txt": " and
 second ",
+        "type": "",
       },
       {
         "alt": "image of a cat",
-        "name": "img",
         "src": "/ordidnthappen.jpg",
+        "type": "img",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -3540,11 +3540,11 @@ exports[`nested lists 1`] = `
           {
             "body": [
               {
-                "name": "",
                 "txt": "foo",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
           {
             "items": [
@@ -3553,61 +3553,61 @@ exports[`nested lists 1`] = `
                   {
                     "body": [
                       {
-                        "name": "",
                         "txt": "foo1",
+                        "type": "",
                       },
                     ],
-                    "name": "p",
+                    "type": "p",
                   },
                 ],
-                "name": "li",
+                "type": "li",
               },
               {
                 "doc": [
                   {
                     "body": [
                       {
-                        "name": "",
                         "txt": "foo2",
+                        "type": "",
                       },
                     ],
-                    "name": "p",
+                    "type": "p",
                   },
                   {
                     "doc": [
                       {
                         "body": [
                           {
-                            "name": "",
                             "txt": "foo2
 foo2",
+                            "type": "",
                           },
                         ],
-                        "name": "p",
+                        "type": "p",
                       },
                     ],
-                    "name": "bq",
+                    "type": "bq",
                   },
                 ],
-                "name": "li",
+                "type": "li",
               },
             ],
-            "name": "l",
             "startNumber": undefined,
+            "type": "l",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
       {
         "doc": [
           {
             "body": [
               {
-                "name": "",
                 "txt": "bar",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
           {
             "items": [
@@ -3616,39 +3616,39 @@ foo2",
                   {
                     "body": [
                       {
-                        "name": "",
                         "txt": "bar1",
+                        "type": "",
                       },
                     ],
-                    "name": "p",
+                    "type": "p",
                   },
                 ],
-                "name": "li",
+                "type": "li",
               },
               {
                 "doc": [
                   {
                     "body": [
                       {
-                        "name": "",
                         "txt": "bar2",
+                        "type": "",
                       },
                     ],
-                    "name": "p",
+                    "type": "p",
                   },
                 ],
-                "name": "li",
+                "type": "li",
               },
             ],
-            "name": "l",
             "startNumber": undefined,
+            "type": "l",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
     ],
-    "name": "l",
     "startNumber": undefined,
+    "type": "l",
   },
   {
     "items": [
@@ -3657,18 +3657,18 @@ foo2",
           {
             "body": [
               {
-                "name": "",
                 "txt": "another list",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
     ],
-    "name": "l",
     "startNumber": undefined,
+    "type": "l",
   },
 ]
 `;
@@ -3714,15 +3714,15 @@ exports[`only carriage returns 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "p1s1
 p1s2
 
 
 p1s3",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -3734,28 +3734,28 @@ exports[`simple blockquotes 1`] = `
       {
         "body": [
           {
-            "name": "",
             "txt": "a",
+            "type": "",
           },
         ],
-        "name": "p",
+        "type": "p",
       },
     ],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "doc": [
       {
         "body": [
           {
-            "name": "",
             "txt": "b",
+            "type": "",
           },
         ],
-        "name": "p",
+        "type": "p",
       },
     ],
-    "name": "bq",
+    "type": "bq",
   },
 ]
 `;
@@ -3765,77 +3765,77 @@ exports[`single character paragraphs 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "#",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "doc": [],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "-",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "*",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "_",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "\`",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "[",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "!",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "br",
+        "type": "br",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -3845,74 +3845,74 @@ exports[`single character paragraphs 2`] = `
   {
     "body": [],
     "level": 1,
-    "name": "h",
+    "type": "h",
   },
   {
     "doc": [],
-    "name": "bq",
+    "type": "bq",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "- ",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "* ",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "_ ",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "\` ",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "[ ",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "! ",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "\\ ",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -3922,121 +3922,121 @@ exports[`spaces inside codespans 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "a ",
+        "type": "",
       },
       {
-        "name": "cs",
         "txt": " ",
+        "type": "cs",
       },
       {
-        "name": "",
         "txt": "1 space is preserved alone",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "b ",
+        "type": "",
       },
       {
-        "name": "cs",
         "txt": "  ",
+        "type": "cs",
       },
       {
-        "name": "",
         "txt": "2 spaces is preserved alone",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "c ",
+        "type": "",
       },
       {
-        "name": "cs",
         "txt": "   ",
+        "type": "cs",
       },
       {
-        "name": "",
         "txt": "3 spaces is preserved alone",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "e ",
+        "type": "",
       },
       {
-        "name": "cs",
         "txt": "y",
+        "type": "cs",
       },
       {
-        "name": "",
         "txt": " first and last spaces are trimmed away when there's more than just spaces",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "f ",
+        "type": "",
       },
       {
-        "name": "cs",
         "txt": "z ",
+        "type": "cs",
       },
       {
-        "name": "",
         "txt": " first and last spaces are trimmed away, but the one after z is preserved",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "g ",
+        "type": "",
       },
       {
-        "name": "cs",
         "txt": "\`",
+        "type": "cs",
       },
       {
-        "name": "",
         "txt": " codespan that results in a single backtick (first and last space trmmed away)",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "h ",
+        "type": "",
       },
       {
-        "name": "cs",
         "txt": "\` x \`",
+        "type": "cs",
       },
       {
-        "name": "",
         "txt": "3 codespan that results in backtick, space, x, space, and backtick",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;
@@ -4060,27 +4060,27 @@ exports[`tabs vs spaces in indentation 1`] = `
           {
             "body": [
               {
-                "name": "",
                 "txt": "item",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
     ],
-    "name": "l",
     "startNumber": undefined,
+    "type": "l",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "	- tab indented",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "items": [
@@ -4089,18 +4089,18 @@ exports[`tabs vs spaces in indentation 1`] = `
           {
             "body": [
               {
-                "name": "",
                 "txt": "space indented",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
     ],
-    "name": "l",
     "startNumber": undefined,
+    "type": "l",
   },
 ]
 `;
@@ -4110,21 +4110,21 @@ exports[`trailing spaces everywhere 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "heading   ",
+        "type": "",
       },
     ],
     "level": 1,
-    "name": "h",
+    "type": "h",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "paragraph   ",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "items": [
@@ -4133,18 +4133,18 @@ exports[`trailing spaces everywhere 1`] = `
           {
             "body": [
               {
-                "name": "",
                 "txt": "list   ",
+                "type": "",
               },
             ],
-            "name": "p",
+            "type": "p",
           },
         ],
-        "name": "li",
+        "type": "li",
       },
     ],
-    "name": "l",
     "startNumber": undefined,
+    "type": "l",
   },
 ]
 `;
@@ -4154,42 +4154,42 @@ exports[`transform 1`] = `
   {
     "body": [
       {
-        "name": "",
         "txt": "a",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "a",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
   {
     "body": [
       {
-        "name": "",
         "txt": "b ",
+        "type": "",
       },
       {
         "body": [
           {
-            "name": "",
             "txt": "c",
+            "type": "",
           },
         ],
-        "name": "b",
+        "type": "b",
       },
       {
-        "name": "",
         "txt": " d",
+        "type": "",
       },
     ],
-    "name": "p",
+    "type": "p",
   },
 ]
 `;

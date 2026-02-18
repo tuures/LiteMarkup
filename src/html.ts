@@ -19,7 +19,7 @@ export function htmlRenderer({
     const i = indent(indentLevel)
 
     const lines = blocks.map(n => {
-      switch (n.name) {
+      switch (n.type) {
         case 'bq':
           return el('blockquote', `\n${renderBlock(n.doc, indentLevel + 1)}\n${i}`)
         case 'l': {
@@ -48,7 +48,7 @@ export function htmlRenderer({
         case 'p':
           return el('p', renderInline(n.body))
         default:
-          throw new Error('Unexpected AST node: ' + (n as any).name)
+          throw new Error('Unexpected AST node: ' + (n as any).type)
       }
     })
 
@@ -66,7 +66,7 @@ export function htmlRenderer({
   function renderInline(inlines: Ast.Inline[]): string {
     return inlines
       .map(n => {
-        switch (n.name) {
+        switch (n.type) {
           case '':
             return esc(n.txt)
           case 'cs':
@@ -89,7 +89,7 @@ export function htmlRenderer({
                 ])
               : esc('[' + n.alt + ']<' + n.src + '>')
           default:
-            throw new Error('Unexpected AST node: ' + (n as any).name)
+            throw new Error('Unexpected AST node: ' + (n as any).type)
         }
       })
       .join('')

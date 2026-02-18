@@ -49,20 +49,20 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
       // need to match \n in the end to make sure the line has no other characters
       // than the bar characters and whitespace
       re: /^ {0,3}(?:[-_\*][ \t]*){3,}(?:$|\n)/,
-      mkNode: r => ({ name: 'hr' }),
+      mkNode: r => ({ type: 'hr' }),
     },
     {
       re: /^ {0,3}(#{1,6})[ \t]+([^\n]*)/,
-      mkNode: r => ({ name: 'h', level: r[1].length, body: parseInline(r[2]) }),
+      mkNode: r => ({ type: 'h', level: r[1].length, body: parseInline(r[2]) }),
     },
     {
       re: /^(<([a-z][a-z0-9-]*)(?: [^>]+)?>[ \t]*\n(?:[^](?!\n<\/\2>(?:[ \t]*\n){2}))*[^]\n<\/\2>)[ \t]*(?:$|\n(?:$|[ \t]*\n))/,
-      mkNode: r => ({ name: 'htm', raw: r[1] }),
+      mkNode: r => ({ type: 'htm', raw: r[1] }),
     },
     {
       re: /^( {0,3})(`{3,})((?:[^\\\n`]|\\[^])*)\n(?:(?:\1\2|(?:(\n|(?:(?:[^](?!\n\1\2))*[^]\n))\1\2))[ \t]*(?:$|\n)|([^]*))/,
       mkNode: r => ({
-        name: 'cb',
+        type: 'cb',
         infoText: unescape(trim(r[3])),
         txt: (r[4] || r[5] || '').replace(R(`^${r[1]}`), '').replace(R(`\\n${r[1]}`, 'g'), '\n'),
       }),
@@ -74,7 +74,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
     mkNode: r => {
       const content = r[0].replace(/(^|\n) {0,3}> ?/g, '\n')
 
-      return { name: 'bq', doc: parseBlock(content) }
+      return { type: 'bq', doc: parseBlock(content) }
     },
   }
 
@@ -91,10 +91,10 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
       const items: Ast.ListItem[] = afterInitialMarkerIndent.split(markerIndent).map(itemSlice => {
         const itemContent = itemSlice.replace(R(`\\n {${pr[1].length}}`, 'g'), '\n')
 
-        return { name: 'li', doc: parseBlock(itemContent) }
+        return { type: 'li', doc: parseBlock(itemContent) }
       })
 
-      return { name: 'l', startNumber: parseInt(pr[3], 10) || undefined, items }
+      return { type: 'l', startNumber: parseInt(pr[3], 10) || undefined, items }
     },
   }
 
@@ -102,7 +102,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
 
   const paragraphRule: SimpleRule<Ast.LeafBlock> = {
     re: /^([^](?!\n( {0,3}(#{1,6}[ \t]|`{3,}[^\n`]*\n|>|([-+*]|\d{1,9}[).]) {1,3}[^\n])|[ \t]*($|\n))))*[^]/,
-    mkNode: r => ({ name: 'p', body: parseInline(r[0]) }),
+    mkNode: r => ({ type: 'p', body: parseInline(r[0]) }),
   }
 
   const blockRules: Rule<Ast.Block>[] = [
@@ -115,14 +115,14 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
     {
       re: /^_((?:[^\\_`]|\\[^])+)_/,
       mkNode: r => ({
-        name: 'i',
+        type: 'i',
         body: parseInline(r[1]),
       }),
     },
     {
       re: /^\*((?:[^\\*`]|\\[^])+)\*/,
       mkNode: r => ({
-        name: 'b',
+        type: 'b',
         body: parseInline(r[1]),
       }),
     },
@@ -132,14 +132,14 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
     {
       re: /^([_*])((?:(?!\1)[^\\`]|\\[^])+)\1/,
       mkNode: r => ({
-        name: 'i',
+        type: 'i',
         body: parseInline(r[2]),
       }),
     },
     {
       re: /^([_*]{2})((?:(?!\1)[^\\`]|\\[^])+)\1/,
       mkNode: r => ({
-        name: 'b',
+        type: 'b',
         body: parseInline(r[2]),
       }),
     },
@@ -149,7 +149,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
     {
       re: /^(?=(`+))\1(([^](?!\1))*[^])?(\1)/,
       mkNode: r => ({
-        name: 'cs',
+        type: 'cs',
         txt: ((s: string) => {
           // so that you can start codespan content with a backtick:
           // `` ` `` will render just the backtick without surrounding space
@@ -162,13 +162,13 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
     {
       re: /^\\(?:\n|$)/,
       mkNode: r => ({
-        name: 'br',
+        type: 'br',
       }),
     },
     {
       re: R(`^${escapedCharacterPattern.source}`),
       mkNode: r => ({
-        name: '',
+        type: '',
         txt: r[1],
       }),
     },
@@ -196,7 +196,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
       // In other words any brackets in link body not part of image tag must be escaped.
       re: /^\[((?:[^\\\[\]]|\\[^])*(?:!\[(?:[^\\\[\]]|\\[^])*\](?:[^\\\[\]]|\\[^])*)*)\](?:<((?:[^\\>]|\\[^])+)>|\(((?:[^\\\)]|\\[^])+)\))/,
       mkNode: r => ({
-        name: 'a',
+        type: 'a',
         body: parseInline(r[1]),
         href: r[2] || r[3],
       }),
@@ -208,7 +208,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
       // a link.)
       re: /^!\[((?:[^\\\[\]]|\\[^])*)\](?:<((?:[^\\>]|\\[^])+)>|\(((?:[^\\\)]|\\[^])+)\))/,
       mkNode: r => ({
-        name: 'img',
+        type: 'img',
         alt: unescape(r[1]),
         src: r[2] || r[3],
       }),
@@ -217,7 +217,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
       // TODO explain
       re: /^(?=(`*))\1([^](?![`\\_*\[!]))*(?:[^]|$)/,
       mkNode: r => ({
-        name: '',
+        type: '',
         txt: r[0],
       }),
     },
@@ -270,7 +270,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
 
     for (let n of inlines) {
       const lastNode = merged[merged.length - 1]
-      if (n.name === '' && lastNode?.name === '') {
+      if (n.type === '' && lastNode?.type === '') {
         lastNode.txt += n.txt
       } else {
         merged.push(n)

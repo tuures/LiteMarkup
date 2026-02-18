@@ -39,10 +39,10 @@ const parse = parser(/* options */)
 
 // Parse markup to produce an AST
 const ast = parse('# Hello *world*!')
-// → [{ name: 'h', level: 1, body: [
-//      { name: '', txt: 'Hello ' },
-//      { name: 'b', body: [{ name: '', txt: 'world' }] },
-//      { name: '', txt: '!' }
+// → [{ type: 'h', level: 1, body: [
+//      { type: '', txt: 'Hello ' },
+//      { type: 'b', body: [{ type: '', txt: 'world' }] },
+//      { type: '', txt: '!' }
 //    ]}]
 
 // Produce output, for example with the built-in HTML rendering
@@ -148,7 +148,7 @@ import type { Block, Inline } from 'litemarkup'
 // Example 1: Convert all headings to level 2
 const parse = parser({
   transformBlock: (node: Block): Block[] => {
-    if (node.name === 'h') {
+    if (node.type === 'h') {
       return [{ ...node, level: 2 }]
     }
     return [node]
@@ -158,15 +158,15 @@ const parse = parser({
 // Example 2: Auto-link URLs in text
 const parseWithAutoLinks = parser({
   transformInline: (node: Inline): Inline[] => {
-    if (node.name === '' && node.txt.includes('http')) {
+    if (node.type === '' && node.txt.includes('http')) {
       const match = node.txt.match(/(https?:\/\/[^\s]+)/)
       if (match) {
         const url = match[1]
         const idx = node.txt.indexOf(url)
         return [
-          { name: '', txt: node.txt.slice(0, idx) },
-          { name: 'a', href: url, body: [{ name: '', txt: url }] },
-          { name: '', txt: node.txt.slice(idx + url.length) },
+          { type: '', txt: node.txt.slice(0, idx) },
+          { type: 'a', href: url, body: [{ type: '', txt: url }] },
+          { type: '', txt: node.txt.slice(idx + url.length) },
         ]
       }
     }
@@ -176,7 +176,7 @@ const parseWithAutoLinks = parser({
 
 // Example 3: Remove a node by returning empty array
 const parseNoImages = parser({
-  transformInline: (node: Inline): Inline[] => (node.name === 'img' ? [] : [node]),
+  transformInline: (node: Inline): Inline[] => (node.type === 'img' ? [] : [node]),
 })
 ```
 
@@ -193,18 +193,18 @@ const isSafeUrl = (url: string) => /^https?:\/\//.test(url)
 const parse = parser({
   transformBlock: (node: Block): Block[] => {
     // Drop HTML blocks
-    if (node.name === 'htm') {
+    if (node.type === 'htm') {
       return []
     }
     return [node]
   },
   transformInline: (node: Inline): Inline[] => {
     // Remove links with unsafe URLs, keep the text
-    if (node.name === 'a' && !isSafeUrl(node.href)) {
+    if (node.type === 'a' && !isSafeUrl(node.href)) {
       return node.body
     }
     // Remove images with unsafe URLs entirely
-    if (node.name === 'img' && !isSafeUrl(node.src)) {
+    if (node.type === 'img' && !isSafeUrl(node.src)) {
       return []
     }
     return [node]
@@ -233,7 +233,7 @@ const ast = parse('Hello *world*!')
 
 // e.g. create a custom render that outputs React elements
 function renderInline(node: Inline) {
-  switch (node.name) {
+  switch (node.type) {
     case '':
       return node.txt
     case 'a':
@@ -243,7 +243,7 @@ function renderInline(node: Inline) {
 }
 
 function renderBlock(node: Block) {
-  switch (node.name) {
+  switch (node.type) {
     case 'p':
       return <p>{node.body.map(renderInline)}</p>
     case 'h':
@@ -268,20 +268,20 @@ const parse = parser()
 const ast = parse('# Hello *world*!')
 
 function renderInline(node: Inline): (TextRun | ExternalHyperlink)[] {
-  switch (node.name) {
+  switch (node.type) {
     case '':
       return [new TextRun(node.txt)]
     case 'b':
       return [
         new TextRun({
-          text: node.body.map(n => (n.name === '' ? n.txt : '')).join(''),
+          text: node.body.map(n => (n.type === '' ? n.txt : '')).join(''),
           bold: true,
         }),
       ]
     case 'i':
       return [
         new TextRun({
-          text: node.body.map(n => (n.name === '' ? n.txt : '')).join(''),
+          text: node.body.map(n => (n.type === '' ? n.txt : '')).join(''),
           italics: true,
         }),
       ]
@@ -293,7 +293,7 @@ function renderInline(node: Inline): (TextRun | ExternalHyperlink)[] {
 }
 
 function renderBlock(node: Block): Paragraph {
-  switch (node.name) {
+  switch (node.type) {
     case 'p':
       return new Paragraph({ children: node.body.flatMap(renderInline) })
     case 'h':
@@ -311,6 +311,10 @@ Packer.toBuffer(doc).then(buffer => {
   writeFileSync('output.docx', buffer)
 })
 ```
+
+### Extending LiteMarkup
+
+LiteMarkup is designed to be forked and extended. The **[Extension Cookbook](./EXTENDING.md)** has full examples for some common features people might want to add.
 
 ---
 
@@ -398,15 +402,9 @@ echo "[click](http://example.com)" | npx litemarkup --allow-unsafe-html
 
 ## Contributing
 
-Bugfixes and small enhancements are welcome! This project intentionally stays minimal — if you need more features, consider forking or using [custom AST transformations](#transforming-ast-on-the-fly) to extend functionality outside the core parser.
+Bugfixes and small enhancements are welcome! This project intentionally stays minimal — if you need more features, use [custom AST transformations](#transforming-ast-on-the-fly) and/or a custom renderer to extend functionality outside the core parser. See the [Extension Cookbook](./EXTENDING.md) for examples.
 
-```bash
-git clone https://github.com/tuures/LiteMarkup.git
-cd LiteMarkup
-npm install
-npm test
-npm run build
-```
+For development setup and guidelines, see [DEV-README.md](./DEV-README.md).
 
 ---
 
