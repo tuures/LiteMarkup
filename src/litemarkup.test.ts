@@ -198,6 +198,8 @@ _not italic
 
 not italic_
 
+__underscore before italic_
+
 a**bold**
 
 _italic_s
@@ -551,13 +553,14 @@ the double backticks will be considered part of the code block content, and the 
   expect(html).toMatchSnapshot()
 })
 
-test('codespan with missing backticks in the end should not parse as codespan', () => {
+test('codespan with extra backticks before should parse correctly', () => {
   const src = `
 \`\`\`foo\`\`
 `
   const ast = parser()(src)
   expect(ast.length).toEqual(1)
   expect(ast[0].type).toEqual('p')
+  expect((ast[0] as Ast.Paragraph).body.map(n => n.type)).toEqual(['', 'cs'])
   expect(ast).toMatchSnapshot()
 
   const html = htmlRenderer()(ast)

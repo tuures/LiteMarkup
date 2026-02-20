@@ -42,25 +42,28 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
 
   const priorityLeafBlockRules: SimpleRule<Ast.LeafBlock>[] = [
     {
+      // Ignore any extra blank lines
       re: /^(?:[ \t]*(?:$|\n))+/,
-      mkNode: r => undefined,
+      mkNode: () => undefined,
     },
     {
       // need to match \n in the end to make sure the line has no other characters
       // than the bar characters and whitespace
       re: /^ {0,3}(?:[-_\*][ \t]*){3,}(?:$|\n)/,
-      mkNode: r => ({ type: 'hr' }),
+      mkNode: () => ({ type: 'hr' }),
     },
     {
       re: /^ {0,3}(#{1,6})[ \t]+([^\n]*)/,
       mkNode: r => ({ type: 'h', level: r[1].length, body: parseInline(r[2]) }),
     },
     {
-      re: /^(<([a-z][a-z0-9-]*)(?: [^>]+)?>[ \t]*\n(?:[^](?!\n<\/\2>(?:[ \t]*\n){2}))*[^]\n<\/\2>)[ \t]*(?:$|\n(?:$|[ \t]*\n))/,
+      // TODO: explain
+      re: /^(<([a-z][a-z0-9-]*)(?: [^>]+)?>[ \t]*\n(?:.(?!\n<\/\2>(?:[ \t]*\n){2}))*.\n<\/\2>)[ \t]*(?:$|\n(?:$|[ \t]*\n))/s,
       mkNode: r => ({ type: 'htm', raw: r[1] }),
     },
     {
-      re: /^( {0,3})(`{3,})((?:[^\\\n`]|\\[^])*)\n(?:(?:\1\2|(?:(\n|(?:(?:[^](?!\n\1\2))*[^]\n))\1\2))[ \t]*(?:$|\n)|([^]*))/,
+      // TODO: explain
+      re: /^( {0,3})(`{3,})((?:[^\\\n`]|\\.)*)\n(?:(?:\1\2|(?:(\n|(?:(?:.(?!\n\1\2))*.\n))\1\2))[ \t]*(?:$|\n)|(.*))/s,
       mkNode: r => ({
         type: 'cb',
         infoText: unescape(trim(r[3])),
@@ -101,7 +104,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
   const containerBlockRules: Rule<Ast.ContainerBlock>[] = [blockQuoteRule, listRule]
 
   const paragraphRule: SimpleRule<Ast.LeafBlock> = {
-    re: /^([^](?!\n( {0,3}(#{1,6}[ \t]|`{3,}[^\n`]*\n|>|([-+*]|\d{1,9}[).]) {1,3}[^\n])|[ \t]*($|\n))))*[^]/,
+    re: /^(.(?!\n( {0,3}(#{1,6}[ \t]|`{3,}[^\n`]*\n|>|([-+*]|\d{1,9}[).]) {1,3}[^\n])|[ \t]*($|\n))))*./s,
     mkNode: r => ({ type: 'p', body: parseInline(r[0]) }),
   }
 
@@ -112,15 +115,33 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
   ]
 
   const litemarkupIb: SimpleRule<Ast.Inline>[] = [
+    /*
+     * Emphasis matchers for LiteMarkup mode that only support *bold* and _italic_ with single markers.
+     *
+     * Pattern breakdown:
+     *
+     * _
+     *
+     *     First we match the opening marker which can be either an asterisk for bold or an underscore for italic.
+     *
+     * ((?:[^\\_`]|\\.)+)
+     *
+     *     Then we match the content of the emphasis. The left side of the alternation matches any character except
+     *     backslash, closing marker or a backtick, and the right side matches any character escaped with a backslash.
+     *
+     * _
+     *
+     *     Finally we match the corresponding closing marker.
+     */
     {
-      re: /^_((?:[^\\_`]|\\[^])+)_/,
+      re: /^_((?:[^\\_`]|\\.)+)_/s,
       mkNode: r => ({
         type: 'i',
         body: parseInline(r[1]),
       }),
     },
     {
-      re: /^\*((?:[^\\*`]|\\[^])+)\*/,
+      re: /^\*((?:[^\\*`]|\\.)+)\*/s,
       mkNode: r => ({
         type: 'b',
         body: parseInline(r[1]),
@@ -130,14 +151,14 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
 
   const markdownIb: SimpleRule<Ast.Inline>[] = [
     {
-      re: /^([_*])((?:(?!\1)[^\\`]|\\[^])+)\1/,
+      re: /^([_*])((?:(?!\1)[^\\`]|\\.)+)\1/s,
       mkNode: r => ({
         type: 'i',
         body: parseInline(r[2]),
       }),
     },
     {
-      re: /^([_*]{2})((?:(?!\1)[^\\`]|\\[^])+)\1/,
+      re: /^([_*]{2})((?:(?!\1)[^\\`]|\\.)+)\1/s,
       mkNode: r => ({
         type: 'b',
         body: parseInline(r[2]),
@@ -147,11 +168,45 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
 
   const inlineRules: SimpleRule<Ast.Inline>[] = [
     {
-      re: /^(?=(`+))\1(([^](?!\1))*[^])?(\1)/,
+      /*
+       * Code span matcher that supports backticks in code span content by allowing the opening and closing backtick
+       * sequences to be of any length as long as they match each other.
+       *
+       * Pattern breakdown:
+       *
+       * (?=(`+))\1
+       *
+       *     First part of the regex captures the opening backticks so that we can match the same number of backticks in
+       *     the closing sequence. This allows us to support code spans that contain backticks by simply using more
+       *     backticks to wrap the code span.
+       *
+       *     The positive lookahead is used instead of a simple (`+) to prevent backtracking in the opening sequence.
+       *     In case of an input such as ``a` the naive (`+) would first match the two backticks and then fail to find
+       *     the closing sequence, thus backtracking to match just the first backtick. This would then cause the second
+       *     backtick to be consumed as part of the code span content.
+       *
+       *     The lookahead ensures that the entire code span pattern fails immediately when a matching closing sequence
+       *     is not found. The parser then proceeds to use the text node matcher to consume the first backtick as a
+       *     normal character and during the next parser iteration this pattern can successfully match the code span
+       *     with a single backtick as the opening and closing sequence.
+       *
+       * ((?:.(?!\1))*.)
+       *
+       *     The second part of the regex captures the content of the code span. The core of this part is the
+       *     negative lookahead that checks that we don't have the closing backtick sequence ahead. Because the first
+       *     dot does not capture the last character before the closing backticks, we need to add an extra dot at the
+       *     end to make sure we capture all content of the code span.
+       *
+       * \1
+       *    Finally we match the closing backtick sequence by referring to the first capturing group. This guarantees
+       *    that the number of backticks in the closing sequence matches the number of backticks in the opening
+       *    sequence.
+       */
+      re: /^(?=(`+))\1((?:.(?!\1))*.)\1/s,
       mkNode: r => ({
         type: 'cs',
         txt: ((s: string) => {
-          // so that you can start codespan content with a backtick:
+          // We trim away first and last space so that you can start codespan content with a backtick:
           // `` ` `` will render just the backtick without surrounding space
           const trimSpaces = s.length >= 3 && s[0] == ' ' && s[1] !== ' ' && s[s.length - 1] == ' '
 
@@ -174,27 +229,53 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
     },
     ...(markdownMode ? markdownIb : litemarkupIb),
     {
-      // The first actual part of the regex tries to parse the link body until the closing bracket.
-      // This part consists of three sub-parts that all use the same core pattern which is the alternation between
-      // [^\\\[\]`] and \\[^] The second part of the alteration parses anything escaped with a backslash verbatim.
-      // This core pattern alone does not accept opening brackets (nested brackets). The core pattern is first
-      // used to parse any basic content of the link body. This is the first sub-part of the body link body parsing.
-      // However, if we find a exclamation mark followed by an opening bracket, we know that we have an image tag, and
-      // the the second sub-part which starts with the exclamation sign matches. This second sub-part tries to parse
-      // the body further until matching inner closing bracket is found.
-      // After that we have a third sub-part to parse any remainder of the body until the actual closing bracket.
-      // This way we can support images within links.
-      // In this part we don't care if the image tag is otherwise properly formed, we are simply trying to match the
-      // brackets so that the entire link body can per parsed.
-      // After the body has been parsed the second part of the regex matches the link url which can be either
-      // in angle brackets or parentheses. Hence the two alternatives at the end of the regex.
-      // This second part should be identical to the one used in the image regex below, as the syntax for the link url
-      // is the same for both links and images.
-      // It's notable that while the url part allows for anything except closing angle bracket or parentheses, (even
-      // an opening angle bracket or parenthesis), the link body parsing is more strict and does not allow opening
-      // brackets unless balanced with a closing bracket after exclamation mark.
-      // In other words any brackets in link body not part of image tag must be escaped.
-      re: /^\[((?:[^\\\[\]]|\\[^])*(?:!\[(?:[^\\\[\]]|\\[^])*\](?:[^\\\[\]]|\\[^])*)*)\](?:<((?:[^\\>]|\\[^])+)>|\(((?:[^\\\)]|\\[^])+)\))/,
+      /*
+       * Link node matcher that supports nested brackets in the link body for image tags and two different syntaxes for
+       * the link url (angle brackets or parentheses).
+       *
+       * Pattern breakdown:
+       *
+       * \[((?:[^\\\[\]]|\\.)*(?:!\[(?:[^\\\[\]]|\\.)*\](?:[^\\\[\]]|\\.)*)*)\]
+       *
+       *     The first section of the regex tries to parse the link body until the closing bracket.
+       *
+       *     The overall structure of this section is \[(A*(?:!\[A*\]A*)*)\] where A is the alteration
+       *     (?:[^\\\[\]]|\\.). The first part of the alteration parses any basic content of the link body
+       *     and the second part parses anything escaped with a backslash verbatim. This core pattern alone
+       *     does not accept nested brackets (nested brackets).
+       *
+       *     The first instance of A* is used to parse any basic content of the link body until any nested
+       *     brackets. However, if an opening bracket is found, preceded by an exclamation mark, we know that
+       *     we have an image tag, and the second sub-part which starts with the exclamation sign matches.
+       *     This second sub-part tries to parse the body of the image tag (alt text) with the same A* pattern
+       *     until a matching inner closing bracket is found. After that we have a third sub-part to parse any
+       *     remainder of the body, again with the A* pattern until the actual closing bracket. This way we can
+       *     support images within links.
+       *
+       *     In this part we don't care if the image tag is otherwise properly formed; we are simply trying to
+       *     match balanced brackets so that the entire link body can be parsed.
+       *
+       * (?:<((?:[^\\>]|\\.)+)>|\(((?:[^\\\)]|\\.)+)\))
+       *
+       *     After the body has been parsed the second section of the regex matches the link url which can be
+       *     either in angle brackets or parentheses. Hence the two alternatives at the end of the regex. Both
+       *     are constructed with a similar alternation where the first part matches anything except escaped
+       *     characters and the closing angle bracket or parenthesis, and the second part matches anything
+       *     escaped with a backslash verbatim.
+       *
+       *     While the url part allows for anything except closing angle bracket or parentheses (even an opening
+       *     angle bracket or parenthesis), the link body parsing is more strict and does not allow opening
+       *     brackets unless balanced with a closing bracket after an exclamation mark. In other words, any
+       *     brackets in the link body not part of an image tag should be escaped even though a broken image tag
+       *     with balanced brackets would be accepted as part of the link body. This is to keep the link parsing
+       *     simple.
+       *
+       * Similarities to image regex:
+       *
+       * The second section of the regex should be identical to the one used in the image regex below, as the
+       * syntax for the link url is the same for both links and images.
+       */
+      re: /^\[((?:[^\\\[\]]|\\.)*(?:!\[(?:[^\\\[\]]|\\.)*\](?:[^\\\[\]]|\\.)*)*)\](?:<((?:[^\\>]|\\.)+)>|\(((?:[^\\\)]|\\.)+)\))/s,
       mkNode: r => ({
         type: 'a',
         body: parseInline(r[1]),
@@ -202,11 +283,31 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
       }),
     },
     {
-      // Note that while link body parsing allows for nested brackets (for image tags), the alt text parsing does not.
-      // Instead brackets in alt text must always be escaped. This is in line with the general rule that applies for
-      // link body as well that brackets must be escaped within brackets. (Only exception being an image tag within
-      // a link.)
-      re: /^!\[((?:[^\\\[\]]|\\[^])*)\](?:<((?:[^\\>]|\\[^])+)>|\(((?:[^\\\)]|\\[^])+)\))/,
+      /*
+       * Image node matcher that supports the same two syntaxes for the link url as the link node matcher (angle
+       * brackets or parentheses)
+       *
+       * Pattern breakdown:
+       *
+       * !\[((?:[^\\\[\]]|\\.)*)\]
+       *
+       *    The first part of the regex matches the alt text of the image which is enclosed in square brackets and
+       *    starts with an exclamation mark. The content of the alt text is parsed with the same alteration as in the
+       *    link body parsing of the link regex, but without the possibility for nested brackets. See above for details
+       *    on the alteration pattern.
+       *
+       *    Note that while link body parsing allows for nested brackets (for image tags), the alt text parsing does
+       *    not. Instead brackets in alt text must always be escaped. This is in line with the general rule that
+       *    applies for link body as well that brackets must be escaped within brackets. (Only exception being an image
+       *    tag within a link.)
+       *
+       * (?:<((?:[^\\>]|\\.)+)>|\(((?:[^\\\)]|\\.)+)\))
+       *
+       *    After the alt text has been parsed the second section of the regex matches the link url which can be either
+       *    in angle brackets or parentheses. This part is identical to the link url parsing part of the link regex.
+       *    See the link regex breakdown above for details on this part of the pattern.
+       */
+      re: /^!\[((?:[^\\\[\]]|\\.)*)\](?:<((?:[^\\>]|\\.)+)>|\(((?:[^\\\)]|\\.)+)\))/s,
       mkNode: r => ({
         type: 'img',
         alt: unescape(r[1]),
@@ -214,8 +315,25 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
       }),
     },
     {
-      // TODO explain
-      re: /^(?=(`*))\1([^](?![`\\_*\[!]))*(?:[^]|$)/,
+      /*
+       * Text node matcher that consumes characters that don't start special inline constructs.
+       *
+       * Pattern breakdown:
+       *
+       * (?:.(?![`\\_*\[!]))*
+       *
+       *     Greedily match characters as long as the next character is not a special starter that can start an inline
+       *     construct (code span, escaped char, emphasis, link, image). Note that the last character before the special
+       *     character is *not* consumed by this part of the regex but the next part will consume it.
+       *
+       * (?:.|$)
+       *
+       *     The second part of the regex guarantees that we always consume at least single character of the remaining
+       *     input (including special character). This way we can also consume extra special characters that are not
+       *     actually starting a valid inline construct. For example a single underscore that is not followed by valid
+       *     emphasis text will be consumed as a plain text character by this part of the regex.
+       */
+      re: /^(?:.(?![`\\_*\[!]))*(?:.|$)/s,
       mkNode: r => ({
         type: '',
         txt: r[0],
@@ -256,7 +374,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
       if (matchedLength > 0) {
         remaining = remaining.slice(matchedLength)
       } else {
-        // if we get here we have a bug as we want parser to accept all input
+        // None of the rules matched meaning we have a bug as we want parser to accept all input
         throw new Error('Failed to parse: ' + remaining.slice(0, 200))
       }
     }

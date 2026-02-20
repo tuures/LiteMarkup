@@ -1732,6 +1732,26 @@ exports[`codespan cannot span multiple lines 1`] = `
 
 exports[`codespan cannot span multiple lines 2`] = `"<p><code> </code></p>"`;
 
+exports[`codespan with extra backticks before should parse correctly 1`] = `
+[
+  {
+    "body": [
+      {
+        "txt": "\`",
+        "type": "",
+      },
+      {
+        "txt": "foo",
+        "type": "cs",
+      },
+    ],
+    "type": "p",
+  },
+]
+`;
+
+exports[`codespan with extra backticks before should parse correctly 2`] = `"<p>\`<code>foo</code></p>"`;
+
 exports[`codespan with extra backticks on the end should parse as codespan plus extra backtick as text 1`] = `
 [
   {
@@ -1751,22 +1771,6 @@ exports[`codespan with extra backticks on the end should parse as codespan plus 
 `;
 
 exports[`codespan with extra backticks on the end should parse as codespan plus extra backtick as text 2`] = `"<p><code>foo</code>\`</p>"`;
-
-exports[`codespan with missing backticks in the end should not parse as codespan 1`] = `
-[
-  {
-    "body": [
-      {
-        "txt": "\`\`\`foo\`\`",
-        "type": "",
-      },
-    ],
-    "type": "p",
-  },
-]
-`;
-
-exports[`codespan with missing backticks in the end should not parse as codespan 2`] = `"<p>\`\`\`foo\`\`</p>"`;
 
 exports[`codespan with three backticks in the beginning of a paragraph (not codeblock) 1`] = `
 [
@@ -2338,7 +2342,15 @@ exports[`invalid codespans 1`] = `
   {
     "body": [
       {
-        "txt": "f \`\`foo\` 21",
+        "txt": "f \`",
+        "type": "",
+      },
+      {
+        "txt": "foo",
+        "type": "cs",
+      },
+      {
+        "txt": " 21",
         "type": "",
       },
     ],
@@ -2349,7 +2361,7 @@ exports[`invalid codespans 1`] = `
 
 exports[`invalid codespans 2`] = `
 "<p>a \`\`0doo</p>
-<p>f \`\`foo\` 21</p>"
+<p>f \`<code>foo</code> 21</p>"
 `;
 
 exports[`list with marker character in content 1`] = `
@@ -3330,6 +3342,24 @@ exports[`markdown compatibility mode 1`] = `
   {
     "body": [
       {
+        "txt": "_",
+        "type": "",
+      },
+      {
+        "body": [
+          {
+            "txt": "underscore before italic",
+            "type": "",
+          },
+        ],
+        "type": "i",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
         "txt": "a",
         "type": "",
       },
@@ -3465,6 +3495,7 @@ exports[`markdown compatibility mode 2`] = `
 <p><i>H italic outside </i><i>but not bold inside</i>**</p>
 <p>_not italic</p>
 <p>not italic_</p>
+<p>_<i>underscore before italic</i></p>
 <p>a<b>bold</b></p>
 <p><i>italic</i>s</p>
 <p>*not emphasized*</p>
