@@ -121,6 +121,8 @@ a*bold*
 
 _italic_s
 
+_*mixed order, first marker (in this case italic) wins_*
+
 \\!\\"\\#\\$\\%\\&\\'\\(\\)\\*\\+\\,\\-\\.\\/\\:\\;\\<\\=\\>\\?\\@\\[\\\\\\]\\^\\_\\\`\\{\\|\\}\\~
 
 \\→\\A\\a\\ \\3\\φ\\«
@@ -172,6 +174,8 @@ __I'm bold too__
 
 _I'm italic_
 *I'm italic too*
+
+_*mixed order, first marker (in this case italic) wins_*
 
 # these are supported:
 
@@ -679,6 +683,25 @@ this is not html but a paragraph with a link because the opening tag is not prec
   expect(ast).toMatchSnapshot()
   const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
   expect(html).toMatchSnapshot()
+})
+
+test('html block ending at EOF without trailing newline', () => {
+  const src = `
+<div>
+html
+</div>`
+  const ast = parser()(src)
+  expect(ast[0]).toMatchObject({ type: 'htm', raw: '<div>\nhtml\n</div>' })
+})
+
+test('html block ending at EOF with trailing newline', () => {
+  const src = `
+<div>
+html
+</div>
+`
+  const ast = parser()(src)
+  expect(ast[0]).toMatchObject({ type: 'htm', raw: '<div>\nhtml\n</div>' })
 })
 
 test('html block with single char element', () => {

@@ -3,7 +3,8 @@
 ## Primitives
 
 - *LF* = U+000A `\n` (line feed)
-- *EOL* = *LF* or end of input
+- *EOF* = end of input
+- *EOL* = *LF* or *EOF*
 - *SPACE* = U+0020 ` `
 - *TAB* = U+0009 `\t`
 - *WS* = one or more *SPACE* or *TAB*
@@ -50,17 +51,17 @@ Examples:
 
 ### Code Block (Fenced)
 
-*CODEBLOCK* = opening fence + content + closing fence
+*CODEBLOCK* = opening fence + content + (*EOF* | closing fence)
 
 - Opening fence: *INDENT* + 3+ backticks + optional info text (no backticks allowed) + *LF*
-- Content: any characters until closing fence (or end of input)
+- Content: any characters until closing fence (or *EOF*)
 - Closing fence: same indent + same number of backticks + *WS*? + *EOL*
 
-The indent of the opening fence is stripped from each content line.
+The indent of the opening fence is stripped from each content line. The final newline before the closing fence is considered part of the content.
 
 ### HTML Block
 
-*HTMLBLOCK* = `<` + tagname + optional attributes + `>` + *WS*? + *LF* + content + *LF* + `</` + tagname + `>` + *WS*? + (end of input or blank line)
+*HTMLBLOCK* = `<` + tagname + optional attributes + `>` + *WS*? + *LF* + content + *LF* + `</` + tagname + `>` + *WS*? + *EOL* + *WS*? + *EOL*
 
 - Tag name: lowercase letter followed by lowercase letters, digits, or hyphens (`[a-z][a-z0-9-]*`)
 - Opening and closing tags must match exactly

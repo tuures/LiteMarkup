@@ -1178,6 +1178,24 @@ closing tag must be followed by empty line or end of file
   {
     "body": [
       {
+        "body": [
+          {
+            "txt": "*mixed order, first marker (in this case italic) wins",
+            "type": "",
+          },
+        ],
+        "type": "i",
+      },
+      {
+        "txt": "*",
+        "type": "",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
         "txt": "!"#$%&'()*+,-./:;<=>?@[\\]^_\`{|}~",
         "type": "",
       },
@@ -1524,6 +1542,7 @@ closing tag must be followed by empty line or end of file
 <p>aftert this comes a text content that is just one characters</p>
 <p>a<b>bold</b></p>
 <p><i>italic</i>s</p>
+<p><i>*mixed order, first marker (in this case italic) wins</i>*</p>
 <p>!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\\]^_\`{|}~</p>
 <p>\\→\\A\\a\\ \\3\\φ\\«</p>
 <p>*not emphasized*</p>
@@ -3122,6 +3141,24 @@ exports[`markdown compatibility mode 1`] = `
   {
     "body": [
       {
+        "body": [
+          {
+            "txt": "*mixed order, first marker (in this case italic) wins",
+            "type": "",
+          },
+        ],
+        "type": "i",
+      },
+      {
+        "txt": "*",
+        "type": "",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
         "txt": "these are supported:",
         "type": "",
       },
@@ -3483,6 +3520,7 @@ exports[`markdown compatibility mode 2`] = `
 <b>I'm bold too</b></p>
 <p><i>I'm italic</i>
 <i>I'm italic too</i></p>
+<p><i>*mixed order, first marker (in this case italic) wins</i>*</p>
 <h1>these are supported:</h1>
 <p><b>A bold outside and <i>italic inside</i></b></p>
 <p><b>B bold outside and <i>italic inside</i></b></p>

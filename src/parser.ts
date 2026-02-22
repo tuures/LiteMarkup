@@ -57,17 +57,83 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
       mkNode: r => ({ type: 'h', level: r[1].length, body: parseInline(r[2]) }),
     },
     {
-      // TODO: explain
-      re: /^(<([a-z][a-z0-9-]*)(?: [^>]+)?>[ \t]*\n(?:.(?!\n<\/\2>(?:[ \t]*\n){2}))*.\n<\/\2>)[ \t]*(?:$|\n(?:$|[ \t]*\n))/s,
+      /*
+       * Raw HTML block matcher for paired open/close tags.
+       *
+       * Pattern breakdown:
+       *
+       * (<([a-z][a-z0-9-]*)(?: [^>]+)?>[ \t]*\n
+       *
+       *     Match the opening HTML tag and capture the tag name in capture group 2 for later backreference. The
+       *     opening tag must not have any indentation. The tag may optionally have attributes. After the opening tag
+       *     we allow optional trailing whitespace before the mandatory newline. Note the capture group 1 capturing the
+       *     entire raw html starts at the beginning of the regex and continues to the next part.
+       *
+       * (?:(?!\n<\/\2>[ \t]*(?:$|\n[ \t]*(?:$|\n))).)*\n<\/\2>)
+       *
+       *     The content is then matched character by character with a negative lookahead that prevents consuming past
+       *     the point where the closing tag appears followed by the two mandatory EOLs. The closing tag must match
+       *     the same tag name as the opening tag via the \2 backreference and have no indentation. After the content
+       *     itself we still need to capture the newline and the closing tag. The capture group 1 ends at the end of
+       *     this part.
+       *
+       * [ \t]*(?:$|\n[ \t]*(?:$|\n))
+       *
+       *     After the closing tag we consume the double EOL that the raw HTML block requires (and any extra
+       *     whitespace before them). It was already matched by the lookahead, but for convenience we consume it here
+       *     as well so that the next parser iteration doesn't have to deal with it.
+       */
+      re: /^(<([a-z][a-z0-9-]*)(?: [^>]+)?>[ \t]*\n(?:(?!\n<\/\2>[ \t]*(?:$|\n[ \t]*(?:$|\n))).)*\n<\/\2>)[ \t]*(?:$|\n[ \t]*(?:$|\n))/s,
       mkNode: r => ({ type: 'htm', raw: r[1] }),
     },
     {
-      // TODO: explain
-      re: /^( {0,3})(`{3,})((?:[^\\\n`]|\\.)*)\n(?:(?:\1\2|(?:(\n|(?:(?:.(?!\n\1\2))*.\n))\1\2))[ \t]*(?:$|\n)|(.*))/s,
+      /*
+       * Fenced code block matcher that supports variable-length backtick fences and optional indentation.
+       *
+       * Pattern breakdown:
+       *
+       * ( {0,3})(`{3,})
+       *
+       *     Match the opening fence: up to 3 spaces of indentation (capture group 1) followed by three or more
+       *     backticks (capture group 2). Both groups are captured so they can be used later to match the closing
+       *     fence with the same indentation and at least the same number of backticks.
+       *
+       * ((?:[^\\\n`]|\\.)*)\n
+       *
+       *     The info text after the opening backticks (capture group 3). The alternation matches any character except
+       *     backslash, newline or backtick, or any backslash-escaped character. Unescaped backticks are not allowed to
+       *     avoid ambiguity with code span. A mandatory newline ends the info text and marks the start of the code
+       *     block content.
+       *
+       * (?:$|\1\2|((?:(?!$|\n\1\2).)*(?:$|\n))(?:$|\1\2[ \t]*(?:$|\n)))
+       *
+       *     Next the content of the code block and the closing fence are matched. The first two top-level alternatives
+       *     handle the cases where the EOF or the closing fence is found immediately, meaning the content is empty.
+       *
+       *     The third top-level alternative handles the case where there is some content and consists of two
+       *     sub-parts. The first one is the capture group 4 which captures the content until EOF or the closing fence
+       *     by using a negative lookahead to ensure we don't consume the closing fence. The final newline before the
+       *     closing fence is considered part of the content and needs to be captured as well.
+       *
+       *     After the content is captured, in the second sub-part of the third top-level alternative, we consume the
+       *     closing fence (unless the EOF was already reached), which was already matched (but not consumed)
+       *     earlier by the lookahead. Finally we have optional trailing whitespace and a mandatory EOL after the
+       *     closing fence.
+       *
+       *     (?:
+       *       $                              # no content, immediate EOF
+       *     |
+       *       \1\2                           # no content, immediate closing fence
+       *     |
+       *       ((?:(?!$|\n\1\2).)*(?:$|\n))   # Content (capture group 4)
+       *       (?:$|\1\2[ \t]*(?:$|\n))       # EOF or the closing fence, optional whitespace, EOL
+       *     )
+       */
+      re: /^( {0,3})(`{3,})((?:[^\\\n`]|\\.)*)\n(?:$|\1\2|((?:(?!$|\n\1\2).)*(?:$|\n))(?:$|\1\2[ \t]*(?:$|\n)))/s,
       mkNode: r => ({
         type: 'cb',
         infoText: unescape(trim(r[3])),
-        txt: (r[4] || r[5] || '').replace(R(`^${r[1]}`), '').replace(R(`\\n${r[1]}`, 'g'), '\n'),
+        txt: (r[4] || '').replace(R(`^${r[1]}`), '').replace(R(`\\n${r[1]}`, 'g'), '\n'),
       }),
     },
   ]
@@ -150,17 +216,40 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
   ]
 
   const markdownIb: SimpleRule<Ast.Inline>[] = [
+    /*
+     * Emphasis matchers for Markdown mode that support **bold** / __bold__ and *italic* / _italic_.
+     *
+     * Pattern breakdown for the bold matcher:
+     *
+     * (?=([_*]))\1\1
+     *
+     *     The lookahead captures the marker character (* or _) without consuming it. Then \1\1 consumes
+     *     two of that character as the opening delimiter. The lookahead prevents backtracking from trying
+     *     a single-character match when no closing double marker is found — the same technique used in
+     *     the code span matcher.
+     *
+     * ((?:(?!\1\1)[^\\`]|\\.)+)
+     *
+     *     Content of the bold span. Each character is checked with a negative lookahead to ensure we
+     *     haven't reached the closing double marker. The left side of the alternation matches any
+     *     character except backslash, backtick or the closing delimiter, and the right side matches
+     *     backslash-escaped characters verbatim. Backticks are excluded so that code spans take priority.
+     *
+     * \1\1
+     *
+     *     The closing double marker, matching the same character as the opening.
+     */
     {
-      re: /^([_*])((?:(?!\1)[^\\`]|\\.)+)\1/s,
+      re: /^(?=([_*]))\1\1((?:(?!\1\1)[^\\`]|\\.)+)\1\1/s,
       mkNode: r => ({
-        type: 'i',
+        type: 'b',
         body: parseInline(r[2]),
       }),
     },
     {
-      re: /^([_*]{2})((?:(?!\1)[^\\`]|\\.)+)\1/s,
+      re: /^([_*])((?:(?!\1)[^\\`]|\\.)+)\1/s,
       mkNode: r => ({
-        type: 'b',
+        type: 'i',
         body: parseInline(r[2]),
       }),
     },
@@ -190,19 +279,17 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
        *     normal character and during the next parser iteration this pattern can successfully match the code span
        *     with a single backtick as the opening and closing sequence.
        *
-       * ((?:.(?!\1))*.)
+       * ((?:(?!\1).)*)
        *
        *     The second part of the regex captures the content of the code span. The core of this part is the
-       *     negative lookahead that checks that we don't have the closing backtick sequence ahead. Because the first
-       *     dot does not capture the last character before the closing backticks, we need to add an extra dot at the
-       *     end to make sure we capture all content of the code span.
+       *     negative lookahead that checks that we don't have the closing backtick sequence ahead.
        *
        * \1
        *    Finally we match the closing backtick sequence by referring to the first capturing group. This guarantees
        *    that the number of backticks in the closing sequence matches the number of backticks in the opening
        *    sequence.
        */
-      re: /^(?=(`+))\1((?:.(?!\1))*.)\1/s,
+      re: /^(?=(`+))\1((?:(?!\1).)*)\1/s,
       mkNode: r => ({
         type: 'cs',
         txt: ((s: string) => {
@@ -216,7 +303,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
     },
     {
       re: /^\\(?:\n|$)/,
-      mkNode: r => ({
+      mkNode: () => ({
         type: 'br',
       }),
     },
