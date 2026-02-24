@@ -1,4 +1,4 @@
-# LiteMarkup Syntax
+# LiteMarkup Syntax (version: unreleased)
 
 ## Primitives
 
@@ -16,7 +16,7 @@ A `?` suffix indicates the element is optional (e.g., *WS*? means zero or more w
 
 *DOCUMENT* = zero or more *BLOCK*
 
-*BLOCK* = *BLANKLINES* | *THEMATICBREAK* | *HEADING* | *HTMLBLOCK* | *CODEBLOCK* | *BLOCKQUOTE* | *LIST* | *PARAGRAPH*
+*BLOCK* = *BLANKLINES* | *THEMATICBREAK* | *HEADING* | *HTMLBLOCK* | *CODEBLOCK* | *TABLE* | *BLOCKQUOTE* | *LIST* | *PARAGRAPH*
 
 Blocks are matched in the order listed above. The first matching rule wins.
 
@@ -67,6 +67,30 @@ The indent of the opening fence is stripped from each content line. The final ne
 - Opening and closing tags must match exactly
 - Must be followed by a blank line or end of input
 
+### Table
+
+*TABLE* = *HEADERROW* + *LF* + *DELIMITERROW* + *LF* + zero or more (*BODYROW* + *LF*)
+
+*HEADERROW* = `|` + one or more (*CELLCONTENT* + `|`) + *WS*?
+
+*DELIMITERROW* = `|` + one or more (*WS*? + one or more `-` + *WS*? + `|`) + *WS*?
+
+*BODYROW* = `|` + one or more (*CELLCONTENT* + `|`) + *WS*?
+
+*CELLCONTENT* = any characters except unescaped `|` and newlines (escaped pipes `\|` are literal)
+
+Cell content is parsed as inline. Each row should have the same number of columns. Implementations may decide to truncate or pad rows with too many/few cells, or end the table parsing after last valid row.
+
+Leading and trailing `|` are always required on every row.
+
+Example:
+```
+| Variable  | Value |
+| --------- | ----- |
+| X         |    30 |
+| Y         |    25 |
+```
+
 ## Container Blocks
 
 ### Blockquote
@@ -116,6 +140,7 @@ A paragraph continues until:
 - A blank line
 - A heading start (`# `)
 - A code block start (three backticks)
+- A table (header + delimiter row)
 - A blockquote start (`>`)
 - A list marker (`- `, `* `, `1. `, etc.)
 

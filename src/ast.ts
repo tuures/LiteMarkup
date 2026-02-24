@@ -83,12 +83,17 @@ export interface CodeBlock {
   txt: string
 }
 
+export interface Table {
+  type: 'tbl'
+  rows: Inline[][][]
+}
+
 export interface Paragraph {
   type: 'p'
   body: Inline[]
 }
 
-export type LeafBlock = ThematicBreak | Heading | HtmlBlock | CodeBlock | Paragraph | Extension
+export type LeafBlock = ThematicBreak | Heading | HtmlBlock | CodeBlock | Table | Paragraph | Extension
 
 export type Block = ContainerBlock | LeafBlock
 

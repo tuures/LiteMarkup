@@ -85,6 +85,7 @@ convertToHtml('Click [here]<javascript:alert(`You’ve been warned!`);>!', { all
 - ✅ **Lists** — Ordered (`1.`) and unordered (`-` or `*`)
 - ✅ **Links** — `[text]<url>` or `[text](url)`
 - ✅ **Code** — Inline `` `code` `` and fenced blocks
+- ✅ **Tables** — GFM-style pipe tables
 - ✅ **Blockquotes** — `> quoted text`
 - ✅ **Thematic breaks** — `---`
 - ✅ **Escape characters** — `\*not bold\*`
@@ -335,6 +336,12 @@ In markdown mode: **bold** and _italic_
    - Nested unordered
 
 A [link](https://example.com) in text.
+
+| Feature          | Status |
+|------------------|--------|
+| Basic formatting | ✅     |
+| Tables           | ✅     |
+| Simple API       | ✅     |
 
 > A blockquote
 

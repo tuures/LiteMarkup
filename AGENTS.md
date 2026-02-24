@@ -23,6 +23,11 @@ src/
 
 Package exports: `litemarkup`, `litemarkup/parser`, `litemarkup/html`, `litemarkup/ast`.
 
+## Commands
+
+- `npm test` — run tests
+- `npm run build` — generate dist files
+
 ## Architecture principles
 
 1. The AST is a plain JSON-serializable data structure. No classes, no functions, no circular references.
@@ -32,7 +37,7 @@ Package exports: `litemarkup`, `litemarkup/parser`, `litemarkup/html`, `litemark
 
 ## AST node shapes
 
-Core nodes use short `type` tags: `''` (text), `cs`, `br`, `i`, `b`, `a`, `img`, `p`, `h`, `cb`, `htm`, `hr`, `bq`, `l`, `li`.
+Core nodes use short `type` tags: `''` (text), `a`, `b`, `bq`, `br`, `cb`, `cs`, `h`, `hr`, `htm`, `i`, `img`, `l`, `li`, `p`, `tbl`.
 
 Field conventions:
 

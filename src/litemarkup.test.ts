@@ -159,6 +159,11 @@ not an image as url is missing ![]() ![]<>
 
 [link with ![image of a cat]</> inside link body]<url>
 
+| Var   | Val  |
+| ----- | --- |
+| X     | 30  |
+| Y     | 25  |
+
 `
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
@@ -905,6 +910,142 @@ end
 
   expect(html1).toEqual(html3)
   expect(html2).toEqual(html4)
+})
+
+test('table: header only (no body rows)', () => {
+  const src = `
+| A |
+| - |
+`
+  const ast = parser()(src)
+  expect(ast).toMatchSnapshot()
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('table: single column', () => {
+  const src = `
+| A |
+| - |
+| 1 |
+| 2 |
+`
+  const ast = parser()(src)
+  expect(ast[0]).toMatchObject({ type: 'tbl', rows: [[[txt('A')]], [[txt('1')]], [[txt('2')]]] })
+  expect(ast).toMatchSnapshot()
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('table: inline formatting in cells', () => {
+  const src = `
+| Header |
+| ------ |
+| *bold* |
+| \`code\` |
+| [link](url) |
+| > no quotes |
+`
+  const ast = parser()(src)
+  expect(ast).toMatchSnapshot()
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('table: escaped pipe in cell', () => {
+  const src = `
+|   A   |
+| ----- |
+| a\\|b |
+`
+  const ast = parser()(src)
+  expect(ast).toMatchSnapshot()
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('table: fewer columns than delimiter (padded)', () => {
+  const src = `
+| A |
+| - | - |
+| 1 |
+`
+  const ast = parser()(src)
+  expect(ast[0]).toHaveProperty('type', 'tbl')
+  const tbl = ast[0] as any
+  expect(tbl.rows[0]).toHaveLength(2)
+  expect(tbl.rows[1]).toHaveLength(2)
+})
+
+test('table: more columns than delimiter (padded to max)', () => {
+  const src = `
+| A | B | C |
+| - |
+| 1 | 2 | 3 |
+`
+  const ast = parser()(src)
+  expect(ast[0]).toHaveProperty('type', 'tbl')
+  const tbl = ast[0] as any
+  expect(tbl.rows[0]).toHaveLength(3)
+  expect(tbl.rows[1]).toHaveLength(3)
+})
+
+test('table: missing delimiter falls through to paragraph', () => {
+  const src = `
+| A | B |
+| C | D |
+`
+  const ast = parser()(src)
+  expect(ast[0]).toHaveProperty('type', 'p')
+})
+
+test('table: inside blockquote', () => {
+  const src = `
+> | A |
+> | - |
+> | 1 |
+`
+  const ast = parser()(src)
+  expect(ast[0]).toHaveProperty('type', 'bq')
+  const bq = ast[0] as any
+  expect(bq.doc[0]).toHaveProperty('type', 'tbl')
+})
+
+test('table: inside list item', () => {
+  const src = `
+- | A |
+  | - |
+  | 1 |
+`
+  const ast = parser()(src)
+  expect(ast[0]).toHaveProperty('type', 'l')
+  const list = ast[0] as any
+  expect(list.items[0].doc[0]).toHaveProperty('type', 'tbl')
+})
+
+test('table: followed immediately by other content', () => {
+  const src = `
+| A |
+| - |
+| 1 |
+A paragraph.
+`
+  const ast = parser()(src)
+  expect(ast[0]).toHaveProperty('type', 'tbl')
+  expect(ast[1]).toHaveProperty('type', 'p')
+})
+
+test('table: whitespace-only cells', () => {
+  const src = `
+| A | B |
+| - | - |
+|   |   |
+`
+  const ast = parser()(src)
+  expect(ast[0]).toHaveProperty('type', 'tbl')
+  const tbl = ast[0] as any
+  expect(tbl.rows[1][0]).toEqual([])
+  expect(tbl.rows[1][1]).toEqual([])
 })
 
 test('large document performance', () => {

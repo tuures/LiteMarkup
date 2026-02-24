@@ -47,6 +47,15 @@ export function htmlRenderer({
           )
         case 'p':
           return el('p', renderInline(n.body))
+        case 'tbl': {
+          const thead = renderTableSection('thead', 'th', n.rows.slice(0, 1), indentLevel + 1)
+          const body = n.rows.slice(1)
+          const tbody = body.length
+            ? `\n${renderTableSection('tbody', 'td', body, indentLevel + 1)}`
+            : ''
+
+          return el('table', `\n${thead}${tbody}\n${i}`)
+        }
         default:
           throw new Error('Unexpected AST node: ' + (n as any).type)
       }
@@ -61,6 +70,37 @@ export function htmlRenderer({
     const lines = items.map(item => el('li', `\n${renderBlock(item.doc, indentLevel + 1)}\n${i}`))
 
     return `${i}${lines.join(`\n${i}`)}`
+  }
+
+  function renderTableSection(
+    sectionTag: 'thead' | 'tbody',
+    cellTag: 'th' | 'td',
+    rows: Ast.Inline[][][],
+    indentLevel: number,
+  ): string {
+    const i = indent(indentLevel)
+
+    return `${i}${el(sectionTag, `\n${renderTableRows(cellTag, rows, indentLevel + 1)}\n${i}`)}`
+  }
+
+  function renderTableRows(
+    cellTag: 'th' | 'td',
+    rows: Ast.Inline[][][],
+    indentLevel: number,
+  ): string {
+    const i = indent(indentLevel)
+
+    const lines = rows.map(row =>
+      el('tr', `\n${renderTableCells(cellTag, row, indentLevel + 1)}\n${i}`),
+    )
+
+    return `${i}${lines.join(`\n${i}`)}`
+  }
+
+  function renderTableCells(tag: 'th' | 'td', cells: Ast.Inline[][], indentLevel: number): string {
+    const i = indent(indentLevel)
+
+    return cells.map(cell => `${i}${el(tag, renderInline(cell))}`).join('\n')
   }
 
   function renderInline(inlines: Ast.Inline[]): string {

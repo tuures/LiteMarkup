@@ -585,6 +585,7 @@
             <option value="code">Code Blocks</option>
             <option value="links">Links &amp; Images</option>
             <option value="blockquotes">Blockquotes</option>
+            <option value="tables">Tables</option>
             <option value="full">Full Demo</option>
             <option value="readme">GitHub repo README.md</option>
             <option value="syntax">Syntax Reference</option>
@@ -762,6 +763,31 @@ Regular paragraph here.
 > Another quote with *bold* and _italic_.
 > Very nice!`,
 
+        tables: `# Tables
+
+A simple table:
+
+| Feature          | Status |
+|------------------|--------|
+| Basic formatting | ✅     |
+| Tables           | ✅     |
+| Simple API       | ✅     |
+
+Tables support *inline* formatting:
+
+| Feature              | Example              |
+|----------------------|----------------------|
+| *Bold*               | *important*          |
+| _Italic_             | _emphasis_           |
+| \`Code\`               | \`inline code\`        |
+| [Links](/)           | [click here](/)      |
+| Escaped \\|pipe\\|    | works!               |
+
+Header-only table (no body rows):
+
+| Col A | Col B | Col C |
+|-------|-------|-------|`,
+
         full: `# LiteMarkup Demo
 
 ## Features
@@ -797,6 +823,14 @@ const html = htmlRenderer()(ast)
 Check out the [GitHub repo](https://github.com/tuures/LiteMarkup) for more.
 
 > LiteMarkup gives you full control over the parsing and rendering pipeline.
+
+### Tables
+
+| Feature          | Status |
+|------------------|--------|
+| Basic formatting | ✅     |
+| Tables           | ✅     |
+| Simple API       | ✅     |
 
 ---
 

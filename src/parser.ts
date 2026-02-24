@@ -149,6 +149,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
 
   const markerRe = (marker: string) => marker.replace(/[-+*).]/, '\\$&').replace(/\d/g, '\\d')
   const listRule: LookaheadRule<Ast.List> = {
+    // TODO: explain, add tests for all variations
     pre: /^(( {0,3})([-+*]|\d{1,9}[).])( {1,3}))([^\n]+)/,
     re: pr => {
       const markerEscaped = markerRe(pr[3])
@@ -169,13 +170,67 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
 
   const containerBlockRules: Rule<Ast.ContainerBlock>[] = [blockQuoteRule, listRule]
 
+  function splitTableRow(row: string): string[] {
+    // Match each |cell| pair using the same cell-content alternation as the table regex.
+    // The trailing pipe produces one extra empty capture that we discard with slice(0, -1).
+    return [...row.matchAll(/\|((?:[^|\\\n]|\\.)*)/gs)].slice(0, -1).map(r => trim(r[1]))
+  }
+
+  function normalizeTableRow(cells: string[], colCount: number): string[] {
+    if (cells.length >= colCount) return cells
+    return [...cells, ...Array(colCount - cells.length).fill('')]
+  }
+
+  const tableRule: SimpleRule<Ast.Table> = {
+    /*
+     * Table matcher for GFM-style pipe tables.
+     *
+     * Pattern breakdown:
+     *
+     * (\|(?:(?:[^|\\\n]|\\.)*\|)+)[ \t]*\n
+     *
+     *     The header row: must start and end with `|` and contain at least one cell. Cell content is
+     *     matched by the alternation (?:[^|\\\n]|\\.) which accepts any character except pipe, backslash
+     *     or newline, or any backslash-escaped character. This allows escaped pipes \| in cell content.
+     *     Trailing whitespace after the last pipe is consumed but not captured.
+     *
+     * (\|(?:[ \t]*-[-\t ]*\|)+)[ \t]*\n
+     *
+     *     The delimiter row: pipe-separated cells containing at least one dash and optional surrounding
+     *     whitespace.
+     *
+     * ((?:\|(?:(?:[^|\\\n]|\\.)*\|)+[ \t]*\n)*)
+     *
+     *     Zero or more body rows with the same structural rules as the header row. The regex does not
+     *     enforce column count — normalization is handled in mkNode.
+     */
+    re: /^(\|(?:(?:[^|\\\n]|\\.)*\|)+)[ \t]*\n(\|(?:[ \t]*-[-\t ]*\|)+)[ \t]*\n((?:\|(?:(?:[^|\\\n]|\\.)*\|)+[ \t]*\n)*)/s,
+    mkNode: r => {
+      const headerCells = splitTableRow(r[1])
+      const delimCells = splitTableRow(r[2])
+      const bodyRows = r[3]
+        ? r[3]
+            .replace(/\n$/, '')
+            .split('\n')
+            .map(splitTableRow)
+        : []
+
+      const colCount = Math.max(headerCells.length, delimCells.length, ...bodyRows.map(r => r.length))
+
+      const parseRow = (cells: string[]) => normalizeTableRow(cells, colCount).map(parseInline)
+
+      return { type: 'tbl', rows: [headerCells, ...bodyRows].map(parseRow) }
+    },
+  }
+
   const paragraphRule: SimpleRule<Ast.LeafBlock> = {
-    re: /^(.(?!\n( {0,3}(#{1,6}[ \t]|`{3,}[^\n`]*\n|>|([-+*]|\d{1,9}[).]) {1,3}[^\n])|[ \t]*($|\n))))*./s,
+    re: /^(.(?!\n( {0,3}(#{1,6}[ \t]|`{3,}[^\n`]*\n|>|\||([-+*]|\d{1,9}[).]) {1,3}[^\n])|[ \t]*($|\n))))*./s,
     mkNode: r => ({ type: 'p', body: parseInline(r[0]) }),
   }
 
   const blockRules: Rule<Ast.Block>[] = [
     ...priorityLeafBlockRules,
+    tableRule,
     ...containerBlockRules,
     paragraphRule,
   ]

@@ -1442,6 +1442,53 @@ closing tag must be followed by empty line or end of file
     ],
     "type": "p",
   },
+  {
+    "rows": [
+      [
+        [
+          {
+            "txt": "Var",
+            "type": "",
+          },
+        ],
+        [
+          {
+            "txt": "Val",
+            "type": "",
+          },
+        ],
+      ],
+      [
+        [
+          {
+            "txt": "X",
+            "type": "",
+          },
+        ],
+        [
+          {
+            "txt": "30",
+            "type": "",
+          },
+        ],
+      ],
+      [
+        [
+          {
+            "txt": "Y",
+            "type": "",
+          },
+        ],
+        [
+          {
+            "txt": "25",
+            "type": "",
+          },
+        ],
+      ],
+    ],
+    "type": "tbl",
+  },
 ]
 `;
 
@@ -1560,7 +1607,25 @@ closing tag must be followed by empty line or end of file
 <p><img alt="image of a cat" src="/ordidnthappen.jpg"/></p>
 <p><img alt="" src="/without-alt.jpg"/></p>
 <p><img alt="another image of a &quot;cat&quot;[]" src="/ordidnthappen.jpg"/></p>
-<p><a href="url">link with <img alt="image of a cat" src="/"/> inside link body</a></p>"
+<p><a href="url">link with <img alt="image of a cat" src="/"/> inside link body</a></p>
+<table>
+  <thead>
+    <tr>
+      <th>Var</th>
+      <th>Val</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>X</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <td>Y</td>
+      <td>25</td>
+    </tr>
+  </tbody>
+</table>"
 `;
 
 exports[`blockquotes with leading and trailing carets 1`] = `
@@ -4118,6 +4183,212 @@ exports[`spaces inside codespans 2`] = `
 <p>f <code>z </code> first and last spaces are trimmed away, but the one after z is preserved</p>
 <p>g <code>\`</code> codespan that results in a single backtick (first and last space trmmed away)</p>
 <p>h <code>\` x \`</code>3 codespan that results in backtick, space, x, space, and backtick</p>"
+`;
+
+exports[`table: escaped pipe in cell 1`] = `
+[
+  {
+    "rows": [
+      [
+        [
+          {
+            "txt": "A",
+            "type": "",
+          },
+        ],
+      ],
+      [
+        [
+          {
+            "txt": "a|b",
+            "type": "",
+          },
+        ],
+      ],
+    ],
+    "type": "tbl",
+  },
+]
+`;
+
+exports[`table: escaped pipe in cell 2`] = `
+"<table>
+  <thead>
+    <tr>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>a|b</td>
+    </tr>
+  </tbody>
+</table>"
+`;
+
+exports[`table: header only (no body rows) 1`] = `
+[
+  {
+    "rows": [
+      [
+        [
+          {
+            "txt": "A",
+            "type": "",
+          },
+        ],
+      ],
+    ],
+    "type": "tbl",
+  },
+]
+`;
+
+exports[`table: header only (no body rows) 2`] = `
+"<table>
+  <thead>
+    <tr>
+      <th>A</th>
+    </tr>
+  </thead>
+</table>"
+`;
+
+exports[`table: inline formatting in cells 1`] = `
+[
+  {
+    "rows": [
+      [
+        [
+          {
+            "txt": "Header",
+            "type": "",
+          },
+        ],
+      ],
+      [
+        [
+          {
+            "body": [
+              {
+                "txt": "bold",
+                "type": "",
+              },
+            ],
+            "type": "b",
+          },
+        ],
+      ],
+      [
+        [
+          {
+            "txt": "code",
+            "type": "cs",
+          },
+        ],
+      ],
+      [
+        [
+          {
+            "body": [
+              {
+                "txt": "link",
+                "type": "",
+              },
+            ],
+            "href": "url",
+            "type": "a",
+          },
+        ],
+      ],
+      [
+        [
+          {
+            "txt": "> no quotes",
+            "type": "",
+          },
+        ],
+      ],
+    ],
+    "type": "tbl",
+  },
+]
+`;
+
+exports[`table: inline formatting in cells 2`] = `
+"<table>
+  <thead>
+    <tr>
+      <th>Header</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>bold</b></td>
+    </tr>
+    <tr>
+      <td><code>code</code></td>
+    </tr>
+    <tr>
+      <td><a href="url">link</a></td>
+    </tr>
+    <tr>
+      <td>&gt; no quotes</td>
+    </tr>
+  </tbody>
+</table>"
+`;
+
+exports[`table: single column 1`] = `
+[
+  {
+    "rows": [
+      [
+        [
+          {
+            "txt": "A",
+            "type": "",
+          },
+        ],
+      ],
+      [
+        [
+          {
+            "txt": "1",
+            "type": "",
+          },
+        ],
+      ],
+      [
+        [
+          {
+            "txt": "2",
+            "type": "",
+          },
+        ],
+      ],
+    ],
+    "type": "tbl",
+  },
+]
+`;
+
+exports[`table: single column 2`] = `
+"<table>
+  <thead>
+    <tr>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>"
 `;
 
 exports[`tabs vs spaces in indentation 1`] = `

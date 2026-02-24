@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.0.0
+## v1.0.0 (unreleased)
 
 ### Breaking changes
 
@@ -82,6 +82,7 @@ const text = { type: '', txt: 'hello' }
 - **Angle-bracket URL syntax** — `[text]<url>` works alongside `[text](url)`
 - **Images in links** — `[![alt](img-src)](link-href)` is now supported
 - **CLI flags** — `--allow-unsafe-html` and `--markdown-mode`
+- **Tables** — GFM-style pipe tables with header row, delimiter row, and optional body rows. AST node type `tbl` with `rows: Inline[][][]`. Supports inline formatting in cells and escaped pipes.
 
 ### Bug fixes
 

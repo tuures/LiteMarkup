@@ -14,6 +14,7 @@ Core nodes use short `type` tags. Key field names:
 | -------------- | ------- | ---------------------------------- |
 | Paragraph      | `'p'`   | `body: Inline[]`                   |
 | Heading        | `'h'`   | `level`, `body: Inline[]`          |
+| Table          | `'tbl'` | `rows: Inline[][][]`               |
 | Code block     | `'cb'`  | `txt`, `infoText`                  |
 | HTML block     | `'htm'` | `raw`                              |
 | Thematic break | `'hr'`  | —                                  |
@@ -167,6 +168,17 @@ function renderBlocks(blocks: Block[]): string {
           return '---'
         case 'htm':
           return block.raw
+        case 'tbl': {
+          // Render all cells first, then pad to align columns.
+          // Note: ANSI escapes in cells would throw off .length — strip them for production use.
+          const cells = block.rows.map(row => row.map(cell => renderInlines(cell)))
+          const widths = cells[0].map((_, c) =>
+            Math.max(...cells.map(row => (row[c] ?? '').length)),
+          )
+          return cells
+            .map(row => '| ' + row.map((s, c) => s.padEnd(widths[c])).join(' | ') + ' |')
+            .join('\n')
+        }
         case 'l':
           return block.items
             .map(
