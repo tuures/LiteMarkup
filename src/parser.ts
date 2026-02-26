@@ -208,14 +208,13 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
     mkNode: r => {
       const headerCells = splitTableRow(r[1])
       const delimCells = splitTableRow(r[2])
-      const bodyRows = r[3]
-        ? r[3]
-            .replace(/\n$/, '')
-            .split('\n')
-            .map(splitTableRow)
-        : []
+      const bodyRows = r[3] ? r[3].replace(/\n$/, '').split('\n').map(splitTableRow) : []
 
-      const colCount = Math.max(headerCells.length, delimCells.length, ...bodyRows.map(r => r.length))
+      const colCount = Math.max(
+        headerCells.length,
+        delimCells.length,
+        ...bodyRows.map(r => r.length),
+      )
 
       const parseRow = (cells: string[]) => normalizeTableRow(cells, colCount).map(parseInline)
 

@@ -1544,9 +1544,7 @@ exports[`basic 2`] = `
   <p>quote here</p>
 </blockquote>
 <p>text and empty quote</p>
-<blockquote>
-  
-</blockquote>
+<blockquote></blockquote>
 <blockquote>
   <h1>heading in quote</h1>
   <p>something &lt;nottag&gt;</p>
@@ -1559,7 +1557,7 @@ exports[`basic 2`] = `
   <p>level 1</p>
   <blockquote>
     <p>level 2
-level 2</p>
+    level 2</p>
   </blockquote>
   <p>level 1 continues</p>
 </blockquote>
@@ -3819,7 +3817,7 @@ exports[`nested lists 2`] = `
         <p>foo2</p>
         <blockquote>
           <p>foo2
-foo2</p>
+          foo2</p>
         </blockquote>
       </li>
     </ul>
@@ -4251,6 +4249,7 @@ exports[`table: header only (no body rows) 2`] = `
       <th>A</th>
     </tr>
   </thead>
+  <tbody></tbody>
 </table>"
 `;
 

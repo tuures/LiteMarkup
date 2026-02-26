@@ -12,95 +12,64 @@ export function htmlRenderer({
   allowUnsafeHtml = false,
   indentCharacters = '  ',
 }: HtmlRendererOptions = {}): (ast: Ast.Block[]) => string {
-  const repeat = (s: string) => (times: number) => s.repeat(times)
-  const indent = repeat(indentCharacters)
+  const indent = (text: string) => text.replace(/(^|\n)/g, '$1' + indentCharacters)
 
-  function renderBlock(blocks: Ast.Block[], indentLevel = 0): string {
-    const i = indent(indentLevel)
+  const elementMultiline = (
+    tag: string,
+    children: string,
+    attributes?: [string, string][],
+  ): string => {
+    return element(tag, children.length > 0 ? '\n' + indent(children) + '\n' : '', attributes)
+  }
 
-    const lines = blocks.map(n => {
-      switch (n.type) {
-        case 'bq':
-          return el('blockquote', `\n${renderBlock(n.doc, indentLevel + 1)}\n${i}`)
-        case 'l': {
-          const containerTag = n.startNumber ? 'ol' : 'ul'
-          const attributes: [string, string][] = n.startNumber
-            ? [['start', String(n.startNumber)]]
-            : []
+  function renderBlock(blocks: Ast.Block[]): string {
+    return blocks
+      .map(n => {
+        switch (n.type) {
+          case 'bq':
+            return elementMultiline('blockquote', renderBlock(n.doc))
+          case 'l': {
+            const tag = n.startNumber ? 'ol' : 'ul'
+            const attr: [string, string][] = n.startNumber ? [['start', String(n.startNumber)]] : []
+            const items = n.items
+              .map(item => elementMultiline('li', renderBlock(item.doc)))
+              .join('\n')
 
-          return el(
-            containerTag,
-            `\n${renderListItems(n.items, indentLevel + 1)}\n${i}`,
-            attributes,
-          )
+            return elementMultiline(tag, items, attr)
+          }
+          case 'hr':
+            return '<hr/>'
+          case 'h':
+            return element(`h${n.level}`, renderInline(n.body))
+          case 'htm':
+            return allowUnsafeHtml ? n.raw : element('p', escape(n.raw))
+          case 'cb':
+            return element(
+              'pre',
+              element('code', escape(n.txt), n.infoText ? [['data-infotext', n.infoText]] : []),
+            )
+          case 'p':
+            return element('p', renderInline(n.body))
+          case 'tbl': {
+            const thead = elementMultiline('thead', renderTableRows('th', n.rows.slice(0, 1)))
+            const tbody = elementMultiline('tbody', renderTableRows('td', n.rows.slice(1)))
+
+            return elementMultiline('table', [thead, tbody].join('\n'))
+          }
+          default:
+            throw new Error('Unexpected AST node: ' + (n as any).type)
         }
-        case 'hr':
-          return '<hr/>'
-        case 'h':
-          return el(`h${n.level}`, renderInline(n.body))
-        case 'htm':
-          return allowUnsafeHtml ? n.raw : el('p', esc(n.raw))
-        case 'cb':
-          return el(
-            'pre',
-            el('code', esc(n.txt), n.infoText ? [['data-infotext', n.infoText]] : []),
-          )
-        case 'p':
-          return el('p', renderInline(n.body))
-        case 'tbl': {
-          const thead = renderTableSection('thead', 'th', n.rows.slice(0, 1), indentLevel + 1)
-          const body = n.rows.slice(1)
-          const tbody = body.length
-            ? `\n${renderTableSection('tbody', 'td', body, indentLevel + 1)}`
-            : ''
-
-          return el('table', `\n${thead}${tbody}\n${i}`)
-        }
-        default:
-          throw new Error('Unexpected AST node: ' + (n as any).type)
-      }
-    })
-
-    return `${i}${lines.join(`\n${i}`)}`
+      })
+      .join('\n')
   }
 
-  function renderListItems(items: Ast.ListItem[], indentLevel: number): string {
-    const i = indent(indentLevel)
-
-    const lines = items.map(item => el('li', `\n${renderBlock(item.doc, indentLevel + 1)}\n${i}`))
-
-    return `${i}${lines.join(`\n${i}`)}`
-  }
-
-  function renderTableSection(
-    sectionTag: 'thead' | 'tbody',
-    cellTag: 'th' | 'td',
-    rows: Ast.Inline[][][],
-    indentLevel: number,
-  ): string {
-    const i = indent(indentLevel)
-
-    return `${i}${el(sectionTag, `\n${renderTableRows(cellTag, rows, indentLevel + 1)}\n${i}`)}`
-  }
-
-  function renderTableRows(
-    cellTag: 'th' | 'td',
-    rows: Ast.Inline[][][],
-    indentLevel: number,
-  ): string {
-    const i = indent(indentLevel)
-
-    const lines = rows.map(row =>
-      el('tr', `\n${renderTableCells(cellTag, row, indentLevel + 1)}\n${i}`),
-    )
-
-    return `${i}${lines.join(`\n${i}`)}`
-  }
-
-  function renderTableCells(tag: 'th' | 'td', cells: Ast.Inline[][], indentLevel: number): string {
-    const i = indent(indentLevel)
-
-    return cells.map(cell => `${i}${el(tag, renderInline(cell))}`).join('\n')
+  function renderTableRows(cellTag: 'th' | 'td', rows: Ast.Inline[][][]): string {
+    return rows
+      .map(row => {
+        const cells = row.map(cell => element(cellTag, renderInline(cell))).join('\n')
+        return elementMultiline('tr', cells)
+      })
+      .join('\n')
   }
 
   function renderInline(inlines: Ast.Inline[]): string {
@@ -108,26 +77,26 @@ export function htmlRenderer({
       .map(n => {
         switch (n.type) {
           case '':
-            return esc(n.txt)
+            return escape(n.txt)
           case 'cs':
-            return el('code', esc(n.txt))
+            return element('code', escape(n.txt))
           case 'br':
             return '<br/>'
           case 'i':
-            return el('i', renderInline(n.body))
+            return element('i', renderInline(n.body))
           case 'b':
-            return el('b', renderInline(n.body))
+            return element('b', renderInline(n.body))
           case 'a':
             return allowUnsafeHtml
-              ? el('a', renderInline(n.body), [['href', n.href]])
-              : '[' + renderInline(n.body) + ']' + esc('<' + n.href + '>')
+              ? element('a', renderInline(n.body), [['href', n.href]])
+              : '[' + renderInline(n.body) + ']' + escape('<' + n.href + '>')
           case 'img':
             return allowUnsafeHtml
-              ? el('img', null, [
+              ? element('img', null, [
                   ['alt', n.alt],
                   ['src', n.src],
                 ])
-              : esc('[' + n.alt + ']<' + n.src + '>')
+              : escape('[' + n.alt + ']<' + n.src + '>')
           default:
             throw new Error('Unexpected AST node: ' + (n as any).type)
         }
@@ -144,17 +113,22 @@ export function htmlRenderer({
   }
 }
 
-const esc = (txt: string) =>
+const escape = (txt: string) =>
   txt
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
 
-function el(tagName: string, body: string | null, attr: Array<[string, string]> = []) {
-  const attributes = attr.map(a => `${a[0]}="${esc(a[1])}"`).join(' ')
+const element = (
+  tagName: string,
+  body: string | null,
+  attributes: Array<[string, string]> = [],
+) => {
+  const attr = attributes.map(a => `${a[0]}="${escape(a[1])}"`).join(' ')
 
-  const start = `<${tagName}${attributes.length ? ' ' : ''}${attributes}`
+  const start = `<${tagName}${attr.length ? ' ' : ''}${attr}`
   const end = body !== null ? `>${body}</${tagName}>` : '/>'
+
   return start + end
 }

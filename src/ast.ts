@@ -93,7 +93,14 @@ export interface Paragraph {
   body: Inline[]
 }
 
-export type LeafBlock = ThematicBreak | Heading | HtmlBlock | CodeBlock | Table | Paragraph | Extension
+export type LeafBlock =
+  | ThematicBreak
+  | Heading
+  | HtmlBlock
+  | CodeBlock
+  | Table
+  | Paragraph
+  | Extension
 
 export type Block = ContainerBlock | LeafBlock
 

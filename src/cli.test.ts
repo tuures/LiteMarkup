@@ -9,9 +9,7 @@ test('multi-line input', () => {
 })
 
 test('links are textified by default', () => {
-  expect(runCli([], '[click](http://example.com)')).toBe(
-    '<p>[click]&lt;http://example.com&gt;</p>',
-  )
+  expect(runCli([], '[click](http://example.com)')).toBe('<p>[click]&lt;http://example.com&gt;</p>')
 })
 
 test('HTML blocks are textified by default', () => {
