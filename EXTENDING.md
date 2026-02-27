@@ -24,15 +24,15 @@ Core nodes use short `type` tags. Key field names:
 
 ### Inline nodes
 
-| Node       | `type`  | Key fields           |
-| ---------- | ------- | -------------------- |
-| Text       | `''`    | `txt`                |
-| Code span  | `'cs'`  | `txt`                |
-| Hard break | `'br'`  | —                    |
-| Italic     | `'i'`   | `body: Inline[]`     |
-| Bold       | `'b'`   | `body: Inline[]`     |
+| Node       | `type`  | Key fields               |
+| ---------- | ------- | ------------------------ |
+| Text       | `''`    | `txt`                    |
+| Code span  | `'cs'`  | `txt`                    |
+| Hard break | `'br'`  | —                        |
+| Italic     | `'i'`   | `body: Inline[]`         |
+| Bold       | `'b'`   | `body: Inline[]`         |
 | Link       | `'a'`   | `body: Inline[]`, `href` |
-| Image      | `'img'` | `alt`, `src`         |
+| Image      | `'img'` | `alt`, `src`             |
 
 ## Extension nodes
 
@@ -51,6 +51,7 @@ Core nodes use short `type` tags. Key field names:
 - [Emoji shortcodes](#emoji-shortcodes)
 - [Automatic URL linking](#automatic-url-linking)
 - [Table of contents generation](#table-of-contents-generation)
+- [Heading IDs (GFM-compatible slugs)](#heading-ids-gfm-compatible-slugs)
 - [Footnotes](#footnotes)
 - [Custom containers / admonitions](#custom-containers--admonitions)
 
@@ -126,10 +127,10 @@ Chain multiple transformations with flatMap — order can matter:
 import { parser } from 'litemarkup/parser'
 
 const parse = parser({
-  transformBlock: (node) => {
+  transformBlock: node => {
     return transformAlert(node).flatMap(transformTaskList)
   },
-  transformInline: (node) => {
+  transformInline: node => {
     return expandStrikethrough(node).flatMap(expandAutolink)
   },
 })
@@ -453,8 +454,7 @@ function renderInlines(inlines: (Inline | XStrikethrough)[]): string {
     .map(node => {
       switch (node.type) {
         case 'x': {
-          if (node.x === 'strikethrough')
-            return `<del>${renderInlines(node.body)}</del>`
+          if (node.x === 'strikethrough') return `<del>${renderInlines(node.body)}</del>`
           return ''
         }
         // ... other inline types
@@ -621,6 +621,84 @@ function inlinesToText(inlines: Inline[]): string {
     })
     .join('')
 }
+```
+
+---
+
+## Heading IDs (GFM-compatible slugs)
+
+Add `id` attributes to headings so that `## My Section` renders as `<h2 id="my-section">My Section</h2>`. This uses a GFM-compatible slugify algorithm and handles duplicate headings by appending `-1`, `-2`, etc.
+
+This is a **Pattern 2** recipe (custom renderer). Fork `html.ts` and modify the `renderBlock` function — there's no way to inject this from outside the renderer without awkward workarounds, and forking is the intended approach for renderer customisation.
+
+Add these helpers to your forked renderer:
+
+```ts
+/** GFM-compatible heading slug: lowercase, collapse whitespace to `-`, strip non-alphanumeric. */
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]/g, '')
+    .replace(/-+/g, '-')
+}
+
+/** Extract plain text from inline nodes (reuse from TOC recipe). */
+function inlinesToText(inlines: Ast.Inline[]): string {
+  return inlines
+    .map(n => {
+      switch (n.type) {
+        case '':
+          return n.txt
+        case 'b':
+        case 'i':
+        case 'a':
+          return inlinesToText(n.body)
+        default:
+          return ''
+      }
+    })
+    .join('')
+}
+```
+
+Then in your forked `htmlRenderer`, add a slug counter and update the `case 'h'` branch:
+
+```ts
+export function htmlRenderer(/* ... */) {
+  // ... existing setup ...
+
+  function renderBlock(blocks: Ast.Block[]): string {
+    const slugCounts = new Map<string, number>()
+
+    return blocks
+      .map(n => {
+        switch (n.type) {
+          // ... other cases unchanged ...
+          case 'h': {
+            const base = slugify(inlinesToText(n.body))
+            const count = slugCounts.get(base) ?? 0
+            slugCounts.set(base, count + 1)
+            const id = count === 0 ? base : `${base}-${count}`
+            return element(`h${n.level}`, renderInline(n.body), [['id', id]])
+          }
+          // ...
+        }
+      })
+      .join('\n')
+  }
+
+  // ...
+}
+```
+
+Example output:
+
+```
+## Hello world      →  <h2 id="hello-world">Hello world</h2>
+## Another          →  <h2 id="another">Another</h2>
+## Hello world      →  <h2 id="hello-world-1">Hello world</h2>
 ```
 
 ---
