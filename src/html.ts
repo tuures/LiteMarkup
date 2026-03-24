@@ -48,16 +48,18 @@ export function htmlRenderer({
               'pre',
               element('code', escape(n.txt), n.infoText ? [['data-infotext', n.infoText]] : []),
             )
-          case 'p':
-            return element('p', renderInline(n.body))
           case 'tbl': {
             const thead = elementMultiline('thead', renderTableRows('th', n.rows.slice(0, 1)))
             const tbody = elementMultiline('tbody', renderTableRows('td', n.rows.slice(1)))
 
             return elementMultiline('table', [thead, tbody].join('\n'))
           }
+          case 'p':
+            return element('p', renderInline(n.body))
+          case 'x':
+            return ''
           default:
-            throw new Error('Unexpected AST node: ' + (n as any).type)
+            return unknownNode(n)
         }
       })
       .join('\n')
@@ -97,8 +99,10 @@ export function htmlRenderer({
                   ['src', n.src],
                 ])
               : escape('[' + n.alt + ']<' + n.src + '>')
+          case 'x':
+            return ''
           default:
-            throw new Error('Unexpected AST node: ' + (n as any).type)
+            return unknownNode(n)
         }
       })
       .join('')
@@ -131,4 +135,8 @@ const element = (
   const end = body !== null ? `>${body}</${tagName}>` : '/>'
 
   return start + end
+}
+
+const unknownNode = (n: never): never => {
+  throw new Error('Unexpected AST node: ' + (n as any).type)
 }
