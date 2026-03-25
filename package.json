@@ -29,6 +29,7 @@
   ],
   "scripts": {
     "build": "tsdown",
+    "bench": "npm run build --silent && node scripts/bench.mjs",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "demopage": "node -e \"const h=require('http'),f=require('fs'),p=require('path');h.createServer((q,r)=>{let u=q.url;f.readFile('.'+u,(e,d)=>{r.setHeader('Content-Type',u.endsWith('.js')?'application/javascript':'text/html');r.end(d)})}).listen(8080,()=>console.log('http://localhost:8080/docs/demopage.html'))\""
   },

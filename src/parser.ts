@@ -20,7 +20,7 @@ function unescape(s: string): string {
 }
 
 function trim(s: string): string {
-  return s.replace(/^[ \t]+/, '').replace(/[ \t]+$/, '')
+  return s.replace(/^[ \t]+|[ \t]+$/g, '')
 }
 
 export function parser({ markdownMode, transformBlock, transformInline }: ParserOptions = {}): (
@@ -172,8 +172,8 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
 
   function splitTableRow(row: string): string[] {
     // Match each |cell| pair using the same cell-content alternation as the table regex.
-    // The trailing pipe produces one extra empty capture that we discard with slice(0, -1).
-    return [...row.matchAll(/\|((?:[^|\\\n]|\\.)*)/gs)].slice(0, -1).map(r => trim(r[1]))
+    // The trailing pipe produces one extra match that we discard with slice(0, -1).
+    return Array.from(row.matchAll(/\|((?:[^|\\\n]|\\.)*)/gs), m => trim(m[1])).slice(0, -1)
   }
 
   function normalizeTableRow(cells: string[], colCount: number): string[] {
@@ -493,6 +493,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
     while (remaining.length > 0) {
       // console.log(`remaining: "${remaining.substr(0, 200)}"`)
       let matchedLength = 0
+
       for (let rule of rules) {
         const preMatch = rule.pre ? rule.pre.exec(remaining) : emptyMatch
         matchedLength += preMatch ? preMatch[0].length : 0
