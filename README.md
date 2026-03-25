@@ -80,8 +80,9 @@ convertToHtml('Click [here]<javascript:alert(`You’ve been warned!`);>!', { all
 ## Syntax overview
 
 - ✅ **Headings** — `# H1` through `###### H6`
-- ✅ **Bold & Italic** — `*bold*` and `_italic_`
-  (or use [markdown mode](#markdown-compatibility-mode) for `**bold**` / `*italic*`)
+- ✅ **Bold, Italic & Strikethrough** — `*bold*`, `_italic_`, and `~deleted~`
+  (or use [markdown mode](#markdown-compatibility-mode) for `**bold**` / `*italic*` / `~~deleted~~`)
+
 - ✅ **Lists** — Ordered (`1.`) and unordered (`-` or `*`)
 - ✅ **Links** — `[text]<url>` or `[text](url)`
 - ✅ **Code** — Inline `` `code` `` and fenced blocks
@@ -126,16 +127,16 @@ import type { Block, Inline } from 'litemarkup/ast'
 
 ### Markdown compatibility mode
 
-By default, LiteMarkup uses `*bold*` and `_italic_`. Enable markdown mode for CommonMark-style emphasis:
+By default, LiteMarkup uses `*bold*`, `_italic_`, and `~deleted~`. Enable markdown mode for `**bold**`, `*italic*`, and `~~deleted~~`:
 
 ```typescript
 import { parser, htmlRenderer } from 'litemarkup'
 
 const parse = parser({ markdownMode: true })
 
-const ast = parse('Hello **world** and *italic*!')
+const ast = parse('Hello **world** and *italic* and ~~deleted~~!')
 const html = htmlRenderer()(ast)
-// → '<p>Hello <b>world</b> and <i>italic</i>!</p>'
+// → '<p>Hello <b>world</b> and <i>italic</i> and <del>deleted</del>!</p>'
 ```
 
 ### Transforming AST on-the-fly
@@ -321,15 +322,16 @@ LiteMarkup is designed to be forked and extended. The **[Extension Cookbook](./E
 
 ## Language tour
 
-````markdown
+````litemarkup
 # Heading 1
 
 ## Heading 2
 
 *This is bold*
 _This is italic_
+~This is deleted~
 
-In markdown mode: **bold** and _italic_
+In markdown mode: **bold**, _italic_, and ~~deleted~~
 
 1. Ordered list
 2. Second item
@@ -338,7 +340,7 @@ In markdown mode: **bold** and _italic_
 A [link](https://example.com) in text.
 
 | Feature          | Status |
-|------------------|--------|
+| ---------------- | ------ |
 | Basic formatting | ✅     |
 | Tables           | ✅     |
 | Simple API       | ✅     |

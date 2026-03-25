@@ -30,6 +30,11 @@ export interface Bold {
   body: Inline[]
 }
 
+export interface Strikethrough {
+  type: 's'
+  body: Inline[]
+}
+
 export interface Link {
   type: 'a'
   body: Inline[]
@@ -42,7 +47,16 @@ export interface Image {
   src: string
 }
 
-export type Inline = Text | CodeSpan | HardLineBreak | Italic | Bold | Link | Image | Extension
+export type Inline =
+  | Text
+  | CodeSpan
+  | HardLineBreak
+  | Italic
+  | Bold
+  | Strikethrough
+  | Link
+  | Image
+  | Extension
 
 export interface BlockQuote {
   type: 'bq'

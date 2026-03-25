@@ -37,11 +37,11 @@ Package exports: `litemarkup`, `litemarkup/parser`, `litemarkup/html`, `litemark
 
 ## AST node shapes
 
-Core nodes use short `type` tags: `''` (text), `a`, `b`, `bq`, `br`, `cb`, `cs`, `h`, `hr`, `htm`, `i`, `img`, `l`, `li`, `p`, `tbl`.
+Core nodes use short `type` tags: `''` (text), `a`, `b`, `bq`, `br`, `cb`, `cs`, `h`, `hr`, `htm`, `i`, `img`, `l`, `li`, `p`, `s`, `tbl`.
 
 Field conventions:
 
-- `body` — inline children (on `p`, `h`, `i`, `b`, `a`)
+- `body` — inline children (on `p`, `h`, `i`, `b`, `s`, `a`)
 - `doc` — nested block children (on `bq`, `li`)
 - `txt` — text content (on text `''`, `cs`, `cb`)
 - `raw` — raw HTML (on `htm`)

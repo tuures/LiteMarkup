@@ -24,15 +24,16 @@ Core nodes use short `type` tags. Key field names:
 
 ### Inline nodes
 
-| Node       | `type`  | Key fields               |
-| ---------- | ------- | ------------------------ |
-| Text       | `''`    | `txt`                    |
-| Code span  | `'cs'`  | `txt`                    |
-| Hard break | `'br'`  | —                        |
-| Italic     | `'i'`   | `body: Inline[]`         |
-| Bold       | `'b'`   | `body: Inline[]`         |
-| Link       | `'a'`   | `body: Inline[]`, `href` |
-| Image      | `'img'` | `alt`, `src`             |
+| Node          | `type`  | Key fields               |
+| ------------- | ------- | ------------------------ |
+| Text          | `''`    | `txt`                    |
+| Code span     | `'cs'`  | `txt`                    |
+| Hard break    | `'br'`  | —                        |
+| Italic        | `'i'`   | `body: Inline[]`         |
+| Bold          | `'b'`   | `body: Inline[]`         |
+| Strikethrough | `'s'`   | `body: Inline[]`         |
+| Link          | `'a'`   | `body: Inline[]`, `href` |
+| Image         | `'img'` | `alt`, `src`             |
 
 ## Extension nodes
 
@@ -131,7 +132,7 @@ const parse = parser({
     return transformAlert(node).flatMap(transformTaskList)
   },
   transformInline: node => {
-    return expandStrikethrough(node).flatMap(expandAutolink)
+    return expandMarkedText(node).flatMap(expandAutolink)
   },
 })
 ```
@@ -397,71 +398,6 @@ function renderBlocks(blocks: Block[]): string {
 - [x] Completed task
 - [ ] Incomplete task
 - Regular list item
-```
-
----
-
-## Strikethrough
-
-Wrap text in `~~deleted~~` to produce `<del>deleted</del>`.
-
-**Strategy:** `transformInline` hook — split text nodes containing `~~...~~` into text and `x`/`strikethrough` nodes.
-
-```ts
-import type { Inline } from 'litemarkup/ast'
-
-interface XStrikethrough {
-  type: 'x'
-  x: 'strikethrough'
-  body: Inline[]
-}
-
-const STRIKE_RE = /~~(.+?)~~/g
-
-function expandStrikethrough(node: Inline): (Inline | XStrikethrough)[] {
-  if (node.type !== '') return [node]
-
-  const parts: (Inline | XStrikethrough)[] = []
-  let last = 0
-
-  for (const m of node.txt.matchAll(STRIKE_RE)) {
-    if (m.index! > last) {
-      parts.push({ type: '', txt: node.txt.slice(last, m.index!) })
-    }
-    parts.push({
-      type: 'x',
-      x: 'strikethrough',
-      body: [{ type: '', txt: m[1] }],
-    })
-    last = m.index! + m[0].length
-  }
-
-  if (last === 0) return [node]
-  if (last < node.txt.length) {
-    parts.push({ type: '', txt: node.txt.slice(last) })
-  }
-  return parts
-}
-
-const parse = parser({ transformInline: expandStrikethrough })
-```
-
-Renderer — add to your `renderInlines`:
-
-```ts
-function renderInlines(inlines: (Inline | XStrikethrough)[]): string {
-  return inlines
-    .map(node => {
-      switch (node.type) {
-        case 'x': {
-          if (node.x === 'strikethrough') return `<del>${renderInlines(node.body)}</del>`
-          return ''
-        }
-        // ... other inline types
-      }
-    })
-    .join('')
-}
 ```
 
 ---

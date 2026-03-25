@@ -170,24 +170,27 @@ Escapable characters: ``- ! " # $ % & ' ( ) * + , . : ; < = > ? @ ^ _ ` { | } ~ 
 
 The backslash is removed and the character is rendered literally.
 
-### Emphasis (LiteMarkup Mode)
+### Emphasis (LiteMarkup mode)
 
 *ITALIC* = `_` + content + `_`\
-*BOLD* = `*` + content + `*`
+*BOLD* = `*` + content + `*`\
+*STRIKETHROUGH* = `~` + content + `~`
 
 Content cannot contain unescaped backticks.
 
 Examples:
 - `_italic_` → italic
 - `*bold*` → bold
+- `~deleted~` → strikethrough
 - `*bold with _italic_ inside*`
 
-### Emphasis (Markdown Mode)
+### Emphasis (markdown mode)
 
 When `markdownMode: true`:
 
 *ITALIC* = `_` or `*` + content + same delimiter\
-*BOLD* = `__` or `**` + content + same delimiter
+*BOLD* = `__` or `**` + content + same delimiter\
+*STRIKETHROUGH* = `~~` + content + `~~`
 
 ### Link
 

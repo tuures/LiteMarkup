@@ -9,6 +9,8 @@ const p1 = (i: Ast.Inline): Ast.Paragraph => ({ type: 'p' as const, body: [i] })
 const txt = (t: string) => ({ type: '' as const, txt: t })
 const ptxt = (t: string) => ({ type: 'p' as const, body: [txt(t)] })
 const atxt = (t: string, href: string) => ({ type: 'a' as const, body: [txt(t)], href })
+const renderLm = (src: string) => convertToHtml(src)
+const renderMd = (src: string) => convertToHtml(src, { markdownMode: true })
 
 test('basic', () => {
   const src = `
@@ -121,6 +123,8 @@ a*bold*
 
 _italic_s
 
+~deleted~
+
 _*mixed order, first marker (in this case italic) wins_*
 
 \\!\\"\\#\\$\\%\\&\\'\\(\\)\\*\\+\\,\\-\\.\\/\\:\\;\\<\\=\\>\\?\\@\\[\\\\\\]\\^\\_\\\`\\{\\|\\}\\~
@@ -179,6 +183,8 @@ __I'm bold too__
 
 _I'm italic_
 *I'm italic too*
+
+~~deleted~~
 
 _*mixed order, first marker (in this case italic) wins_*
 
@@ -418,6 +424,60 @@ test('extra asterisks doesn’t produce nested emphasis', () => {
   expect(ast).toMatchSnapshot()
 })
 
+test('strikethrough nests inline formatting in both modes', () => {
+  expect(renderLm('~*bold* text~')).toEqual('<p><del><b>bold</b> text</del></p>')
+  expect(renderMd('~~**bold** text~~')).toEqual('<p><del><b>bold</b> text</del></p>')
+})
+
+test('strikethrough can appear inside other formatting in both modes', () => {
+  expect(renderLm('*~bold deleted~*')).toEqual('<p><b><del>bold deleted</del></b></p>')
+  expect(renderMd('**~~bold deleted~~**')).toEqual('<p><b><del>bold deleted</del></b></p>')
+})
+
+test('escaped tilde does not close strikethrough in LiteMarkup mode', () => {
+  expect(renderLm('~not\\~done~')).toEqual('<p><del>not~done</del></p>')
+})
+
+test('escaped tilde does not close strikethrough in markdown mode', () => {
+  expect(renderMd('~~not\\~~done~~')).toEqual('<p><del>not~~done</del></p>')
+})
+
+test('extra trailing tilde falls back to text in LiteMarkup mode', () => {
+  expect(renderLm('~foo~bar~')).toEqual('<p><del>foo</del>bar~</p>')
+})
+
+test('extra trailing double tilde falls back to text in markdown mode', () => {
+  expect(renderMd('~~foo~~bar~~')).toEqual('<p><del>foo</del>bar~~</p>')
+})
+
+test('double tilde parses the innermost strikethrough in LiteMarkup mode', () => {
+  expect(renderLm('~~a~~')).toEqual('<p>~<del>a</del>~</p>')
+})
+
+test('empty strikethrough falls back to text in LiteMarkup mode', () => {
+  expect(renderLm('~~')).toEqual('<p>~~</p>')
+})
+
+test('unmatched tilde falls back to text in LiteMarkup mode', () => {
+  expect(renderLm('~not closed')).toEqual('<p>~not closed</p>')
+})
+
+test('single tilde is plain text in markdown mode', () => {
+  expect(renderMd('~not deleted~')).toEqual('<p>~not deleted~</p>')
+})
+
+test('single tilde inside markdown strikethrough stays literal', () => {
+  expect(renderMd('~~foo~bar~~')).toEqual('<p><del>foo~bar</del></p>')
+})
+
+test('empty strikethrough falls back to text in markdown mode', () => {
+  expect(renderMd('~~~~')).toEqual('<p>~~~~</p>')
+})
+
+test('unmatched double tilde falls back to text in markdown mode', () => {
+  expect(renderMd('~~not closed')).toEqual('<p>~~not closed</p>')
+})
+
 test('many alternating formatting chars', () => {
   const src = '_*'.repeat(50) + 'a' + '*_'.repeat(50)
   const ast = parser()(src)
@@ -651,7 +711,7 @@ test('codespan cannot span multiple lines', () => {
 
 test('escaped characters in code spans', () => {
   const src = '`\\*not special\\*`'
-  const html = convertToHtml(src)
+  const html = renderLm(src)
   expect(html).toContain('<code>\\*not special\\*</code>')
 })
 

@@ -73,6 +73,7 @@ const text = { type: '', txt: 'hello' }
 
 - **AST transform hooks** — `parser({ transformBlock, transformInline })` lets you modify nodes during parsing without forking the parser or writing a separate walker
 - **`allowUnsafeHtml` option** — opt-in to render raw HTML blocks, links, and images via `htmlRenderer({ allowUnsafeHtml: true })` or `convertToHtml(src, { allowUnsafeHtml: true })`
+- **Built-in strikethrough** — use `~deleted~` in LiteMarkup mode or `~~deleted~~` in markdown mode; renders to the inline AST node `type: 's'` and HTML `<del>...</del>`
 - **Separate imports** — import only the parser or renderer to reduce bundle size:
   ```ts
   import { parser } from 'litemarkup/parser'

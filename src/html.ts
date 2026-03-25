@@ -88,6 +88,8 @@ export function htmlRenderer({
             return element('i', renderInline(n.body))
           case 'b':
             return element('b', renderInline(n.body))
+          case 's':
+            return element('del', renderInline(n.body))
           case 'a':
             return allowUnsafeHtml
               ? element('a', renderInline(n.body), [['href', n.href]])

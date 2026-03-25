@@ -267,6 +267,13 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
         body: parseInline(r[1]),
       }),
     },
+    {
+      re: /^~((?:[^\\~`]|\\.)+)~/s,
+      mkNode: r => ({
+        type: 's',
+        body: parseInline(r[1]),
+      }),
+    },
   ]
 
   const markdownIb: SimpleRule<Ast.Inline>[] = [
@@ -305,6 +312,13 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
       mkNode: r => ({
         type: 'i',
         body: parseInline(r[2]),
+      }),
+    },
+    {
+      re: /^~~((?:(?!~~)[^\\`]|\\.)+)~~/s,
+      mkNode: r => ({
+        type: 's',
+        body: parseInline(r[1]),
       }),
     },
   ]
@@ -461,7 +475,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
        *
        * Pattern breakdown:
        *
-       * (?:.(?![`\\_*\[!]))*
+       * (?:.(?![`\\_*\[!~]))*
        *
        *     Greedily match characters as long as the next character is not a special starter that can start an inline
        *     construct (code span, escaped char, emphasis, link, image). Note that the last character before the special
@@ -474,7 +488,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
        *     actually starting a valid inline construct. For example a single underscore that is not followed by valid
        *     emphasis text will be consumed as a plain text character by this part of the regex.
        */
-      re: /^(?:.(?![`\\_*\[!]))*(?:.|$)/s,
+      re: /^(?:.(?![`\\_*\[!~]))*(?:.|$)/s,
       mkNode: r => ({
         type: '',
         txt: r[0],
