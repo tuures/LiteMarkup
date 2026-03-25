@@ -1,6 +1,6 @@
 {
   "name": "litemarkup",
-  "version": "0.1.10",
+  "version": "1.0.0",
   "description": "Unbloated Markdown-like markup language",
   "type": "module",
   "exports": {
@@ -33,7 +33,15 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "demopage": "node -e \"const h=require('http'),f=require('fs'),p=require('path');h.createServer((q,r)=>{let u=q.url;f.readFile('.'+u,(e,d)=>{r.setHeader('Content-Type',u.endsWith('.js')?'application/javascript':'text/html');r.end(d)})}).listen(8080,()=>console.log('http://localhost:8080/docs/demopage.html'))\""
   },
-  "keywords": ["markdown", "markup", "parser", "html", "typescript", "simple", "lightweight"],
+  "keywords": [
+    "markdown",
+    "markup",
+    "parser",
+    "html",
+    "typescript",
+    "simple",
+    "lightweight"
+  ],
   "homepage": "https://tuures.github.io/LiteMarkup/",
   "repository": "github:tuures/LiteMarkup",
   "license": "MIT",
