@@ -22,7 +22,7 @@
     }
   },
   "bin": {
-    "litemarkup": "./dist/cli.mjs"
+    "litemarkup": "dist/cli.mjs"
   },
   "files": [
     "dist"
@@ -43,7 +43,10 @@
     "lightweight"
   ],
   "homepage": "https://tuures.github.io/LiteMarkup/",
-  "repository": "github:tuures/LiteMarkup",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuures/LiteMarkup.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^30.0.0",
