@@ -896,6 +896,7 @@ That's it! Simple, clean, and powerful.`,
 
       // State
       let mdMode = false
+      const loadingExamples = {}
 
       // Prefetch example files on page load
       const filesToFetch = {
@@ -903,22 +904,49 @@ That's it! Simple, clean, and powerful.`,
         readme: '../README.md',
       }
 
-      Object.entries(filesToFetch).forEach(([key, path]) => {
-        fetch(path)
-          .then(res => (res.ok ? res.text() : null))
-          .then(text => {
-            examples[key] = text
-          })
-          .catch(() => {})
+      Object.entries(filesToFetch).forEach(([key]) => {
+        ensureExampleLoaded(key)
       })
+
+      function ensureExampleLoaded(name) {
+        if (examples[name]) return Promise.resolve(examples[name])
+
+        const path = filesToFetch[name]
+        if (!path) return Promise.resolve(null)
+
+        if (!loadingExamples[name]) {
+          loadingExamples[name] = fetch(path)
+            .then(res => (res.ok ? res.text() : null))
+            .then(text => {
+              if (text) examples[name] = text
+              return text
+            })
+            .catch(() => null)
+            .finally(() => {
+              delete loadingExamples[name]
+            })
+        }
+
+        return loadingExamples[name]
+      }
 
       // Load example content
       function loadExample(name) {
+        mdMode = name === 'readme'
+        mdModeToggle.checked = mdMode
+
         const content = examples[name]
         if (content) {
           editor.value = content
           updateViews()
+          return
         }
+
+        ensureExampleLoaded(name).then(loaded => {
+          if (!loaded) return
+          editor.value = loaded
+          updateViews()
+        })
       }
 
       // Theme
@@ -1044,7 +1072,7 @@ That's it! Simple, clean, and powerful.`,
       })
 
       // Initialize with default example
-      loadExample('basics')
+      loadExample('readme')
     </script>
   </body>
 </html>
