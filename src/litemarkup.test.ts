@@ -983,6 +983,29 @@ test('table: header only (no body rows)', () => {
   expect(html).toMatchSnapshot()
 })
 
+test('table: header only (no body rows), EOF after delimiter', () => {
+  const src = `
+| A |
+| - |`
+  const ast = parser()(src)
+  expect(ast[0]).toMatchObject({ type: 'tbl', rows: [[[txt('A')]]] })
+  expect(ast).toMatchSnapshot()
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
+  expect(html).toMatchSnapshot()
+})
+
+test('table: EOF after last row', () => {
+  const src = `
+| A |
+| - |
+| 1 |`
+  const ast = parser()(src)
+  expect(ast[0]).toMatchObject({ type: 'tbl', rows: [[[txt('A')]], [[txt('1')]]] })
+  expect(ast).toMatchSnapshot()
+  const html = htmlRenderer({ allowUnsafeHtml: true })(ast)
+  expect(html).toMatchSnapshot()
+})
+
 test('table: single column', () => {
   const src = `
 | A |

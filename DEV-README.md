@@ -52,7 +52,7 @@ Add a failing test first for parser/renderer changes. Re-run the suite after cha
 
 - `npm run build`
 - `npm version patch|minor|major`
-- `npm publish`
 - `git push --tags`
+- `npm publish`
 - Make release in GitHub
 - Update demopage to use the new release

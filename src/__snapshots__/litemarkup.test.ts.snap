@@ -4213,6 +4213,47 @@ exports[`spaces inside codespans 2`] = `
 <p>h <code>\` x \`</code>3 codespan that results in backtick, space, x, space, and backtick</p>"
 `;
 
+exports[`table: EOF after last row 1`] = `
+[
+  {
+    "rows": [
+      [
+        [
+          {
+            "txt": "A",
+            "type": "",
+          },
+        ],
+      ],
+      [
+        [
+          {
+            "txt": "1",
+            "type": "",
+          },
+        ],
+      ],
+    ],
+    "type": "tbl",
+  },
+]
+`;
+
+exports[`table: EOF after last row 2`] = `
+"<table>
+  <thead>
+    <tr>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>"
+`;
+
 exports[`table: escaped pipe in cell 1`] = `
 [
   {
@@ -4273,6 +4314,35 @@ exports[`table: header only (no body rows) 1`] = `
 `;
 
 exports[`table: header only (no body rows) 2`] = `
+"<table>
+  <thead>
+    <tr>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>"
+`;
+
+exports[`table: header only (no body rows), EOF after delimiter 1`] = `
+[
+  {
+    "rows": [
+      [
+        [
+          {
+            "txt": "A",
+            "type": "",
+          },
+        ],
+      ],
+    ],
+    "type": "tbl",
+  },
+]
+`;
+
+exports[`table: header only (no body rows), EOF after delimiter 2`] = `
 "<table>
   <thead>
     <tr>

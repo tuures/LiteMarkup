@@ -194,17 +194,17 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
      *     or newline, or any backslash-escaped character. This allows escaped pipes \| in cell content.
      *     Trailing whitespace after the last pipe is consumed but not captured.
      *
-     * (\|(?:[ \t]*-[-\t ]*\|)+)[ \t]*\n
+     * (\|(?:[ \t]*-[-\t ]*\|)+)[ \t]*(?:$|\n)
      *
      *     The delimiter row: pipe-separated cells containing at least one dash and optional surrounding
      *     whitespace.
      *
-     * ((?:\|(?:(?:[^|\\\n]|\\.)*\|)+[ \t]*\n)*)
+     * ((?:\|(?:(?:[^|\\\n]|\\.)*\|)+[ \t]*(?:$|\n))*)
      *
      *     Zero or more body rows with the same structural rules as the header row. The regex does not
      *     enforce column count — normalization is handled in mkNode.
      */
-    re: /^(\|(?:(?:[^|\\\n]|\\.)*\|)+)[ \t]*\n(\|(?:[ \t]*-[-\t ]*\|)+)[ \t]*\n((?:\|(?:(?:[^|\\\n]|\\.)*\|)+[ \t]*\n)*)/s,
+    re: /^(\|(?:(?:[^|\\\n]|\\.)*\|)+)[ \t]*\n(\|(?:[ \t]*-[-\t ]*\|)+)[ \t]*(?:$|\n)((?:\|(?:(?:[^|\\\n]|\\.)*\|)+[ \t]*(?:$|\n))*)/s,
     mkNode: r => {
       const headerCells = splitTableRow(r[1])
       const delimCells = splitTableRow(r[2])
