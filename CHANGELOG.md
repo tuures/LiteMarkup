@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.1
+
+- **Fix table parsing at EOF** — fixed a parser bug where table parsing could fail when the input ended immediately after the delimiter row or last table row (no trailing newline)
+
 ## v1.0.0
 
 ### Breaking changes

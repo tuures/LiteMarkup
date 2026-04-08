@@ -1,6 +1,6 @@
 {
   "name": "litemarkup",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Unbloated Markdown-like markup language",
   "type": "module",
   "exports": {
