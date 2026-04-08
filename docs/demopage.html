@@ -32,7 +32,7 @@
         --success: #10b981;
         --code-bg: #f8fafc;
         --code-text: #6366f1;
-        --code-block-bg: #f1f5f9;
+        --code-block-bg: #f8fafc;
         --code-block-text: #334155;
         --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
         --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
@@ -57,7 +57,7 @@
         --border-focus: #818cf8;
         --code-bg: #1e293b;
         --code-text: #a5b4fc;
-        --code-block-bg: #0f172a;
+        --code-block-bg: #1e293b;
         --code-block-text: #e2e8f0;
         --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
         --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
@@ -84,7 +84,7 @@
           sans-serif;
         background: var(--bg-secondary);
         color: var(--text-primary);
-        line-height: 1.6;
+        line-height: 1.5;
       }
 
       .app {
@@ -336,8 +336,8 @@
         height: 100%;
         padding: 16px;
         font-family: 'JetBrains Mono', monospace;
-        font-size: 14px;
-        line-height: 1.7;
+        font-size: 13px;
+        line-height: 1.5;
         background: var(--bg-editor);
         color: var(--text-editor);
         border: none;
@@ -363,8 +363,8 @@
 
       .html-preview {
         padding: 24px;
-        font-size: 15px;
-        line-height: 1.7;
+        font-size: 14px;
+        line-height: 1.5;
       }
 
       .html-preview h1,
@@ -407,7 +407,7 @@
       }
 
       .html-preview p {
-        margin: 1em 0;
+        margin: 0.5em 0;
       }
 
       .html-preview a {
@@ -431,12 +431,23 @@
         border-radius: var(--radius);
         overflow-x: auto;
         margin: 1em 0;
+        position: relative;
       }
 
       .html-preview pre code {
         background: transparent;
         color: inherit;
         padding: 0;
+      }
+
+      .html-preview pre code::before {
+        content: attr(data-infotext);
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 10px;
+        padding: 4px 8px;
+        color: var(--text-muted);
       }
 
       .html-preview blockquote {
@@ -454,12 +465,12 @@
 
       .html-preview ul,
       .html-preview ol {
-        margin: 1em 0;
+        margin: 0;
         padding-left: 1.5em;
       }
 
       .html-preview li {
-        margin: 0.25em 0;
+        margin: 0;
       }
 
       .html-preview hr {
@@ -487,7 +498,7 @@
         padding: 16px;
         font-family: 'JetBrains Mono', monospace;
         font-size: 13px;
-        line-height: 1.7;
+        line-height: 1.5;
         white-space: pre-wrap;
         word-break: break-all;
         background: var(--bg-editor);
@@ -499,7 +510,7 @@
         padding: 16px;
         font-family: 'JetBrains Mono', monospace;
         font-size: 12px;
-        line-height: 1.6;
+        line-height: 1.3;
         white-space: pre-wrap;
         background: var(--bg-secondary);
         min-height: 100%;
@@ -751,7 +762,7 @@ Here's a [link to GitHub](https://github.com).
 
 Images work too:
 
-![Placeholder](https://via.placeholder.com/400x200/6366f1/ffffff?text=LiteMarkup)
+![LiteMarkup Logo](https://tuures.github.io/LiteMarkup/docs/logo.svg)
 
 Links can be *styled* like [_this italic link_](https://example.com).`,
 
@@ -938,14 +949,28 @@ That's it! Simple, clean, and powerful.`,
           .replace(/"/g, '&quot;')
       }
 
+      // Sanitize URLs: only allow explicit http(s) URLs in rendered links and images
+      const sanitizeUrl = url => (/^https?:\/\//i.test(url) ? url : '')
+
       // Update views
       let updateTimer = null
       function updateViews() {
         clearTimeout(updateTimer)
         updateTimer = setTimeout(() => {
           const value = editor.value
-          const ast = litemarkup.parser({ markdownMode: mdMode })(value)
-          const html = litemarkup.htmlRenderer()(ast)
+          const ast = litemarkup.parser({
+            markdownMode: mdMode,
+            transformBlock: node => {
+              if (node.type === 'htm') return [{ type: 'p', body: [{ type: '', txt: node.raw }] }]
+              return [node]
+            },
+            transformInline: node => {
+              if (node.type === 'a') return [{ ...node, href: sanitizeUrl(node.href) }]
+              if (node.type === 'img') return [{ ...node, src: sanitizeUrl(node.src) }]
+              return [node]
+            },
+          })(value)
+          const html = litemarkup.htmlRenderer({ allowUnsafeHtml: true })(ast)
 
           previewView.innerHTML = html
           previewView.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(el => {
