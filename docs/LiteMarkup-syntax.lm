@@ -1,4 +1,4 @@
-# LiteMarkup Syntax (version: unreleased)
+# LiteMarkup Syntax (version: 0.1)
 
 ## Primitives
 
@@ -10,7 +10,7 @@
 - *WS* = one or more *SPACE* or *TAB*
 - *INDENT* = 0-3 spaces
 
-A `?` suffix indicates the element is optional (e.g., *WS*? means zero or more whitespace).
+A `?` suffix indicates the element is optional (e.g., *WS*? means optional whitespace).
 
 ## Document Structure
 
@@ -69,7 +69,7 @@ The indent of the opening fence is stripped from each content line. The final ne
 
 ### Table
 
-*TABLE* = *HEADERROW* + *LF* + *DELIMITERROW* + *LF* + zero or more (*BODYROW* + *LF*)
+*TABLE* = *HEADERROW* + *LF* + *DELIMITERROW* + *EOL* + zero or more (*BODYROW* + *EOL*)
 
 *HEADERROW* = `|` + one or more (*CELLCONTENT* + `|`) + *WS*?
 
@@ -148,7 +148,7 @@ Paragraph content is parsed as inline.
 
 ## Inline Elements
 
-Inline parsing applies to heading content and paragraph content. Inline rules are matched in the order listed below; the first matching rule wins.
+Inline parsing applies to heading content, paragraph content, and table cell content. Inline rules are matched in the order listed below; the first matching rule wins.
 
 ### Code Span
 
