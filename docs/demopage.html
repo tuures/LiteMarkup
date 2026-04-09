@@ -1007,7 +1007,7 @@ That's it! Simple, clean, and powerful.`,
       }
 
       // Sanitize URLs: only allow explicit http(s) URLs in rendered links and images
-      const sanitizeUrl = url => (/^https?:\/\//i.test(url) ? url : '')
+      const sanitizeUrl = url => (/^#|https?:\/\//i.test(url) ? url : '')
 
       // Update views
       let updateTimer = null
