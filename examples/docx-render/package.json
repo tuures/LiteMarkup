@@ -1,0 +1,14 @@
+{
+  "name": "docx-render-example",
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-strip-types index.ts"
+  },
+  "dependencies": {
+    "docx": "^9.0.0",
+    "litemarkup": "file:../../"
+  },
+  "devDependencies": {
+    "tsx": "^4.0.0"
+  }
+}
