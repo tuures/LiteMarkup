@@ -176,6 +176,10 @@ The backslash is removed and the character is rendered literally.
 *BOLD* = `*` + content + `*`\
 *STRIKETHROUGH* = `~` + content + `~`
 
+For emphasis delimiters (`_`, `*`, `~`) to open and close, they must be adjacent to non-space content:
+- opening delimiter must not be followed by a space
+- closing delimiter must not be preceded by a space
+
 Content cannot contain unescaped backticks.
 
 Examples:
@@ -191,6 +195,8 @@ When `markdownMode: true`:
 *ITALIC* = `_` or `*` + content + same delimiter\
 *BOLD* = `__` or `**` + content + same delimiter\
 *STRIKETHROUGH* = `~~` + content + `~~`
+
+The same non-space-adjacent delimiter rule applies in markdown mode.
 
 ### Link
 

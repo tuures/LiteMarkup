@@ -240,35 +240,43 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
      *
      * Pattern breakdown:
      *
+     * _(?! )
+     *
+     *     First we match the opening marker (asterisk/underscore/tilde).
+     *     The opening marker must be followed by a non-space character.
+     *
+     * (?=((?:[^\\_`]|\\.|(?<= )_)+))\1
+     *
+     *     Then we match the content of the emphasis. The first part of the alternation matches any character except
+     *     backslash, closing marker or a backtick, and the second part matches any character escaped with a backslash.
+     *     The third part of the alternation consumes a closing marker that is preceded by a space, because the closing
+     *     marker is required to be preceded by a non-space character.
+     *
+     *     The entire content pattern is captured inside a lookahead into capture group 1 which is then immediately
+     *     matched to consume those characters. This mechanism prevents backtracking of the content match if the closing
+     *     marker is not found.
+     *
      * _
      *
-     *     First we match the opening marker which can be either an asterisk for bold or an underscore for italic.
-     *
-     * ((?:[^\\_`]|\\.)+)
-     *
-     *     Then we match the content of the emphasis. The left side of the alternation matches any character except
-     *     backslash, closing marker or a backtick, and the right side matches any character escaped with a backslash.
-     *
-     * _
-     *
-     *     Finally we match the corresponding closing marker.
+     *     Finally we match the corresponding closing marker. Since the content parsing captures any closing markers
+     *     preceded by a space, it's guaranteed that the closing marker is preceded by a non-space character.
      */
     {
-      re: /^_((?:[^\\_`]|\\.)+)_/s,
+      re: /^_(?! )(?=((?:[^\\_`]|\\.|(?<= )_)+))\1_/s,
       mkNode: r => ({
         type: 'i',
         body: parseInline(r[1]),
       }),
     },
     {
-      re: /^\*((?:[^\\*`]|\\.)+)\*/s,
+      re: /^\*(?! )(?=((?:[^\\*`]|\\.|(?<= )\*)+))\1\*/s,
       mkNode: r => ({
         type: 'b',
         body: parseInline(r[1]),
       }),
     },
     {
-      re: /^~((?:[^\\~`]|\\.)+)~/s,
+      re: /^~(?! )(?=((?:[^\\~`]|\\.|(?<= )~)+))\1~/s,
       mkNode: r => ({
         type: 's',
         body: parseInline(r[1]),
@@ -282,40 +290,46 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
      *
      * Pattern breakdown for the bold matcher:
      *
-     * (?=([_*]))\1\1
+     * (?=([_*]))\1\1(?! )
      *
      *     The lookahead captures the marker character (* or _) without consuming it. Then \1\1 consumes
      *     two of that character as the opening delimiter. The lookahead prevents backtracking from trying
      *     a single-character match when no closing double marker is found — the same technique used in
-     *     the code span matcher.
+     *     the code span matcher. The opening marker must be followed by a non-space character.
      *
-     * ((?:(?!\1\1)[^\\`]|\\.)+)
+     * (?=((?:(?!\1\1)[^\\`]|\\.|(?<= )\1\1)+))\2
      *
-     *     Content of the bold span. Each character is checked with a negative lookahead to ensure we
-     *     haven't reached the closing double marker. The left side of the alternation matches any
-     *     character except backslash, backtick or the closing delimiter, and the right side matches
-     *     backslash-escaped characters verbatim. Backticks are excluded so that code spans take priority.
+     *     Then we match the content of the emphasis. The first part of the alternation matches any character except
+     *     backslash, backtick or the closing delimiter. Each character is also checked with a negative lookahead to
+     *     ensure we haven't reached the closing double marker. The second alternative matches backslash-escaped
+     *     characters verbatim. The third part of the alternation consumes a closing marker that is preceded by a
+     *     space, because the closing marker is required to be preceded by a non-space character.
+     *
+     *     The entire content is captured inside a lookahead into capture group 2 which is then immediately matched to
+     *     consume those characters. This mechanism prevents backtracking of the content match if the closing marker is
+     *     not found.
      *
      * \1\1
      *
-     *     The closing double marker, matching the same character as the opening.
+     *     Finally we match the corresponding closing marker. Since the content parsing captures any closing markers
+     *     preceded by a space, it's guaranteed that the closing marker is preceded by a non-space character.
      */
     {
-      re: /^(?=([_*]))\1\1((?:(?!\1\1)[^\\`]|\\.)+)\1\1/s,
+      re: /^(?=([_*]))\1\1(?! )(?=((?:(?!\1\1)[^\\`]|\\.|(?<= )\1\1)+))\2\1\1/s,
       mkNode: r => ({
         type: 'b',
         body: parseInline(r[2]),
       }),
     },
     {
-      re: /^([_*])((?:(?!\1)[^\\`]|\\.)+)\1/s,
+      re: /^([_*])(?! )(?=((?:(?!\1)[^\\`]|\\.|(?<= )\1)+))\2\1/s,
       mkNode: r => ({
         type: 'i',
         body: parseInline(r[2]),
       }),
     },
     {
-      re: /^~~((?:(?!~~)[^\\`]|\\.)+)~~/s,
+      re: /^~~(?! )(?=((?:(?!~~)[^\\`]|\\.|(?<= )~~)+))\1~~/s,
       mkNode: r => ({
         type: 's',
         body: parseInline(r[1]),

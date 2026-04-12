@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Require non-space-adjacent emphasis delimiters** — bold, italic, and strikethrough delimiters must hug non-space content (no space after opening or before closing delimiter), to avoid false positives like `~10 minutes in ~200 degrees` while still allowing intraword emphasis (for example `work_s_`, `with_in_s`).
+
 ## v1.0.1
 
 - **Fix table parsing at EOF** — fixed a parser bug where table parsing could fail when the input ended immediately after the delimiter row or last table row (no trailing newline)

@@ -1079,7 +1079,7 @@ closing tag must be followed by empty line or end of file
   {
     "body": [
       {
-        "txt": "_not bold start",
+        "txt": "_not italic start",
         "type": "",
       },
     ],
@@ -1088,7 +1088,89 @@ closing tag must be followed by empty line or end of file
   {
     "body": [
       {
-        "txt": "not bold ending_",
+        "txt": "not italic ending_",
+        "type": "",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "txt": "italic with _space closes at the end",
+            "type": "",
+          },
+        ],
+        "type": "i",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
+        "txt": "_not italic _as closing missing",
+        "type": "",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "txt": "italic underscore _",
+            "type": "",
+          },
+        ],
+        "type": "i",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "txt": "italic underscore and non-italic underscore _",
+            "type": "",
+          },
+        ],
+        "type": "i",
+      },
+      {
+        "txt": "_",
+        "type": "",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
+        "body": [
+          {
+            "txt": "italic underscore and 2x non-italic underscore _",
+            "type": "",
+          },
+        ],
+        "type": "i",
+      },
+      {
+        "txt": "__",
+        "type": "",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
+        "txt": "empty content is not valid italic __",
         "type": "",
       },
     ],
@@ -1244,6 +1326,24 @@ closing tag must be followed by empty line or end of file
           },
         ],
         "type": "b",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
+        "txt": "_not italic_",
+        "type": "",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
+        "txt": "*not bold*",
+        "type": "",
       },
     ],
     "type": "p",
@@ -1592,8 +1692,14 @@ closing tag must be followed by empty line or end of file
 <p><b>I'm bold</b></p>
 <p><i>I'm italic</i></p>
 <p><b>bold outside and <i>italic inside</i></b></p>
-<p>_not bold start</p>
-<p>not bold ending_</p>
+<p>_not italic start</p>
+<p>not italic ending_</p>
+<p><i>italic with _space closes at the end</i></p>
+<p>_not italic _as closing missing</p>
+<p><i>italic underscore _</i></p>
+<p><i>italic underscore and non-italic underscore _</i>_</p>
+<p><i>italic underscore and 2x non-italic underscore _</i>__</p>
+<p>empty content is not valid italic __</p>
 <p>aftert this comes a few paragraphs with just one character</p>
 <p>a</p>
 <p>#</p>
@@ -1607,6 +1713,8 @@ closing tag must be followed by empty line or end of file
 <p>\\→\\A\\a\\ \\3\\φ\\«</p>
 <p>*not emphasized*</p>
 <p><b>emphasized star*</b></p>
+<p>_not italic_</p>
+<p>*not bold*</p>
 <p><i>_italic underlines_</i></p>
 <p><i>italic underline_and star*</i></p>
 <p>\\<b>emphasis</b></p>
@@ -3401,23 +3509,14 @@ exports[`markdown compatibility mode 1`] = `
       {
         "body": [
           {
-            "txt": "G italic outside ",
+            "txt": "G italic outside _",
             "type": "",
           },
         ],
         "type": "i",
       },
       {
-        "body": [
-          {
-            "txt": "but not bold inside",
-            "type": "",
-          },
-        ],
-        "type": "i",
-      },
-      {
-        "txt": "__",
+        "txt": "but not bold inside___",
         "type": "",
       },
     ],
@@ -3428,23 +3527,14 @@ exports[`markdown compatibility mode 1`] = `
       {
         "body": [
           {
-            "txt": "H italic outside ",
+            "txt": "H italic outside *",
             "type": "",
           },
         ],
         "type": "i",
       },
       {
-        "body": [
-          {
-            "txt": "but not bold inside",
-            "type": "",
-          },
-        ],
-        "type": "i",
-      },
-      {
-        "txt": "**",
+        "txt": "but not bold inside***",
         "type": "",
       },
     ],
@@ -3548,6 +3638,33 @@ exports[`markdown compatibility mode 1`] = `
   {
     "body": [
       {
+        "txt": "_not italic_",
+        "type": "",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
+        "txt": "*",
+        "type": "",
+      },
+      {
+        "body": [
+          {
+            "txt": "comes out as italic star*",
+            "type": "",
+          },
+        ],
+        "type": "i",
+      },
+    ],
+    "type": "p",
+  },
+  {
+    "body": [
+      {
         "body": [
           {
             "txt": "_italic underlines_",
@@ -3622,8 +3739,8 @@ exports[`markdown compatibility mode 2`] = `
 <h1>these nestings are not supported (only outer will be applied):</h1>
 <p><b>E bold outside *but not italic inside</b>*</p>
 <p><b>F bold outside _but not italic inside</b>_</p>
-<p><i>G italic outside </i><i>but not bold inside</i>__</p>
-<p><i>H italic outside </i><i>but not bold inside</i>**</p>
+<p><i>G italic outside _</i>but not bold inside___</p>
+<p><i>H italic outside *</i>but not bold inside***</p>
 <p>_not italic</p>
 <p>not italic_</p>
 <p>_<i>underscore before italic</i></p>
@@ -3631,6 +3748,8 @@ exports[`markdown compatibility mode 2`] = `
 <p><i>italic</i>s</p>
 <p>*not emphasized*</p>
 <p><i>emphasized star*</i></p>
+<p>_not italic_</p>
+<p>*<i>comes out as italic star*</i></p>
 <p><i>_italic underlines_</i></p>
 <p><i>italic underline_and star*</i></p>
 <p>\\<i>emphasis after a literal backslash</i></p>

@@ -105,9 +105,21 @@ _I'm italic_
 
 *bold outside and _italic inside_*
 
-_not bold start
+_not italic start
 
-not bold ending_
+not italic ending_
+
+_italic with _space closes at the end_
+
+_not italic _as closing missing
+
+_italic underscore __
+
+_italic underscore and non-italic underscore ___
+
+_italic underscore and 2x non-italic underscore ____
+
+empty content is not valid italic __
 
 aftert this comes a few paragraphs with just one character
 
@@ -134,6 +146,10 @@ _*mixed order, first marker (in this case italic) wins_*
 \\*not emphasized*
 
 *emphasized star\\**
+
+_not italic\\_
+
+*not bold\\*
 
 _\\_italic underlines\\__
 
@@ -222,6 +238,10 @@ _italic_s
 \\*not emphasized*
 
 *emphasized star\\**
+
+_not italic\\_
+
+**comes out as italic star\\**
 
 _\\_italic underlines\\__
 
@@ -434,6 +454,45 @@ test('strikethrough can appear inside other formatting in both modes', () => {
   expect(renderMd('**~~bold deleted~~**')).toEqual('<p><b><del>bold deleted</del></b></p>')
 })
 
+test('intraword emphasis is supported in LiteMarkup mode', () => {
+  expect(renderLm('work_s_')).toEqual('<p>work<i>s</i></p>')
+  expect(renderLm('a_b_c')).toEqual('<p>a<i>b</i>c</p>')
+  expect(renderLm('a*b*c')).toEqual('<p>a<b>b</b>c</p>')
+  expect(renderLm('a~b~c')).toEqual('<p>a<del>b</del>c</p>')
+  expect(renderLm('a~contains space~b')).toEqual('<p>a<del>contains space</del>b</p>')
+})
+
+test('intraword emphasis is supported in markdown mode', () => {
+  expect(renderMd('a*b*c')).toEqual('<p>a<i>b</i>c</p>')
+  expect(renderMd('a_b_c')).toEqual('<p>a<i>b</i>c</p>')
+  expect(renderMd('a**b**c')).toEqual('<p>a<b>b</b>c</p>')
+  expect(renderMd('a__b__c')).toEqual('<p>a<b>b</b>c</p>')
+  expect(renderMd('a~~b~~c')).toEqual('<p>a<del>b</del>c</p>')
+  expect(renderMd('a~~contains space~~b')).toEqual('<p>a<del>contains space</del>b</p>')
+})
+
+test('emphasis markers cannot include leading or trailing spaces in markdown mode', () => {
+  expect(renderMd('_ foo_')).toEqual('<p>_ foo_</p>')
+  expect(renderMd('_foo _')).toEqual('<p>_foo _</p>')
+  expect(renderMd('a* foo*')).toEqual('<p>a* foo*</p>')
+  expect(renderMd('a*foo *')).toEqual('<p>a*foo *</p>')
+  expect(renderMd('** foo**')).toEqual('<p>** foo**</p>')
+  expect(renderMd('**foo **')).toEqual('<p>*<i>foo *</i></p>')
+  expect(renderMd('__ foo__')).toEqual('<p>__ foo__</p>')
+  expect(renderMd('__foo __')).toEqual('<p>_<i>foo _</i></p>')
+  expect(renderMd('~~ foo~~')).toEqual('<p>~~ foo~~</p>')
+  expect(renderMd('~~foo ~~')).toEqual('<p>~~foo ~~</p>')
+})
+
+test('emphasis markers cannot include leading or trailing spaces in LiteMarkup mode', () => {
+  expect(renderLm('_ foo_')).toEqual('<p>_ foo_</p>')
+  expect(renderLm('_foo _')).toEqual('<p>_foo _</p>')
+  expect(renderLm('a* foo*')).toEqual('<p>a* foo*</p>')
+  expect(renderLm('a*foo *')).toEqual('<p>a*foo *</p>')
+  expect(renderLm('~ foo~')).toEqual('<p>~ foo~</p>')
+  expect(renderLm('~foo ~')).toEqual('<p>~foo ~</p>')
+})
+
 test('escaped tilde does not close strikethrough in LiteMarkup mode', () => {
   expect(renderLm('~not\\~done~')).toEqual('<p><del>not~done</del></p>')
 })
@@ -460,6 +519,16 @@ test('empty strikethrough falls back to text in LiteMarkup mode', () => {
 
 test('unmatched tilde falls back to text in LiteMarkup mode', () => {
   expect(renderLm('~not closed')).toEqual('<p>~not closed</p>')
+})
+
+test('single-tilde strikethrough requires non-space-adjacent delimiters in LiteMarkup mode', () => {
+  expect(renderLm('~ foo~')).toEqual('<p>~ foo~</p>')
+  expect(renderLm('~foo ~')).toEqual('<p>~foo ~</p>')
+  expect(renderLm('~foo~')).toEqual('<p><del>foo</del></p>')
+})
+
+test('approximation tildes stay literal in LiteMarkup mode', () => {
+  expect(renderLm('~10 minutes, and ~200 degrees')).toEqual('<p>~10 minutes, and ~200 degrees</p>')
 })
 
 test('single tilde is plain text in markdown mode', () => {
