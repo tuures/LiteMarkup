@@ -2,4 +2,6 @@
 /dist
 /coverage
 /.vscode
+/.bench-log.ndjson
+
 .DS_Store
