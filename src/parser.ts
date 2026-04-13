@@ -141,7 +141,7 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
   const blockQuoteRule: SimpleRule<Ast.BlockQuote> = {
     re: /^(?: {0,3}>[^\n]*(?:$|\n))+/,
     mkNode: r => {
-      const content = r[0].replace(/(^|\n) {0,3}> ?/g, '\n')
+      const content = r[0].replace(/(?:^|\n) {0,3}> ?/g, '\n')
 
       return { type: 'bq', doc: parseBlock(content) }
     },
@@ -223,7 +223,29 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
   }
 
   const paragraphRule: SimpleRule<Ast.LeafBlock> = {
-    re: /^(.(?!\n( {0,3}(#{1,6}[ \t]|`{3,}[^\n`]*\n|>|\||([-+*]|\d{1,9}[).]) {1,3}[^\n])|[ \t]*($|\n))))*./s,
+    /*
+     * Paragraph matcher that consumes plain text until a block-level starter is found.
+     *
+     * Pattern breakdown:
+     *
+     * (?:[^\n]+|\n(?!A|B))+
+     *
+     *     This matches input in larger chunks for efficiency:
+     *
+     *     [^\n]+
+     *
+     *         Consumes runs of non-newline characters in one step.
+     *
+     *     \n(?!A|B)
+     *
+     *         Consumes a newline only if the following line does not terminate the paragraph by starting a new
+     *         block (heading/fence/quote/table/list) (A) or being blank (B).
+     *
+     *         A =  {0,3}(?:#{1,6}[ \t]|`{3,}[^\n`]*\n|>|\||(?:[-+*]|\d{1,9}[).]) {1,3}[^\n])
+     *
+     *         B = [ \t]*(?:$|\n)
+     */
+    re: /^(?:[^\n]+|\n(?! {0,3}(?:#{1,6}[ \t]|`{3,}[^\n`]*\n|>|\||(?:[-+*]|\d{1,9}[).]) {1,3}[^\n])|[ \t]*(?:$|\n)))+/s,
     mkNode: r => ({ type: 'p', body: parseInline(r[0]) }),
   }
 
