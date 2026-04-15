@@ -147,24 +147,63 @@ export function parser({ markdownMode, transformBlock, transformInline }: Parser
     },
   }
 
-  const markerRe = (marker: string) => marker.replace(/[-+*).]/, '\\$&').replace(/\d/g, '\\d')
+  const markerRe = (marker: string) => marker.replace(/[-+*).]/, '\\$&').replace(/\d+/, '\\d{1,9}')
+
   const listRule: LookaheadRule<Ast.List> = {
-    // TODO: explain, add tests for all variations
-    pre: /^(( {0,3})([-+*]|\d{1,9}[).])( {1,3}))([^\n]+)/,
+    /*
+     * List matcher that parses a run of items sharing the same outer indentation and marker type.
+     *
+     * Pattern breakdown:
+     *
+     * pre: ( {0,3})([-+*]|\d{1,9}[).])( {1,3})([^\n]+)
+     *
+     *     First match the initial list item prefix and first-line content to detect the list (marker) type
+     *
+     *     Capture group 1 is the outer indentation (0-3 spaces), group 2 is the marker itself (bullet or ordered
+     *     marker such as `1.` or `1)`), group 3 is the required post-marker spacing (1-3 spaces), and group 4 is
+     *     the first line of the first item content.
+     *
+     * re: (?:\n+I(?: {C}|K)[^\n]*)*
+     *
+     *     For the remaining lines, we build a regex from the first match where:
+     *
+     *       I = the outer indentation (capture group 1 result)
+     *       C = number of additional spaces if item continues on this line (marker width + post-marker spacing width)
+     *       K = another list-item marker (same marker type) with 1-3 spaces after marker
+     *
+     *     Each matched line is therefore either:
+     *
+     *     - a continuation line aligned under the initial item's content column, or
+     *     - another item using the same marker type and the same outer indentation
+     *
+     *     K uses the same marker type followed by 1-3 spaces. For ordered lists this means
+     *     `\d{1,9}` plus the same delimiter, so items with different digit widths still stay in the same
+     *     list. For unordered lists this allows per-item spacing variation between one and three spaces.
+     *     A different outer indentation, bullet marker, or ordered delimiter starts a new list block instead.
+     */
+    pre: /^( {0,3})([-+*]|\d{1,9}[).])( {1,3})([^\n]+)/,
     re: pr => {
-      const markerEscaped = markerRe(pr[3])
-      return R(String.raw`(?:\n+${pr[2]}(?: {${pr[3].length}}|${markerEscaped})${pr[4]}[^\n]*)*`)
+      const continuationAdditionalSpaceCount = pr[2].length + pr[3].length
+      const markerEscaped = markerRe(pr[2])
+
+      return R(
+        String.raw`(?:\n+${pr[1]}(?: {${continuationAdditionalSpaceCount}}|${markerEscaped} {1,3})[^\n]*)*`,
+      )
     },
     mkNode: (pr, r) => {
-      const markerIndent = R('\\n' + markerRe(pr[1]))
-      const afterInitialMarkerIndent = pr[5] + r[0]
+      const startNumber = parseInt(pr[2], 10) || undefined
+      const markerIndent = R('\\n' + pr[1] + markerRe(pr[2]) + ' {1,3}')
+      const afterInitialMarkerIndent = pr[4] + r[0]
+      const continuationTotalSpaceCount = pr[1].length + pr[2].length + pr[3].length
+      const continuationIndentRe = R(`\\n {${continuationTotalSpaceCount}}`, 'g')
+
       const items: Ast.ListItem[] = afterInitialMarkerIndent.split(markerIndent).map(itemSlice => {
-        const itemContent = itemSlice.replace(R(`\\n {${pr[1].length}}`, 'g'), '\n')
+        const itemContent = itemSlice.replaceAll(continuationIndentRe, '\n')
 
         return { type: 'li', doc: parseBlock(itemContent) }
       })
 
-      return { type: 'l', startNumber: parseInt(pr[3], 10) || undefined, items }
+      return { type: 'l', startNumber, items }
     },
   }
 

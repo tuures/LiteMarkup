@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **Fix ordered list split on digit-width change** — ordered list items with different digit widths (e.g. `9. a` followed by `10. b`) now correctly stay in one list. Unordered list items also allow varying 1–3 spaces after the marker without splitting.
+
 - **Require non-space-adjacent emphasis delimiters** — bold, italic, and strikethrough delimiters must hug non-space content (no space after opening or before closing delimiter), to avoid false positives like `~10 minutes in ~200 degrees` while still allowing intraword emphasis (for example `work_s_`, `with_in_s`).
 
 ## v1.0.1

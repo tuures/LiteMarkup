@@ -3951,6 +3951,26 @@ foo2",
     "startNumber": undefined,
     "type": "l",
   },
+  {
+    "items": [
+      {
+        "doc": [
+          {
+            "body": [
+              {
+                "txt": "yet another list",
+                "type": "",
+              },
+            ],
+            "type": "p",
+          },
+        ],
+        "type": "li",
+      },
+    ],
+    "startNumber": undefined,
+    "type": "l",
+  },
 ]
 `;
 
@@ -3986,6 +4006,11 @@ exports[`nested lists 2`] = `
 <ul>
   <li>
     <p>another list</p>
+  </li>
+</ul>
+<ul>
+  <li>
+    <p>yet another list</p>
   </li>
 </ul>"
 `;

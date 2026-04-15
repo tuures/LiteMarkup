@@ -412,12 +412,61 @@ test('nested lists', () => {
    * bar1
    * bar2
 * another list
++ yet another list
 `
   const ast = parser()(src)
   expect(ast).toMatchSnapshot()
 
   const html = htmlRenderer()(ast)
   expect(html).toMatchSnapshot()
+})
+
+test('ordered list accepts parenthesis markers', () => {
+  const ast = parser()('3) three\n4) four')
+
+  expect(ast).toEqual([
+    {
+      type: 'l',
+      startNumber: 3,
+      items: [li([ptxt('three')]), li([ptxt('four')])],
+    },
+  ])
+})
+
+test('ordered list items with same delimiter stay in one list regardless of digit width', () => {
+  const expected = (startNumber: number) => ({
+    type: 'l',
+    startNumber,
+    items: [li([ptxt('a')]), li([ptxt('b')])],
+  })
+
+  expect(parser()('9. a\n10. b')).toEqual([expected(9)])
+  expect(parser()('9.  a\n10. b')).toEqual([expected(9)])
+  expect(parser()('999.  a\n1000. b')).toEqual([expected(999)])
+})
+
+test('unordered list items stay in one list with varying marker spacing', () => {
+  expect(parser()('- a\n-  b\n-   c')).toEqual([
+    list([li([ptxt('a')]), li([ptxt('b')]), li([ptxt('c')])]),
+  ])
+})
+
+test('list continuation lines stay in the same item when aligned to content', () => {
+  const ast = parser()('- one\n  continued\n- two')
+
+  expect(ast).toEqual([list([li([ptxt('one\ncontinued')]), li([ptxt('two')])])])
+})
+
+test('changing unordered marker starts a new list block', () => {
+  const ast = parser()('- one\n* two')
+
+  expect(ast).toEqual([list([li([ptxt('one')])]), list([li([ptxt('two')])])])
+})
+
+test('root lists allow up to three spaces of indentation', () => {
+  const ast = parser()('   - one\n   - two')
+
+  expect(ast).toEqual([list([li([ptxt('one')]), li([ptxt('two')])])])
 })
 
 test('list starting at max number', () => {
