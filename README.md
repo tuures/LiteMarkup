@@ -23,6 +23,8 @@ Most Markdown parsers are **bloated** — full CommonMark implementations have e
 
 > 💡 **AST-first design:** Unlike libraries that only output HTML, LiteMarkup gives you a clean typed AST. Integrate to custom output formats easily.
 
+[Comparison and performance](#comparison-and-performance)
+
 ---
 
 ## Quick start
@@ -139,7 +141,7 @@ const html = htmlRenderer()(ast)
 // → '<p>Hello <b>world</b> and <i>italic</i> and <del>deleted</del>!</p>'
 ```
 
-### Transforming AST on-the-fly
+### Transforming AST on-the-fly (single pass)
 
 Use `transformBlock` and `transformInline` hooks to modify the AST during parsing:
 
@@ -366,7 +368,7 @@ Use backslash to escape special characters to keep them verbatim:
 
 **[Try it live →](https://tuures.github.io/LiteMarkup/docs/demopage.html)**
 
-Notable differences from CommonMark:
+Some notable differences from CommonMark and GFM (not a comprehensive list of differences):
 
 - [Emphasis and strong emphasis](https://spec.commonmark.org/0.29/#emphasis-and-strong-emphasis) use single `_` and `*` characters, respectively.
 - [Settext headings](https://spec.commonmark.org/0.29/#setext-heading) are not supported (use ATX headings (`# foo`) instead)
@@ -409,11 +411,69 @@ echo "[click](http://example.com)" | npx litemarkup --allow-unsafe-html
 
 ---
 
+## Comparison and performance
+
+LiteMarkup performance is roughly on par with popular JS-based implementations like commonmark, marked, and markdown-it, but naturally slower than WASM-based ones.
+
+If you are looking for a smaller bundle size with reasonable performance, decent feature support, and AST-output, LiteMarkup can be a good option.
+
+| Name          | Min+gzip ([bundlephobia.com](https://bundlephobia.com))         | AST support | Feature Coverage | Performance |
+| ------------- | --------------------------------------------------------------- | ----------- | ---------------- | ----------- |
+| LiteMarkup    | 🟢🟢 ++ ([2.3 kB](https://bundlephobia.com/package/litemarkup)) | 🟢🟢 ++     | 🟢 +             | 🟢 +        |
+| commonmark    | 🔴 - ([47.2 kB](https://bundlephobia.com/package/commonmark))   | 🟢🟢 ++     | 🟢🟢 ++          | 🟢 +        |
+| marked        | 🔴 - ([12.0 kB](https://bundlephobia.com/package/marked))       | 🔴🔴 --     | 🟢🟢 ++          | 🟢 +        |
+| markdown-it   | 🔴 - ([43.3 kB](https://bundlephobia.com/package/markdown-it))  | 🟢 +        | 🟢🟢 ++          | 🟢 +        |
+| micromark     | 🔴 - ([14.2 kB](https://bundlephobia.com/package/micromark))    | 🟢 +        | 🟢🟢 ++          | 🔴🔴 --     |
+| snarkdown     | 🟢🟢 ++ ([1.1 kB](https://bundlephobia.com/package/snarkdown))  | 🔴🔴 --     | 🔴 -             | 🔴🔴 --     |
+| markdown-wasm | 🟢 + ([4.2 kB](https://bundlephobia.com/package/markdown-wasm)) | 🔴🔴 --     | 🟢🟢 ++          | 🟢🟢 ++     |
+| ironmark      | 🔴🔴 -- ([500+ kB](https://bundlephobia.com/package/ironmark))  | 🟢🟢 ++     | 🟢🟢 ++          | 🟢🟢 ++     |
+
+Performance via [markdown-parser-benchmark](https://github.com/tuures/markdown-parser-benchmark)
+
+LiteMarkup `089ee2d` (markdownMode: true, allowUnsafeHtml: true)
+
+```
+> node benchmark.js
+
+Input: 10/983 files, 820 KB
+Host: darwin x64 | Intel(R) Core(TM) i7-4980HQ CPU @ 2.80GHz
+Node: v22.12.0
+Config: rounds=5, time=1000ms, warmup=300ms, gcBetweenRounds=false
+
+=== AST/token parsing ===
+ironmark (rust/wasm)  avg 100.459 ops/sec  best 107.078  round-RSD 5.88%  samples/round 97.2  total 486  (1.00x)
+commonmark            avg  27.764 ops/sec  best  29.193  round-RSD 5.10%  samples/round   64  total 320  (0.28x)
+litemarkup            avg  20.427 ops/sec  best  20.856  round-RSD 3.11%  samples/round   64  total 320  (0.20x)
+markdown-it           avg  15.028 ops/sec  best   15.44  round-RSD 2.11%  samples/round   64  total 320  (0.15x)
+
+=== Parsing + HTML rendering ===
+ironmark (rust/wasm)    avg 91.951 ops/sec  best 93.925  round-RSD 1.79%  samples/round 91.8  total 459  (1.00x)
+markdown-wasm (c/wasm)  avg 54.377 ops/sec  best 56.429  round-RSD 4.87%  samples/round   64  total 320  (0.59x)
+commonmark              avg 19.856 ops/sec  best 20.739  round-RSD 6.66%  samples/round   64  total 320  (0.22x)
+litemarkup (html)       avg 14.967 ops/sec  best 15.182  round-RSD 0.91%  samples/round   64  total 320  (0.16x)
+markdown-it             avg 12.929 ops/sec  best 13.337  round-RSD 2.63%  samples/round   64  total 320  (0.14x)
+marked                  avg 11.894 ops/sec  best 12.345  round-RSD 3.56%  samples/round   64  total 320  (0.13x)
+micromark               avg  1.413 ops/sec  best  1.432  round-RSD 1.25%  samples/round   64  total 320  (0.02x)
+snarkdown               avg  1.185 ops/sec  best  1.208  round-RSD 1.50%  samples/round   64  total 320  (0.01x)
+```
+
+---
+
 ## Contributing
 
-Bugfixes and small enhancements are welcome! This project intentionally stays minimal — if you need more features, use [custom AST transformations](#transforming-ast-on-the-fly) and/or a custom renderer to extend functionality outside the core parser. See the [Extension Cookbook](./EXTENDING.md) for examples.
+Bugfixes and small enhancements are welcome! However, this project intentionally stays minimal — if you need more features, use [custom AST transformations](#transforming-ast-on-the-fly) and/or a custom renderer to extend functionality outside the core parser. See the [Extension Cookbook](./EXTENDING.md) for examples.
 
 For development setup and guidelines, see [DEV-README.md](./DEV-README.md).
+
+### Developer Certificate of Origin (DCO)
+
+All contributions must be signed off under the [Developer Certificate of Origin](https://developercertificate.org/). By adding a `Signed-off-by` line to your commit messages, you certify that you wrote or have the right to submit the code under this project's MIT license.
+
+---
+
+## AI usage
+
+Written by hand, with AI assisting since 2026. AI has been used particularly for test maintenance, docs, and code review. All AI-assisted work is reviewed before commit.
 
 ---
 
