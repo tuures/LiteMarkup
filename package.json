@@ -1,7 +1,7 @@
 {
   "name": "litemarkup",
   "version": "1.0.1",
-  "description": "Unbloated Markdown-like markup language",
+  "description": "Tiny Markdown-like parser with a typed, AST-first TypeScript API. Under 3 KB gzipped, zero dependencies.",
   "type": "module",
   "exports": {
     ".": {
@@ -40,7 +40,10 @@
     "html",
     "typescript",
     "simple",
-    "lightweight"
+    "lightweight",
+    "zero-dependencies",
+    "ast",
+    "typed"
   ],
   "homepage": "https://tuures.github.io/LiteMarkup/",
   "repository": {

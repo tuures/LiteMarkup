@@ -1,12 +1,12 @@
 # ![LiteMarkup](https://tuures.github.io/LiteMarkup/docs/logo-text.svg)
 
-**A tiny, fast Markdown(-like) parser for when you need just the essentials. Not tied to HTML output.**
+**Tiny Markdown-like parser with a typed, AST-first TypeScript API. Under 3 KB gzipped, zero dependencies.**
 
 [![npm version](https://img.shields.io/npm/v/litemarkup.svg)](https://www.npmjs.com/package/litemarkup)
 [![Bundle Size](https://img.shields.io/badge/gzip-<3kb-blue)](https://bundlephobia.com/package/litemarkup)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-[Live Demo](https://tuures.github.io/LiteMarkup/docs/demopage.html)
+[![Live demo here](https://img.shields.io/badge/Live_demo-Click_here-brightgreen)](https://tuures.github.io/LiteMarkup/docs/demopage.html)
 
 ---
 
