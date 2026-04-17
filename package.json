@@ -1,6 +1,6 @@
 {
   "name": "litemarkup",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Tiny Markdown-like parser with a typed, AST-first TypeScript API. Under 3 KB gzipped, zero dependencies.",
   "type": "module",
   "exports": {
