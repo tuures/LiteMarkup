@@ -51,6 +51,7 @@ Add a failing test first for parser/renderer changes. Re-run the suite after cha
 ## How to do a release
 
 - Update CHANGELOG.md
+- `npm run test`
 - `npm run build`
 - `npm version patch|minor|major`
 - `git push --tags`

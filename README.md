@@ -81,18 +81,19 @@ convertToHtml('Click [here]<javascript:alert(`You’ve been warned!`);>!', { all
 
 ## Syntax overview
 
-- ✅ **Headings** — `# H1` through `###### H6`
-- ✅ **Bold, Italic & Strikethrough** — `*bold*`, `_italic_`, and `~deleted~`
-  (or use [markdown mode](#markdown-compatibility-mode) for `**bold**` / `*italic*` / `~~deleted~~`)
-
-- ✅ **Lists** — Ordered (`1.`) and unordered (`-` or `*`)
-- ✅ **Links** — `[text]<url>` or `[text](url)`
-- ✅ **Code** — Inline `` `code` `` and fenced blocks
-- ✅ **Tables** — GFM-style pipe tables
-- ✅ **Blockquotes** — `> quoted text`
-- ✅ **Thematic breaks** — `---`
-- ✅ **Escape characters** — `\*not bold\*`
-- ✅ **Line breaks** — Trailing `\`
+- **Headings** — `# H1` through `###### H6`
+- **Bold, Italic & Strikethrough** — `*bold*`, `_italic_`, and `~deleted~`
+  (or use [markdown mode](#markdown-compatibility-mode) for `**bold**` / `_italic_` / `~~deleted~~`)
+- **Lists** — Ordered (`1.`, `1)`) and unordered (`-`/`+`/`*`)
+- **Links** — `[text]<url>` or `[text](url)`
+- **Images** — `![alt]<url>` or `![alt](url)`
+- **Code** — Inline `` `code` `` and fenced multi-line code blocks with triple-backticks
+- **Tables** — GFM-style pipe tables
+- **Blockquotes** — `> quoted text`
+- **Thematic breaks** — `---`
+- **Escape characters** — `\*not bold\*`
+- **Line breaks** — Trailing `\`
+- **Embedded raw HTML blocks (can be disabled)**
 
 [See language tour](#language-tour)
 
@@ -129,7 +130,7 @@ import type { Block, Inline } from 'litemarkup/ast'
 
 ### Markdown compatibility mode
 
-By default, LiteMarkup uses `*bold*`, `_italic_`, and `~deleted~`. Enable markdown mode for `**bold**`, `*italic*`, and `~~deleted~~`:
+By default, LiteMarkup uses `*bold*`, `_italic_`, and `~deleted~`. Enable markdown mode for `**bold**`, `__bold__`, `*italic*`, `_italic_`, and `~~deleted~~`:
 
 ```typescript
 import { parser, htmlRenderer } from 'litemarkup'
@@ -341,13 +342,19 @@ In markdown mode: **bold**, _italic_, and ~~deleted~~
 
 A [link](https://example.com) in text.
 
+A [link]<https://example.com> can also use angle brackets. Convenient if url contains parenthesis.
+
+![An embedded image](https://example.com/image.jpg)
+
 | Feature          | Status |
 | ---------------- | ------ |
 | Basic formatting | ✅     |
 | Tables           | ✅     |
 | Simple API       | ✅     |
 
-> A blockquote
+> A blockquote.
+> Can span multiple lines and contain other block-level elements:
+> - e.g. a list
 
 `inline code` and:
 
@@ -363,7 +370,9 @@ New line here.
 Use backslash to escape special characters to keep them verbatim:
 \*this is not bolded — verbatim asterisks\*
 
-    * Indent anything four spaces to keep entire paragraph verbatim without using backslash escapes. *
+<div>
+block-level raw html can be allowed or disabled
+</div>
 ````
 
 **[Try it live →](https://tuures.github.io/LiteMarkup/docs/demopage.html)**
@@ -381,6 +390,7 @@ Some notable differences from CommonMark and GFM (not a comprehensive list of di
 - [Entity and numeric character references](https://spec.commonmark.org/0.29/#entity-and-numeric-character-references) are not supported
 - Only type 7 [HTML blocks](https://spec.commonmark.org/0.29/#html-block) are supported (and with some limitations)
 - [Link reference definitions](https://spec.commonmark.org/0.29/#link-reference-definition) are not supported
+- Tables don't support column alignment markers (`---:` etc.)
 
 [Full syntax description →](./docs/LiteMarkup-syntax.lm)
 
@@ -461,7 +471,7 @@ snarkdown               avg  1.185 ops/sec  best  1.208  round-RSD 1.50%  sample
 
 ## Contributing
 
-Bugfixes and small enhancements are welcome! However, this project intentionally stays minimal — if you need more features, use [custom AST transformations](#transforming-ast-on-the-fly) and/or a custom renderer to extend functionality outside the core parser. See the [Extension Cookbook](./EXTENDING.md) for examples.
+Bugfixes and small enhancements are welcome! However, this project intentionally stays minimal — if you need more features, use [custom AST transformations](#transforming-ast-on-the-fly-single-pass) and/or a custom renderer to extend functionality outside the core parser. See the [Extension Cookbook](./EXTENDING.md) for examples.
 
 For development setup and guidelines, see [DEV-README.md](./DEV-README.md).
 
