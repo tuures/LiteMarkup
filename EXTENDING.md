@@ -45,16 +45,13 @@ Core nodes use short `type` tags. Key field names:
 
 - [Extension architecture patterns](#extension-architecture-patterns)
 - [Writing a custom renderer](#writing-a-custom-renderer)
-- [GFM-style alerts (callouts)](#gfm-style-alerts-callouts)
+- [GFM-style callouts](#gfm-style-callouts)
 - [Task lists / checkboxes](#task-lists--checkboxes)
-- [Strikethrough](#strikethrough)
 - [Highlighted / marked text](#highlighted--marked-text)
 - [Emoji shortcodes](#emoji-shortcodes)
 - [Automatic URL linking](#automatic-url-linking)
 - [Table of contents generation](#table-of-contents-generation)
 - [Heading IDs (GFM-compatible slugs)](#heading-ids-gfm-compatible-slugs)
-- [Footnotes](#footnotes)
-- [Custom containers / admonitions](#custom-containers--admonitions)
 
 ---
 
@@ -110,7 +107,7 @@ Input → your parse() → AST with your customized nodes → your custom render
 
 ```ts
 // ✅ CORRECT — custom node types
-{ type: 'bq', x: 'alert', level: 'warning', doc: [...] }
+{ type: 'bq', x: 'callout', level: 'warning', doc: [...] }
 { type: 'li', x: 'task-item', checked: true, doc: [...] }  // core renderers see it as normal li
 { type: 'x', x: 'math', formula: 'x^2' }
 
@@ -129,7 +126,7 @@ import { parser } from 'litemarkup/parser'
 
 const parse = parser({
   transformBlock: node => {
-    return transformAlert(node).flatMap(transformTaskList)
+    return transformCallouts(node).flatMap(transformTaskList)
   },
   transformInline: node => {
     return expandMarkedText(node).flatMap(expandAutolink)
@@ -230,7 +227,7 @@ function renderInlines(inlines: Inline[]): string {
 
 GitHub-flavored callouts are blockquotes whose first line is `[!NOTE]`, `[!WARNING]`, etc.
 
-**Strategy:** `transformBlock` hook — when the node is a blockquote matching the pattern, return a node with `x: 'alert'` attribute.
+**Strategy:** `transformBlock` hook — when the node is a blockquote matching the pattern, return a blockquote subtype with `type: 'bq'` and `x: 'callout'`.
 
 ```ts
 import { parser } from 'litemarkup/parser'
@@ -238,9 +235,9 @@ import type { Block, Inline, Paragraph } from 'litemarkup/ast'
 
 interface XCalloutBlock {
   type: 'bq'
-  x: 'alert'
+  x: 'callout'
   level: 'note' | 'tip' | 'important' | 'warning' | 'caution'
-  body: Block[]
+  doc: Block[]
 }
 
 const ALERT_RE = /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i
@@ -269,15 +266,15 @@ function transformCallouts(node: Block): (Block | XCalloutBlock)[] {
 
   return [
     {
-      type: 'x' as const,
+      type: 'bq' as const,
       x: 'callout' as const,
       level,
-      body: [newFirst, ...node.doc.slice(1)],
+      doc: [newFirst, ...node.doc.slice(1)],
     },
   ]
 }
 
-const parse = parser({ transformBlock: transformAlert })
+const parse = parser({ transformBlock: transformCallouts })
 ```
 
 Renderer — add a case to your `renderBlocks`:
@@ -287,15 +284,12 @@ function renderBlocks(blocks: (Block | XCalloutBlock)[]): string {
   return blocks
     .map(block => {
       switch (block.type) {
-        case 'x':
-          switch (block.x) {
-            case 'callout': {
-              const title = block.level.charAt(0).toUpperCase() + block.level.slice(1)
-              return `<div class="callout callout-${block.level}">\n<p class="callout-title">${title}</p>\n${renderBlocks(block.body)}\n</div>`
-            }
-            default:
-              return ''
+        case 'bq':
+          if (block.x === 'callout') {
+            const title = block.level.charAt(0).toUpperCase() + block.level.slice(1)
+            return `<div class="callout callout-${block.level}">\n<p class="callout-title">${title}</p>\n${renderBlocks(block.doc)}\n</div>`
           }
+          return `<blockquote>\n${renderBlocks(block.doc)}\n</blockquote>`
         // ... other block types
       }
     })
@@ -319,7 +313,7 @@ function renderBlocks(blocks: (Block | XCalloutBlock)[]): string {
 
 Task lists are list items starting with `[ ]` or `[x]`.
 
-**Strategy:** `transformBlock` hook on list nodes — rewrite matching list items to `x`/`task-item` nodes.
+**Strategy:** `transformBlock` hook on list nodes — rewrite matching list items to `type: 'li'` nodes with `x: 'task-item'`.
 
 ```ts
 import type { Block, Inline, Paragraph } from 'litemarkup/ast'
@@ -367,7 +361,7 @@ function transformTaskList(node: Block): Block[] {
 }
 ```
 
-Renderer — handle `x`/`task-item` in the list-item rendering path of your `renderBlocks`:
+Renderer — handle `li`/`task-item` in the list-item rendering path of your `renderBlocks`:
 
 ```ts
 function renderBlocks(blocks: Block[]): string {

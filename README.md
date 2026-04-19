@@ -12,16 +12,17 @@
 
 ## Why LiteMarkup?
 
-Most Markdown parsers are **bloated** — full CommonMark implementations have edge cases you'll never use. LiteMarkup is different:
+Most Markdown parsers are either heavy, slow, or only output HTML. LiteMarkup aims to support the most popular Markdown features while maintaining a small bundle size, good performance, and strong AST extensibility.
 
 - ✅ **Tiny & fast** — less than 3 KB gzipped, zero dependencies, fast parsing
-- ✅ **AST-first** — Parse once, render to anything (HTML, React, JSON, plain text...) with ease
-- ✅ **TypeScript** — Full type safety for AST out of the box
-- ✅ **Simple API** — No complex config, no plugins, no learning curve
+- ✅ **Popular features** — Bold/italic/strikethrough, lists, links, images, code blocks, blockquotes, tables
+- ✅ **AST-first TypeScript API** — Parse once to a typed AST, then render to anything (HTML, React, docx...)
+- ✅ **Single-pass transforms** — Modify AST during parsing with [transform hooks](#transforming-ast-on-the-fly-single-pass), no extra tree traversal needed!
+- ✅ **Simple but extendable** — No complex config, no plugins, [cookbook](EXTENDING.md) for extensions included
 
 **Perfect for:** Comment systems, chat apps, note-taking tools, or anywhere you want lightweight markup without the bloat.
 
-> 💡 **AST-first design:** Unlike libraries that only output HTML, LiteMarkup gives you a clean typed AST. Integrate to custom output formats easily.
+> 💡 **AST-first design:** Unlike libraries that only output HTML, LiteMarkup gives you a clean typed AST. Integrate to custom output formats easily. A simple HTML string renderer is included for demonstration and simple use cases, but users are expected to bring their own renderer tailored to their specific use case and context, such as rendering to React, docx, or something else.
 
 [Comparison and performance](#comparison-and-performance)
 
