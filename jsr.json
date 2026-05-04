@@ -1,0 +1,21 @@
+{
+  "name": "@tuures/litemarkup",
+  "version": "1.1.0",
+  "exports": {
+    ".": "./src/litemarkup.ts",
+    "./parser": "./src/parser.ts",
+    "./html": "./src/html.ts",
+    "./ast": "./src/ast.ts"
+  },
+  "publish": {
+    "include": [
+      "src/ast.ts",
+      "src/parser.ts",
+      "src/html.ts",
+      "src/litemarkup.ts",
+      "src/cli.ts",
+      "README.md",
+      "LICENSE.md"
+    ]
+  }
+}
