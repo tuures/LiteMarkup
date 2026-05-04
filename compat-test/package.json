@@ -1,0 +1,20 @@
+{
+  "name": "litemarkup-compat-test",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "pretest:deno": "npm run build:lib",
+    "pretest:bun": "npm run build:lib",
+    "build:lib": "npm --prefix .. run build --silent",
+    "test:deno": "npx --no-install deno test deno/compat_test.ts --no-lock",
+    "test:bun": "npx --no-install bun test bun/compat.test.ts",
+    "test": "npm run test:deno && npm run test:bun"
+  },
+  "dependencies": {
+    "litemarkup": "file:.."
+  },
+  "devDependencies": {
+    "bun": "^1.3.13",
+    "deno-bin": "^2.2.7"
+  }
+}

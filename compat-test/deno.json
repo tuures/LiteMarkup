@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "litemarkup": "./node_modules/litemarkup/dist/litemarkup.mjs",
+    "litemarkup/html": "./node_modules/litemarkup/dist/html.mjs",
+    "litemarkup/parser": "./node_modules/litemarkup/dist/parser.mjs",
+    "litemarkup/ast": "./node_modules/litemarkup/dist/ast.mjs"
+  }
+}
