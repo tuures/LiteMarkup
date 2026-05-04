@@ -728,11 +728,26 @@
       let examples = {
         basics: `# Welcome to LiteMarkup
 
-This is a paragraph with some text.
+LiteMarkup: a tiny Markdown parser with an AST-first TypeScript API and no dependencies.
+
+Another paragraph here.
 
 ## Subheading
 
-Another paragraph here. LiteMarkup is simple and lightweight.`,
+LiteMarkup aims to support the most popular Markdown features while maintaining a small bundle size, good performance,\
+and strong AST extensibility.
+
+The parser outputs a JSON AST and supports transformation hooks that can be used to post-process the AST without\
+additional tree traversal. This makes it possible to extend some features outside the core parser when needed. \
+Performance is comparable to popular JavaScript-based implementations like commonmark, marked, and markdown-it.
+
+A simple HTML string renderer is included for demonstration and simple use cases, but users are expected to bring their\
+own renderer tailored to their specific use case and context, such as rendering to React, docx, or something else.
+
+LiteMarkup is not the fastest, the smallest, or the most comprehensive parser available, but it aims to provide the\
+best balance between those three aspects while also offering AST support. I wrote LiteMarkup because the existing\
+parsers I found either only output HTML or had large bundle sizes. It worked for my use case, so I took some time to\
+smooth out a few rough edges and turn it into something that could hopefully benefit others with similar needs.`,
 
         formatting: `# Text Formatting
 
