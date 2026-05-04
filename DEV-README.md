@@ -5,6 +5,7 @@
 - `npm run build` — generate dist files
 - `npm test` — run tests
 - `npm test -- --coverage` — run tests with coverage report
+- `npm run test:compat` — run compatibility tests (Deno + Bun) from `compat-test/`
 
 ## Architecture
 
@@ -45,6 +46,7 @@ Avoid backtracking — match as little as possible, but not too little.
 
 - **Snapshot tests** — verify output for various inputs
 - **Fuzzy tests** — random input to catch parser failures
+- **Compatibility tests** — run package-consumer smoke tests for Deno and Bun from `compat-test/`
 
 Add a failing test first for parser/renderer changes. Re-run the suite after changes.
 
@@ -52,9 +54,12 @@ Add a failing test first for parser/renderer changes. Re-run the suite after cha
 
 - Update CHANGELOG.md
 - `npm run test`
+- `npm run test:compat`
 - `npm run build`
 - `npm version patch|minor|major`
+- Update version in `jsr.json` to match `package.json`
 - `git push --tags`
 - `npm publish`
+- `npx jsr publish`
 - Make release in GitHub
 - Update demopage to use the new release
