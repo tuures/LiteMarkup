@@ -2,7 +2,8 @@
 
 **Tiny Markdown-like parser with a typed, AST-first TypeScript API. Under 3 KB gzipped, zero dependencies.**
 
-[![npm version](https://img.shields.io/npm/v/litemarkup.svg)](https://www.npmjs.com/package/litemarkup)
+[![NPM version](https://img.shields.io/npm/v/litemarkup.svg)](https://www.npmjs.com/package/litemarkup)
+[![JSR version](https://jsr.io/badges/@tuures/litemarkup)](https://jsr.io/@tuures/litemarkup)
 [![Bundle Size](https://img.shields.io/badge/gzip-<3kb-blue)](https://bundlephobia.com/package/litemarkup)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
