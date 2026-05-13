@@ -3,11 +3,21 @@ import * as Ast from './ast'
 //
 // HTML renderer
 //
+
+/** Options for creating an HTML renderer instance. */
 export interface HtmlRendererOptions {
+  /** Allow rendering of raw HTML blocks, links, and images. When `false` (default), these are textified for security. */
   allowUnsafeHtml?: boolean
+  /** Characters used for indenting nested HTML output. Defaults to two spaces. */
   indentCharacters?: string
 }
 
+/**
+ * Creates a stateless HTML renderer function that converts an AST into an HTML string.
+ *
+ * @param options - Renderer options including unsafe HTML handling and indentation.
+ * @returns A function that takes an array of block AST nodes and returns an HTML string.
+ */
 export function htmlRenderer({
   allowUnsafeHtml = false,
   indentCharacters = '  ',

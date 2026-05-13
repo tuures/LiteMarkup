@@ -3,9 +3,14 @@ import * as Ast from './ast'
 //
 // Parser
 //
+
+/** Options for creating a parser instance. */
 export interface ParserOptions {
+  /** Enable Markdown compatibility mode (`**bold**`, `*italic*`, `~~deleted~~`). */
   markdownMode?: boolean
+  /** Transform hook applied to each block node during parsing. Return an array of replacement nodes, or an empty array to remove the node. */
   transformBlock?: (node: Ast.Block) => Ast.Block[]
+  /** Transform hook applied to each inline node during parsing. Return an array of replacement nodes, or an empty array to remove the node. */
   transformInline?: (node: Ast.Inline) => Ast.Inline[]
 }
 
@@ -23,6 +28,12 @@ function trim(s: string): string {
   return s.replace(/^[ \t]+|[ \t]+$/g, '')
 }
 
+/**
+ * Creates a stateless parser function that converts a markup string into an AST.
+ *
+ * @param options - Parser options including markdown mode and transform hooks.
+ * @returns A function that takes a markup string and returns an array of block AST nodes.
+ */
 export function parser({ markdownMode, transformBlock, transformInline }: ParserOptions = {}): (
   src: string,
 ) => Ast.Block[] {
