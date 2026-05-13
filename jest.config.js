@@ -5,5 +5,5 @@ export default {
   transform: {
     '^.+\\.ts$': ['ts-jest', { useESM: true }],
   },
-  testMatch: ['**/*.test.ts'],
+  testMatch: ['<rootDir>/src/**/*.test.ts'],
 }
